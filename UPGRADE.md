@@ -1,5 +1,18 @@
 # Upgrade guide
 
+## From ZfcRbac v3 to LmcRbac v1
+
+The ZF-Commons orgnisation has been moved to Laminas-Commons and ZfcRbac has been split into two repositories.
+
+- [LmcRbacMvc](https://github.com/Laminas-Commons/LmcRbacMvc) contains the old version 2 of ZfcRbac.
+- LmcRbac contains the version 3 of ZfcRbac, which was only released as v3.alpha.1.
+
+To upgrade 
+
+- uninstall `zf-commons/zfc-rbac:3.0.0-alpha.1`.
+- install `laminas-commons/lmc-rbac:^1.0` 
+- replace config keys `zfc_rbac` with `lmc_rbac`.
+
 ## From v2.x to v3
 
 - ZfcRbac is no longer a ZF2 module. Instead, it fully embraces middlewares and can be used for any middleware

@@ -1,23 +1,23 @@
-# ZfcRbac
+# LmcRbac
 
-[![Develop Branch Build Status](https://travis-ci.org/ZF-Commons/zfc-rbac.svg?branch=develop)](http://travis-ci.org/ZF-Commons/zfc-rbac)
-[![Coverage Status](https://coveralls.io/repos/github/ZF-Commons/zfc-rbac/badge.svg?branch=develop)](https://coveralls.io/github/ZF-Commons/zfc-rbac?branch=develop)
-[![Latest Stable Version](https://poser.pugx.org/zf-commons/zfc-rbac/v/stable)](https://packagist.org/packages/zf-commons/zfc-rbac)
-[![Total Downloads](https://poser.pugx.org/zf-commons/zfc-rbac/downloads)](https://packagist.org/packages/zf-commons/zfc-rbac)
-[![Latest Unstable Version](https://poser.pugx.org/zf-commons/zfc-rbac/v/unstable)](https://packagist.org/packages/zf-commons/zfc-rbac)
-[![License](https://poser.pugx.org/zf-commons/zfc-rbac/license)](https://packagist.org/packages/zf-commons/zfc-rbac)
-[![Join the chat at https://gitter.im/ZFCommons/zfc-rbac](https://badges.gitter.im/ZFCommons/zfc-rbac.svg)](https://gitter.im/ZFCommons/zfc-rbac?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Version](https://poser.pugx.org/laminas-commons/lmc-rbac/version)](//packagist.org/packages/laminas-commons/lmc-rbac)
+[![Total Downloads](https://poser.pugx.org/laminas-commons/lmc-rbac/downloads)](//packagist.org/packages/laminas-commons/lmc-rbac)
+[![License](https://poser.pugx.org/laminas-commons/lmc-rbac/license)](//packagist.org/packages/laminas-commons/lmc-rbac)
+[![Master Branch Build Status](https://travis-ci.org/Laminas-Commons/LmcRbac.svg?branch=master)](http://travis-ci.org/Laminas-Commons/LmcRbac)
+[![Gitter](https://badges.gitter.im/LaminasCommons/community.svg)](https://gitter.im/LaminasCommons/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Coverage Status](https://coveralls.io/repos/github/Laminas-Commons/LmcRbac/badge.svg?branch=master)](https://coveralls.io/github/Laminas-Commons/LmcRbac?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Laminas-Commons/LmcRbac/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Laminas-Commons/LmcRbac/?branch=master)
 
-ZfcRbac is an access control library based on the RBAC permission model.
+Role-based access control module to provide additional features on top of Zend\Permissions\Rbac
 
-**Work In Progress**; *you are looking at the next version, for stable visit the master branch.*
+Based on [ZF-Commons/zfc-rbac](https://github.com/ZF-Commons/zfc-rbac) v3.x. If you are looking for the Laminas version
+of zfc-rbac v2, please use [Laminas-Commons/LmcRbacMvc](https://github.com/Laminas-Commons/LmcRbacMvc).
+
+**Work In Progress**
 
 ## Requirements
 
-- PHP 7.1 or higher
-
-> If you are looking for older version of ZfcRbac, please refer to the 2.x branch.
-> If you are using ZfcRbac 2.0, please upgrade to 3.0.
+- PHP 7.2 or higher
 
 ## Optional
 
@@ -27,20 +27,20 @@ the Zend Developer toolbar.
 
 ## Upgrade
 
-You can find an [upgrade guide](UPGRADE.md) to quickly upgrade your application from major versions of ZfcRbac.
+You can find an [upgrade guide](UPGRADE.md) to quickly upgrade your application from major versions of LmcRbac.
 
 ## Installation
 
-ZfcRbac only officially supports installation through Composer. For Composer documentation, please refer to
+LmcRbac only officially supports installation through Composer. For Composer documentation, please refer to
 [getcomposer.org](http://getcomposer.org/).
 
 Install the module:
 
 ```sh
-$ php composer.phar require zf-commons/zfc-rbac:^3.0
+$ php composer.phar require laminas-commons/lmc-rbac:^1.0
 ```
 
-Enable the module by adding `ZfcRbac` key to your `application.config.php` file. Customize the module by copy-pasting
+Enable the module by adding `LmcRbac` key to your `application.config.php` file. Customize the module by copy-pasting
 the `zfc_rbac.global.php.dist` file to your `config/autoload` folder.
 
 ## Documentation
@@ -48,9 +48,9 @@ the `zfc_rbac.global.php.dist` file to your `config/autoload` folder.
 The official documentation is available in the [/docs](docs/) folder.
 
 You can also find some Doctrine entities in the [/data](data/) folder that will help you to more quickly take advantage
-of ZfcRbac.
+of LmcRbac.
 
 ## Support
 
-- File issues at https://github.com/ZF-Commons/zfc-rbac/issues.
-- Ask questions in the [zf-common gitter](https://gitter.im/ZFCommons/zfc-rbac) chat.
+- File issues at https://github.com/Laminas-Commons/LmcRbac/issues.
+- Ask questions in the [LaminasCommons gitter](https://gitter.im/LaminasCommons/community) chat.
