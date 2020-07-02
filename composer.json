@@ -1,5 +1,5 @@
 {
-  "name": "zf-commons/zfc-rbac",
+  "name": "laminas-commons/lmc-rbac",
   "description": "Laminas Module that provides a layer of features of Laminas\\Permissions\\Rbac",
   "type": "library",
   "license": "MIT",
@@ -59,8 +59,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "2.4-dev",
-      "dev-develop": "3.0-dev"
+      "dev-master": "1.1-dev"
     },
     "laminas": {
       "component": "LmcRbac",
