@@ -22,12 +22,12 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
+use LmcRbac\Assertion\AssertionContainer;
+use LmcRbac\Container\AssertionContainerFactory;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\Assertion\AssertionContainer;
-use ZfcRbac\Container\AssertionContainerFactory;
 
 /**
- * @covers \ZfcRbac\Container\AssertionContainerFactory
+ * @covers \LmcRbac\Container\AssertionContainerFactory
  */
 class AssertionContainerFactoryTest extends TestCase
 {

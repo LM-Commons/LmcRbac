@@ -22,24 +22,24 @@ declare(strict_types=1);
 namespace LmcRbacTest\Service;
 
 use Laminas\ServiceManager\ServiceManager;
+use LmcRbac\Assertion\AssertionContainer;
+use LmcRbac\Assertion\AssertionContainerInterface;
+use LmcRbac\Assertion\AssertionSet;
+use LmcRbac\Exception\InvalidArgumentException;
+use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Rbac;
+use LmcRbac\Role\InMemoryRoleProvider;
+use LmcRbac\Role\RoleInterface;
+use LmcRbac\Service\AuthorizationService;
+use LmcRbac\Service\RoleService;
+use LmcRbac\Service\RoleServiceInterface;
+use LmcRbacTest\Asset\FlatRole;
+use LmcRbacTest\Asset\Identity;
+use LmcRbacTest\Asset\SimpleAssertion;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\Assertion\AssertionContainer;
-use ZfcRbac\Assertion\AssertionContainerInterface;
-use ZfcRbac\Assertion\AssertionSet;
-use ZfcRbac\Exception\InvalidArgumentException;
-use ZfcRbac\Identity\IdentityInterface;
-use ZfcRbac\Rbac;
-use ZfcRbac\Role\InMemoryRoleProvider;
-use ZfcRbac\Role\RoleInterface;
-use ZfcRbac\Service\AuthorizationService;
-use ZfcRbac\Service\RoleService;
-use ZfcRbac\Service\RoleServiceInterface;
-use ZfcRbacTest\Asset\FlatRole;
-use ZfcRbacTest\Asset\Identity;
-use ZfcRbacTest\Asset\SimpleAssertion;
 
 /**
- * @covers \ZfcRbac\Service\AuthorizationService
+ * @covers \LmcRbac\Service\AuthorizationService
  */
 class AuthorizationServiceTest extends TestCase
 {

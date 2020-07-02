@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Assertion;
+namespace LmcRbac\Assertion;
 
 use Psr\Container\ContainerInterface;
 
