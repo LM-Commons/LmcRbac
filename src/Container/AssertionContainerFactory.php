@@ -34,7 +34,7 @@ final class AssertionContainerFactory
 {
     public function __invoke(ContainerInterface $container): AssertionContainer
     {
-        $config = $container->get('config')['zfc_rbac']['assertion_manager'];
+        $config = $container->get('config')['lmc_rbac']['assertion_manager'];
 
         return new AssertionContainer($container, $config);
     }

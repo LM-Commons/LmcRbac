@@ -41,7 +41,7 @@ $ php composer.phar require laminas-commons/lmc-rbac:^1.0
 ```
 
 Enable the module by adding `LmcRbac` key to your `application.config.php` file. Customize the module by copy-pasting
-the `zfc_rbac.global.php.dist` file to your `config/autoload` folder.
+the `lmc_rbac.global.php.dist` file to your `config/autoload` folder.
 
 ## Documentation
 

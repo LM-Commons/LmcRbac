@@ -60,7 +60,7 @@ class ConfigProviderTest extends TestCase
         $provider = new ConfigProvider();
         $expected = [
             'dependencies' => $provider->getDependencyConfig(),
-            'zfc_rbac' => $provider->getModuleConfig(),
+            'lmc_rbac' => $provider->getModuleConfig(),
         ];
         $this->assertEquals($expected, $provider());
     }

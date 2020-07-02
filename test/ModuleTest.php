@@ -36,7 +36,7 @@ class ModuleTest extends TestCase
         $module = new Module();
         $expected = [
             'service_manager' => $provider->getDependencyConfig(),
-            'zfc_rbac' => $provider->getModuleConfig(),
+            'lmc_rbac' => $provider->getModuleConfig(),
         ];
         $this->assertEquals($expected, $module->getConfig());
     }

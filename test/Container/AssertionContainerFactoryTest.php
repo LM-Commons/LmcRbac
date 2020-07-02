@@ -35,7 +35,7 @@ class AssertionContainerFactoryTest extends TestCase
     {
         $serviceManager = new ServiceManager();
         $serviceManager->setService('config', [
-            'zfc_rbac' => [
+            'lmc_rbac' => [
                 'assertion_manager' => [],
             ],
         ]);

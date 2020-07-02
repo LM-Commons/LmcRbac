@@ -33,7 +33,7 @@ class ModuleOptionsFactoryTest extends TestCase
 {
     public function testFactory(): void
     {
-        $config = ['zfc_rbac' => []];
+        $config = ['lmc_rbac' => []];
 
         $serviceManager = new ServiceManager();
         $serviceManager->setService('config', $config);

@@ -34,6 +34,6 @@ final class ModuleOptionsFactory
 {
     public function __invoke(ContainerInterface $container): ModuleOptions
     {
-        return new ModuleOptions($container->get('config')['zfc_rbac']);
+        return new ModuleOptions($container->get('config')['lmc_rbac']);
     }
 }

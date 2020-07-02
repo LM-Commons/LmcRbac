@@ -23,7 +23,7 @@ declare(strict_types=1);
  */
 
 return [
-    'zfc_rbac' => [
+    'lmc_rbac' => [
 
         /**
          * Set the guest role

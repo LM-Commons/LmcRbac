@@ -32,7 +32,7 @@ final class Module
 
         return [
             'service_manager' => $provider->getDependencyConfig(),
-            'zfc_rbac' => $provider->getModuleConfig(),
+            'lmc_rbac' => $provider->getModuleConfig(),
         ];
     }
 }

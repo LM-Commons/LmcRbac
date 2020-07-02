@@ -32,7 +32,7 @@ final class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencyConfig(),
-            'zfc_rbac' => $this->getModuleConfig(),
+            'lmc_rbac' => $this->getModuleConfig(),
         ];
     }
 
