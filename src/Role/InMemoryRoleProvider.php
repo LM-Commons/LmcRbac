@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Role;
+namespace LmcRbac\Role;
 
 /**
  * Simple role providers that store them in memory (ideal for small websites)

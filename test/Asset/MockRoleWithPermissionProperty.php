@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Asset;
+namespace LmcRbacTest\Asset;
 
-use ZfcRbac\Role\RoleInterface;
+use LmcRbac\Role\RoleInterface;
 
 class MockRoleWithPermissionProperty implements RoleInterface
 {

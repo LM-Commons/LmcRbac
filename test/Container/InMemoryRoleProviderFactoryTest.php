@@ -19,16 +19,16 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Container;
+namespace LmcRbacTest\Container;
 
+use Laminas\ServiceManager\ServiceManager;
+use LmcRbac\Container\InMemoryRoleProviderFactory;
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Role\InMemoryRoleProvider;
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceManager;
-use ZfcRbac\Container\InMemoryRoleProviderFactory;
-use ZfcRbac\Options\ModuleOptions;
-use ZfcRbac\Role\InMemoryRoleProvider;
 
 /**
- * @covers \ZfcRbac\Container\InMemoryRoleProviderFactory
+ * @covers \LmcRbac\Container\InMemoryRoleProviderFactory
  */
 class InMemoryRoleProviderFactoryTest extends TestCase
 {

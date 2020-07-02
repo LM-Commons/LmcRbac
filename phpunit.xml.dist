@@ -10,7 +10,7 @@
         processIsolation="false"
         backupGlobals="false"
         >
-    <testsuite name="ZfcRbac tests">
+    <testsuite name="LmcRbac tests">
         <directory>./test</directory>
     </testsuite>
     <filter>

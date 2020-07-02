@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Container;
+namespace LmcRbac\Container;
 
+use LmcRbac\Options\ModuleOptions;
 use Psr\Container\ContainerInterface;
-use ZfcRbac\Options\ModuleOptions;
 
 /**
  * Factory for the module options
@@ -34,6 +34,6 @@ final class ModuleOptionsFactory
 {
     public function __invoke(ContainerInterface $container): ModuleOptions
     {
-        return new ModuleOptions($container->get('config')['zfc_rbac']);
+        return new ModuleOptions($container->get('config')['lmc_rbac']);
     }
 }

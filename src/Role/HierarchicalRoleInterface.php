@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Role;
+namespace LmcRbac\Role;
 
 /**
  * Interface for a hierarchical role

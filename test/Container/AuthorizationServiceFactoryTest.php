@@ -19,19 +19,19 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Container;
+namespace LmcRbacTest\Container;
 
+use LmcRbac\Assertion\AssertionContainerInterface;
+use LmcRbac\Container\AuthorizationServiceFactory;
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Rbac;
+use LmcRbac\Service\AuthorizationService;
+use LmcRbac\Service\RoleServiceInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use ZfcRbac\Assertion\AssertionContainerInterface;
-use ZfcRbac\Container\AuthorizationServiceFactory;
-use ZfcRbac\Options\ModuleOptions;
-use ZfcRbac\Rbac;
-use ZfcRbac\Service\AuthorizationService;
-use ZfcRbac\Service\RoleServiceInterface;
 
 /**
- * @covers \ZfcRbac\Container\AuthorizationServiceFactory
+ * @covers \LmcRbac\Container\AuthorizationServiceFactory
  */
 class AuthorizationServiceFactoryTest extends TestCase
 {

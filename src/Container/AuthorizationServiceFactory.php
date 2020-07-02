@@ -19,14 +19,14 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Container;
+namespace LmcRbac\Container;
 
+use LmcRbac\Assertion\AssertionContainerInterface;
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Rbac;
+use LmcRbac\Service\AuthorizationService;
+use LmcRbac\Service\RoleServiceInterface;
 use Psr\Container\ContainerInterface;
-use ZfcRbac\Assertion\AssertionContainerInterface;
-use ZfcRbac\Options\ModuleOptions;
-use ZfcRbac\Rbac;
-use ZfcRbac\Service\AuthorizationService;
-use ZfcRbac\Service\RoleServiceInterface;
 
 /**
  * Factory to create the authorization service

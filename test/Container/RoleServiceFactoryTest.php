@@ -19,17 +19,17 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Container;
+namespace LmcRbacTest\Container;
 
+use Laminas\ServiceManager\ServiceManager;
+use LmcRbac\Container\RoleServiceFactory;
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Role\InMemoryRoleProvider;
+use LmcRbac\Role\RoleProviderInterface;
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceManager;
-use ZfcRbac\Container\RoleServiceFactory;
-use ZfcRbac\Options\ModuleOptions;
-use ZfcRbac\Role\InMemoryRoleProvider;
-use ZfcRbac\Role\RoleProviderInterface;
 
 /**
- * @covers \ZfcRbac\Container\RoleServiceFactory
+ * @covers \LmcRbac\Container\RoleServiceFactory
  */
 class RoleServiceFactoryTest extends TestCase
 {
@@ -38,7 +38,7 @@ class RoleServiceFactoryTest extends TestCase
         $options = new ModuleOptions([
             'guest_role' => 'guest',
             'role_provider' => [
-                \ZfcRbac\Role\InMemoryRoleProvider::class => [
+                \LmcRbac\Role\InMemoryRoleProvider::class => [
                     'foo',
                 ],
             ],
@@ -52,7 +52,7 @@ class RoleServiceFactoryTest extends TestCase
         $factory = new RoleServiceFactory();
         $roleService = $factory($container);
 
-        $this->assertInstanceOf(\ZfcRbac\Service\RoleService::class, $roleService);
+        $this->assertInstanceOf(\LmcRbac\Service\RoleService::class, $roleService);
     }
 
     public function testThrowExceptionIfNoRoleProvider(): void

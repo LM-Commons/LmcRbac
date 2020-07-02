@@ -19,11 +19,11 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Container;
+namespace LmcRbac\Container;
 
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Role\InMemoryRoleProvider;
 use Psr\Container\ContainerInterface;
-use ZfcRbac\Options\ModuleOptions;
-use ZfcRbac\Role\InMemoryRoleProvider;
 
 /**
  * Factory used to create an in memory role provider

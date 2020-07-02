@@ -19,20 +19,20 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Options;
+namespace LmcRbacTest\Options;
 
+use LmcRbac\Options\ModuleOptions;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\Options\ModuleOptions;
 
 /**
- * @covers \ZfcRbac\Options\ModuleOptions
+ * @covers \LmcRbac\Options\ModuleOptions
  */
 class ModuleOptionsTest extends TestCase
 {
     public function testAssertModuleDefaultOptions(): void
     {
-        /** @var \ZfcRbac\Options\ModuleOptions $moduleOptions */
-        $moduleOptions = new \ZfcRbac\Options\ModuleOptions();
+        /** @var \LmcRbac\Options\ModuleOptions $moduleOptions */
+        $moduleOptions = new \LmcRbac\Options\ModuleOptions();
 
         $this->assertEquals('guest', $moduleOptions->getGuestRole());
         $this->assertIsArray($moduleOptions->getRoleProvider());

@@ -19,15 +19,15 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Role;
+namespace LmcRbacTest\Role;
 
+use LmcRbac\Role\HierarchicalRoleInterface;
+use LmcRbac\Role\InMemoryRoleProvider;
+use LmcRbac\Role\RoleInterface;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\Role\HierarchicalRoleInterface;
-use ZfcRbac\Role\InMemoryRoleProvider;
-use ZfcRbac\Role\RoleInterface;
 
 /**
- * @covers \ZfcRbac\Role\InMemoryRoleProvider
+ * @covers \LmcRbac\Role\InMemoryRoleProvider
  */
 class InMemoryRoleProviderTest extends TestCase
 {

@@ -19,12 +19,12 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Container;
+namespace LmcRbac\Container;
 
+use LmcRbac\Exception;
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Role\ObjectRepositoryRoleProvider;
 use Psr\Container\ContainerInterface;
-use ZfcRbac\Exception;
-use ZfcRbac\Options\ModuleOptions;
-use ZfcRbac\Role\ObjectRepositoryRoleProvider;
 
 /**
  * Factory used to create an object repository role provider
@@ -57,7 +57,7 @@ final class ObjectRepositoryRoleProviderFactory
         }
 
         throw new Exception\RuntimeException(
-            'No object repository was found while creating the ZfcRbac object repository role provider. Are
+            'No object repository was found while creating the LmcRbac object repository role provider. Are
              you sure you specified either the "object_repository" option or "object_manager"/"class_name" options?'
         );
     }

@@ -19,13 +19,13 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest;
+namespace LmcRbacTest;
 
+use LmcRbac\ConfigProvider;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\ConfigProvider;
 
 /**
- * @covers  \ZfcRbac\ConfigProvider
+ * @covers  \LmcRbac\ConfigProvider
  */
 class ConfigProviderTest extends TestCase
 {
@@ -34,13 +34,13 @@ class ConfigProviderTest extends TestCase
         $provider = new ConfigProvider();
         $expected = [
             'factories' => [
-                \ZfcRbac\Assertion\AssertionContainerInterface::class => \ZfcRbac\Container\AssertionContainerFactory::class,
-                \ZfcRbac\Options\ModuleOptions::class => \ZfcRbac\Container\ModuleOptionsFactory::class,
-                \ZfcRbac\Role\InMemoryRoleProvider::class => \ZfcRbac\Container\InMemoryRoleProviderFactory::class,
-                \ZfcRbac\Role\ObjectRepositoryRoleProvider::class => \ZfcRbac\Container\ObjectRepositoryRoleProviderFactory::class,
-                \ZfcRbac\Service\AuthorizationServiceInterface::class => \ZfcRbac\Container\AuthorizationServiceFactory::class,
-                \ZfcRbac\Service\RoleServiceInterface::class => \ZfcRbac\Container\RoleServiceFactory::class,
-                \ZfcRbac\Rbac::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
+                \LmcRbac\Assertion\AssertionContainerInterface::class => \LmcRbac\Container\AssertionContainerFactory::class,
+                \LmcRbac\Options\ModuleOptions::class => \LmcRbac\Container\ModuleOptionsFactory::class,
+                \LmcRbac\Role\InMemoryRoleProvider::class => \LmcRbac\Container\InMemoryRoleProviderFactory::class,
+                \LmcRbac\Role\ObjectRepositoryRoleProvider::class => \LmcRbac\Container\ObjectRepositoryRoleProviderFactory::class,
+                \LmcRbac\Service\AuthorizationServiceInterface::class => \LmcRbac\Container\AuthorizationServiceFactory::class,
+                \LmcRbac\Service\RoleServiceInterface::class => \LmcRbac\Container\RoleServiceFactory::class,
+                \LmcRbac\Rbac::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
             ],
         ];
         $this->assertEquals($expected, $provider->getDependencyConfig());
@@ -60,7 +60,7 @@ class ConfigProviderTest extends TestCase
         $provider = new ConfigProvider();
         $expected = [
             'dependencies' => $provider->getDependencyConfig(),
-            'zfc_rbac' => $provider->getModuleConfig(),
+            'lmc_rbac' => $provider->getModuleConfig(),
         ];
         $this->assertEquals($expected, $provider());
     }

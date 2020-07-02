@@ -19,21 +19,21 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Container;
+namespace LmcRbacTest\Container;
 
+use Laminas\ServiceManager\ServiceManager;
+use LmcRbac\Container\ModuleOptionsFactory;
+use LmcRbac\Options\ModuleOptions;
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceManager;
-use ZfcRbac\Container\ModuleOptionsFactory;
-use ZfcRbac\Options\ModuleOptions;
 
 /**
- * @covers \ZfcRbac\Container\ModuleOptionsFactory
+ * @covers \LmcRbac\Container\ModuleOptionsFactory
  */
 class ModuleOptionsFactoryTest extends TestCase
 {
     public function testFactory(): void
     {
-        $config = ['zfc_rbac' => []];
+        $config = ['lmc_rbac' => []];
 
         $serviceManager = new ServiceManager();
         $serviceManager->setService('config', $config);

@@ -19,12 +19,12 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Asset;
+namespace LmcRbacTest\Asset;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use ZfcRbac\Role\HierarchicalRoleInterface;
-use ZfcRbac\Role\RoleInterface;
+use LmcRbac\Role\HierarchicalRoleInterface;
+use LmcRbac\Role\RoleInterface;
 
 /**
  * @ORM\Entity

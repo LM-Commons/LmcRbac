@@ -19,18 +19,18 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Assertion;
+namespace LmcRbacTest\Assertion;
 
 use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use LmcRbac\Assertion\AssertionContainer;
+use LmcRbac\Assertion\AssertionInterface;
+use LmcRbacTest\Asset\SimpleAssertion;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
-use Zend\ServiceManager\Factory\InvokableFactory;
-use ZfcRbac\Assertion\AssertionContainer;
-use ZfcRbac\Assertion\AssertionInterface;
-use ZfcRbacTest\Asset\SimpleAssertion;
 
 /**
- * @covers \ZfcRbac\Assertion\AssertionContainer
+ * @covers \LmcRbac\Assertion\AssertionContainer
  */
 class AssertionContainerTest extends TestCase
 {

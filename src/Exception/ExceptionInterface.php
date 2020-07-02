@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Exception;
+namespace LmcRbac\Exception;
 
 /**
- * Base exception interface for ZfcRbac
+ * Base exception interface for LmcRbac
  *
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT

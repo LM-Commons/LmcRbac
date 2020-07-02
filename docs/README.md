@@ -1,4 +1,4 @@
-_Up-to-date with version 2.3.* of ZfcRbac_
+_Up-to-date with version 2.3.* of LmcRbac_
 
 Welcome to the official ZfcRbac documentation. This documentation will help you to quickly understand how to use
 and extend ZfcRbac.
@@ -8,7 +8,7 @@ If you are looking for some information that is not listed in the documentation,
 1. [Introduction](/docs/01. Introduction.md)
    1. [Why should I use an authorization module?](/docs/01. Introduction.md#why-should-i-use-an-authorization-module)
    2. [What is the Rbac model?](/docs/01. Introduction.md#what-is-the-rbac-model)
-   3. [How can I integrate ZfcRbac into my application?](/docs/01. Introduction.md#how-can-i-integrate-zfcrbac-into-my-application)
+   3. [How can I integrate LmcRbac into my application?](/docs/01. Introduction.md#how-can-i-integrate-zfcrbac-into-my-application)
 
 2. [Quick Start](/docs/02. Quick Start.md)
    1. [Specifying an identity provider](/docs/02. Quick Start.md#specifying-an-identity-provider)
@@ -46,7 +46,7 @@ If you are looking for some information that is not listed in the documentation,
 7. [Cookbook](/docs/07. Cookbook.md)
    1. [A real world example](/docs/07. Cookbook.md#a-real-world-application)
    2. [Best practices](/docs/07. Cookbook.md#best-practices)
-   3. [Using ZfcRbac with Doctrine ORM](/docs/07. Cookbook.md#using-zfcrbac-with-doctrine-orm)
+   3. [Using LmcRbac with Doctrine ORM](/docs/07. Cookbook.md#using-zfcrbac-with-doctrine-orm)
    4. [How to deal with roles with lot of permissions?](/docs/07. Cookbook.md#how-to-deal-with-roles-with-lot-of-permissions)
-   5. [Using ZfcRbac and ZF2 Assetic](/docs/07. Cookbook.md#using-zfcrbac-and-zf2-assetic)
-   6. [Using ZfcRbac and ZfcUser](/docs/07. Cookbook.md#using-zfcrbac-and-zfcuser)
+   5. [Using LmcRbac and ZF2 Assetic](/docs/07. Cookbook.md#using-zfcrbac-and-zf2-assetic)
+   6. [Using LmcRbac and ZfcUser](/docs/07. Cookbook.md#using-zfcrbac-and-zfcuser)

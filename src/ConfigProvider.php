@@ -19,12 +19,12 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac;
+namespace LmcRbac;
 
 /**
- * The configuration provider for the ZfcRbac module
+ * The configuration provider for the LmcRbac module
  *
- * @see https://docs.zendframework.com/zend-component-installer/
+ * @see https://docs.laminas.dev/laminas-component-installer/
  */
 final class ConfigProvider
 {
@@ -32,7 +32,7 @@ final class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencyConfig(),
-            'zfc_rbac' => $this->getModuleConfig(),
+            'lmc_rbac' => $this->getModuleConfig(),
         ];
     }
 
@@ -40,13 +40,13 @@ final class ConfigProvider
     {
         return [
             'factories' => [
-                \ZfcRbac\Assertion\AssertionContainerInterface::class => \ZfcRbac\Container\AssertionContainerFactory::class,
-                \ZfcRbac\Options\ModuleOptions::class => \ZfcRbac\Container\ModuleOptionsFactory::class,
-                \ZfcRbac\Role\InMemoryRoleProvider::class => \ZfcRbac\Container\InMemoryRoleProviderFactory::class,
-                \ZfcRbac\Role\ObjectRepositoryRoleProvider::class => \ZfcRbac\Container\ObjectRepositoryRoleProviderFactory::class,
-                \ZfcRbac\Service\AuthorizationServiceInterface::class => \ZfcRbac\Container\AuthorizationServiceFactory::class,
-                \ZfcRbac\Service\RoleServiceInterface::class => \ZfcRbac\Container\RoleServiceFactory::class,
-                \ZfcRbac\Rbac::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
+                \LmcRbac\Assertion\AssertionContainerInterface::class => \LmcRbac\Container\AssertionContainerFactory::class,
+                \LmcRbac\Options\ModuleOptions::class => \LmcRbac\Container\ModuleOptionsFactory::class,
+                \LmcRbac\Role\InMemoryRoleProvider::class => \LmcRbac\Container\InMemoryRoleProviderFactory::class,
+                \LmcRbac\Role\ObjectRepositoryRoleProvider::class => \LmcRbac\Container\ObjectRepositoryRoleProviderFactory::class,
+                \LmcRbac\Service\AuthorizationServiceInterface::class => \LmcRbac\Container\AuthorizationServiceFactory::class,
+                \LmcRbac\Service\RoleServiceInterface::class => \LmcRbac\Container\RoleServiceFactory::class,
+                \LmcRbac\Rbac::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
             ],
         ];
     }

@@ -19,13 +19,13 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Role;
+namespace LmcRbacTest\Role;
 
+use LmcRbac\Role\Role;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\Role\Role;
 
 /**
- * @covers \ZfcRbac\Role\Role
+ * @covers \LmcRbac\Role\Role
  * @group Coverage
  */
 class RoleTest extends TestCase
@@ -37,7 +37,7 @@ class RoleTest extends TestCase
     }
 
     /**
-     * @covers \ZfcRbac\Role\Role::addPermission
+     * @covers \LmcRbac\Role\Role::addPermission
      */
     public function testRoleCanAddPermission(): void
     {
@@ -52,7 +52,7 @@ class RoleTest extends TestCase
     }
 
     /**
-     * @covers \ZfcRbac\Role\Role::getPermissions
+     * @covers \LmcRbac\Role\Role::getPermissions
      */
     public function testRoleCanGetPermissions(): void
     {

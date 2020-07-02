@@ -19,12 +19,12 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Options;
+namespace LmcRbac\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
- * Options for ZfcRbac module
+ * Options for LmcRbac module
  *
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT

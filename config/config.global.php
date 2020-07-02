@@ -23,7 +23,7 @@ declare(strict_types=1);
  */
 
 return [
-    'zfc_rbac' => [
+    'lmc_rbac' => [
 
         /**
          * Set the guest role
@@ -38,7 +38,7 @@ return [
          * It must be an array that contains configuration for the role provider. The provider config
          * must follow the following format:
          *
-         *      'ZfcRbac\Role\InMemoryRoleProvider' => [
+         *      'LmcRbac\Role\InMemoryRoleProvider' => [
          *          'role1' => [
          *              'children'    => ['children1', 'children2'], // OPTIONAL
          *              'permissions' => ['edit', 'read'] // OPTIONAL

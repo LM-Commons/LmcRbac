@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Assertion;
+namespace LmcRbac\Assertion;
 
-use Zend\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\AbstractPluginManager;
 
 /**
  * Plugin manager to create assertions

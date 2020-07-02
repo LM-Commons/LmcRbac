@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Service;
+namespace LmcRbac\Service;
 
-use ZfcRbac\Identity\IdentityInterface;
-use ZfcRbac\Role\RoleInterface;
+use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Role\RoleInterface;
 
 /**
  * Role service

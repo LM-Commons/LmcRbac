@@ -19,15 +19,15 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Container;
+namespace LmcRbacTest\Container;
 
+use Laminas\ServiceManager\ServiceManager;
+use LmcRbac\Assertion\AssertionContainer;
+use LmcRbac\Container\AssertionContainerFactory;
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceManager;
-use ZfcRbac\Assertion\AssertionContainer;
-use ZfcRbac\Container\AssertionContainerFactory;
 
 /**
- * @covers \ZfcRbac\Container\AssertionContainerFactory
+ * @covers \LmcRbac\Container\AssertionContainerFactory
  */
 class AssertionContainerFactoryTest extends TestCase
 {
@@ -35,7 +35,7 @@ class AssertionContainerFactoryTest extends TestCase
     {
         $serviceManager = new ServiceManager();
         $serviceManager->setService('config', [
-            'zfc_rbac' => [
+            'lmc_rbac' => [
                 'assertion_manager' => [],
             ],
         ]);

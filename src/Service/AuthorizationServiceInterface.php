@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Service;
+namespace LmcRbac\Service;
 
-use ZfcRbac\Identity\IdentityInterface;
+use LmcRbac\Identity\IdentityInterface;
 
 /**
  * Minimal interface for an authorization service

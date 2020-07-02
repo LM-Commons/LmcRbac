@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Asset;
+namespace LmcRbacTest\Asset;
 
-use ZfcRbac\Assertion\AssertionInterface;
-use ZfcRbac\Identity\IdentityInterface;
+use LmcRbac\Assertion\AssertionInterface;
+use LmcRbac\Identity\IdentityInterface;
 
 class SimpleAssertion implements AssertionInterface
 {

@@ -18,18 +18,18 @@ declare(strict_types=1);
  * and is licensed under the MIT license.
  */
 
-namespace ZfcRbacTest\Assertion;
+namespace LmcRbacTest\Assertion;
 
+use LmcRbac\Assertion\AssertionContainerInterface;
+use LmcRbac\Assertion\AssertionInterface;
+use LmcRbac\Assertion\AssertionSet;
+use LmcRbac\Exception\InvalidArgumentException;
+use LmcRbac\Identity\IdentityInterface;
+use LmcRbacTest\Asset\SimpleAssertion;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\Assertion\AssertionContainerInterface;
-use ZfcRbac\Assertion\AssertionInterface;
-use ZfcRbac\Assertion\AssertionSet;
-use ZfcRbac\Exception\InvalidArgumentException;
-use ZfcRbac\Identity\IdentityInterface;
-use ZfcRbacTest\Asset\SimpleAssertion;
 
 /**
- * @covers \ZfcRbac\Assertion\AssertionSet
+ * @covers \LmcRbac\Assertion\AssertionSet
  */
 class AssertionSetTest extends TestCase
 {

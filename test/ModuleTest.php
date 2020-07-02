@@ -19,14 +19,14 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest;
+namespace LmcRbacTest;
 
+use LmcRbac\ConfigProvider;
+use LmcRbac\Module;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\ConfigProvider;
-use ZfcRbac\Module;
 
 /**
- * @covers  \ZfcRbac\Module
+ * @covers  \LmcRbac\Module
  */
 class ModuleTest extends TestCase
 {
@@ -36,7 +36,7 @@ class ModuleTest extends TestCase
         $module = new Module();
         $expected = [
             'service_manager' => $provider->getDependencyConfig(),
-            'zfc_rbac' => $provider->getModuleConfig(),
+            'lmc_rbac' => $provider->getModuleConfig(),
         ];
         $this->assertEquals($expected, $module->getConfig());
     }

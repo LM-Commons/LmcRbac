@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Assertion;
+namespace LmcRbac\Assertion;
 
-use ZfcRbac\Identity\IdentityInterface;
+use LmcRbac\Identity\IdentityInterface;
 
 /**
  * Interface that you can implement for dynamic assertions
