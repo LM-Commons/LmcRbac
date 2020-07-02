@@ -19,12 +19,12 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac;
+namespace LmcRbac;
 
 use Generator;
 use Traversable;
-use ZfcRbac\Role\HierarchicalRoleInterface;
-use ZfcRbac\Role\RoleInterface;
+use LmcRbac\Role\HierarchicalRoleInterface;
+use LmcRbac\Role\RoleInterface;
 
 /**
  * Rbac object. It is used to check a permission against roles
@@ -49,7 +49,7 @@ class Rbac
         }
 
         foreach ($this->flattenRoles($roles) as $role) {
-            /* @var \ZfcRbac\Role\RoleInterface $role */
+            /* @var \LmcRbac\Role\RoleInterface $role */
             if ($role->hasPermission($permission)) {
                 return true;
             }

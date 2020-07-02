@@ -19,12 +19,12 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Service;
+namespace LmcRbac\Service;
 
 use Traversable;
-use ZfcRbac\Identity\IdentityInterface;
-use ZfcRbac\Role\RoleInterface;
-use ZfcRbac\Role\RoleProviderInterface;
+use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Role\RoleInterface;
+use LmcRbac\Role\RoleProviderInterface;
 
 /**
  * Role service

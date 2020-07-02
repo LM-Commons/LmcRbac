@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Container;
+namespace LmcRbac\Container;
 
 use Psr\Container\ContainerInterface;
-use ZfcRbac\Options\ModuleOptions;
+use LmcRbac\Options\ModuleOptions;
 
 /**
  * Factory for the module options

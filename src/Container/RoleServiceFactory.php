@@ -19,12 +19,12 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Container;
+namespace LmcRbac\Container;
 
 use Psr\Container\ContainerInterface;
-use ZfcRbac\Options\ModuleOptions;
-use ZfcRbac\Role\RoleProviderInterface;
-use ZfcRbac\Service\RoleService;
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Role\RoleProviderInterface;
+use LmcRbac\Service\RoleService;
 
 /**
  * Factory to create the role service

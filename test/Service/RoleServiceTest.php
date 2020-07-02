@@ -19,21 +19,21 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Service;
+namespace LmcRbacTest\Service;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use ZfcRbac\Identity\IdentityInterface;
-use ZfcRbac\Role\HierarchicalRole;
-use ZfcRbac\Role\InMemoryRoleProvider;
-use ZfcRbac\Role\Role;
-use ZfcRbac\Role\RoleInterface;
-use ZfcRbac\Role\RoleProviderInterface;
-use ZfcRbac\Service\RoleService;
-use ZfcRbacTest\Asset\Identity;
+use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Role\HierarchicalRole;
+use LmcRbac\Role\InMemoryRoleProvider;
+use LmcRbac\Role\Role;
+use LmcRbac\Role\RoleInterface;
+use LmcRbac\Role\RoleProviderInterface;
+use LmcRbac\Service\RoleService;
+use LmcRbacTest\Asset\Identity;
 
 /**
- * @covers \ZfcRbac\Service\RoleService
+ * @covers \LmcRbac\Service\RoleService
  */
 class RoleServiceTest extends TestCase
 {

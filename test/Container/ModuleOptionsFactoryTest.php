@@ -19,15 +19,15 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Container;
+namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\Container\ModuleOptionsFactory;
-use ZfcRbac\Options\ModuleOptions;
+use LmcRbac\Container\ModuleOptionsFactory;
+use LmcRbac\Options\ModuleOptions;
 
 /**
- * @covers \ZfcRbac\Container\ModuleOptionsFactory
+ * @covers \LmcRbac\Container\ModuleOptionsFactory
  */
 class ModuleOptionsFactoryTest extends TestCase
 {

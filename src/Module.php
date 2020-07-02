@@ -19,12 +19,12 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac;
+namespace LmcRbac;
 
 final class Module
 {
     /**
-     * Return default ZfcRbac configuration for laminas-mvc applications.
+     * Return default LmcRbac configuration for laminas-mvc applications.
      */
     public function getConfig(): array
     {

@@ -19,14 +19,14 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest;
+namespace LmcRbacTest;
 
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\ConfigProvider;
-use ZfcRbac\Module;
+use LmcRbac\ConfigProvider;
+use LmcRbac\Module;
 
 /**
- * @covers  \ZfcRbac\Module
+ * @covers  \LmcRbac\Module
  */
 class ModuleTest extends TestCase
 {

@@ -49,12 +49,12 @@
   },
   "autoload": {
     "psr-4": {
-      "ZfcRbac\\": "src/"
+      "LmcRbac\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "ZfcRbacTest\\": "test/"
+      "LmcRbacTest\\": "test/"
     }
   },
   "extra": {
@@ -63,8 +63,8 @@
       "dev-develop": "3.0-dev"
     },
     "laminas": {
-      "component": "ZfcRbac",
-      "config-provider": "ZfcRbac\\ConfigProvider"
+      "component": "LmcRbac",
+      "config-provider": "LmcRbac\\ConfigProvider"
     }
   },
   "scripts": {

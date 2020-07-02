@@ -19,15 +19,15 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Role;
+namespace LmcRbacTest\Role;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\Role\ObjectRepositoryRoleProvider;
-use ZfcRbacTest\Asset\FlatRole;
+use LmcRbac\Role\ObjectRepositoryRoleProvider;
+use LmcRbacTest\Asset\FlatRole;
 
 /**
- * @covers \ZfcRbac\Role\ObjectRepositoryRoleProvider
+ * @covers \LmcRbac\Role\ObjectRepositoryRoleProvider
  */
 class ObjectRepositoryRoleProviderTest extends TestCase
 {
@@ -81,7 +81,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
 
         $objectRepository->expects($this->once())->method('findBy')->will($this->returnValue($result));
 
-        $this->expectException('ZfcRbac\Exception\RoleNotFoundException');
+        $this->expectException('LmcRbac\Exception\RoleNotFoundException');
         $this->expectExceptionMessage('Some roles were asked but could not be loaded from database: guest, admin');
 
         $provider->getRoles(['guest', 'admin', 'member']);

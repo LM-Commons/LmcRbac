@@ -19,19 +19,19 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Container;
+namespace LmcRbacTest\Container;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\Container\ObjectRepositoryRoleProviderFactory;
-use ZfcRbac\Exception\RuntimeException;
-use ZfcRbac\Options\ModuleOptions;
-use ZfcRbac\Role\ObjectRepositoryRoleProvider;
+use LmcRbac\Container\ObjectRepositoryRoleProviderFactory;
+use LmcRbac\Exception\RuntimeException;
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Role\ObjectRepositoryRoleProvider;
 
 /**
- * @covers \ZfcRbac\Container\ObjectRepositoryRoleProviderFactory
+ * @covers \LmcRbac\Container\ObjectRepositoryRoleProviderFactory
  */
 class ObjectRepositoryRoleProviderFactoryTest extends TestCase
 {
@@ -99,7 +99,7 @@ class ObjectRepositoryRoleProviderFactoryTest extends TestCase
     public function testThrowExceptionIfNoObjectManagerNorObjectRepositoryIsSet(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('No object repository was found while creating the ZfcRbac object repository role provider. Are
+        $this->expectExceptionMessage('No object repository was found while creating the LmcRbac object repository role provider. Are
              you sure you specified either the "object_repository" option or "object_manager"/"class_name" options?');
 
         $container = new ServiceManager();

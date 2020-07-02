@@ -19,13 +19,13 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest;
+namespace LmcRbacTest;
 
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\ConfigProvider;
+use LmcRbac\ConfigProvider;
 
 /**
- * @covers  \ZfcRbac\ConfigProvider
+ * @covers  \LmcRbac\ConfigProvider
  */
 class ConfigProviderTest extends TestCase
 {
@@ -34,10 +34,10 @@ class ConfigProviderTest extends TestCase
         $provider = new ConfigProvider();
         $expected = [
             'factories' => [
-                \ZfcRbac\Assertion\AssertionContainerInterface::class => \ZfcRbac\Container\AssertionContainerFactory::class,
-                \ZfcRbac\Options\ModuleOptions::class => \ZfcRbac\Container\ModuleOptionsFactory::class,
-                \ZfcRbac\Role\InMemoryRoleProvider::class => \ZfcRbac\Container\InMemoryRoleProviderFactory::class,
-                \ZfcRbac\Role\ObjectRepositoryRoleProvider::class => \ZfcRbac\Container\ObjectRepositoryRoleProviderFactory::class,
+                \LmcRbac\Assertion\AssertionContainerInterface::class => \LmcRbac\Container\AssertionContainerFactory::class,
+                \LmcRbac\Options\ModuleOptions::class => \LmcRbac\Container\ModuleOptionsFactory::class,
+                \LmcRbac\Role\InMemoryRoleProvider::class => \LmcRbac\Container\InMemoryRoleProviderFactory::class,
+                \LmcRbac\Role\ObjectRepositoryRoleProvider::class => \LmcRbac\Container\ObjectRepositoryRoleProviderFactory::class,
                 \ZfcRbac\Service\AuthorizationServiceInterface::class => \ZfcRbac\Container\AuthorizationServiceFactory::class,
                 \ZfcRbac\Service\RoleServiceInterface::class => \ZfcRbac\Container\RoleServiceFactory::class,
                 \ZfcRbac\Rbac::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,

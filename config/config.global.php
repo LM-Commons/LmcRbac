@@ -38,7 +38,7 @@ return [
          * It must be an array that contains configuration for the role provider. The provider config
          * must follow the following format:
          *
-         *      'ZfcRbac\Role\InMemoryRoleProvider' => [
+         *      'LmcRbac\Role\InMemoryRoleProvider' => [
          *          'role1' => [
          *              'children'    => ['children1', 'children2'], // OPTIONAL
          *              'permissions' => ['edit', 'read'] // OPTIONAL

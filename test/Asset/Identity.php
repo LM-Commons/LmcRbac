@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Asset;
+namespace LmcRbacTest\Asset;
 
-use ZfcRbac\Identity\IdentityInterface;
+use LmcRbac\Identity\IdentityInterface;
 
 class Identity implements IdentityInterface
 {

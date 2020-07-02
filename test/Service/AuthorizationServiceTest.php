@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Service;
+namespace LmcRbacTest\Service;
 
 use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;

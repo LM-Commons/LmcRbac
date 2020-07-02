@@ -19,12 +19,12 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbac\Service;
+namespace LmcRbac\Service;
 
-use ZfcRbac\Assertion\AssertionContainerInterface;
-use ZfcRbac\Assertion\AssertionSet;
-use ZfcRbac\Identity\IdentityInterface;
-use ZfcRbac\Rbac;
+use LmcRbac\Assertion\AssertionContainerInterface;
+use LmcRbac\Assertion\AssertionSet;
+use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Rbac;
 
 /**
  * Authorization service is a simple service that internally uses Rbac to check if identity is

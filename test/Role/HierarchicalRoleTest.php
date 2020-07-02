@@ -19,20 +19,20 @@
 
 declare(strict_types=1);
 
-namespace ZfcRbacTest\Role;
+namespace LmcRbacTest\Role;
 
 use PHPUnit\Framework\TestCase;
-use ZfcRbac\Role\HierarchicalRole;
-use ZfcRbac\Role\HierarchicalRoleInterface;
+use LmcRbac\Role\HierarchicalRole;
+use LmcRbac\Role\HierarchicalRoleInterface;
 
 /**
- * @covers \ZfcRbac\Role\HierarchicalRole
+ * @covers \LmcRbac\Role\HierarchicalRole
  * @group  Coverage
  */
 class HierarchicalRoleTest extends TestCase
 {
     /**
-     * @covers \ZfcRbac\Role\HierarchicalRole::addChild
+     * @covers \LmcRbac\Role\HierarchicalRole::addChild
      */
     public function testCanAddChild(): void
     {
@@ -45,7 +45,7 @@ class HierarchicalRoleTest extends TestCase
     }
 
     /**
-     * @covers \ZfcRbac\Role\HierarchicalRole::hasChildren
+     * @covers \LmcRbac\Role\HierarchicalRole::hasChildren
      */
     public function testHasChildren(): void
     {
@@ -59,7 +59,7 @@ class HierarchicalRoleTest extends TestCase
     }
 
     /**
-     * @covers \ZfcRbac\Role\HierarchicalRole::getChildren
+     * @covers \LmcRbac\Role\HierarchicalRole::getChildren
      */
     public function testCanGetChildren(): void
     {
@@ -77,7 +77,7 @@ class HierarchicalRoleTest extends TestCase
     }
 
     /**
-     * @covers \ZfcRbac\Role\HierarchicalRole::addPermission
+     * @covers \LmcRbac\Role\HierarchicalRole::addPermission
      */
     public function testRoleCanAddPermission(): void
     {
@@ -89,7 +89,7 @@ class HierarchicalRoleTest extends TestCase
     }
 
     /**
-     * @covers \ZfcRbac\Role\HierarchicalRole::getPermissions
+     * @covers \LmcRbac\Role\HierarchicalRole::getPermissions
      */
     public function testRoleCanGetPermissions(): void
     {
