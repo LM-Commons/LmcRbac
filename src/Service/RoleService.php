@@ -21,10 +21,10 @@ declare(strict_types=1);
 
 namespace LmcRbac\Service;
 
-use Traversable;
 use LmcRbac\Identity\IdentityInterface;
 use LmcRbac\Role\RoleInterface;
 use LmcRbac\Role\RoleProviderInterface;
+use Traversable;
 
 /**
  * Role service

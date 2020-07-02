@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace LmcRbacTest;
 
-use PHPUnit\Framework\TestCase;
 use LmcRbac\ConfigProvider;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers  \LmcRbac\ConfigProvider

@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace LmcRbac\Container;
 
-use Psr\Container\ContainerInterface;
 use LmcRbac\Assertion\AssertionContainer;
+use Psr\Container\ContainerInterface;
 
 /**
  * Factory to create a assertion plugin manager

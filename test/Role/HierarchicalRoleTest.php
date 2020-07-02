@@ -21,9 +21,9 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Role;
 
-use PHPUnit\Framework\TestCase;
 use LmcRbac\Role\HierarchicalRole;
 use LmcRbac\Role\HierarchicalRoleInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \LmcRbac\Role\HierarchicalRole

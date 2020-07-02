@@ -22,9 +22,9 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
-use PHPUnit\Framework\TestCase;
 use LmcRbac\Container\ModuleOptionsFactory;
 use LmcRbac\Options\ModuleOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \LmcRbac\Container\ModuleOptionsFactory

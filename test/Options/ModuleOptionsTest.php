@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Options;
 
-use PHPUnit\Framework\TestCase;
 use LmcRbac\Options\ModuleOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \LmcRbac\Options\ModuleOptions

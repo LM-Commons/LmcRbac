@@ -22,11 +22,11 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
-use PHPUnit\Framework\TestCase;
 use LmcRbac\Container\RoleServiceFactory;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\InMemoryRoleProvider;
 use LmcRbac\Role\RoleProviderInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \LmcRbac\Container\RoleServiceFactory

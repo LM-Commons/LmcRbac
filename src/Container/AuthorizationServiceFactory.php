@@ -21,12 +21,12 @@ declare(strict_types=1);
 
 namespace LmcRbac\Container;
 
-use Psr\Container\ContainerInterface;
 use LmcRbac\Assertion\AssertionContainerInterface;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Rbac;
 use LmcRbac\Service\AuthorizationService;
 use LmcRbac\Service\RoleServiceInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Factory to create the authorization service

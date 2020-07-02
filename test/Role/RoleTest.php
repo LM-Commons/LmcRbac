@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Role;
 
-use PHPUnit\Framework\TestCase;
 use LmcRbac\Role\Role;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \LmcRbac\Role\Role

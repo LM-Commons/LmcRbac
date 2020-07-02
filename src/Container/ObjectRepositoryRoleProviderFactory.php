@@ -21,10 +21,10 @@ declare(strict_types=1);
 
 namespace LmcRbac\Container;
 
-use Psr\Container\ContainerInterface;
 use LmcRbac\Exception;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\ObjectRepositoryRoleProvider;
+use Psr\Container\ContainerInterface;
 
 /**
  * Factory used to create an object repository role provider

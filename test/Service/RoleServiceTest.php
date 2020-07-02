@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Service;
 
-use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 use LmcRbac\Identity\IdentityInterface;
 use LmcRbac\Role\HierarchicalRole;
 use LmcRbac\Role\InMemoryRoleProvider;
@@ -31,6 +29,8 @@ use LmcRbac\Role\RoleInterface;
 use LmcRbac\Role\RoleProviderInterface;
 use LmcRbac\Service\RoleService;
 use LmcRbacTest\Asset\Identity;
+use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 
 /**
  * @covers \LmcRbac\Service\RoleService

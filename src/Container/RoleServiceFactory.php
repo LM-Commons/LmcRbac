@@ -21,10 +21,10 @@ declare(strict_types=1);
 
 namespace LmcRbac\Container;
 
-use Psr\Container\ContainerInterface;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\RoleProviderInterface;
 use LmcRbac\Service\RoleService;
+use Psr\Container\ContainerInterface;
 
 /**
  * Factory to create the role service

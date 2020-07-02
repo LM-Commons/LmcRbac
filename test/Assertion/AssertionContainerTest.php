@@ -23,11 +23,11 @@ namespace LmcRbacTest\Assertion;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerExceptionInterface;
 use LmcRbac\Assertion\AssertionContainer;
 use LmcRbac\Assertion\AssertionInterface;
 use LmcRbacTest\Asset\SimpleAssertion;
+use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
 
 /**
  * @covers \LmcRbac\Assertion\AssertionContainer

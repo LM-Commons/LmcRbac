@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace LmcRbac\Container;
 
-use Psr\Container\ContainerInterface;
 use LmcRbac\Options\ModuleOptions;
+use Psr\Container\ContainerInterface;
 
 /**
  * Factory for the module options

@@ -21,10 +21,10 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Role;
 
-use PHPUnit\Framework\TestCase;
 use LmcRbac\Role\HierarchicalRoleInterface;
 use LmcRbac\Role\InMemoryRoleProvider;
 use LmcRbac\Role\RoleInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \LmcRbac\Role\InMemoryRoleProvider

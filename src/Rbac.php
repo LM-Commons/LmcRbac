@@ -22,9 +22,9 @@ declare(strict_types=1);
 namespace LmcRbac;
 
 use Generator;
-use Traversable;
 use LmcRbac\Role\HierarchicalRoleInterface;
 use LmcRbac\Role\RoleInterface;
+use Traversable;
 
 /**
  * Rbac object. It is used to check a permission against roles
