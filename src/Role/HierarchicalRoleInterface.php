@@ -31,7 +31,7 @@ interface HierarchicalRoleInterface extends RoleInterface
     public function hasChildren(): bool;
 
     /**
-     * @return RoleInterface[]
+     * @return iterable<RoleInterface>
      */
     public function getChildren(): iterable;
 }
