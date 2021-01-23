@@ -5,19 +5,18 @@ cache:
     - $HOME/.composer/cache
     - $HOME/.php-cs-fixer
 
+env:
+  global:
+    - COMPOSER_ARGS="--no-interaction"
+    - XDEBUG_MODE=coverage
+
 matrix:
   include:
-    - php: 7.2
+    - php: 7.3
       env:
         - DEPENDENCIES=""
         - EXECUTE_CS_CHECK=true
         - TEST_COVERAGE=true
-    - php: 7.2
-      env:
-        - DEPENDENCIES="--prefer-lowest --prefer-stable"
-    - php: 7.3
-      env:
-        - DEPENDENCIES=""
     - php: 7.3
       env:
         - DEPENDENCIES="--prefer-lowest --prefer-stable"
@@ -27,15 +26,18 @@ matrix:
     - php: 7.4
       env:
         - DEPENDENCIES="--prefer-lowest --prefer-stable"
+
+before_install:
+  - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0; fi
 
 before_script:
+  - mkdir -p ./build/logs
   - mkdir -p "$HOME/.php-cs-fixer"
-  - phpenv config-rm xdebug.ini
   - composer self-update
-  - composer update $DEPENDENCIES
+  - composer update $COMPOSER_ARGS $DEPENDENCIES
 
 script:
-  - if [[ $TEST_COVERAGE == 'true' ]]; then php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-clover ./build/logs/clover.xml; else ./vendor/bin/phpunit; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then ./vendor/bin/phpunit --coverage-text --coverage-clover ./build/logs/clover.xml; else ./vendor/bin/phpunit; fi
   - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then ./vendor/bin/php-cs-fixer fix -v --diff --dry-run; fi
   - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then ./vendor/bin/docheader check src/ tests/; fi
 
