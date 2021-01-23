@@ -1,12 +1,12 @@
 # LmcRbac
 
-[![Version](https://poser.pugx.org/lm-commons/lmc-rbac/version)](//packagist.org/packages/lm-commons/lmc-rbac)
+[![Version](https://poser.pugx.org/lm-commons/lmc-rbac/v)](https://packagist.org/packages/lm-commons/lmc-rbac)
 [![Total Downloads](https://poser.pugx.org/lm-commons/lmc-rbac/downloads)](//packagist.org/packages/lm-commons/lmc-rbac)
-[![License](https://poser.pugx.org/lm-commons/lmc-rbac/license)](//packagist.org/packages/lm-commons/lmc-rbac)
-[![Master Branch Build Status](https://travis-ci.org/Lm-Commons/LmcRbac.svg?branch=master)](http://travis-ci.org/LM-Commons/LmcRbac)
+[![License](https://poser.pugx.org/lm-commons/lmc-rbac/license)](https://packagist.org/packages/lm-commons/lmc-rbac)
+[![Master Branch Build Status](https://travis-ci.com/LM-Commons/LmcRbac.svg?branch=master)](http://travis-ci.org/LM-Commons/LmcRbac)
 [![Gitter](https://badges.gitter.im/Lm-Commons/community.svg)](https://gitter.im/LmCommons/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Coverage Status](https://coveralls.io/repos/github/Lm-Commons/LmcRbac/badge.svg?branch=master)](https://coveralls.io/github/Lm-Commons/LmcRbac?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Lm-Commons/LmcRbac/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Lm-Commons/LmcRbac/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/LM-Commons/LmcRbac/badge.svg?branch=master)](https://coveralls.io/github/LM-Commons/LmcRbac?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LM-Commons/LmcRbac/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/LM-Commons/LmcRbac/?branch=master)
 
 Role-based access control module to provide additional features on top of Zend\Permissions\Rbac
 
