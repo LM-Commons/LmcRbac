@@ -1,12 +1,12 @@
 # LmcRbac
 
-[![Version](https://poser.pugx.org/laminas-commons/lmc-rbac/version)](//packagist.org/packages/laminas-commons/lmc-rbac)
-[![Total Downloads](https://poser.pugx.org/laminas-commons/lmc-rbac/downloads)](//packagist.org/packages/laminas-commons/lmc-rbac)
-[![License](https://poser.pugx.org/laminas-commons/lmc-rbac/license)](//packagist.org/packages/laminas-commons/lmc-rbac)
-[![Master Branch Build Status](https://travis-ci.org/Laminas-Commons/LmcRbac.svg?branch=master)](http://travis-ci.org/Laminas-Commons/LmcRbac)
-[![Gitter](https://badges.gitter.im/LaminasCommons/community.svg)](https://gitter.im/LaminasCommons/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Coverage Status](https://coveralls.io/repos/github/Laminas-Commons/LmcRbac/badge.svg?branch=master)](https://coveralls.io/github/Laminas-Commons/LmcRbac?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Laminas-Commons/LmcRbac/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Laminas-Commons/LmcRbac/?branch=master)
+[![Version](https://poser.pugx.org/lm-commons/lmc-rbac/version)](//packagist.org/packages/lm-commons/lmc-rbac)
+[![Total Downloads](https://poser.pugx.org/lm-commons/lmc-rbac/downloads)](//packagist.org/packages/lm-commons/lmc-rbac)
+[![License](https://poser.pugx.org/lm-commons/lmc-rbac/license)](//packagist.org/packages/lm-commons/lmc-rbac)
+[![Master Branch Build Status](https://travis-ci.org/Lm-Commons/LmcRbac.svg?branch=master)](http://travis-ci.org/LM-Commons/LmcRbac)
+[![Gitter](https://badges.gitter.im/Lm-Commons/community.svg)](https://gitter.im/LmCommons/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Coverage Status](https://coveralls.io/repos/github/Lm-Commons/LmcRbac/badge.svg?branch=master)](https://coveralls.io/github/Lm-Commons/LmcRbac?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Lm-Commons/LmcRbac/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Lm-Commons/LmcRbac/?branch=master)
 
 Role-based access control module to provide additional features on top of Zend\Permissions\Rbac
 

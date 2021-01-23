@@ -9,7 +9,7 @@
     "rbac",
     "permissions"
   ],
-  "homepage": "http://www.github.com/LM-Commons/zfc-rbac",
+  "homepage": "http://www.github.com/LM-Commons/lmc-rbac",
   "authors": [
     {
       "name": "Kyle Spraggs",
