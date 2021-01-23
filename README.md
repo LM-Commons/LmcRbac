@@ -11,9 +11,7 @@
 Role-based access control module to provide additional features on top of Zend\Permissions\Rbac
 
 Based on [ZF-Commons/zfc-rbac](https://github.com/ZF-Commons/zfc-rbac) v3.x. If you are looking for the Laminas version
-of zfc-rbac v2, please use [Laminas-Commons/LmcRbacMvc](https://github.com/Laminas-Commons/LmcRbacMvc).
-
-**Work In Progress**
+of zfc-rbac v2, please use [LM-Commons/LmcRbacMvc](https://github.com/LM-Commons/LmcRbacMvc).
 
 ## Requirements
 
@@ -37,11 +35,11 @@ LmcRbac only officially supports installation through Composer. For Composer doc
 Install the module:
 
 ```sh
-$ php composer.phar require laminas-commons/lmc-rbac:^1.0
+$ php composer.phar require lm-commons/lmc-rbac:^1.0
 ```
 
 Enable the module by adding `LmcRbac` key to your `application.config.php` file. Customize the module by copy-pasting
-the `lmc_rbac.global.php.dist` file to your `config/autoload` folder.
+the `config.global.php` file to your `config/autoload` folder.
 
 ## Documentation
 
@@ -52,5 +50,5 @@ of LmcRbac.
 
 ## Support
 
-- File issues at https://github.com/Laminas-Commons/LmcRbac/issues.
-- Ask questions in the [LaminasCommons gitter](https://gitter.im/LaminasCommons/community) chat.
+- File issues at https://github.com/LM-Commons/LmcRbac/issues.
+- Ask questions in the [LM-Commons gitter](https://gitter.im/Lm-Commons/community) chat.
