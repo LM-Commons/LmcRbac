@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Role;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use LmcRbac\Role\ObjectRepositoryRoleProvider;
 use LmcRbacTest\Asset\FlatRole;
 use PHPUnit\Framework\TestCase;
