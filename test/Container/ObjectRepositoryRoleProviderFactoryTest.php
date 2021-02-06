@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Container;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
 use Laminas\ServiceManager\ServiceManager;
 use LmcRbac\Container\ObjectRepositoryRoleProviderFactory;
 use LmcRbac\Exception\RuntimeException;

@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace LmcRbac\Role;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use LmcRbac\Exception\RoleNotFoundException;
 
 /**
