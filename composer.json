@@ -35,7 +35,7 @@
     }
   ],
   "require": {
-    "php": "^7.3",
+    "php": "^7.3 || ^8.0",
     "laminas/laminas-servicemanager": "^3.3",
     "laminas/laminas-stdlib": "^3.1",
     "doctrine/persistence": "^2.0"
@@ -45,7 +45,7 @@
     "phpunit/phpunit": "^9.5.0",
     "phpspec/prophecy": "^1.10",
     "friendsofphp/php-cs-fixer": "^2.9.3",
-    "doctrine/doctrine-orm-module": "^3.1",
+
     "php-coveralls/php-coveralls": "^2.0"
   },
   "autoload": {
