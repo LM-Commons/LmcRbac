@@ -1,24 +1,15 @@
 <?xml version="1.0"?>
-<phpunit
-        bootstrap="./vendor/autoload.php"
-        colors="true"
-        convertErrorsToExceptions="true"
-        convertNoticesToExceptions="true"
-        convertWarningsToExceptions="true"
-        verbose="true"
-        stopOnFailure="false"
-        processIsolation="false"
-        backupGlobals="false"
-        >
-    <testsuite name="LmcRbac tests">
-        <directory>./test</directory>
-    </testsuite>
-    <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-html" target="./build/coverage" lowUpperBound="80" highLowerBound="90"/>
-    </logging>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="./vendor/autoload.php" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" verbose="true" stopOnFailure="false" processIsolation="false" backupGlobals="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage includeUncoveredFiles="true">
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+    <report>
+      <html outputDirectory="./build/coverage" lowUpperBound="80" highLowerBound="90"/>
+    </report>
+  </coverage>
+  <testsuite name="LmcRbac tests">
+    <directory>./test</directory>
+  </testsuite>
+  <logging/>
 </phpunit>

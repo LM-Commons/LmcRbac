@@ -15,18 +15,23 @@ matrix:
     - php: 7.3
       env:
         - DEPENDENCIES=""
-        - EXECUTE_CS_CHECK=true
-        - TEST_COVERAGE=true
     - php: 7.3
       env:
         - DEPENDENCIES="--prefer-lowest --prefer-stable"
     - php: 7.4
       env:
         - DEPENDENCIES=""
+        - EXECUTE_CS_CHECK=true
+        - TEST_COVERAGE=true
     - php: 7.4
       env:
         - DEPENDENCIES="--prefer-lowest --prefer-stable"
-
+    - php: 8.0
+      env:
+        - DEPENDENCIES="--prefer-lowest --prefer-stable"
+    - php: 8.0
+      env:
+        - DEPENDENCIES=""
 before_install:
   - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0; fi
 
