@@ -81,8 +81,11 @@ class AssertionSetTest extends TestCase
         $assertionContainer = $this->getMockBuilder(AssertionContainerInterface::class)->getMock();
         $assertionSet = new AssertionSet($assertionContainer, ['fooFactory', 'barFactory']);
 
-        $assertionContainer->expects($this->at(0))->method('get')->with('fooFactory')->willReturn($fooAssertion);
-        $assertionContainer->expects($this->at(1))->method('get')->with('barFactory')->willReturn($barAssertion);
+        $assertionContainer->expects($this->exactly(2))
+            ->method('get')
+            ->withConsecutive(
+                ['fooFactory'], ['barFactory'])
+            ->willReturnOnConsecutiveCalls($fooAssertion, $barAssertion);
 
         $this->assertFalse($assertionSet->assert('permission'));
 
@@ -98,7 +101,7 @@ class AssertionSetTest extends TestCase
         $assertionContainer = $this->getMockBuilder(AssertionContainerInterface::class)->getMock();
         $assertionSet = new AssertionSet($assertionContainer, ['fooFactory', 'barFactory', 'condition' => AssertionSet::CONDITION_AND]);
 
-        $assertionContainer->expects($this->at(0))->method('get')->with('fooFactory')->willReturn($fooAssertion);
+        $assertionContainer->expects($this->once())->method('get')->with('fooFactory')->willReturn($fooAssertion);
 
         $this->assertFalse($assertionSet->assert('permission'));
 
@@ -114,7 +117,7 @@ class AssertionSetTest extends TestCase
         $assertionContainer = $this->getMockBuilder(AssertionContainerInterface::class)->getMock();
         $assertionSet = new AssertionSet($assertionContainer, ['fooFactory', 'barFactory', 'condition' => AssertionSet::CONDITION_OR]);
 
-        $assertionContainer->expects($this->at(0))->method('get')->with('fooFactory')->willReturn($fooAssertion);
+        $assertionContainer->expects($this->once())->method('get')->with('fooFactory')->willReturn($fooAssertion);
 
         $this->assertTrue($assertionSet->assert('permission'));
 
@@ -189,8 +192,10 @@ class AssertionSetTest extends TestCase
         $assertionContainer = $this->getMockBuilder(AssertionContainerInterface::class)->getMock();
         $assertionSet = new AssertionSet($assertionContainer, ['fooFactory', ['barFactory']]);
 
-        $assertionContainer->expects($this->at(0))->method('get')->with('fooFactory')->willReturn($fooAssertion);
-        $assertionContainer->expects($this->at(1))->method('get')->with('barFactory')->willReturn($barAssertion);
+        $assertionContainer->expects($this->exactly(2))
+            ->method('get')
+            ->withConsecutive(['fooFactory'], ['barFactory'])
+            ->willReturnOnConsecutiveCalls($fooAssertion, $barAssertion);
 
         $this->assertTrue($assertionSet->assert('permission'));
 

@@ -28,6 +28,7 @@ use LmcRbac\Rbac;
 use LmcRbac\Service\AuthorizationService;
 use LmcRbac\Service\RoleServiceInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -35,6 +36,8 @@ use Psr\Container\ContainerInterface;
  */
 class AuthorizationServiceFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testCanCreateAuthorizationService(): void
     {
         $container = $this->prophesize(ContainerInterface::class);
