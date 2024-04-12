@@ -1,54 +1,55 @@
-# LmcRbac
+# Documentation Website
 
-[![Version](https://poser.pugx.org/lm-commons/lmc-rbac/v)](https://packagist.org/packages/lm-commons/lmc-rbac)
-[![Total Downloads](https://poser.pugx.org/lm-commons/lmc-rbac/downloads)](//packagist.org/packages/lm-commons/lmc-rbac)
-[![License](https://poser.pugx.org/lm-commons/lmc-rbac/license)](https://packagist.org/packages/lm-commons/lmc-rbac)
-[![Master Branch Build Status](https://travis-ci.com/LM-Commons/LmcRbac.svg?branch=master)](http://travis-ci.org/LM-Commons/LmcRbac)
-[![Gitter](https://badges.gitter.im/Lm-Commons/community.svg)](https://gitter.im/LmCommons/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Coverage Status](https://coveralls.io/repos/github/LM-Commons/LmcRbac/badge.svg?branch=master)](https://coveralls.io/github/LM-Commons/LmcRbac?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LM-Commons/LmcRbac/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/LM-Commons/LmcRbac/?branch=master)
+The Documentation Website is built using [Docusaurus](https://docusaurus.io/).
 
-Role-based access control module to provide additional features on top of Zend\Permissions\Rbac
+If you want to make a contribution to the documentation, please follow these
+instructions:
 
-Based on [ZF-Commons/zfc-rbac](https://github.com/ZF-Commons/zfc-rbac) v3.x. If you are looking for the Laminas version
-of zfc-rbac v2, please use [LM-Commons/LmcRbacMvc](https://github.com/LM-Commons/LmcRbacMvc).
+1. Fork the `master` branch of this repository to your GitHub profile. Do not fork the `gh-pages` branch as it only contains the "built" version.
+2. Create a branch to work on your changes
+3. Test your changes locally (see below for instructions on how to use Docusaurus)
+4. Create a Pull Request against the `master` branch to submit your changes
 
-## Requirements
 
-- PHP 7.2 or higher
+## Install and Develop with Docusaurus
 
-## Optional
+This is not a tutorial on how to use Docusaurus. Please refer to Docusaurus documentation.
 
-- [DoctrineModule](https://github.com/doctrine/DoctrineModule): if you want to use some built-in role and permission providers.
-- [Laminas\DeveloperTools](https://github.com/zendframework/Laminas\DeveloperTools): if you want to have useful stats added to
-the Zend Developer toolbar.
+### Installation
 
-## Upgrade
+On your local fork of the Documentation, use `yarn` to install
+the Docusaurus dependencies.
 
-You can find an [upgrade guide](UPGRADE.md) to quickly upgrade your application from major versions of LmcRbac.
-
-## Installation
-
-LmcRbac only officially supports installation through Composer. For Composer documentation, please refer to
-[getcomposer.org](http://getcomposer.org/).
-
-Install the module:
-
-```sh
-$ php composer.phar require lm-commons/lmc-rbac:^1.1
+```
+$ yarn
 ```
 
-Enable the module by adding `LmcRbac` key to your `application.config.php` file. Customize the module by copy-pasting
-the `config.global.php` file to your `config/autoload` folder.
+### Local Development
 
-## Documentation
+Once the dependencies are installed, you can make changes to the documentation source files.
 
-The official documentation is available in the [/docs](docs/) folder.
+Typically, only the files located under `/docs`, `/src` and `/blog` should be changed.
 
-You can also find some Doctrine entities in the [/data](data/) folder that will help you to more quickly take advantage
-of LmcRbac.
+Changes to the navigation and footer are made to the `docusauraus.config.js` file.
 
-## Support
+To test locally your changes, run:
 
-- File issues at https://github.com/LM-Commons/LmcRbac/issues.
-- Ask questions in the [LM-Commons gitter](https://gitter.im/Lm-Commons/community) chat.
+```
+$ yarn start
+```
+
+This command starts a local development server and opens up a browser window. Most changes are reflected live
+without having to restart the server.
+
+## Test builds
+
+A GitHub action is define to test builds. It will run on push to your fork.
+
+You may have to enable workflows on your fork before they are run.
+
+## Submit changes
+
+Once you are satisfied with your changes and the `Build GitHub Pages No Deploy` action has
+passed successfully, then create and submit a Pull Request against the `master` branch of
+the repository.
+
