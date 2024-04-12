@@ -44,7 +44,7 @@
     "malukenho/docheader": "^0.1.7",
     "phpunit/phpunit": "^9.5.0",
     "phpspec/prophecy": "^1.10",
-    "friendsofphp/php-cs-fixer": "^2.9.3",
+    "friendsofphp/php-cs-fixer": "^3.0.0",
 
     "php-coveralls/php-coveralls": "^2.0"
   },
