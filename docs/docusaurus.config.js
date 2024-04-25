@@ -9,7 +9,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
     title: 'LmcRbac',
-    tagline: 'LmcUser is a user registration and authentication module for Laminas. LmcUser provides the foundations for adding user authentication and registration to your Laminas site.',
+    tagline: 'Role-based access control module to provide additional features on top of Laminas\\Permissions\\Rbac',
     favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

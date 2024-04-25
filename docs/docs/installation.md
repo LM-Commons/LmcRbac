@@ -16,7 +16,7 @@ LmcRbac only officially supports installation through Composer. For Composer doc
 Install the module:
 
 ```sh
-$ composer require lm-commons/lmc-rbac:^1.1
+$ composer require lm-commons/lmc-rbac
 ```
 
 Enable the module by adding `LmcRbac` key to your `application.config.php` file. Customize the module by copy-pasting
