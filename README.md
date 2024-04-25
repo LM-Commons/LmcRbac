@@ -1,55 +1,54 @@
-# Documentation Website
+# LmcRbac
 
-The Documentation Website is built using [Docusaurus](https://docusaurus.io/).
+[![Version](https://poser.pugx.org/lm-commons/lmc-rbac/v)](https://packagist.org/packages/lm-commons/lmc-rbac)
+[![Total Downloads](https://poser.pugx.org/lm-commons/lmc-rbac/downloads)](//packagist.org/packages/lm-commons/lmc-rbac)
+[![License](https://poser.pugx.org/lm-commons/lmc-rbac/license)](https://packagist.org/packages/lm-commons/lmc-rbac)
+[![Master Branch Build Status](https://travis-ci.com/LM-Commons/LmcRbac.svg?branch=master)](http://travis-ci.org/LM-Commons/LmcRbac)
+[![Gitter](https://badges.gitter.im/Lm-Commons/community.svg)](https://gitter.im/LmCommons/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Coverage Status](https://coveralls.io/repos/github/LM-Commons/LmcRbac/badge.svg?branch=master)](https://coveralls.io/github/LM-Commons/LmcRbac?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LM-Commons/LmcRbac/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/LM-Commons/LmcRbac/?branch=master)
 
-If you want to make a contribution to the documentation, please follow these
-instructions:
+Role-based access control module to provide additional features on top of Zend\Permissions\Rbac
 
-1. Fork the `master` branch of this repository to your GitHub profile. Do not fork the `gh-pages` branch as it only contains the "built" version.
-2. Create a branch to work on your changes
-3. Test your changes locally (see below for instructions on how to use Docusaurus)
-4. Create a Pull Request against the `master` branch to submit your changes
+Based on [ZF-Commons/zfc-rbac](https://github.com/ZF-Commons/zfc-rbac) v3.x. If you are looking for the Laminas version
+of zfc-rbac v2, please use [LM-Commons/LmcRbacMvc](https://github.com/LM-Commons/LmcRbacMvc).
 
+## Requirements
 
-## Install and Develop with Docusaurus
+- PHP 7.2 or higher
 
-This is not a tutorial on how to use Docusaurus. Please refer to Docusaurus documentation.
+## Optional
 
-### Installation
+- [DoctrineModule](https://github.com/doctrine/DoctrineModule): if you want to use some built-in role and permission providers.
+- [Laminas\DeveloperTools](https://github.com/zendframework/Laminas\DeveloperTools): if you want to have useful stats added to
+the Laminas Developer toolbar.
 
-On your local fork of the Documentation, use `yarn` to install
-the Docusaurus dependencies.
+## Upgrade
 
+You can find an [upgrade guide](UPGRADE.md) to quickly upgrade your application from major versions of LmcRbac.
+
+## Installation
+
+LmcRbac only officially supports installation through Composer. For Composer documentation, please refer to
+[getcomposer.org](http://getcomposer.org/).
+
+Install the module:
+
+```sh
+$ php composer.phar require lm-commons/lmc-rbac
 ```
-$ yarn
-```
 
-### Local Development
+Enable the module by adding `LmcRbac` key to your `application.config.php` file. Customize the module by copy-pasting
+the `config.global.php` file to your `config/autoload` folder.
 
-Once the dependencies are installed, you can make changes to the documentation source files.
+## Documentation
 
-Typically, only the files located under `/docs`, `/src` and `/blog` should be changed.
+The official documentation is available [here](https://lm-commons.github.io/LmcRbac) folder.
 
-Changes to the navigation and footer are made to the `docusauraus.config.js` file.
+You can also find some Doctrine entities in the [/data](/data) folder that will help you to more quickly take advantage
+of LmcRbac.
 
-To test locally your changes, run:
+## Support
 
-```
-$ yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live
-without having to restart the server.
-
-## Test builds
-
-A GitHub action is define to test builds. It will run on push to your fork.
-
-You may have to enable workflows on your fork before they are run.
-
-## Submit changes
-
-Once you are satisfied with your changes and the `Build GitHub Pages No Deploy` action has
-passed successfully, then create and submit a Pull Request against the `master` branch of
-the repository.
-
+- File issues at https://github.com/LM-Commons/LmcRbac/issues.
+- Ask questions in the [LM-Commons Slack](https://join.slack.com/t/lm-commons/shared_invite/zt-2gankt2wj-FTS45hp1W~JEj1tWvDsUHQ) chat.
