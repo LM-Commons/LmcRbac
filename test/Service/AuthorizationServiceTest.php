@@ -43,7 +43,7 @@ use PHPUnit\Framework\TestCase;
  */
 class AuthorizationServiceTest extends TestCase
 {
-    public function grantedProvider(): array
+    static function grantedProvider(): array
     {
         return [
             // Simple is granted

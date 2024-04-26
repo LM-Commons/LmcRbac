@@ -31,12 +31,15 @@ use LmcRbac\Service\RoleService;
 use LmcRbacTest\Asset\Identity;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @covers \LmcRbac\Service\RoleService
  */
 class RoleServiceTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testReturnGuestRoleIfNoIdentityIsGiven(): void
     {
         $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
