@@ -14,13 +14,13 @@ of zfc-rbac v2, please use [LM-Commons/LmcRbacMvc](https://github.com/LM-Commons
 
 ## Requirements
 
-- PHP 7.2 or higher
+- PHP 7.3 or higher
+
+**Note:** PHP 7.3 and 8.0 are no longer actively tested
 
 ## Optional
 
 - [DoctrineModule](https://github.com/doctrine/DoctrineModule): if you want to use some built-in role and permission providers.
-- [Laminas\DeveloperTools](https://github.com/zendframework/Laminas\DeveloperTools): if you want to have useful stats added to
-the Laminas Developer toolbar.
 
 ## Upgrade
 
