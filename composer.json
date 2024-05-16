@@ -41,7 +41,7 @@
     "doctrine/persistence": "^2.0 || ^3.0"
   },
   "require-dev": {
-    "malukenho/docheader": "^0.1.7",
+    "malukenho/docheader": "^1.0.0",
     "phpunit/phpunit": "^10.0",
     "phpspec/prophecy": "^1.10",
     "phpspec/prophecy-phpunit": "^2.0",
