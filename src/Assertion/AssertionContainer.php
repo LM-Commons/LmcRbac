@@ -34,7 +34,7 @@ final class AssertionContainer extends AbstractPluginManager implements Assertio
     protected $instanceOf = AssertionInterface::class;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function get($name, array $options = null): AssertionInterface
     {

@@ -29,8 +29,8 @@ final class AssertionSet implements AssertionInterface
     /**
      * Condition constants
      */
-    const CONDITION_OR = 'condition_or';
-    const CONDITION_AND = 'condition_and';
+    public const CONDITION_OR = 'condition_or';
+    public const CONDITION_AND = 'condition_and';
 
     /**
      * @var AssertionContainerInterface

@@ -22,11 +22,9 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Container\InMemoryRoleProviderFactory;
 use LmcRbac\Container\RoleServiceFactory;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\InMemoryRoleProvider;
-use LmcRbac\Role\RoleProviderInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -44,8 +42,6 @@ class RoleServiceFactoryTest extends TestCase
                 ],
             ],
         ]);
-
-
 
         $container = new ServiceManager(['services' => [
             ModuleOptions::class => $options,

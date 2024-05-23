@@ -23,7 +23,6 @@ namespace LmcRbac\Container;
 
 use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Role\RoleProviderInterface;
 use LmcRbac\Service\RoleService;
 use Psr\Container\ContainerInterface;
 

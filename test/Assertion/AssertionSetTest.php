@@ -84,10 +84,12 @@ class AssertionSetTest extends TestCase
         $matcher = $this->exactly(2);
         $assertionContainer->expects($matcher)
             ->method('get')
-            ->willReturnCallback(fn (string $key) => match ($key) {
+            ->willReturnCallback(function (string $key) use ($fooAssertion, $barAssertion) {
+                return match ($key) {
                     'fooFactory' => $fooAssertion,
                     'barFactory' => $barAssertion,
-                });
+                };
+            });
 
         $this->assertFalse($assertionSet->assert('permission'));
 
@@ -244,7 +246,7 @@ class AssertionSetTest extends TestCase
         }
     }
 
-    static public function dpMatrix(): array
+    public static function dpMatrix(): array
     {
         return [
             // no assertions will fail

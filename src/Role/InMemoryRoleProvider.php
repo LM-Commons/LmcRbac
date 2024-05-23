@@ -55,7 +55,7 @@ final class InMemoryRoleProvider implements RoleProviderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getRoles(iterable $roleNames): iterable
     {

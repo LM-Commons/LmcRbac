@@ -43,7 +43,7 @@ use PHPUnit\Framework\TestCase;
  */
 class AuthorizationServiceTest extends TestCase
 {
-    static function grantedProvider(): array
+    public static function grantedProvider(): array
     {
         return [
             // Simple is granted
@@ -302,7 +302,10 @@ class AuthorizationServiceTest extends TestCase
 
         $called = false;
 
-        $authorizationService = new AuthorizationService($rbac, $roleService, $assertionContainer,
+        $authorizationService = new AuthorizationService(
+            $rbac,
+            $roleService,
+            $assertionContainer,
             [
                 'foo' => function ($permission, IdentityInterface $identity = null, $context = null) use (&$called) {
                     $called = true;
