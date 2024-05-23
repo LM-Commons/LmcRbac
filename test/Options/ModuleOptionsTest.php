@@ -31,12 +31,12 @@ class ModuleOptionsTest extends TestCase
 {
     public function testAssertModuleDefaultOptions(): void
     {
-        /** @var \LmcRbac\Options\ModuleOptions $moduleOptions */
         $moduleOptions = new \LmcRbac\Options\ModuleOptions();
 
         $this->assertEquals('guest', $moduleOptions->getGuestRole());
         $this->assertIsArray($moduleOptions->getRoleProvider());
         $this->assertIsArray($moduleOptions->getAssertionMap());
+        $this->assertEquals('LmcRbac\Role\InMemoryRoleProvider', key($moduleOptions->getRoleProvider()));
     }
 
     public function testSettersAndGetters(): void

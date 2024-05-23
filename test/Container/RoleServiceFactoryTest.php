@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
+use LmcRbac\Container\InMemoryRoleProviderFactory;
 use LmcRbac\Container\RoleServiceFactory;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\InMemoryRoleProvider;
@@ -44,9 +45,11 @@ class RoleServiceFactoryTest extends TestCase
             ],
         ]);
 
+
+
         $container = new ServiceManager(['services' => [
             ModuleOptions::class => $options,
-            RoleProviderInterface::class => new InMemoryRoleProvider([]),
+            InMemoryRoleProvider::class => new InMemoryRoleProvider([]),
         ]]);
 
         $factory = new RoleServiceFactory();
@@ -57,7 +60,7 @@ class RoleServiceFactoryTest extends TestCase
 
     public function testThrowExceptionIfNoRoleProvider(): void
     {
-        $this->expectException(\Psr\Container\NotFoundExceptionInterface::class);
+        $this->expectException(\Laminas\ServiceManager\Exception\ServiceNotCreatedException::class);
 
         $options = new ModuleOptions([
             'guest_role' => 'guest',
