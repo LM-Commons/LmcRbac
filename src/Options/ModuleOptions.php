@@ -47,10 +47,13 @@ final class ModuleOptions extends AbstractOptions
 
     /**
      * A configuration for role provider
+     * Defaults to InMemoryRoleProvider
      *
      * @var array
      */
-    protected $roleProvider = [];
+    protected $roleProvider = [
+        'LmcRbac\Role\InMemoryRoleProvider' => [],
+    ];
 
     /**
      * Constructor

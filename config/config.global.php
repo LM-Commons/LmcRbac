@@ -35,19 +35,21 @@ return [
         /**
          * Configuration for role provider
          *
-         * It must be an array that contains configuration for the role provider. The provider config
-         * must follow the following format:
-         *
-         *      'LmcRbac\Role\InMemoryRoleProvider' => [
-         *          'role1' => [
-         *              'children'    => ['children1', 'children2'], // OPTIONAL
-         *              'permissions' => ['edit', 'read'] // OPTIONAL
-         *          ]
-         *      ]
+         * It must be an array that contains configuration for the role provider.
+         * The default Role Provider is 'LmcRbac\Role\InMemoryRoleProvider'
          *
          * Supported options depend of the role provider, so please refer to the official documentation
+         *
+         * The provider config for InMemoryRoleProvider must follow the following format:
+         *
+         *       'LmcRbac\Role\InMemoryRoleProvider' => [
+         *           'role1' => [
+         *               'children'    => ['children1', 'children2'], // OPTIONAL
+         *               'permissions' => ['edit', 'read'] // OPTIONAL
+         *           ]
+         *       ]
          */
-        'role_provider' => [],
+        // 'role_provider' => [],
 
         /**
          * Defining the assertion map

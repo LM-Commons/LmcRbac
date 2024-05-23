@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace LmcRbac\Container;
 
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\RoleProviderInterface;
 use LmcRbac\Service\RoleService;
@@ -38,6 +39,14 @@ final class RoleServiceFactory
     {
         $moduleOptions = $container->get(ModuleOptions::class);
 
-        return new RoleService($container->get(RoleProviderInterface::class), $moduleOptions->getGuestRole());
+        // Get the role provider from the options
+        $roleProvider = $moduleOptions->getRoleProvider();
+        if (empty($roleProvider)) {
+            throw new ServiceNotCreatedException('No role provider defined in LmcRbac configuration.');
+        }
+
+        $roleProviderName = key($roleProvider);
+
+        return new RoleService($container->get($roleProviderName), $moduleOptions->getGuestRole());
     }
 }
