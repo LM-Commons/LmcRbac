@@ -30,6 +30,7 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Vytautas Stankus
  * @licence MIT
+ * @deprecated Replaced by LmcRbac\Role\InMemoryRoleProviderFactory
  */
 final class InMemoryRoleProviderFactory
 {

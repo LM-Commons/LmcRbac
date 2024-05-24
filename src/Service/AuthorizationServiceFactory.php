@@ -19,30 +19,32 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Container;
+namespace LmcRbac\Service;
 
-use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Assertion\AssertionContainer;
-use LmcRbac\Assertion\AssertionContainerFactory;
-use PHPUnit\Framework\TestCase;
+use LmcRbac\Assertion\AssertionContainerInterface;
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Rbac;
+use LmcRbac\Service\AuthorizationService;
+use LmcRbac\Service\RoleServiceInterface;
+use Psr\Container\ContainerInterface;
 
 /**
- * @covers \LmcRbac\Assertion\AssertionContainerFactory
+ * Factory to create the authorization service
+ *
+ * @author  Michaël Gallego <mic.gallego@gmail.com>
+ * @licence MIT
  */
-class AssertionContainerFactoryTest extends TestCase
+final class AuthorizationServiceFactory
 {
-    public function testFactory(): void
+    public function __invoke(ContainerInterface $container): AuthorizationService
     {
-        $serviceManager = new ServiceManager();
-        $serviceManager->setService('config', [
-            'lmc_rbac' => [
-                'assertion_manager' => [],
-            ],
-        ]);
+        $moduleOptions = $container->get(ModuleOptions::class);
 
-        $factory = new AssertionContainerFactory();
-        $pluginManager = $factory($serviceManager);
-
-        $this->assertInstanceOf(AssertionContainer::class, $pluginManager);
+        return new AuthorizationService(
+            $container->get(Rbac::class),
+            $container->get(RoleServiceInterface::class),
+            $container->get(AssertionContainerInterface::class),
+            $moduleOptions->getAssertionMap()
+        );
     }
 }

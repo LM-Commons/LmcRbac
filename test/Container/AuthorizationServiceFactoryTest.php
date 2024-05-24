@@ -22,7 +22,7 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use LmcRbac\Assertion\AssertionContainerInterface;
-use LmcRbac\Container\AuthorizationServiceFactory;
+use LmcRbac\Service\AuthorizationServiceFactory;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Rbac;
 use LmcRbac\Service\AuthorizationService;
@@ -32,7 +32,7 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
 /**
- * @covers \LmcRbac\Container\AuthorizationServiceFactory
+ * @covers \LmcRbac\Service\AuthorizationServiceFactory
  */
 class AuthorizationServiceFactoryTest extends TestCase
 {

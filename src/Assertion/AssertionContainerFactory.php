@@ -19,30 +19,23 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Container;
+namespace LmcRbac\Assertion;
 
-use Laminas\ServiceManager\ServiceManager;
 use LmcRbac\Assertion\AssertionContainer;
-use LmcRbac\Assertion\AssertionContainerFactory;
-use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 /**
- * @covers \LmcRbac\Assertion\AssertionContainerFactory
+ * Factory to create a assertion plugin manager
+ *
+ * @author  Aeneas Rekkas
+ * @licence MIT
  */
-class AssertionContainerFactoryTest extends TestCase
+final class AssertionContainerFactory
 {
-    public function testFactory(): void
+    public function __invoke(ContainerInterface $container): AssertionContainer
     {
-        $serviceManager = new ServiceManager();
-        $serviceManager->setService('config', [
-            'lmc_rbac' => [
-                'assertion_manager' => [],
-            ],
-        ]);
+        $config = $container->get('config')['lmc_rbac']['assertion_manager'];
 
-        $factory = new AssertionContainerFactory();
-        $pluginManager = $factory($serviceManager);
-
-        $this->assertInstanceOf(AssertionContainer::class, $pluginManager);
+        return new AssertionContainer($container, $config);
     }
 }

@@ -29,6 +29,7 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Aeneas Rekkas
  * @licence MIT
+ * @deprecated Replaced by LmcRbac\Assertion\AssertionContainerFactory
  */
 final class AssertionContainerFactory
 {

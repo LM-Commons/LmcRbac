@@ -29,6 +29,7 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
+ * @deprecated Replaced by LmcRbac\Options\ModuleOptionsFactory
  */
 final class ModuleOptionsFactory
 {

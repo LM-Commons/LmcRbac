@@ -31,6 +31,7 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
+ * @deprecated Replaced by LmcRbac\Service\RoleServiceFactory
  */
 final class RoleServiceFactory
 {

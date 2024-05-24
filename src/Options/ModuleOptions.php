@@ -29,21 +29,21 @@ use Laminas\Stdlib\AbstractOptions;
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
  */
-final class ModuleOptions extends AbstractOptions
+class ModuleOptions extends AbstractOptions
 {
     /**
      * Guest role (used when no identity is found)
      *
      * @var string
      */
-    protected $guestRole = 'guest';
+    protected string $guestRole = 'guest';
 
     /**
      * Assertion map
      *
      * @var array
      */
-    protected $assertionMap = [];
+    protected array $assertionMap = [];
 
     /**
      * A configuration for role provider
@@ -51,7 +51,7 @@ final class ModuleOptions extends AbstractOptions
      *
      * @var array
      */
-    protected $roleProvider = [
+    protected array $roleProvider = [
         'LmcRbac\Role\InMemoryRoleProvider' => [],
     ];
 
