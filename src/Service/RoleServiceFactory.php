@@ -19,30 +19,33 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Container;
+namespace LmcRbac\Service;
 
-use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Assertion\AssertionContainer;
-use LmcRbac\Assertion\AssertionContainerFactory;
-use PHPUnit\Framework\TestCase;
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Service\RoleService;
+use Psr\Container\ContainerInterface;
 
 /**
- * @covers \LmcRbac\Assertion\AssertionContainerFactory
+ * Factory to create the role service
+ *
+ * @author  Michaël Gallego <mic.gallego@gmail.com>
+ * @licence MIT
  */
-class AssertionContainerFactoryTest extends TestCase
+final class RoleServiceFactory
 {
-    public function testFactory(): void
+    public function __invoke(ContainerInterface $container): RoleService
     {
-        $serviceManager = new ServiceManager();
-        $serviceManager->setService('config', [
-            'lmc_rbac' => [
-                'assertion_manager' => [],
-            ],
-        ]);
+        $moduleOptions = $container->get(ModuleOptions::class);
 
-        $factory = new AssertionContainerFactory();
-        $pluginManager = $factory($serviceManager);
+        // Get the role provider from the options
+        $roleProvider = $moduleOptions->getRoleProvider();
+        if (empty($roleProvider)) {
+            throw new ServiceNotCreatedException('No role provider defined in LmcRbac configuration.');
+        }
 
-        $this->assertInstanceOf(AssertionContainer::class, $pluginManager);
+        $roleProviderName = key($roleProvider);
+
+        return new RoleService($container->get($roleProviderName), $moduleOptions->getGuestRole());
     }
 }

@@ -19,30 +19,26 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Container;
+namespace LmcRbac\Role;
 
-use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Assertion\AssertionContainer;
-use LmcRbac\Assertion\AssertionContainerFactory;
-use PHPUnit\Framework\TestCase;
+use LmcRbac\Options\ModuleOptions;
+use LmcRbac\Role\InMemoryRoleProvider;
+use Psr\Container\ContainerInterface;
 
 /**
- * @covers \LmcRbac\Assertion\AssertionContainerFactory
+ * Factory used to create an in memory role provider
+ *
+ * @author  Vytautas Stankus
+ * @licence MIT
  */
-class AssertionContainerFactoryTest extends TestCase
+final class InMemoryRoleProviderFactory
 {
-    public function testFactory(): void
+    public function __invoke(ContainerInterface $container): InMemoryRoleProvider
     {
-        $serviceManager = new ServiceManager();
-        $serviceManager->setService('config', [
-            'lmc_rbac' => [
-                'assertion_manager' => [],
-            ],
-        ]);
+        $moduleOptions = $container->get(ModuleOptions::class);
 
-        $factory = new AssertionContainerFactory();
-        $pluginManager = $factory($serviceManager);
-
-        $this->assertInstanceOf(AssertionContainer::class, $pluginManager);
+        return new InMemoryRoleProvider(
+            $moduleOptions->getRoleProvider()[InMemoryRoleProvider::class] ?? []
+        );
     }
 }

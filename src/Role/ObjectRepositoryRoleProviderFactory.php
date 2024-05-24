@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Container;
+namespace LmcRbac\Role;
 
 use LmcRbac\Exception;
 use LmcRbac\Options\ModuleOptions;
@@ -31,7 +31,6 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
- * @deprecated Replaced by LmcRbac\Role\ObjectRepositoryRoleProviderFactory
  */
 final class ObjectRepositoryRoleProviderFactory
 {

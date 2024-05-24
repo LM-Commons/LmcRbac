@@ -24,14 +24,14 @@ namespace LmcRbacTest\Container;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Container\ObjectRepositoryRoleProviderFactory;
+use LmcRbac\Role\ObjectRepositoryRoleProviderFactory;
 use LmcRbac\Exception\RuntimeException;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\ObjectRepositoryRoleProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Container\ObjectRepositoryRoleProviderFactory
+ * @covers \LmcRbac\Role\ObjectRepositoryRoleProviderFactory
  */
 class ObjectRepositoryRoleProviderFactoryTest extends TestCase
 {

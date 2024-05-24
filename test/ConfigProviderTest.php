@@ -34,12 +34,12 @@ class ConfigProviderTest extends TestCase
         $provider = new ConfigProvider();
         $expected = [
             'factories' => [
-                \LmcRbac\Assertion\AssertionContainerInterface::class => \LmcRbac\Container\AssertionContainerFactory::class,
-                \LmcRbac\Options\ModuleOptions::class => \LmcRbac\Container\ModuleOptionsFactory::class,
-                \LmcRbac\Role\InMemoryRoleProvider::class => \LmcRbac\Container\InMemoryRoleProviderFactory::class,
-                \LmcRbac\Role\ObjectRepositoryRoleProvider::class => \LmcRbac\Container\ObjectRepositoryRoleProviderFactory::class,
-                \LmcRbac\Service\AuthorizationServiceInterface::class => \LmcRbac\Container\AuthorizationServiceFactory::class,
-                \LmcRbac\Service\RoleServiceInterface::class => \LmcRbac\Container\RoleServiceFactory::class,
+                \LmcRbac\Assertion\AssertionContainerInterface::class => \LmcRbac\Assertion\AssertionContainerFactory::class,
+                \LmcRbac\Options\ModuleOptions::class => \LmcRbac\Options\ModuleOptionsFactory::class,
+                \LmcRbac\Role\InMemoryRoleProvider::class => \LmcRbac\Role\InMemoryRoleProviderFactory::class,
+                \LmcRbac\Role\ObjectRepositoryRoleProvider::class => \LmcRbac\Role\ObjectRepositoryRoleProviderFactory::class,
+                \LmcRbac\Service\AuthorizationServiceInterface::class => \LmcRbac\Service\AuthorizationServiceFactory::class,
+                \LmcRbac\Service\RoleServiceInterface::class => \LmcRbac\Service\RoleServiceFactory::class,
                 \LmcRbac\Rbac::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
             ],
         ];
