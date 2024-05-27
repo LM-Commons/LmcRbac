@@ -32,7 +32,7 @@ use Psr\Container\ContainerInterface;
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
  */
-final class RoleServiceFactory
+class RoleServiceFactory
 {
     public function __invoke(ContainerInterface $container): RoleService
     {

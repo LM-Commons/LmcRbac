@@ -30,7 +30,7 @@ use Psr\Container\ContainerInterface;
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
  */
-final class ModuleOptionsFactory
+class ModuleOptionsFactory
 {
     public function __invoke(ContainerInterface $container): ModuleOptions
     {

@@ -34,7 +34,7 @@ use Psr\Container\ContainerInterface;
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
  */
-final class AuthorizationServiceFactory
+class AuthorizationServiceFactory
 {
     public function __invoke(ContainerInterface $container): AuthorizationService
     {

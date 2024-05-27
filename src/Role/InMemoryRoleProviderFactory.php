@@ -31,7 +31,7 @@ use Psr\Container\ContainerInterface;
  * @author  Vytautas Stankus
  * @licence MIT
  */
-final class InMemoryRoleProviderFactory
+class InMemoryRoleProviderFactory
 {
     public function __invoke(ContainerInterface $container): InMemoryRoleProvider
     {

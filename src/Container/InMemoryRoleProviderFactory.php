@@ -32,14 +32,6 @@ use Psr\Container\ContainerInterface;
  * @licence MIT
  * @deprecated Replaced by LmcRbac\Role\InMemoryRoleProviderFactory
  */
-final class InMemoryRoleProviderFactory
+final class InMemoryRoleProviderFactory extends \LmcRbac\Role\InMemoryRoleProviderFactory
 {
-    public function __invoke(ContainerInterface $container): InMemoryRoleProvider
-    {
-        $moduleOptions = $container->get(ModuleOptions::class);
-
-        return new InMemoryRoleProvider(
-            $moduleOptions->getRoleProvider()[InMemoryRoleProvider::class] ?? []
-        );
-    }
 }

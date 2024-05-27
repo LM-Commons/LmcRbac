@@ -35,17 +35,6 @@ use Psr\Container\ContainerInterface;
  * @licence MIT
  * @deprecated Replaced by LmcRbac\Service\AuthorizationServiceFactory
  */
-final class AuthorizationServiceFactory
+final class AuthorizationServiceFactory extends \LmcRbac\Service\AuthorizationServiceFactory
 {
-    public function __invoke(ContainerInterface $container): AuthorizationService
-    {
-        $moduleOptions = $container->get(ModuleOptions::class);
-
-        return new AuthorizationService(
-            $container->get(Rbac::class),
-            $container->get(RoleServiceInterface::class),
-            $container->get(AssertionContainerInterface::class),
-            $moduleOptions->getAssertionMap()
-        );
-    }
 }

@@ -30,7 +30,7 @@ use Psr\Container\ContainerInterface;
  * @author  Aeneas Rekkas
  * @licence MIT
  */
-final class AssertionContainerFactory
+class AssertionContainerFactory
 {
     public function __invoke(ContainerInterface $container): AssertionContainer
     {
