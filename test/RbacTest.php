@@ -92,7 +92,7 @@ class RbacTest extends TestCase
         $childRole = new Role('Bar');
         $childRole->addPermission('permission');
 
-        $parentRole = new HierarchicalRole('Foo');
+        $parentRole = new Role('Foo');
         $parentRole->addChild($childRole);
 
         $rbac = new \LmcRbac\Rbac();
@@ -107,7 +107,7 @@ class RbacTest extends TestCase
     {
         $childRole = new Role('Bar');
 
-        $parentRole = new HierarchicalRole('Foo');
+        $parentRole = new Role('Foo');
         $parentRole->addChild($childRole);
 
         $rbac = new Rbac();

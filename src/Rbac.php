@@ -22,14 +22,13 @@ declare(strict_types=1);
 namespace LmcRbac;
 
 use Generator;
-use LmcRbac\Role\HierarchicalRoleInterface;
 use LmcRbac\Role\RoleInterface;
 use Traversable;
 
 /**
  * Rbac object. It is used to check a permission against roles
  */
-class Rbac
+class Rbac implements RbacInterface
 {
     /**
      * Determines if access is granted by checking the roles for permission.
@@ -63,7 +62,7 @@ class Rbac
         foreach ($roles as $role) {
             yield $role;
 
-            if ($role instanceof HierarchicalRoleInterface) {
+            if ($role->hasChildren()) {
                 yield from $this->flattenRoles($role->getChildren());
             }
         }
