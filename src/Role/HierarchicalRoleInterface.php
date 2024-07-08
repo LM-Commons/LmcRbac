@@ -25,13 +25,7 @@ namespace LmcRbac\Role;
  * Interface for a hierarchical role
  *
  * A hierarchical role is a role that can have children.
+ * @deprecated
  */
 interface HierarchicalRoleInterface extends RoleInterface
-{
-    public function hasChildren(): bool;
-
-    /**
-     * @return iterable<RoleInterface>
-     */
-    public function getChildren(): iterable;
-}
+{}

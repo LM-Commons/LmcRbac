@@ -30,7 +30,7 @@ use LmcRbac\Role\RoleInterface;
  * @ORM\Entity
  * @ORM\Table(name="hierarchical_roles")
  */
-class HierarchicalRole implements HierarchicalRoleInterface
+class HierarchicalRole implements RoleInterface
 {
     /**
      * @var int|null

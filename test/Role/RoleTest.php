@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace LmcRbacTest\Role;
 
 use LmcRbac\Role\Role;
+use LmcRbac\Role\RoleInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -66,5 +67,68 @@ class RoleTest extends TestCase
             'bar' => 'bar',
         ];
         $this->assertEquals($expectedPermissions, $role->getPermissions());
+    }
+
+    /**
+     * @covers \LmcRbac\Role\Role::hasPermission
+     */
+    public function testHasPermission(): void
+    {
+        $role = new Role('php');
+        $role->addPermission('foo');
+        $this->assertTrue($role->hasPermission('foo'));
+        $this->assertFalse($role->hasPermission('bar'));
+
+        $childRole = new Role('child');
+        $childRole->addPermission('bar');
+        $role->addChild($childRole);
+        $this->assertTrue($role->hasPermission('bar'));
+        $this->assertFalse($role->hasPermission('baz'));
+
+    }
+
+    /**
+     * @covers \LmcRbac\Role\Role::addChild
+     */
+    public function testCanAddChild(): void
+    {
+        $role = new Role('role');
+        $child = new Role('child');
+
+        $role->addChild($child);
+
+        $this->assertCount(1, $role->getChildren());
+    }
+
+    /**
+     * @covers \LmcRbac\Role\Role::hasChildren
+     */
+    public function testHasChildren(): void
+    {
+        $role = new Role('role');
+
+        $this->assertFalse($role->hasChildren());
+
+        $role->addChild(new Role('child'));
+
+        $this->assertTrue($role->hasChildren());
+    }
+
+    /**
+     * @covers \LmcRbac\Role\Role::getChildren
+     */
+    public function testCanGetChildren(): void
+    {
+        $role = new Role('role');
+        $child1 = new Role('child 1');
+        $child2 = new Role('child 2');
+
+        $role->addChild($child1);
+        $role->addChild($child2);
+
+        $children = $role->getChildren();
+
+        $this->assertCount(2, $children);
+        $this->assertContainsOnlyInstancesOf(RoleInterface::class, $children);
     }
 }

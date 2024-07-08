@@ -80,4 +80,14 @@ class FlatRole implements RoleInterface
     {
         return isset($this->permissions[$permission]);
     }
+
+    public function hasChildren(): bool
+    {
+        return false;
+    }
+
+    public function getChildren(): iterable
+    {
+        return [];
+    }
 }

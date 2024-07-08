@@ -23,61 +23,8 @@ namespace LmcRbac\Role;
 
 /**
  * Simple implementation for a hierarchical role
+ * @deprecated
  */
-final class HierarchicalRole implements HierarchicalRoleInterface
+final class HierarchicalRole extends Role
 {
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string[]
-     */
-    private $permissions = [];
-
-    /**
-     * @var array|RoleInterface[]
-     */
-    private $children = [];
-
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getPermissions(): array
-    {
-        return $this->permissions;
-    }
-
-    public function addPermission(string $permission): void
-    {
-        $this->permissions[$permission] = $permission;
-    }
-
-    public function hasPermission(string $permission): bool
-    {
-        return isset($this->permissions[$permission]);
-    }
-
-    public function hasChildren(): bool
-    {
-        return ! empty($this->children);
-    }
-
-    public function getChildren(): iterable
-    {
-        return $this->children;
-    }
-
-    public function addChild(RoleInterface $child): void
-    {
-        $this->children[$child->getName()] = $child;
-    }
 }

@@ -25,17 +25,22 @@ namespace LmcRbac\Role;
  * Simple implementation for a role without hierarchy
  * and using strings as permissions
  */
-final class Role implements RoleInterface
+class Role implements RoleInterface
 {
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string[]
      */
-    private $permissions = [];
+    private array $permissions = [];
+
+    /**
+     * @var array|RoleInterface[]
+     */
+    private array $children = [];
 
     public function __construct(string $name)
     {
@@ -59,6 +64,31 @@ final class Role implements RoleInterface
 
     public function hasPermission(string $permission): bool
     {
-        return isset($this->permissions[$permission]);
+        if (isset($this->permissions[$permission])) {
+            return true;
+        }
+
+        foreach ($this->children as $child) {
+            if ($child->hasPermission($permission)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasChildren(): bool
+    {
+        return ! empty($this->children);
+    }
+
+    public function getChildren(): iterable
+    {
+        return $this->children;
+    }
+
+    public function addChild(Role $child): void
+    {
+        $this->children[$child->getName()] = $child;
     }
 }
