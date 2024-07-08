@@ -22,7 +22,7 @@ declare(strict_types=1);
 namespace LmcRbacTest\Service;
 
 use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Role\HierarchicalRole;
+use LmcRbac\Identity\IdentityProviderInterface;
 use LmcRbac\Role\InMemoryRoleProvider;
 use LmcRbac\Role\Role;
 use LmcRbac\Role\RoleInterface;
@@ -42,7 +42,9 @@ class RoleServiceTest extends TestCase
 
     public function testReturnGuestRoleIfNoIdentityIsGiven(): void
     {
-        $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
+        $identityProvider = $this->createMock(IdentityProviderInterface::class);
+        $identityProvider->expects($this->once())->method('getIdentity')->willReturn(null);
+        $roleService = new RoleService($identityProvider, new InMemoryRoleProvider([]), 'guest');
 
         $result = $roleService->getIdentityRoles(null);
 
@@ -53,9 +55,10 @@ class RoleServiceTest extends TestCase
 
     public function testReturnGuestRoleIfGuestIdentityIsGiven(): void
     {
-        $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
-
         $identity = new Identity(['guest']);
+        $identityProvider = $this->createMock(IdentityProviderInterface::class);
+        $roleService = new RoleService($identityProvider, new InMemoryRoleProvider([]), 'guest');
+
 
         $result = $roleService->getIdentityRoles($identity);
 
@@ -66,7 +69,8 @@ class RoleServiceTest extends TestCase
 
     public function testReturnTraversableRolesFromIdentityGiven(): void
     {
-        $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
+        $identityProvider = $this->createMock(IdentityProviderInterface::class);
+        $roleService = new RoleService($identityProvider, new InMemoryRoleProvider([]), 'guest');
         $identity = $this->prophesize(IdentityInterface::class);
         $identity->getRoles()->willReturn($roles = new \ArrayIterator(['first', 'second', 'third']));
 
@@ -83,9 +87,10 @@ class RoleServiceTest extends TestCase
     {
         $roleProvider = $this->prophesize(RoleProviderInterface::class);
         $roleProvider->getRoles(Argument::any())->shouldNotBeCalled();
+        $identityProvider = $this->createMock(IdentityProviderInterface::class);
 
-        $roleService = new RoleService($roleProvider->reveal(), 'guest');
-        $roles = [new Role('first'), new HierarchicalRole('second'), new Role('third')];
+        $roleService = new RoleService($identityProvider, $roleProvider->reveal(), 'guest');
+        $roles = [new Role('first'), new Role('second'), new Role('third')];
         $identity = new Identity($roles);
 
         $result = $roleService->getIdentityRoles($identity);
@@ -98,10 +103,11 @@ class RoleServiceTest extends TestCase
     public function testWillCollectRolesOnlyIfRequired(): void
     {
         $roleProvider = $this->prophesize(RoleProviderInterface::class);
-        $roles = [new Role('first'), new HierarchicalRole('second'), 'third'];
+        $roles = [new Role('first'), new Role('second'), 'third'];
         $roleProvider->getRoles(['third'])->shouldBeCalled()->willReturn([new Role('third')]);
+        $identityProvider = $this->createMock(IdentityProviderInterface::class);
 
-        $roleService = new RoleService($roleProvider->reveal(), 'guest');
+        $roleService = new RoleService($identityProvider, $roleProvider->reveal(), 'guest');
         $identity = new Identity($roles);
 
         $result = $roleService->getIdentityRoles($identity);
@@ -112,5 +118,14 @@ class RoleServiceTest extends TestCase
         $this->assertEquals($roles[0]->getName(), $result[0]->getName());
         $this->assertEquals($roles[1]->getName(), $result[1]->getName());
         $this->assertEquals($roles[2], $result[2]->getName());
+    }
+
+    public function testGetIdentity()
+    {
+        $identity = new Identity([]);
+        $identityProvider = $this->createMock(IdentityProviderInterface::class);
+        $identityProvider->expects($this->once())->method('getIdentity')->willReturn($identity);
+        $roleService = new RoleService($identityProvider, new InMemoryRoleProvider([]), 'guest');
+        $this->assertEquals($identity, $roleService->getIdentity());
     }
 }

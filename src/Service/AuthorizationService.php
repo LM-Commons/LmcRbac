@@ -21,10 +21,10 @@ declare(strict_types=1);
 
 namespace LmcRbac\Service;
 
-use LmcRbac\Assertion\AssertionContainerInterface;
+use LmcRbac\Assertion\AssertionPluginManagerInterface;
 use LmcRbac\Assertion\AssertionSet;
 use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Rbac;
+use LmcRbac\RbacInterface;
 
 /**
  * Authorization service is a simple service that internally uses Rbac to check if identity is
@@ -33,43 +33,34 @@ use LmcRbac\Rbac;
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
  */
-final class AuthorizationService implements AuthorizationServiceInterface
+class AuthorizationService implements AuthorizationServiceInterface
 {
-    /**
-     * @var Rbac
-     */
-    private $rbac;
+    protected RbacInterface $rbac;
 
-    /**
-     * @var RoleServiceInterface
-     */
-    private $roleService;
+    protected RoleServiceInterface $roleService;
 
-    /**
-     * @var AssertionContainerInterface
-     */
-    private $assertionContainer;
+    private AssertionPluginManagerInterface $assertionPluginManager;
 
     /**
      * @var array
      */
-    private $assertions;
+    private array $assertions;
 
     public function __construct(
-        Rbac $rbac,
+        RbacInterface $rbac,
         RoleServiceInterface $roleService,
-        AssertionContainerInterface $assertionContainer,
+        AssertionPluginManagerInterface $assertionPluginManager,
         array $assertions = []
     ) {
         $this->rbac = $rbac;
         $this->roleService = $roleService;
-        $this->assertionContainer = $assertionContainer;
+        $this->assertionPluginManager = $assertionPluginManager;
         $this->assertions = $assertions;
     }
 
-    public function isGranted(?IdentityInterface $identity, string $permission, $context = null): bool
+    public function isGranted(string $permission, mixed $context = null): bool
     {
-        $roles = $this->roleService->getIdentityRoles($identity, $context);
+        $roles = $this->roleService->getIdentityRoles(null, $context);
 
         if (empty($roles)) {
             return false;
@@ -89,8 +80,8 @@ final class AuthorizationService implements AuthorizationServiceInterface
             $permissionAssertions = [$this->assertions[$permission]];
         }
 
-        $assertionSet = new AssertionSet($this->assertionContainer, $permissionAssertions);
+        $assertionSet = new AssertionSet($this->assertionPluginManager, $permissionAssertions);
 
-        return $assertionSet->assert($permission, $identity, $context);
+        return $assertionSet->assert($permission, $this->roleService->getIdentity(), $context);
     }
 }

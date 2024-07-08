@@ -19,24 +19,11 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Service;
+namespace LmcRbac\Assertion;
 
-use LmcRbac\Identity\IdentityInterface;
+use Psr\Container\ContainerInterface;
 
-/**
- * Minimal interface for an authorization service
- *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
- */
-interface AuthorizationServiceInterface
+interface AssertionPluginManagerInterface extends ContainerInterface
 {
-    /**
-     * Check if the permission is granted to the current identity
-     *
-     * @param  string                 $permission
-     * @param mixed|null $context
-     * @return bool
-     */
-    public function isGranted(string $permission, mixed $context = null): bool;
+    public function get($name): AssertionInterface;
 }
