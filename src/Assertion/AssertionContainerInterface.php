@@ -23,6 +23,9 @@ namespace LmcRbac\Assertion;
 
 use Psr\Container\ContainerInterface;
 
+/**
+ * @deprecated
+ */
 interface AssertionContainerInterface extends ContainerInterface
 {
     public function get($name): AssertionInterface;

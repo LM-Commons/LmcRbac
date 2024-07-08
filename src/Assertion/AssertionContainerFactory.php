@@ -21,7 +21,6 @@ declare(strict_types=1);
 
 namespace LmcRbac\Assertion;
 
-use LmcRbac\Assertion\AssertionContainer;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -29,6 +28,8 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Aeneas Rekkas
  * @licence MIT
+ * @deprecated Use AssertionPluginManagerFactory
+ * @codeCoverageIgnore
  */
 class AssertionContainerFactory
 {

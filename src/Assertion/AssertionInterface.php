@@ -36,6 +36,6 @@ interface AssertionInterface
     public function assert(
         string $permission,
         IdentityInterface $identity = null,
-        $context = null
+        mixed $context = null
     ): bool;
 }
