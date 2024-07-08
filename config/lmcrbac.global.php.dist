@@ -55,7 +55,7 @@ return [
          * Defining the assertion map
          *
          * The assertion map can automatically map permissions to assertions. This means that every times you check for
-         * a permission methioned in the assertion map, you'll include the assertion in your check.
+         * a permission mentioned in the assertion map, you will include the assertion in your check.
          *
          * example:
          *   'assertion_map' => [
