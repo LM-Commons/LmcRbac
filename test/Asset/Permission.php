@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -17,45 +18,60 @@
  * and is licensed under the MIT license.
  */
 
-declare(strict_types=1);
-
 namespace LmcRbacTest\Asset;
 
-use LmcRbac\Assertion\AssertionInterface;
-use LmcRbac\Identity\IdentityInterface;
+use Doctrine\ORM\Mapping as ORM;
 use LmcRbac\Permission\PermissionInterface;
 
-class SimpleAssertion implements AssertionInterface
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="permissions")
+ */
+#[ORM\Entity]
+#[ORM\Table(name: 'permissions')]
+class Permission implements PermissionInterface
 {
     /**
-     * @var int
+     * @var int|null
+     *
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $called = 0;
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    protected ?int $id;
 
     /**
-     * @var bool
+     * @var string|null
+     *
+     * @ORM\Column(type="string", length=128, unique=true)
      */
-    protected $willAssert;
+    #[ORM\Column(type: 'string', length: 128, unique: true)]
+    protected ?string $name;
 
-    public function __construct(bool $willAssert = true)
+    /**
+     * Constructor
+     * @param string $name
+     */
+    public function __construct(string $name)
     {
-        $this->willAssert = $willAssert;
+        $this->name = $name;
     }
 
-    public function assert(string|PermissionInterface $permission, IdentityInterface $identity = null, $context = null): bool
+    /**
+     * Get the permission identifier
+     *
+     * @return int|null
+     */
+    public function getId(): ?int
     {
-        $this->called++;
-
-        return $this->willAssert;
+        return $this->id;
     }
 
-    public function gotCalled(): bool
+    public function __toString(): string
     {
-        return (bool) $this->called;
-    }
-
-    public function calledTimes(): int
-    {
-        return $this->called;
+        return $this->name;
     }
 }

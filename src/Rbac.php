@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace LmcRbac;
 
 use Generator;
+use LmcRbac\Permission\PermissionInterface;
 use LmcRbac\Role\RoleInterface;
 use Traversable;
 
@@ -33,11 +34,11 @@ class Rbac implements RbacInterface
     /**
      * Determines if access is granted by checking the roles for permission.
      *
-     * @param  RoleInterface|RoleInterface[]|Traversable $roles
-     * @param  string                                    $permission
+     * @param RoleInterface|iterable $roles
+     * @param string|PermissionInterface $permission
      * @return bool
      */
-    public function isGranted($roles, string $permission): bool
+    public function isGranted(RoleInterface|iterable $roles, string|PermissionInterface $permission): bool
     {
         if ($roles instanceof Traversable) {
             $roles = iterator_to_array($roles);
@@ -48,7 +49,7 @@ class Rbac implements RbacInterface
         }
 
         foreach ($this->flattenRoles($roles) as $role) {
-            /* @var \LmcRbac\Role\RoleInterface $role */
+            /* @var RoleInterface $role */
             if ($role->hasPermission($permission)) {
                 return true;
             }

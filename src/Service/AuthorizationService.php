@@ -23,7 +23,7 @@ namespace LmcRbac\Service;
 
 use LmcRbac\Assertion\AssertionPluginManagerInterface;
 use LmcRbac\Assertion\AssertionSet;
-use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Permission\PermissionInterface;
 use LmcRbac\RbacInterface;
 
 /**
@@ -58,7 +58,7 @@ class AuthorizationService implements AuthorizationServiceInterface
         $this->assertions = $assertions;
     }
 
-    public function isGranted(string $permission, mixed $context = null): bool
+    public function isGranted(string|PermissionInterface $permission, mixed $context = null): bool
     {
         $roles = $this->roleService->getIdentityRoles(null, $context);
 
@@ -70,14 +70,14 @@ class AuthorizationService implements AuthorizationServiceInterface
             return false;
         }
 
-        if (empty($this->assertions[$permission])) {
+        if (empty($this->assertions[(string) $permission])) {
             return true;
         }
 
-        if (\is_array($this->assertions[$permission])) {
-            $permissionAssertions = $this->assertions[$permission];
+        if (\is_array($this->assertions[(string) $permission])) {
+            $permissionAssertions = $this->assertions[(string) $permission];
         } else {
-            $permissionAssertions = [$this->assertions[$permission]];
+            $permissionAssertions = [$this->assertions[(string) $permission]];
         }
 
         $assertionSet = new AssertionSet($this->assertionPluginManager, $permissionAssertions);

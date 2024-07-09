@@ -23,12 +23,21 @@ namespace LmcRbacTest\Asset;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use LmcRbac\Permission\PermissionInterface;
 use LmcRbac\Role\RoleInterface;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="roles")
+ * There is no specific implementation of a flot role.
+ * A flot role is a simple utilization of the Laminas\Permission\Rbac\Role without children
  */
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="flat_roles")
+ */
+#[ORM\Entity]
+#[ORM\Table(name: 'flat_roles')]
 class FlatRole implements RoleInterface
 {
     /**
@@ -38,56 +47,101 @@ class FlatRole implements RoleInterface
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    #[ORM\Id]
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    protected ?int $id;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=32, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
-    protected $name;
+    #[ORM\Column(name: 'name', type: 'string', length: 255, unique: true)]
+    protected ?string $name;
 
     /**
-     * @var Collection[]
+     * @var Permission[]|Collection
+     * @ORM\ManyToMany(targetEntity="Permission", indexBy="name", fetch="EAGER", cascade={"persist"})
      */
-    protected $permissions;
+    #[ORM\ManyToMany(targetEntity: 'Persmission', cascade: ['persist'], fetch: 'EAGER', indexBy: 'name')]
+    protected array|Collection|ArrayCollection $permissions;
 
     /**
      * Init the Doctrine collection
      */
-    public function __construct(string $name)
+    public function __construct($name)
     {
-        $this->name = $name;
+        $this->name = (string) $name;
         $this->permissions = new ArrayCollection();
     }
 
     /**
      * Get the role identifier
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Add a permission
+     *
+     * @param  string $name
+     * @return void
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Get the role name
+     *
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function hasPermission(string $permission): bool
+    /**
+     * @inheritDoc
+     */
+    public function addPermission(PermissionInterface|string $permission): void
     {
-        return isset($this->permissions[$permission]);
+        if (is_string($permission)) {
+            $permission = new Permission($permission);
+        }
+
+        $this->permissions[(string) $permission] = $permission;
     }
 
-    public function hasChildren(): bool
+    /**
+     * @inheritDoc
+     */
+    public function hasPermission(PermissionInterface|string $permission): bool
     {
-        return false;
+        // This can be a performance problem if your role has a lot of permissions. Please refer
+        // to the cookbook to an elegant way to solve this issue
+
+        return isset($this->permissions[(string) $permission]);
+    }
+
+    public function addChild(RoleInterface $role): void
+    {
+        // Do nothing
     }
 
     public function getChildren(): iterable
     {
         return [];
+    }
+
+    public function hasChildren(): bool
+    {
+        // Do nothing
     }
 }

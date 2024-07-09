@@ -23,6 +23,7 @@ namespace LmcRbac\Assertion;
 
 use LmcRbac\Exception;
 use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Permission\PermissionInterface;
 
 class AssertionSet implements AssertionInterface
 {
@@ -61,7 +62,7 @@ class AssertionSet implements AssertionInterface
         $this->assertions = $assertions;
     }
 
-    public function assert(string $permission, IdentityInterface $identity = null, $context = null): bool
+    public function assert(PermissionInterface|string $permission, IdentityInterface $identity = null, $context = null): bool
     {
         if (empty($this->assertions)) {
             return false;

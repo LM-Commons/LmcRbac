@@ -23,13 +23,16 @@ namespace LmcRbacTest\Asset;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use LmcRbac\Role\HierarchicalRoleInterface;
+use Doctrine\ORM\Mapping as ORM;
+use LmcRbac\Permission\PermissionInterface;
 use LmcRbac\Role\RoleInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="hierarchical_roles")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'hierarchical_roles')]
 class HierarchicalRole implements RoleInterface
 {
     /**
@@ -39,71 +42,122 @@ class HierarchicalRole implements RoleInterface
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    #[ORM\Id]
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    protected ?int $id = null;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=32, unique=true)
+     * @ORM\Column(type="string", length=48, unique=true)
      */
-    protected $name;
+    #[ORM\Column(name: 'name', type: 'string', length: 255, unique: true)]
+    protected ?string $name;
 
     /**
      * @var RoleInterface[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="HierarchicalRole")
      */
-    protected $children;
+    #[ORM\ManyToMany(targetEntity: RoleInterface::class)]
+    protected array|Collection|ArrayCollection $children = [];
 
     /**
-     * @var string[]
+     * @var Permission[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="Permission", indexBy="name", fetch="EAGER")
      */
-    protected $permissions;
+    #[ORM\ManyToMany(targetEntity: Permission::class, fetch: 'EAGER', indexBy: 'name')]
+    protected array|Collection|ArrayCollection $permissions;
 
     /**
      * Init the Doctrine collection
-     *
-     * @param string $name
      */
-    public function __construct(string $name)
+    public function __construct()
     {
-        $this->name = $name;
+        $this->children = new ArrayCollection();
         $this->permissions = new ArrayCollection();
     }
 
     /**
      * Get the role identifier
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function hasChildren(): bool
+    /**
+     * Set the role name
+     *
+     * @param string $name
+     * @return void
+     */
+    public function setName(string $name): void
     {
-        return ! empty($this->children);
+        $this->name = $name;
     }
 
-    public function getChildren(): iterable
-    {
-        return $this->children;
-    }
-
+    /**
+     * Get the role name
+     *
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function hasPermission(string $permission): bool
+    /**
+     * @param RoleInterface $role
+     * @return void
+     */
+    public function addChild(RoleInterface $role): void
     {
+        $this->children[] = $role;
     }
 
-    public function addChild(RoleInterface $child): void
+    /**
+     * @param string|PermissionInterface $permission
+     * @return void
+     */
+    public function addPermission(string|PermissionInterface $permission): void
     {
-        $this->children[$child->getName()] = $child;
+        if (is_string($permission)) {
+            $permission = new Permission($permission);
+        }
+
+        $this->permissions[(string) $permission] = $permission;
+    }
+
+    /**
+     * @param string|PermissionInterface $permission
+     * @return bool
+     */
+    public function hasPermission(string|PermissionInterface $permission): bool
+    {
+        // This can be a performance problem if your role has a lot of permissions. Please refer
+        // to the cookbook to an elegant way to solve this issue
+
+        return isset($this->permissions[(string) $permission]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getChildren(): iterable
+    {
+        return $this->children;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function hasChildren(): bool
+    {
+        return ! $this->children->isEmpty();
     }
 }
