@@ -10,7 +10,7 @@ The ZF-Commons orgnisation has been moved to Laminas-Commons and ZfcRbac has bee
 To upgrade 
 
 - Uninstall `zf-commons/zfc-rbac:3.0.0-alpha.1`.
-- Install `laminas-commons/lmc-rbac:^1.0` 
+- Install `lm-commons/lmc-rbac:^1.0` 
 - Change `zfc-rbac.global.php` to `lmc-rbac.global.php` and update the key `zfc_rbac` to `lmc_rbac`.
 - Review your code for usages of the `ZfcRbac/*` namespace to `LmcRbac/*` namespace.
 

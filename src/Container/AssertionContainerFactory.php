@@ -31,12 +31,6 @@ use Psr\Container\ContainerInterface;
  * @licence MIT
  * @deprecated Replaced by LmcRbac\Assertion\AssertionContainerFactory
  */
-final class AssertionContainerFactory
+final class AssertionContainerFactory extends \LmcRbac\Assertion\AssertionContainerFactory
 {
-    public function __invoke(ContainerInterface $container): AssertionContainer
-    {
-        $config = $container->get('config')['lmc_rbac']['assertion_manager'];
-
-        return new AssertionContainer($container, $config);
-    }
 }

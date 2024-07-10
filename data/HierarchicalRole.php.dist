@@ -16,16 +16,20 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Rbac\Role\HierarchicalRoleInterface;
-use LmcRbac\Permission\PermissionInterface;
+use LmcRbac\Role\RoleInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="roles")
  */
-class HierarchicalRole implements HierarchicalRoleInterface
+#[ORM\Entity]
+#[ORM\Table(name: 'roles')]
+class HierarchicalRole implements RoleInterface
 {
     /**
      * @var int|null
@@ -34,44 +38,50 @@ class HierarchicalRole implements HierarchicalRoleInterface
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    #[ORM\Id]
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    protected ?int $id = null;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=48, unique=true)
      */
-    protected $name;
+    #[ORM\Column(name: 'name', type: 'string', length: 255, unique: true)]
+    protected ?string $name;
 
     /**
-     * @var HierarchicalRoleInterface[]|\Doctrine\Common\Collections\Collection
+     * @var RoleInterface[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="HierarchicalRole")
      */
-    protected $children = [];
+    #[ORM\ManyToMany(targetEntity: RoleInterface::class)]
+    protected array|Collection|ArrayCollection $children = [];
 
     /**
-     * @var PermissionInterface[]|\Doctrine\Common\Collections\Collection
+     * @var Permission[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="Permission", indexBy="name", fetch="EAGER")
      */
-    protected $permissions;
+    #[ORM\ManyToMany(targetEntity: Permission::class, fetch: 'EAGER', indexBy: 'name')]
+    protected array|Collection|ArrayCollection $permissions;
 
     /**
      * Init the Doctrine collection
      */
     public function __construct()
     {
-        $this->children    = new ArrayCollection();
+        $this->children = new ArrayCollection();
         $this->permissions = new ArrayCollection();
     }
 
     /**
      * Get the role identifier
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -79,12 +89,12 @@ class HierarchicalRole implements HierarchicalRoleInterface
     /**
      * Set the role name
      *
-     * @param  string $name
+     * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
-        $this->name = (string) $name;
+        $this->name = $name;
     }
 
     /**
@@ -92,23 +102,25 @@ class HierarchicalRole implements HierarchicalRoleInterface
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * {@inheritDoc}
+     * @param RoleInterface $child
+     * @return void
      */
-    public function addChild(HierarchicalRoleInterface $child)
+    public function addChild(RoleInterface $role): void
     {
-        $this->children[] = $child;
+        $this->children[] = $role;
     }
 
     /**
-     * {@inheritDoc}
+     * @param string|Permission $permission
+     * @return void
      */
-    public function addPermission($permission)
+    public function addPermission(string|Permission|\LmcRbac\Permission\PermissionInterface $permission): void
     {
         if (is_string($permission)) {
             $permission = new Permission($permission);
@@ -118,9 +130,10 @@ class HierarchicalRole implements HierarchicalRoleInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @param $permission
+     * @return bool
      */
-    public function hasPermission($permission)
+    public function hasPermission(string|\LmcRbac\Permission\PermissionInterface $permission): bool
     {
         // This can be a performance problem if your role has a lot of permissions. Please refer
         // to the cookbook to an elegant way to solve this issue
@@ -129,18 +142,18 @@ class HierarchicalRole implements HierarchicalRoleInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getChildren()
+    public function getChildren(): iterable
     {
         return $this->children;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function hasChildren()
+    public function hasChildren(): bool
     {
-        return !$this->children->isEmpty();
+        return ! $this->children->isEmpty();
     }
 }

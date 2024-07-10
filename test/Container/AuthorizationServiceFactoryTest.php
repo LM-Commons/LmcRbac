@@ -22,6 +22,8 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use LmcRbac\Assertion\AssertionContainerInterface;
+use LmcRbac\Assertion\AssertionPluginManager;
+use LmcRbac\Assertion\AssertionPluginManagerInterface;
 use LmcRbac\Service\AuthorizationServiceFactory;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Rbac;
@@ -43,7 +45,7 @@ class AuthorizationServiceFactoryTest extends TestCase
         $container = $this->prophesize(ContainerInterface::class);
         $container->get(ModuleOptions::class)->willReturn(new ModuleOptions([]));
         $container->get(RoleServiceInterface::class)->willReturn($this->createMock(RoleServiceInterface::class));
-        $container->get(AssertionContainerInterface::class)->willReturn($this->createMock(AssertionContainerInterface::class));
+        $container->get(AssertionPluginManagerInterface::class)->willReturn($this->createMock(AssertionPluginManager::class));
         $container->get(Rbac::class)->willReturn(new Rbac());
 
         $factory = new AuthorizationServiceFactory();

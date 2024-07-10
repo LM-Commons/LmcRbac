@@ -22,22 +22,22 @@ declare(strict_types=1);
 namespace LmcRbacTest\Assertion;
 
 use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use LmcRbac\Assertion\AssertionContainer;
 use LmcRbac\Assertion\AssertionInterface;
+use LmcRbac\Assertion\AssertionPluginManager;
 use LmcRbacTest\Asset\SimpleAssertion;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerExceptionInterface;
 
 /**
- * @covers \LmcRbac\Assertion\AssertionContainer
+ * @covers \LmcRbac\Assertion\AssertionPluginManager
  */
-class AssertionContainerTest extends TestCase
+class AssertionPluginManagerTest extends TestCase
 {
     public function testValidationOfPluginSucceedsIfAssertionInterfaceIsImplemented()
     {
         $containerMock = $this->createMock(ContainerInterface::class);
-        $container = new AssertionContainer($containerMock, [
+        $container = new AssertionPluginManager($containerMock, [
             'factories' => [
                 SimpleAssertion::class => InvokableFactory::class,
             ],
@@ -49,13 +49,13 @@ class AssertionContainerTest extends TestCase
     public function testValidationOfPluginFailsIfAssertionInterfaceIsNotImplemented()
     {
         $containerMock = $this->createMock(ContainerInterface::class);
-        $container = new AssertionContainer($containerMock, [
+        $container = new AssertionPluginManager($containerMock, [
             'factories' => [
                 \stdClass::class => InvokableFactory::class,
             ],
         ]);
 
-        $this->expectException(ContainerExceptionInterface::class);
-        $this->assertInstanceOf(AssertionInterface::class, $container->get(\stdClass::class));
+        $this->expectException(InvalidServiceException::class);
+        $instance = $container->get(\stdClass::class);
     }
 }

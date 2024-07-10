@@ -26,6 +26,14 @@ return [
     'lmc_rbac' => [
 
         /**
+         * Key that is used to fetch the identity provider
+         *
+         * Please note that when an identity is found, it MUST implement the LmcRbac\Identity\IdentityProviderInterface
+         * interface, otherwise it will throw an exception.
+         */
+        // 'identity_provider' => 'LmcRbac\Identity\AuthenticationIdentityProvider',
+
+        /**
          * Set the guest role
          *
          * This role is used by the authorization service when the authentication service returns no identity
@@ -55,7 +63,7 @@ return [
          * Defining the assertion map
          *
          * The assertion map can automatically map permissions to assertions. This means that every times you check for
-         * a permission methioned in the assertion map, you'll include the assertion in your check.
+         * a permission mentioned in the assertion map, you will include the assertion in your check.
          *
          * example:
          *   'assertion_map' => [

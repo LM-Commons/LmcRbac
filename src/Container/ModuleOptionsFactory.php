@@ -31,10 +31,6 @@ use Psr\Container\ContainerInterface;
  * @licence MIT
  * @deprecated Replaced by LmcRbac\Options\ModuleOptionsFactory
  */
-final class ModuleOptionsFactory
+final class ModuleOptionsFactory extends \LmcRbac\Options\ModuleOptionsFactory
 {
-    public function __invoke(ContainerInterface $container): ModuleOptions
-    {
-        return new ModuleOptions($container->get('config')['lmc_rbac']);
-    }
 }

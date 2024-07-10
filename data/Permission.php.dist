@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -23,6 +25,8 @@ use LmcRbac\Permission\PermissionInterface;
  * @ORM\Entity
  * @ORM\Table(name="permissions")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'permissions')]
 class Permission implements PermissionInterface
 {
     /**
@@ -32,37 +36,42 @@ class Permission implements PermissionInterface
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    protected ?int $id;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=128, unique=true)
      */
-    protected $name;
+    #[ORM\Column(type: 'string', length: 128, unique: true)]
+    protected ?string $name;
 
     /**
      * Constructor
+     * @param string $name
      */
-    public function __construct($name)
+    public function __construct(string $name)
     {
-        $this->name  = (string) $name;
+        $this->name = $name;
     }
 
     /**
      * Get the permission identifier
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }

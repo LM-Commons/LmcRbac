@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -17,19 +18,18 @@
  * and is licensed under the MIT license.
  */
 
-declare(strict_types=1);
-
 namespace LmcRbacTest\Asset;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use LmcRbac\Role\RoleInterface;
+use Doctrine\ORM\Mapping as ORM;
+use LmcRbac\Permission\PermissionInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="roles")
+ * @ORM\Table(name="permissions")
  */
-class FlatRole implements RoleInterface
+#[ORM\Entity]
+#[ORM\Table(name: 'permissions')]
+class Permission implements PermissionInterface
 {
     /**
      * @var int|null
@@ -38,46 +38,40 @@ class FlatRole implements RoleInterface
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    protected ?int $id;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=32, unique=true)
+     * @ORM\Column(type="string", length=128, unique=true)
      */
-    protected $name;
+    #[ORM\Column(type: 'string', length: 128, unique: true)]
+    protected ?string $name;
 
     /**
-     * @var Collection[]
-     */
-    protected $permissions;
-
-    /**
-     * Init the Doctrine collection
+     * Constructor
+     * @param string $name
      */
     public function __construct(string $name)
     {
         $this->name = $name;
-        $this->permissions = new ArrayCollection();
     }
 
     /**
-     * Get the role identifier
+     * Get the permission identifier
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function __toString(): string
     {
         return $this->name;
-    }
-
-    public function hasPermission(string $permission): bool
-    {
-        return isset($this->permissions[$permission]);
     }
 }

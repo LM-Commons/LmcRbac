@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -16,7 +18,7 @@
  * and is licensed under the MIT license.
  */
 
-declare(strict_types=1);
+namespace LmcRbacTest\Asset;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -30,7 +32,7 @@ use LmcRbac\Role\RoleInterface;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'roles')]
-class FlatRole implements RoleInterface
+class Role implements RoleInterface
 {
     /**
      * @var int|null
@@ -40,30 +42,47 @@ class FlatRole implements RoleInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     #[ORM\Id]
-    #[ORM\Column(name: 'id', type: 'integer')]
-    #[ORM\GeneratedValue(strategy: 'AUTO')]
-    protected ?int $id;
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue]
+    private ?int $id;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=32, unique=true)
      */
-    #[ORM\Column(name: 'name', type: 'string', length: 255, unique: true)]
-    protected ?string $name;
+    #[ORM\Column(type: 'string', length: 32, unique: true)]
+    private ?string $name;
 
     /**
-     * @var Permission[]|Collection
+     * @var Collection
+     *
+     * @ORM\JoinTable(name="role_children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\InverseJoinColumn(name="child_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="role", cascade={"persist"})
+     */
+    #[ORM\JoinTable(name: 'role_children')]
+    #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'child_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: Role::class, cascade: ['persist'])]
+    private Collection $children;
+
+    /**
+     * @var Collection
+     *
      * @ORM\ManyToMany(targetEntity="Permission", indexBy="name", fetch="EAGER", cascade={"persist"})
      */
-    #[ORM\ManyToMany(targetEntity: "Persmission", cascade: ["persist"], fetch: "EAGER", indexBy: "name")]
-    protected array|Collection|ArrayCollection $permissions;
+    #[ORM\ManyToMany(targetEntity: 'Permission', cascade: ['persist'], fetch: 'EAGER', indexBy: 'name')]
+    private Collection $permissions;
 
     /**
      * Init the Doctrine collection
      */
-    public function __construct()
+    public function __construct(string $name)
     {
+        $this->name = $name;
+        $this->children = new ArrayCollection();
         $this->permissions = new ArrayCollection();
     }
 
@@ -78,63 +97,40 @@ class FlatRole implements RoleInterface
     }
 
     /**
-     * Set the role name
+     * Add a permission
      *
-     * @param string $name
+     * @param  string $name
      * @return void
      */
-    public function setName(string $name): void
+    public function addPermission(string|PermissionInterface $permission): void
     {
-        $this->name = $name;
+        $permission = new Permission($permission);
+
+        $this->permissions[(string) $permission] = $permission;
     }
 
-    /**
-     * Get the role name
-     *
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function addPermission(PermissionInterface|string $permission): void
-    {
-        if (is_string($permission)) {
-            $permission = new Permission($permission);
-        }
-
-        $this->permissions[(string) $permission] = $permission;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function hasPermission(PermissionInterface|string $permission): bool
     {
-        // This can be a performance problem if your role has a lot of permissions. Please refer
-        // to the cookbook to an elegant way to solve this issue
-
         return isset($this->permissions[(string) $permission]);
-    }
-
-
-
-    public function getChildren(): iterable
-    {
-        return [];
-    }
-
-    public function hasChildren(): bool
-    {
-        return false;
     }
 
     public function addChild(RoleInterface $role): void
     {
-        // Do nothing
+        $this->children[] = $role;
+    }
+
+    public function getChildren(): iterable
+    {
+        return $this->children;
+    }
+
+    public function hasChildren(): bool
+    {
+        return ! $this->children->isEmpty();
     }
 }

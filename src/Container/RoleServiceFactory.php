@@ -33,20 +33,6 @@ use Psr\Container\ContainerInterface;
  * @licence MIT
  * @deprecated Replaced by LmcRbac\Service\RoleServiceFactory
  */
-final class RoleServiceFactory
+final class RoleServiceFactory extends \LmcRbac\Service\RoleServiceFactory
 {
-    public function __invoke(ContainerInterface $container): RoleService
-    {
-        $moduleOptions = $container->get(ModuleOptions::class);
-
-        // Get the role provider from the options
-        $roleProvider = $moduleOptions->getRoleProvider();
-        if (empty($roleProvider)) {
-            throw new ServiceNotCreatedException('No role provider defined in LmcRbac configuration.');
-        }
-
-        $roleProviderName = key($roleProvider);
-
-        return new RoleService($container->get($roleProviderName), $moduleOptions->getGuestRole());
-    }
 }

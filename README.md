@@ -10,16 +10,11 @@
 ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2Flm-commons%2Flmcrbac%2Fproperties%2Fvalues&query=%24%5B%3A1%5D.value&label=Maintenance%20Status)
 
 
-Role-based access control module to provide additional features on top of Zend\Permissions\Rbac
-
-Based on [ZF-Commons/zfc-rbac](https://github.com/ZF-Commons/zfc-rbac) v3.x. If you are looking for the Laminas version
-of zfc-rbac v2, please use [LM-Commons/LmcRbacMvc](https://github.com/LM-Commons/LmcRbacMvc).
+Role-based access control module to provide additional features on top of Laminas\Permissions\Rbac
 
 ## Requirements
 
-- PHP 7.3 or higher
-
-**Note:** PHP 7.3 and 8.0 are no longer actively tested
+- PHP 8.1 or higher
 
 ## Optional
 

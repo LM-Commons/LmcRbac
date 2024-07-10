@@ -19,19 +19,11 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Asset;
+namespace LmcRbac\Assertion;
 
-use LmcRbac\Role\RoleInterface;
+use Psr\Container\ContainerInterface;
 
-class MockRoleWithPermissionProperty implements RoleInterface
+interface AssertionPluginManagerInterface extends ContainerInterface
 {
-    public function getName(): string
-    {
-        return 'role-with-permission-property';
-    }
-
-    public function hasPermission(string $permission): bool
-    {
-        return false;
-    }
+    public function get($name): AssertionInterface;
 }

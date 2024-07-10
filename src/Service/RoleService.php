@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace LmcRbac\Service;
 
 use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Identity\IdentityProviderInterface;
 use LmcRbac\Role\RoleInterface;
 use LmcRbac\Role\RoleProviderInterface;
 use Traversable;
@@ -32,35 +33,49 @@ use Traversable;
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
  */
-final class RoleService implements RoleServiceInterface
+class RoleService implements RoleServiceInterface
 {
-    /**
-     * @var RoleProviderInterface
-     */
-    private $roleProvider;
+    protected IdentityProviderInterface $identityProvider;
 
-    /**
-     * @var string
-     */
-    private $guestRole;
+    protected RoleProviderInterface $roleProvider;
 
-    public function __construct(RoleProviderInterface $roleProvider, string $guestRole)
-    {
+    protected string $guestRole = '';
+
+    public function __construct(
+        IdentityProviderInterface $identityProvider,
+        RoleProviderInterface $roleProvider,
+        string $guestRole
+    ) {
+        $this->identityProvider = $identityProvider;
         $this->roleProvider = $roleProvider;
         $this->guestRole = $guestRole;
     }
 
     /**
+     * Get the current identity from the identity provider
+     *
+     * @return IdentityInterface|null
+     */
+    public function getIdentity(): ?IdentityInterface
+    {
+        return $this->identityProvider->getIdentity();
+    }
+
+    /**
      * Get the identity roles from the current identity, applying some more logic
      *
-     * @param IdentityInterface $identity
-     * @param null              $context
+     * @param IdentityInterface|null $identity
+     * @param mixed|null $context
      * @return RoleInterface[]
      */
-    public function getIdentityRoles(IdentityInterface $identity = null, $context = null): iterable
+    public function getIdentityRoles(IdentityInterface $identity = null, mixed $context = null): iterable
     {
+        // If no identity is provided, get it from the identity provider
         if (null === $identity) {
-            return $this->convertRoles([$this->guestRole]);
+            $identity = $this->identityProvider->getIdentity();
+            if (null === $identity) {
+                return $this->convertRoles([$this->guestRole]);
+            }
         }
 
         return $this->convertRoles($identity->getRoles());

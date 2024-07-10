@@ -23,6 +23,7 @@ namespace LmcRbacTest\Asset;
 
 use LmcRbac\Assertion\AssertionInterface;
 use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Permission\PermissionInterface;
 
 class SimpleAssertion implements AssertionInterface
 {
@@ -41,7 +42,7 @@ class SimpleAssertion implements AssertionInterface
         $this->willAssert = $willAssert;
     }
 
-    public function assert(string $permission, IdentityInterface $identity = null, $context = null): bool
+    public function assert(string|PermissionInterface $permission, IdentityInterface $identity = null, $context = null): bool
     {
         $this->called++;
 

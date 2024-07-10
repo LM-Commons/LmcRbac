@@ -23,8 +23,9 @@ namespace LmcRbac\Assertion;
 
 use LmcRbac\Exception;
 use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Permission\PermissionInterface;
 
-final class AssertionSet implements AssertionInterface
+class AssertionSet implements AssertionInterface
 {
     /**
      * Condition constants
@@ -33,19 +34,20 @@ final class AssertionSet implements AssertionInterface
     public const CONDITION_AND = 'condition_and';
 
     /**
-     * @var AssertionContainerInterface
-     */
-    private $assertionContainer;
-
-    /**
      * @var array
      */
-    private $assertions;
+    private array $assertions;
 
     private $condition = self::CONDITION_AND;
 
-    public function __construct(AssertionContainerInterface $assertionContainer, array $assertions)
-    {
+    /**
+     * @param AssertionPluginManagerInterface $assertionPluginManager
+     * @param array $assertions
+     */
+    public function __construct(
+        private readonly AssertionPluginManagerInterface $assertionPluginManager,
+        array $assertions
+    ) {
         if (isset($assertions['condition'])) {
             if ($assertions['condition'] !== AssertionSet::CONDITION_AND
                 && $assertions['condition'] !== AssertionSet::CONDITION_OR) {
@@ -58,10 +60,9 @@ final class AssertionSet implements AssertionInterface
         }
 
         $this->assertions = $assertions;
-        $this->assertionContainer = $assertionContainer;
     }
 
-    public function assert(string $permission, IdentityInterface $identity = null, $context = null): bool
+    public function assert(PermissionInterface|string $permission, IdentityInterface $identity = null, $context = null): bool
     {
         if (empty($this->assertions)) {
             return false;
@@ -78,12 +79,12 @@ final class AssertionSet implements AssertionInterface
                     $asserted = $assertion->assert($permission, $identity, $context);
                     break;
                 case is_string($assertion):
-                    $this->assertions[$index] = $assertion = $this->assertionContainer->get($assertion);
+                    $this->assertions[$index] = $assertion = $this->assertionPluginManager->get($assertion);
 
                     $asserted = $assertion->assert($permission, $identity, $context);
                     break;
                 case is_array($assertion):
-                    $this->assertions[$index] = $assertion = new AssertionSet($this->assertionContainer, $assertion);
+                    $this->assertions[$index] = $assertion = new AssertionSet($this->assertionPluginManager, $assertion);
                     $asserted = $assertion->assert($permission, $identity, $context);
                     break;
                 default:

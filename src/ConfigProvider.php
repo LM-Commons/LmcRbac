@@ -21,6 +21,9 @@ declare(strict_types=1);
 
 namespace LmcRbac;
 
+use LmcRbac\Assertion\AssertionPluginManager;
+use LmcRbac\Identity\AuthenticationIdentityProvider;
+
 /**
  * The configuration provider for the LmcRbac module
  *
@@ -40,10 +43,11 @@ final class ConfigProvider
     {
         return [
             'factories' => [
-                \LmcRbac\Assertion\AssertionContainerInterface::class => \LmcRbac\Assertion\AssertionContainerFactory::class,
+                \LmcRbac\Assertion\AssertionPluginManager::class => \LmcRbac\Assertion\AssertionPluginManagerFactory::class,
                 \LmcRbac\Options\ModuleOptions::class => \LmcRbac\Options\ModuleOptionsFactory::class,
                 \LmcRbac\Role\InMemoryRoleProvider::class => \LmcRbac\Role\InMemoryRoleProviderFactory::class,
                 \LmcRbac\Role\ObjectRepositoryRoleProvider::class => \LmcRbac\Role\ObjectRepositoryRoleProviderFactory::class,
+                \LmcRbac\Identity\AuthenticationIdentityProvider::class => \LmcRbac\Identity\AuthenticationIdentityProviderFactory::class,
                 \LmcRbac\Service\AuthorizationServiceInterface::class => \LmcRbac\Service\AuthorizationServiceFactory::class,
                 \LmcRbac\Service\RoleServiceInterface::class => \LmcRbac\Service\RoleServiceFactory::class,
                 \LmcRbac\Rbac::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,

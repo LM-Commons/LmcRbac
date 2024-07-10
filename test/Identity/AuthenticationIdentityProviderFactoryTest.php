@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -17,26 +18,27 @@
  * and is licensed under the MIT license.
  */
 
-declare(strict_types=1);
+namespace LmcRbacTest\Identity;
 
-namespace LmcRbacTest\Asset;
+use Laminas\ServiceManager\ServiceManager;
+use LmcRbac\Identity\AuthenticationIdentityProviderFactory;
 
-use LmcRbac\Role\RoleInterface;
-
-class MockRoleWithPermissionMethod implements RoleInterface
+/**
+ * @covers \LmcRbac\Identity\AuthenticationIdentityProviderFactory
+ */
+class AuthenticationIdentityProviderFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    public function getPermissions(): array
+    public function testFactory()
     {
-        return ['permission-method-a', 'permission-method-b'];
-    }
+        $serviceManager = new ServiceManager();
+        $serviceManager->setService(
+            'Laminas\Authentication\AuthenticationService',
+            $this->createMock('Laminas\Authentication\AuthenticationService')
+        );
 
-    public function getName(): string
-    {
-        return 'role-with-permission-method';
-    }
+        $factory = new AuthenticationIdentityProviderFactory();
+        $authenticationProvider = $factory($serviceManager, 'LmcRbac\Identity\AuthenticationIdentityProvider');
 
-    public function hasPermission(string $permission): bool
-    {
-        return in_array($permission, $this->getPermissions(), true);
+        $this->assertInstanceOf('LmcRbac\Identity\AuthenticationIdentityProvider', $authenticationProvider);
     }
 }

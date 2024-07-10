@@ -19,10 +19,9 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest;
+namespace LmcRbacTest\Rbac;
 
 use LmcRbac\Rbac;
-use LmcRbac\Role\HierarchicalRole;
 use LmcRbac\Role\Role;
 use PHPUnit\Framework\TestCase;
 
@@ -92,7 +91,7 @@ class RbacTest extends TestCase
         $childRole = new Role('Bar');
         $childRole->addPermission('permission');
 
-        $parentRole = new HierarchicalRole('Foo');
+        $parentRole = new Role('Foo');
         $parentRole->addChild($childRole);
 
         $rbac = new \LmcRbac\Rbac();
@@ -107,7 +106,7 @@ class RbacTest extends TestCase
     {
         $childRole = new Role('Bar');
 
-        $parentRole = new HierarchicalRole('Foo');
+        $parentRole = new Role('Foo');
         $parentRole->addChild($childRole);
 
         $rbac = new Rbac();

@@ -22,8 +22,11 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
+use LmcRbac\Identity\AuthenticationIdentityProviderFactory;
+use LmcRbac\Identity\IdentityProviderInterface;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\InMemoryRoleProvider;
+use LmcRbac\Service\RoleService;
 use LmcRbac\Service\RoleServiceFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -43,13 +46,17 @@ class RoleServiceFactoryTest extends TestCase
             ],
         ]);
 
-        $container = new ServiceManager(['services' => [
-            ModuleOptions::class => $options,
-            InMemoryRoleProvider::class => new InMemoryRoleProvider([]),
-        ]]);
+        $container = new ServiceManager([
+            'services' => [
+                ModuleOptions::class => $options,
+                InMemoryRoleProvider::class => new InMemoryRoleProvider([]),
+                \LmcRbac\Identity\AuthenticationIdentityProvider::class => $this->createMock(IdentityProviderInterface::class),
+                IdentityProviderInterface::class => $this->createMock(IdentityProviderInterface::class),
+            ],
+        ]);
 
         $factory = new RoleServiceFactory();
-        $roleService = $factory($container);
+        $roleService = $factory($container, RoleService::class);
 
         $this->assertInstanceOf(\LmcRbac\Service\RoleService::class, $roleService);
     }

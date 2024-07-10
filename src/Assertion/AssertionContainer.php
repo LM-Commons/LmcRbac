@@ -28,6 +28,8 @@ use Laminas\ServiceManager\AbstractPluginManager;
  *
  * @author  Aeneas Rekkas
  * @licence MIT
+ * @deprecated Use AssertionPluginManager
+ * @codeCoverageIgnore
  */
 final class AssertionContainer extends AbstractPluginManager implements AssertionContainerInterface
 {

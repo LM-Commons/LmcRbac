@@ -21,8 +21,10 @@ declare(strict_types=1);
 
 namespace LmcRbac\Role;
 
+use LmcRbac\Permission\PermissionInterface;
+
 /**
- * Interface for a flat role
+ * Interface for a role
  *
  * The role embeds all the information needed to evaluate if a given role has a given permission
  */
@@ -30,5 +32,14 @@ interface RoleInterface
 {
     public function getName(): string;
 
-    public function hasPermission(string $permission): bool;
+    public function hasPermission(PermissionInterface|string $permission): bool;
+
+    public function addChild(RoleInterface $role): void;
+
+    public function addPermission(PermissionInterface $permission): void;
+
+    public function hasChildren(): bool;
+
+    /** @return iterable<RoleInterface> */
+    public function getChildren(): iterable;
 }

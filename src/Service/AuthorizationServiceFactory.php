@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace LmcRbac\Service;
 
 use LmcRbac\Assertion\AssertionContainerInterface;
+use LmcRbac\Assertion\AssertionPluginManagerInterface;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Rbac;
 use LmcRbac\Service\AuthorizationService;
@@ -34,7 +35,7 @@ use Psr\Container\ContainerInterface;
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
  */
-final class AuthorizationServiceFactory
+class AuthorizationServiceFactory
 {
     public function __invoke(ContainerInterface $container): AuthorizationService
     {
@@ -43,7 +44,7 @@ final class AuthorizationServiceFactory
         return new AuthorizationService(
             $container->get(Rbac::class),
             $container->get(RoleServiceInterface::class),
-            $container->get(AssertionContainerInterface::class),
+            $container->get(AssertionPluginManagerInterface::class),
             $moduleOptions->getAssertionMap()
         );
     }

@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace LmcRbac\Service;
 
-use LmcRbac\Identity\IdentityInterface;
+use LmcRbac\Permission\PermissionInterface;
 
 /**
  * Minimal interface for an authorization service
@@ -34,10 +34,9 @@ interface AuthorizationServiceInterface
     /**
      * Check if the permission is granted to the current identity
      *
-     * @param  IdentityInterface|null $identity
-     * @param  string                 $permission
-     * @param  mixed                  $context
+     * @param PermissionInterface|string $permission
+     * @param mixed|null $context
      * @return bool
      */
-    public function isGranted(?IdentityInterface $identity, string $permission, $context = null): bool;
+    public function isGranted(PermissionInterface|string $permission, mixed $context = null): bool;
 }

@@ -24,12 +24,14 @@ namespace LmcRbacTest\Container;
 use Laminas\ServiceManager\ServiceManager;
 use LmcRbac\Assertion\AssertionContainer;
 use LmcRbac\Assertion\AssertionContainerFactory;
+use LmcRbac\Assertion\AssertionPluginManager;
+use LmcRbac\Assertion\AssertionPluginManagerFactory;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Assertion\AssertionContainerFactory
+ * @covers \LmcRbac\Assertion\AssertionPluginManagerFactory
  */
-class AssertionContainerFactoryTest extends TestCase
+class AssertionPluginManagerFactoryTest extends TestCase
 {
     public function testFactory(): void
     {
@@ -40,9 +42,9 @@ class AssertionContainerFactoryTest extends TestCase
             ],
         ]);
 
-        $factory = new AssertionContainerFactory();
-        $pluginManager = $factory($serviceManager);
+        $factory = new AssertionPluginManagerFactory();
+        $pluginManager = $factory($serviceManager, AssertionPluginManager::class);
 
-        $this->assertInstanceOf(AssertionContainer::class, $pluginManager);
+        $this->assertInstanceOf(AssertionPluginManager::class, $pluginManager);
     }
 }
