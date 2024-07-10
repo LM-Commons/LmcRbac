@@ -28,7 +28,7 @@ class Identity implements IdentityInterface
     /**
      * @var array
      */
-    private $roles;
+    private array $roles;
 
     public function __construct(array $roles = [])
     {

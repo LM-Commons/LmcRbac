@@ -18,14 +18,13 @@ declare(strict_types=1);
  * and is licensed under the MIT license.
  */
 
-namespace LmcRbac\Asset;
+namespace LmcRbacTest\Asset;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use LmcRbac\Permission\PermissionInterface;
 use LmcRbac\Role\RoleInterface;
-use LmcRbacTest\Asset\Permission;
 
 /**
  * @ORM\Entity
@@ -66,14 +65,8 @@ class Role implements RoleInterface
     #[ORM\JoinTable(name: 'role_children')]
     #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'child_id', referencedColumnName: 'id')]
-    #[ORM\ManyToMany(targetEntity: 'Role', cascade: ['persist'])]
+    #[ORM\ManyToMany(targetEntity: Role::class, cascade: ['persist'])]
     private Collection $children;
-
-    /**
-     * @var Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Role", cascade={"persist"})
-     */
 
     /**
      * @var Collection
@@ -109,11 +102,11 @@ class Role implements RoleInterface
      * @param  string $name
      * @return void
      */
-    public function addPermission(string $name): void
+    public function addPermission(string|PermissionInterface $permission): void
     {
-        $permission = new Permission($name);
+        $permission = new Permission($permission);
 
-        $this->permissions[$name] = $permission;
+        $this->permissions[(string) $permission] = $permission;
     }
 
     public function getName(): string
@@ -138,6 +131,6 @@ class Role implements RoleInterface
 
     public function hasChildren(): bool
     {
-        return false;
+        return ! $this->children->isEmpty();
     }
 }

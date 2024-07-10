@@ -21,9 +21,15 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Role;
 
+use Doctrine\DBAL\DriverManager;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMSetup;
+use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 use LmcRbac\Role\ObjectRepositoryRoleProvider;
-use LmcRbacTest\Asset\FlatRole;
+use LmcRbac\Role\Role;
+use LmcRbac\Role\RoleInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,10 +37,30 @@ use PHPUnit\Framework\TestCase;
  */
 class ObjectRepositoryRoleProviderTest extends TestCase
 {
+
+    public static function roleProvider(): array
+    {
+        return [
+            'one-role-flat' => [
+                'rolesConfig' => [
+                    'admin',
+                ],
+                'rolesToCheck' => ['admin'],
+            ],
+            '2-roles-flat' => [
+                'rolesConfig' => [
+                    'admin',
+                    'member',
+                ],
+                'rolesToCheck' => ['admin', 'member'],
+            ],
+        ];
+    }
+
     public function testObjectRepositoryProviderGetRoles(): void
     {
         $objectRepository = $this->createMock(ObjectRepository::class);
-        $memberRole = new FlatRole('member');
+        $memberRole = new Role('member');
         $provider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
         $result = [$memberRole];
 
@@ -46,7 +72,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
     public function testRoleCacheOnConsecutiveCalls(): void
     {
         $objectRepository = $this->createMock(ObjectRepository::class);
-        $memberRole = new FlatRole('member');
+        $memberRole = new Role('member');
         $provider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
         $result = [$memberRole];
 
@@ -60,7 +86,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
     public function testClearRoleCache(): void
     {
         $objectRepository = $this->createMock(ObjectRepository::class);
-        $memberRole = new FlatRole('member');
+        $memberRole = new Role('member');
         $provider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
         $result = [$memberRole];
 
@@ -75,7 +101,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
     public function testThrowExceptionIfAskedRoleIsNotFound(): void
     {
         $objectRepository = $this->createMock(ObjectRepository::class);
-        $memberRole = new FlatRole('member');
+        $memberRole = new Role('member');
         $provider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
         $result = [$memberRole];
 
@@ -85,5 +111,145 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $this->expectExceptionMessage('Some roles were asked but could not be loaded from database: guest, admin');
 
         $provider->getRoles(['guest', 'admin', 'member']);
+    }
+
+    /**
+     * @dataProvider roleProvider
+     */
+    public function testObjectRepositoryProviderForFlatRole(array $rolesConfig, array $rolesToCheck)
+    {
+        $objectManager = $this->getObjectManager();
+        foreach ($rolesConfig as $name => $roleConfig) {
+            if (is_array($roleConfig)) {
+                $role = new \LmcRbacTest\Asset\Role($name);
+                if (isset($roleConfig['permissions'])) {
+                    foreach ($roleConfig['permissions'] as $permission) {
+                        $role->addPermission($permission);
+                    }
+                }
+            } else {
+                $role = new \LmcRbacTest\Asset\Role($roleConfig);
+            }
+            $objectManager->persist($role);
+        }
+        $objectManager->flush();
+
+        $objectRepository = $objectManager->getRepository('LmcRbacTest\Asset\Role');
+        $objectRepositoryRoleProvider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
+
+        $roles = $objectRepositoryRoleProvider->getRoles($rolesToCheck);
+
+        $this->assertIsArray($roles);
+        $this->assertCount(count($rolesToCheck), $roles);
+
+        $i = 0;
+        foreach ($roles as $role) {
+            $this->assertInstanceOf(RoleInterface::class, $role);
+            $this->assertEquals($rolesToCheck[$i], $role->getName());
+            $i++;
+        }
+    }
+
+    public function testObjectRepositoryProviderForFlatRoleWithPermissions()
+    {
+        $objectManager = $this->getObjectManager();
+
+        // Let's create a role
+        $adminRole = new \LmcRbacTest\Asset\Role('admin');
+        $adminRole->addPermission('manage');
+        $adminRole->addPermission('write');
+        $adminRole->addPermission('read');
+        $objectManager->persist($adminRole);
+        $objectManager->flush();
+
+        $objectRepository = $objectManager->getRepository('LmcRbacTest\Asset\Role');
+
+        $objectRepositoryRoleProvider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
+
+        // Get only the role
+        $roles = $objectRepositoryRoleProvider->getRoles(['admin']);
+
+        $this->assertCount(1, $roles);
+        $this->assertIsArray($roles);
+
+        $this->assertInstanceOf('LmcRbac\Role\RoleInterface', $roles[0]);
+        $this->assertEquals('admin', $roles[0]->getName());
+        $this->assertTrue($roles[0]->hasPermission('manage'));
+        $this->assertTrue($roles[0]->hasPermission('read'));
+        $this->assertTrue($roles[0]->hasPermission('write'));
+        $this->assertFalse($roles[0]->hasPermission('foo'));
+    }
+
+    public function testObjectRepositoryProviderForHierarchicalRole()
+    {
+        $objectManager = $this->getObjectManager();
+
+        // Let's add some roles
+        $guestRole = new \LmcRbacTest\Asset\Role('guest');
+        $objectManager->persist($guestRole);
+
+        $memberRole = new \LmcRbacTest\Asset\Role('member');
+        $memberRole->addChild($guestRole);
+        $objectManager->persist($memberRole);
+
+        $adminRole = new \LmcRbacTest\Asset\Role('admin');
+        $adminRole->addChild($memberRole);
+        $objectManager->persist($adminRole);
+
+        $objectManager->flush();
+
+        $objectRepository = $objectManager->getRepository('LmcRbacTest\Asset\Role');
+
+        $objectRepositoryRoleProvider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
+
+        // Get only the admin role
+        $roles = $objectRepositoryRoleProvider->getRoles(['admin']);
+
+        $this->assertCount(1, $roles);
+        $this->assertIsArray($roles);
+
+        $this->assertInstanceOf('LmcRbac\Role\RoleInterface', $roles[0]);
+        $this->assertEquals('admin', $roles[0]->getName());
+
+        $childRolesString = '';
+
+        foreach ($this->flattenRoles($roles[0]->getChildren()) as $childRole) {
+            $this->assertInstanceOf('LmcRbac\Role\RoleInterface', $childRole);
+            $childRolesString .= $childRole->getName();
+        }
+
+        $this->assertEquals('memberguest', $childRolesString);
+    }
+
+    private function getObjectManager(): ObjectManager|EntityManager
+    {
+        $config = ORMSetup::createAttributeMetadataConfiguration(
+            paths: [__DIR__ . '/../Asset'],
+            isDevMode: true
+        );
+        $connection = DriverManager::getConnection([
+            'driverClass' => 'Doctrine\DBAL\Driver\PDO\SQLite\Driver',
+            'path' => null,
+            'memory' => true,
+            'dbname' => 'test',
+        ], $config);
+        $entityManager = new EntityManager($connection, $config);
+
+        $schemaTool = new SchemaTool($objectManager = $entityManager);
+        $schemaTool->dropDatabase();
+        $schemaTool->createSchema($entityManager->getMetadataFactory()->getAllMetadata());
+
+        return $objectManager;
+    }
+
+    private function flattenRoles(iterable $roles): \Generator
+    {
+        foreach ($roles as $role) {
+            yield $role;
+
+            if ($role->hasChildren()) {
+                yield from $this->flattenRoles($role->getChildren());
+            }
+        }
     }
 }

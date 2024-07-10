@@ -33,11 +33,11 @@ use LmcRbac\Identity\IdentityProviderInterface;
 use LmcRbac\Rbac;
 use LmcRbac\RbacInterface;
 use LmcRbac\Role\InMemoryRoleProvider;
+use LmcRbac\Role\Role;
 use LmcRbac\Role\RoleInterface;
 use LmcRbac\Service\AuthorizationService;
 use LmcRbac\Service\RoleService;
 use LmcRbac\Service\RoleServiceInterface;
-use LmcRbacTest\Asset\FlatRole;
 use LmcRbacTest\Asset\Identity;
 use LmcRbacTest\Asset\SimpleAssertion;
 use PHPUnit\Framework\TestCase;
@@ -233,7 +233,7 @@ class AuthorizationServiceTest extends TestCase
 
     public function testReturnsTrueForIdentityWhenHasPermissionButNoAssertionsExists(): void
     {
-        $role = new FlatRole('admin');
+        $role = new Role('admin');
         $identity = new Identity([$role]);
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
@@ -252,7 +252,7 @@ class AuthorizationServiceTest extends TestCase
 
     public function testUsesAssertionsAsInstances(): void
     {
-        $role = new FlatRole('admin');
+        $role = new Role('admin');
         $identity = new Identity([$role]);
         $assertion = new SimpleAssertion();
 
@@ -275,7 +275,7 @@ class AuthorizationServiceTest extends TestCase
 
     public function testUsesAssertionsAsStrings(): void
     {
-        $role = new FlatRole('admin');
+        $role = new Role('admin');
         $identity = new Identity([$role]);
         $assertion = new SimpleAssertion();
 
@@ -298,7 +298,7 @@ class AuthorizationServiceTest extends TestCase
 
     public function testUsesAssertionsAsCallable(): void
     {
-        $role = new FlatRole('admin');
+        $role = new Role('admin');
         $identity = new Identity([$role]);
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
@@ -333,7 +333,7 @@ class AuthorizationServiceTest extends TestCase
 
     public function testUsesAssertionsAsArrays(): void
     {
-        $role = new FlatRole('admin');
+        $role = new Role('admin');
         $identity = new Identity([$role]);
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();

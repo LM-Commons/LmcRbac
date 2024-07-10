@@ -19,10 +19,9 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest;
+namespace LmcRbacTest\Rbac;
 
 use LmcRbac\Rbac;
-use LmcRbac\Role\HierarchicalRole;
 use LmcRbac\Role\Role;
 use PHPUnit\Framework\TestCase;
 
