@@ -9,7 +9,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
     title: 'LmcRbac',
-    tagline: 'Role-based access control module to provide additional features on top of Laminas\\Permissions\\Rbac',
+    tagline: 'Role-based access control components for your Laminas or Mezzio application',
     favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -100,7 +100,7 @@ themeConfig:
                 items: [
                 {
                     label: 'Documentation',
-                    to: '/docs/introduction',
+                    to: '/docs/gettingstarted',
                 },
                 ],
             },
@@ -140,7 +140,7 @@ themeConfig:
             tagName: 'meta',
             attributes: {
                 name: 'keywords',
-                content: 'php, LmcUser, Laminas MVC, authentication'
+                content: 'php, LmcRbac, Laminas MVC, authorization'
             }
         }
     ],

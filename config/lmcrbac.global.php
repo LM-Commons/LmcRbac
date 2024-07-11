@@ -38,7 +38,7 @@ return [
          * It must be an array that contains configuration for the role provider.
          * The default Role Provider is 'LmcRbac\Role\InMemoryRoleProvider'
          *
-         * Supported options depend of the role provider, so please refer to the official documentation
+         * Supported options depend on the role provider, so please refer to the official documentation
          *
          * The provider config for InMemoryRoleProvider must follow the following format:
          *
