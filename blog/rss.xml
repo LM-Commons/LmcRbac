@@ -13,13 +13,13 @@
             <link>https://lm-commons.github.io/LmcRbac/blog/new-documentation</link>
             <guid>https://lm-commons.github.io/LmcRbac/blog/new-documentation</guid>
             <pubDate>Thu, 11 Apr 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[This the new documentation site dedicated to the LmcUser module.]]></description>
-            <content:encoded><![CDATA[<p>This the new documentation site dedicated to the LmcUser module.</p>
+            <description><![CDATA[This the new documentation site dedicated to the LmcRbac module.]]></description>
+            <content:encoded><![CDATA[<p>This the new documentation site dedicated to the LmcRbac module.</p>
 <p>There are no changes to the code, just improvements in the documentation.</p>]]></content:encoded>
             <category>laminas</category>
             <category>PHP</category>
-            <category>LmcUser</category>
-            <category>authentication</category>
+            <category>LmcRbac</category>
+            <category>authorization</category>
             <category>LM-Commons</category>
         </item>
     </channel>

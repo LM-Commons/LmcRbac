@@ -12,8 +12,8 @@
         <id>https://lm-commons.github.io/LmcRbac/blog/new-documentation</id>
         <link href="https://lm-commons.github.io/LmcRbac/blog/new-documentation"/>
         <updated>2024-04-11T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[This the new documentation site dedicated to the LmcUser module.]]></summary>
-        <content type="html"><![CDATA[<p>This the new documentation site dedicated to the LmcUser module.</p>
+        <summary type="html"><![CDATA[This the new documentation site dedicated to the LmcRbac module.]]></summary>
+        <content type="html"><![CDATA[<p>This the new documentation site dedicated to the LmcRbac module.</p>
 <p>There are no changes to the code, just improvements in the documentation.</p>]]></content>
         <author>
             <name>Eric Richer</name>
@@ -21,8 +21,8 @@
         </author>
         <category label="laminas" term="laminas"/>
         <category label="PHP" term="PHP"/>
-        <category label="LmcUser" term="LmcUser"/>
-        <category label="authentication" term="authentication"/>
+        <category label="LmcRbac" term="LmcRbac"/>
+        <category label="authorization" term="authorization"/>
         <category label="LM-Commons" term="LM-Commons"/>
     </entry>
 </feed>
