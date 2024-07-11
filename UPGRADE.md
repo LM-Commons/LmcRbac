@@ -2,9 +2,9 @@
 
 ## From ZfcRbac v3 to LmcRbac v1
 
-The ZF-Commons orgnisation has been moved to Laminas-Commons and ZfcRbac has been split into two repositories.
+The ZF-Commons organisation has been moved to LM-Commons and ZfcRbac has been split into two repositories.
 
-- [LmcRbacMvc](https://github.com/Laminas-Commons/LmcRbacMvc) contains the old version 2 of ZfcRbac.
+- [LmcRbacMvc](https://github.com/LM-Commons/LmcRbacMvc) contains the old version 2 of ZfcRbac.
 - LmcRbac contains the version 3 of ZfcRbac, which was only released as v3.alpha.1.
 
 To upgrade 
