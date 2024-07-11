@@ -64,7 +64,7 @@ export default function HomepageFeatures() {
                 <p>If you are looking for the Laminas version of zfc-rbac v2, please use <a
                     href="https://github.com/LM-Commons/LmcRbacMvc">LM-Commons/LmcRbacMvc</a>.</p>
                 <div className={styles.buttons}>
-                    <Link className="button buttton--primary" to="/docs/installation">Get started</Link>
+                    <Link className="button buttton--primary" to="/docs/gettingstarted">Get started</Link>
                 </div>
                 <Heading as="h2">Support</Heading>
                 <ul>
