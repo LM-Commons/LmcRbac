@@ -82,6 +82,36 @@ class RoleService implements RoleServiceInterface
     }
 
     /**
+     * Check if the given roles match one of the identity's roles
+     * @param string[]|RoleInterface[] $roles
+     * @param IdentityInterface|null $identity
+     * @return bool
+     */
+    public function matchIdentityRoles(array $roles, IdentityInterface $identity = null): bool
+    {
+        // Get the roles for the identity
+        $identityRoles = $this->getIdentityRoles($identity);
+
+        // No roles
+        if (empty($identityRoles)) {
+            return false;
+        }
+
+        $roleNames = [];
+
+        foreach ($roles as $role) {
+            $roleNames[] = $role instanceof RoleInterface ? $role->getName() : $role;
+        }
+
+        foreach ($this->flattenRoles($identityRoles) as $role) {
+            $a[] = $role->getName();
+        }
+        $identityRoles = $a;
+
+        return count(array_intersect($roleNames, $identityRoles)) > 0;
+    }
+
+    /**
      * Convert the roles (potentially strings) to concrete RoleInterface objects using role provider
      *
      * @param  array|Traversable $roles
@@ -109,5 +139,20 @@ class RoleService implements RoleServiceInterface
         }
 
         return array_merge($collectedRoles, $this->roleProvider->getRoles($toCollect));
+    }
+
+    /**
+     * @param RoleInterface[] $roles
+     * @return \Generator
+     */
+    private function flattenRoles(array $roles): \Generator
+    {
+        foreach ($roles as $role) {
+            yield $role;
+
+            if ($role->hasChildren()) {
+                yield from $this->flattenRoles($role->getChildren());
+            }
+        }
     }
 }

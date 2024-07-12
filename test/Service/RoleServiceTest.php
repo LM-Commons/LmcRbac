@@ -40,6 +40,156 @@ class RoleServiceTest extends TestCase
 {
     use ProphecyTrait;
 
+    public static function roleProvider(): array
+    {
+        return [
+            // No identity role
+            [
+                'rolesConfig' => [],
+                'identityRoles' => [],
+                'rolesToCheck' => [
+                    'member',
+                ],
+                'doesMatch' => false,
+            ],
+
+            // Simple
+            [
+                'rolesConfig' => [
+                    'member' => [
+                        'children' => ['guest'],
+                    ],
+                    'guest',
+                ],
+                'identityRoles' => [
+                    'guest',
+                ],
+                'rolesToCheck' => [
+                    'member',
+                ],
+                'doesMatch' => false,
+            ],
+            [
+                'rolesConfig' => [
+                    'member' => [
+                        'children' => ['guest'],
+                    ],
+                    'guest',
+                ],
+                'identityRoles' => [
+                    'member',
+                ],
+                'rolesToCheck' => [
+                    'member',
+                ],
+                'doesMatch' => true,
+            ],
+
+            // Complex role inheritance
+            [
+                'rolesConfig' => [
+                    'admin' => [
+                        'children' => ['moderator'],
+                    ],
+                    'moderator' => [
+                        'children' => ['member'],
+                    ],
+                    'member' => [
+                        'children' => ['guest'],
+                    ],
+                    'guest',
+                ],
+                'identityRoles' => [
+                    'member',
+                    'moderator',
+                ],
+                'rolesToCheck' => [
+                    'admin',
+                ],
+                'doesMatch' => false,
+            ],
+            [
+                'rolesConfig' => [
+                    'admin' => [
+                        'children' => ['moderator'],
+                    ],
+                    'moderator' => [
+                        'children' => ['member'],
+                    ],
+                    'member' => [
+                        'children' => ['guest'],
+                    ],
+                    'guest',
+                ],
+                'identityRoles' => [
+                    'member',
+                    'admin',
+                ],
+                'rolesToCheck' => [
+                    'moderator',
+                ],
+                'doesMatch' => true,
+            ],
+
+            // Complex role inheritance and multiple check
+            [
+                'rolesConfig' => [
+                    'sysadmin' => [
+                        'children' => ['siteadmin', 'admin'],
+                    ],
+                    'siteadmin',
+                    'admin' => [
+                        'children' => ['moderator'],
+                    ],
+                    'moderator' => [
+                        'children' => ['member'],
+                    ],
+                    'member' => [
+                        'children' => ['guest'],
+                    ],
+                    'guest',
+                ],
+                'identityRoles' => [
+                    'member',
+                    'moderator',
+                ],
+                'rolesToCheck' => [
+                    'admin',
+                    'sysadmin',
+                ],
+                'doesMatch' => false,
+            ],
+            [
+                'rolesConfig' => [
+                    'sysadmin' => [
+                        'children' => ['siteadmin', 'admin'],
+                    ],
+                    'siteadmin',
+                    'admin' => [
+                        'children' => ['moderator'],
+                    ],
+                    'moderator' => [
+                        'children' => ['member'],
+                    ],
+                    'member' => [
+                        'children' => ['guest'],
+                    ],
+                    'guest',
+                ],
+                'identityRoles' => [
+                    'moderator',
+                    'admin',
+                ],
+                'rolesToCheck' => [
+                    'sysadmin',
+                    'siteadmin',
+                    'member',
+                ],
+                'doesMatch' => true,
+            ],
+        ];
+    }
+
     public function testReturnGuestRoleIfNoIdentityIsGiven(): void
     {
         $identityProvider = $this->createMock(IdentityProviderInterface::class);
@@ -58,7 +208,6 @@ class RoleServiceTest extends TestCase
         $identity = new Identity(['guest']);
         $identityProvider = $this->createMock(IdentityProviderInterface::class);
         $roleService = new RoleService($identityProvider, new InMemoryRoleProvider([]), 'guest');
-
 
         $result = $roleService->getIdentityRoles($identity);
 
@@ -127,5 +276,41 @@ class RoleServiceTest extends TestCase
         $identityProvider->expects($this->once())->method('getIdentity')->willReturn($identity);
         $roleService = new RoleService($identityProvider, new InMemoryRoleProvider([]), 'guest');
         $this->assertEquals($identity, $roleService->getIdentity());
+    }
+
+    /**
+     * @dataProvider roleProvider
+     */
+    public function testMatchIdentityRoles(
+        array $rolesConfig,
+        array $identityRoles,
+        array $rolesToCheck,
+        $doesMatch
+    ): void {
+        $identity = $this->createMock(IdentityInterface::class);
+        $identity->expects($this->once())->method('getRoles')->willReturn($identityRoles);
+
+        $identityProvider = $this->createMock(IdentityProviderInterface::class);
+
+        $roleService = new RoleService($identityProvider, new InMemoryRoleProvider($rolesConfig), 'guest');
+        $this->assertEquals($doesMatch, $roleService->matchIdentityRoles($rolesToCheck, $identity));
+    }
+
+    /**
+     * @dataProvider roleProvider
+     */
+    public function testMatchIdentityRolesWithNullIdentity(
+        array $rolesConfig,
+        array $identityRoles,
+        array $rolesToCheck,
+        $doesMatch
+    ): void {
+        $identity = $this->createMock(IdentityInterface::class);
+        $identity->expects($this->once())->method('getRoles')->willReturn($identityRoles);
+
+        $identityProvider = $this->createMock(IdentityProviderInterface::class);
+        $identityProvider->expects($this->once())->method('getIdentity')->willReturn($identity);
+        $roleService = new RoleService($identityProvider, new InMemoryRoleProvider($rolesConfig), 'guest');
+        $this->assertEquals($doesMatch, $roleService->matchIdentityRoles($rolesToCheck, null));
     }
 }
