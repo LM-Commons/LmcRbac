@@ -22,9 +22,7 @@ declare(strict_types=1);
 namespace LmcRbac\Service;
 
 use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
-use LmcRbac\Identity\IdentityProviderInterface;
 use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Service\RoleService;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -48,8 +46,8 @@ class RoleServiceFactory
         $roleProviderName = key($roleProvider);
 
         return new RoleService(
-            $container->get($moduleOptions->getIdentityProvider()),
             $container->get($roleProviderName),
-            $moduleOptions->getGuestRole());
+            $moduleOptions->getGuestRole()
+        );
     }
 }

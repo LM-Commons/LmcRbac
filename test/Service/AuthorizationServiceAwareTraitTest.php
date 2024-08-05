@@ -1,5 +1,4 @@
 <?php
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -17,28 +16,22 @@
  * and is licensed under the MIT license.
  */
 
-declare(strict_types=1);
-
-namespace LmcRbac\Service;
-
-use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Role\RoleInterface;
+namespace LmcRbacTest\Service;
 
 /**
- * Role service
- *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
+ * @author Eric Richer <eric.richer@vistoconsulting.com>
  */
-interface RoleServiceInterface
-{
-    /**
-     * Get the identity roles from the current identity, applying some more logic
-     *
-     * @param null|IdentityInterface $identity
-     * @param mixed|null $context
-     * @return RoleInterface[]
-     */
-    public function getIdentityRoles(IdentityInterface $identity = null, mixed $context = null): iterable;
 
+use LmcRbac\Service\AuthorizationServiceInterface;
+use PHPUnit\Framework\TestCase;
+
+class AuthorizationServiceAwareTraitTest extends TestCase
+{
+    public function testAuthorizationServiceAwareTrait()
+    {
+        $class = new DummyAuthorizationServiceClass();
+        $authorizationService = $this->createMock(AuthorizationServiceInterface::class);
+        $class->setAuthorizationService($authorizationService);
+        $this->assertSame($authorizationService, $class->getAuthorizationService());
+    }
 }

@@ -35,30 +35,16 @@ use Traversable;
  */
 class RoleService implements RoleServiceInterface
 {
-    protected IdentityProviderInterface $identityProvider;
-
     protected RoleProviderInterface $roleProvider;
 
     protected string $guestRole = '';
 
     public function __construct(
-        IdentityProviderInterface $identityProvider,
         RoleProviderInterface $roleProvider,
         string $guestRole
     ) {
-        $this->identityProvider = $identityProvider;
         $this->roleProvider = $roleProvider;
         $this->guestRole = $guestRole;
-    }
-
-    /**
-     * Get the current identity from the identity provider
-     *
-     * @return IdentityInterface|null
-     */
-    public function getIdentity(): ?IdentityInterface
-    {
-        return $this->identityProvider->getIdentity();
     }
 
     /**
@@ -70,12 +56,9 @@ class RoleService implements RoleServiceInterface
      */
     public function getIdentityRoles(IdentityInterface $identity = null, mixed $context = null): iterable
     {
-        // If no identity is provided, get it from the identity provider
+        // If no identity is provided, get the guest role
         if (null === $identity) {
-            $identity = $this->identityProvider->getIdentity();
-            if (null === $identity) {
-                return $this->convertRoles([$this->guestRole]);
-            }
+            return $this->convertRoles([$this->guestRole]);
         }
 
         return $this->convertRoles($identity->getRoles());

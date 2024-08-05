@@ -1,6 +1,4 @@
 <?php
-
-declare(strict_types=1);
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,27 +16,20 @@ declare(strict_types=1);
  * and is licensed under the MIT license.
  */
 
-namespace LmcRbacTest\Identity;
-
-use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Identity\AuthenticationIdentityProviderFactory;
+namespace LmcRbac\Service;
 
 /**
- * @covers \LmcRbac\Identity\AuthenticationIdentityProviderFactory
+ * @author Eric Richer <eric.richer@vistoconsulting.com>
+ *
  */
-class AuthenticationIdentityProviderFactoryTest extends \PHPUnit\Framework\TestCase
+
+interface AuthorizationServiceAwareInterface
 {
-    public function testFactory()
-    {
-        $serviceManager = new ServiceManager();
-        $serviceManager->setService(
-            'Laminas\Authentication\AuthenticationService',
-            $this->createMock('Laminas\Authentication\AuthenticationService')
-        );
-
-        $factory = new AuthenticationIdentityProviderFactory();
-        $authenticationProvider = $factory($serviceManager, 'LmcRbac\Identity\AuthenticationIdentityProvider');
-
-        $this->assertInstanceOf('LmcRbac\Identity\AuthenticationIdentityProvider', $authenticationProvider);
-    }
+    /**
+     * Set the AuthorizationService
+     *
+     * @param   AuthorizationServiceInterface $authorizationService
+     * @return  void
+     */
+    public function setAuthorizationService(AuthorizationServiceInterface $authorizationService): void;
 }

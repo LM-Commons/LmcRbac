@@ -50,7 +50,7 @@ class RoleServiceFactoryTest extends TestCase
             'services' => [
                 ModuleOptions::class => $options,
                 InMemoryRoleProvider::class => new InMemoryRoleProvider([]),
-                \LmcRbac\Identity\AuthenticationIdentityProvider::class => $this->createMock(IdentityProviderInterface::class),
+//                \LmcRbac\Identity\AuthenticationIdentityProvider::class => $this->createMock(IdentityProviderInterface::class),
                 IdentityProviderInterface::class => $this->createMock(IdentityProviderInterface::class),
             ],
         ]);

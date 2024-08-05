@@ -1,5 +1,4 @@
 <?php
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -17,28 +16,33 @@
  * and is licensed under the MIT license.
  */
 
-declare(strict_types=1);
-
 namespace LmcRbac\Service;
 
-use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Role\RoleInterface;
-
 /**
- * Role service
+ * @author Eric Richer <eric.richer@vistoconsulting.com>
  *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
-interface RoleServiceInterface
-{
-    /**
-     * Get the identity roles from the current identity, applying some more logic
-     *
-     * @param null|IdentityInterface $identity
-     * @param mixed|null $context
-     * @return RoleInterface[]
-     */
-    public function getIdentityRoles(IdentityInterface $identity = null, mixed $context = null): iterable;
 
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
+use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
+use Psr\Container\ContainerInterface;
+
+class AuthorizationServiceDelegatorFactory implements DelegatorFactoryInterface
+{
+
+    /**
+     * @inheritDoc
+     */
+    public function __invoke(ContainerInterface $container, $name, callable $callback, ?array $options = null): AuthorizationServiceAwareInterface
+    {
+        $instance = call_user_func($callback);
+
+        if (! $instance instanceof AuthorizationServiceAwareInterface) {
+            throw new ServiceNotCreatedException("The service $name must implement Laminas\Authorization\Service\AuthorizationServiceAwareInterface");
+        }
+
+        $authorizationService = $container->get(AuthorizationServiceInterface::class);
+        $instance->setAuthorizationService($authorizationService);
+        return $instance;
+    }
 }
