@@ -1,16 +1,45 @@
 ---
-sidebar_label: Role providers
-title: Role providers
+sidebar_label: Roles and Role providers
+title: Roles and Role providers
 sidebar_position: 4
 ---
 
+## Role types
+
+A role is an object that returns a list of permissions that the role has.
+
+`LmcRbac` support two types of roles: hierarchical roles and flat roles.
+
+### Flat roles
+
+A flat role is the simplest role object. It contains the list of permissions that
+the role has.
+
+Flat roles are defined using by the `LmcRbac\Role\Role` class or by classes
+implementing the `LmcRbac\Role\RoleInterface`.
+
+### Hierarchical roles
+
+A hierarchical role is a role that has child roles and therefore provides
+a hierarchy of roles where a role inherit the permissions of all its child roles.
+
+For example, a 'user' role may have the 'read' and 'write' permissions, and a 'admin' role 
+may inherit the permissions of the 'user' role plus an additional 'delete' role. In this structure,
+the 'admin' role will have 'user' as its child role.
+
+Hierarchical roles may have flat roles or hierarchical roles as children.
+
+Hierarchical roles are defined using by the `LmcRbac\Role\HierarchicalRole` class or by classes
+implementing the `LmcRbac\Role\HierarchicalRoleInterface`.
+
+## Role Providers
 A role provider is an object that returns a list of roles. A role provider must implement the
 `LmcRbac\Role\RoleProviderInterface` interface. The only required method is `getRoles`, and must return an array
 of `LmcRbac\Role\RoleInterface` objects.
 
 Roles can come from one of many sources: in memory, from a file, from a database, etc. However, you can specify only one role provider per application.
 
-## Built-in role providers
+### Built-in role providers
 
 LmcRbac comes with two built-in role providers: `LmcRbac\Role\InMemoryRoleProvider` and `LmcRbac\Role\ObjectRepositoryRoleProvider`. A role
 provider must be added to the `role_provider` subkey in the configuration file:
