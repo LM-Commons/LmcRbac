@@ -22,8 +22,6 @@ declare(strict_types=1);
 namespace LmcRbacTest\Service;
 
 use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Assertion\AssertionContainer;
-use LmcRbac\Assertion\AssertionContainerInterface;
 use LmcRbac\Assertion\AssertionPluginManager;
 use LmcRbac\Assertion\AssertionPluginManagerInterface;
 use LmcRbac\Assertion\AssertionSet;
@@ -186,15 +184,18 @@ class AuthorizationServiceTest extends TestCase
         ];
 
         $identity = new Identity((array) $role);
+        /*
         $identityProvider = $this->createMock(IdentityProviderInterface::class);
+
         $identityProvider->expects($this->any())
             ->method('getIdentity')
             ->willReturn($identity);
-        $roleService = new RoleService($identityProvider, new InMemoryRoleProvider($roleConfig), 'guest');
+        */
+        $roleService = new RoleService(new InMemoryRoleProvider($roleConfig), 'guest');
         $assertionPluginManager = new AssertionPluginManager(new ServiceManager(), $assertionPluginConfig);
         $authorizationService = new AuthorizationService(new Rbac(), $roleService, $assertionPluginManager, $assertions);
 
-        $this->assertEquals($isGranted, $authorizationService->isGranted($permission, $context));
+        $this->assertEquals($isGranted, $authorizationService->isGranted($identity, $permission, $context));
     }
 
     public function testDoNotCallAssertionIfThePermissionIsNotGranted(): void
@@ -210,7 +211,7 @@ class AuthorizationServiceTest extends TestCase
 
         $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager);
 
-        $this->assertFalse($authorizationService->isGranted('foo', 'foo'));
+        $this->assertFalse($authorizationService->isGranted(null, 'foo', 'foo'));
     }
 
     public function testReturnsFalseForIdentityWithoutRoles(): void
@@ -228,7 +229,7 @@ class AuthorizationServiceTest extends TestCase
 
         $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager);
 
-        $this->assertFalse($authorizationService->isGranted('foo', 'foo'));
+        $this->assertFalse($authorizationService->isGranted($identity, 'foo', 'foo'));
     }
 
     public function testReturnsTrueForIdentityWhenHasPermissionButNoAssertionsExists(): void
@@ -247,7 +248,7 @@ class AuthorizationServiceTest extends TestCase
 
         $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager);
 
-        $this->assertTrue($authorizationService->isGranted('foo', 'foo'));
+        $this->assertTrue($authorizationService->isGranted($identity, 'foo', 'foo'));
     }
 
     public function testUsesAssertionsAsInstances(): void
@@ -258,7 +259,6 @@ class AuthorizationServiceTest extends TestCase
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
         $roleService->expects($this->once())->method('getIdentityRoles')->willreturn($identity->getRoles());
-        $roleService->expects($this->once())->method('getIdentity')->willreturn($identity);
 
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
         $rbac->expects($this->once())->method('isGranted')->willReturn(true);
@@ -268,7 +268,7 @@ class AuthorizationServiceTest extends TestCase
 
         $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager, ['foo' => $assertion]);
 
-        $authorizationService->isGranted('foo', 'foo');
+        $authorizationService->isGranted($identity, 'foo', 'foo');
 
         $this->assertTrue($assertion->gotCalled());
     }
@@ -281,7 +281,6 @@ class AuthorizationServiceTest extends TestCase
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
         $roleService->expects($this->once())->method('getIdentityRoles')->willReturn($identity->getRoles());
-        $roleService->expects($this->once())->method('getIdentity')->willreturn($identity);
 
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
         $rbac->expects($this->once())->method('isGranted')->willReturn(true);
@@ -291,7 +290,7 @@ class AuthorizationServiceTest extends TestCase
 
         $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager, ['foo' => 'fooFactory']);
 
-        $authorizationService->isGranted('foo', 'foo');
+        $authorizationService->isGranted($identity, 'foo', 'foo');
 
         $this->assertTrue($assertion->gotCalled());
     }
@@ -303,7 +302,6 @@ class AuthorizationServiceTest extends TestCase
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
         $roleService->expects($this->once())->method('getIdentityRoles')->willreturn($identity->getRoles());
-        $roleService->expects($this->once())->method('getIdentity')->willreturn($identity);
 
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
         $rbac->expects($this->once())->method('isGranted')->willReturn(true);
@@ -326,7 +324,7 @@ class AuthorizationServiceTest extends TestCase
             ]
         );
 
-        $authorizationService->isGranted('foo', 'foo');
+        $authorizationService->isGranted($identity, 'foo', 'foo');
 
         $this->assertTrue($called);
     }
@@ -338,7 +336,6 @@ class AuthorizationServiceTest extends TestCase
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
         $roleService->expects($this->once())->method('getIdentityRoles')->willreturn($identity->getRoles());
-        $roleService->expects($this->once())->method('getIdentity')->willreturn($identity);
 
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
         $rbac->expects($this->once())->method('isGranted')->willReturn(true);
@@ -364,7 +361,7 @@ class AuthorizationServiceTest extends TestCase
             ],
         ]);
 
-        $this->assertFalse($authorizationService->isGranted('foo', 'foo'));
+        $this->assertFalse($authorizationService->isGranted($identity, 'foo', 'foo'));
 
         $this->assertTrue($called1);
         $this->assertTrue($called2);
@@ -379,14 +376,13 @@ class AuthorizationServiceTest extends TestCase
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
         $roleService->expects($this->once())->method('getIdentityRoles')->willreturn([$role]);
-        $roleService->expects($this->once())->method('getIdentity')->willreturn(new Identity());
 
         $assertionPluginManager = $this->getMockBuilder(AssertionPluginManagerInterface::class)->disableOriginalConstructor()->getMock();
         $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager, ['foo' => new \stdClass()]);
 
         $this->expectException(InvalidArgumentException::class);
 
-        $authorizationService->isGranted('foo', 'foo');
+        $authorizationService->isGranted(new Identity(), 'foo', 'foo');
     }
 
     public function testContextIsPassedToRoleService(): void
@@ -399,8 +395,7 @@ class AuthorizationServiceTest extends TestCase
         $assertionPluginManager = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
         $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager);
 
-        $roleService->expects($this->once())->method('getIdentityRoles')->with(null, $context)->willReturn([]);
-        $roleService->expects($this->never())->method('getIdentity')->willreturn($identity);
-        $authorizationService->isGranted('foo', $context);
+        $roleService->expects($this->once())->method('getIdentityRoles')->with($identity, $context)->willReturn([]);
+        $authorizationService->isGranted($identity, 'foo', $context);
     }
 }

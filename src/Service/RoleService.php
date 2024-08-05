@@ -35,30 +35,16 @@ use Traversable;
  */
 class RoleService implements RoleServiceInterface
 {
-    protected IdentityProviderInterface $identityProvider;
-
     protected RoleProviderInterface $roleProvider;
 
     protected string $guestRole = '';
 
     public function __construct(
-        IdentityProviderInterface $identityProvider,
         RoleProviderInterface $roleProvider,
         string $guestRole
     ) {
-        $this->identityProvider = $identityProvider;
         $this->roleProvider = $roleProvider;
         $this->guestRole = $guestRole;
-    }
-
-    /**
-     * Get the current identity from the identity provider
-     *
-     * @return IdentityInterface|null
-     */
-    public function getIdentity(): ?IdentityInterface
-    {
-        return $this->identityProvider->getIdentity();
     }
 
     /**
@@ -70,45 +56,12 @@ class RoleService implements RoleServiceInterface
      */
     public function getIdentityRoles(IdentityInterface $identity = null, mixed $context = null): iterable
     {
-        // If no identity is provided, get it from the identity provider
+        // If no identity is provided, get the guest role
         if (null === $identity) {
-            $identity = $this->identityProvider->getIdentity();
-            if (null === $identity) {
-                return $this->convertRoles([$this->guestRole]);
-            }
+            return $this->convertRoles([$this->guestRole]);
         }
 
         return $this->convertRoles($identity->getRoles());
-    }
-
-    /**
-     * Check if the given roles match one of the identity's roles
-     * @param string[]|RoleInterface[] $roles
-     * @param IdentityInterface|null $identity
-     * @return bool
-     */
-    public function matchIdentityRoles(array $roles, IdentityInterface $identity = null): bool
-    {
-        // Get the roles for the identity
-        $identityRoles = $this->getIdentityRoles($identity);
-
-        // No roles
-        if (empty($identityRoles)) {
-            return false;
-        }
-
-        $roleNames = [];
-
-        foreach ($roles as $role) {
-            $roleNames[] = $role instanceof RoleInterface ? $role->getName() : $role;
-        }
-
-        foreach ($this->flattenRoles($identityRoles) as $role) {
-            $a[] = $role->getName();
-        }
-        $identityRoles = $a;
-
-        return count(array_intersect($roleNames, $identityRoles)) > 0;
     }
 
     /**
@@ -139,20 +92,5 @@ class RoleService implements RoleServiceInterface
         }
 
         return array_merge($collectedRoles, $this->roleProvider->getRoles($toCollect));
-    }
-
-    /**
-     * @param RoleInterface[] $roles
-     * @return \Generator
-     */
-    private function flattenRoles(array $roles): \Generator
-    {
-        foreach ($roles as $role) {
-            yield $role;
-
-            if ($role->hasChildren()) {
-                yield from $this->flattenRoles($role->getChildren());
-            }
-        }
     }
 }

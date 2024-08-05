@@ -41,19 +41,4 @@ interface RoleServiceInterface
      */
     public function getIdentityRoles(IdentityInterface $identity = null, mixed $context = null): iterable;
 
-    /**
-     * Get the current identity from the identity provider
-     *
-     * @return IdentityInterface|null
-     */
-    public function getIdentity(): ?IdentityInterface;
-
-    /**
-     * Check if the given roles match one of the identity's roles
-     * @param RoleInterface[] $roles
-     * @param IdentityInterface|null $identity
-     * @return bool
-     */
-    public function matchIdentityRoles(array $roles, IdentityInterface $identity = null): bool;
-
 }
