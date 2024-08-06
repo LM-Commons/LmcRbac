@@ -7,7 +7,7 @@
   "packageRules": [
     {
       "matchPackageNames": ["phpunit/phpunit"],
-      "allowedVersions": "<=11.0"
+      "allowedVersions": "<11.0"
     }
   ]
 }
