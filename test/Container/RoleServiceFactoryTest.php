@@ -22,8 +22,6 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Identity\AuthenticationIdentityProviderFactory;
-use LmcRbac\Identity\IdentityProviderInterface;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\InMemoryRoleProvider;
 use LmcRbac\Service\RoleService;
@@ -50,8 +48,6 @@ class RoleServiceFactoryTest extends TestCase
             'services' => [
                 ModuleOptions::class => $options,
                 InMemoryRoleProvider::class => new InMemoryRoleProvider([]),
-//                \LmcRbac\Identity\AuthenticationIdentityProvider::class => $this->createMock(IdentityProviderInterface::class),
-                IdentityProviderInterface::class => $this->createMock(IdentityProviderInterface::class),
             ],
         ]);
 

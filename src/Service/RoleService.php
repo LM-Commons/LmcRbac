@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace LmcRbac\Service;
 
 use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Identity\IdentityProviderInterface;
 use LmcRbac\Role\RoleInterface;
 use LmcRbac\Role\RoleProviderInterface;
 use Traversable;
@@ -70,7 +69,7 @@ class RoleService implements RoleServiceInterface
      * @param  array|Traversable $roles
      * @return RoleInterface[]
      */
-    private function convertRoles(iterable $roles): iterable
+    protected function convertRoles(iterable $roles): iterable
     {
         $collectedRoles = [];
         $toCollect = [];
