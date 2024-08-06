@@ -47,6 +47,27 @@ class RoleService implements RoleServiceInterface
     }
 
     /**
+     * Set the guest role
+     *
+     * @param string $guestRole
+     * @return void
+     */
+    public function setGuestRole(string $guestRole): void
+    {
+        $this->guestRole = $guestRole;
+    }
+
+    /**
+     * Get the guest role
+     *
+     * @return string
+     */
+    public function getGuestRole(): string
+    {
+        return $this->guestRole;
+    }
+
+    /**
      * Get the identity roles from the current identity, applying some more logic
      *
      * @param IdentityInterface|null $identity

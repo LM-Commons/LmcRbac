@@ -110,4 +110,13 @@ class RoleServiceTest extends TestCase
         $this->assertEquals($roles[1]->getName(), $result[1]->getName());
         $this->assertEquals($roles[2], $result[2]->getName());
     }
+
+    public function testGuestRoleSetterGetter(): void
+    {
+        $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
+        $this->assertEquals('guest', $roleService->getGuestRole());
+
+        $roleService->setGuestRole('foo');
+        $this->assertEquals('foo', $roleService->getGuestRole());
+    }
 }
