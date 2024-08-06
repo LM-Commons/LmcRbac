@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Container;
+namespace Lmc\Rbac\Container;
 
-use LmcRbac\Options\ModuleOptions;
+use Lmc\Rbac\Options\ModuleOptions;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -29,8 +29,8 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
- * @deprecated Replaced by LmcRbac\Options\ModuleOptionsFactory
+ * @deprecated Replaced by Lmc\Rbac\Options\ModuleOptionsFactory
  */
-final class ModuleOptionsFactory extends \LmcRbac\Options\ModuleOptionsFactory
+final class ModuleOptionsFactory extends \Lmc\Rbac\Options\ModuleOptionsFactory
 {
 }

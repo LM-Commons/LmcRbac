@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Assertion;
+namespace Lmc\Rbac\Assertion;
 
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
@@ -19,7 +19,7 @@ class AssertionPluginManager extends AbstractPluginManager implements AssertionP
             return;
         }
         throw new InvalidServiceException(sprintf(
-            'Assertions must implement "LmcRbac\Assertion\AssertionInterface", but "%s" was given',
+            'Assertions must implement "Lmc\Rbac\Assertion\AssertionInterface", but "%s" was given',
             get_class($instance)
         ));
     }

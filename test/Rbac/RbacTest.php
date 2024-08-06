@@ -21,18 +21,18 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Rbac;
 
-use LmcRbac\Rbac;
-use LmcRbac\Role\Role;
+use Lmc\Rbac\Rbac;
+use Lmc\Rbac\Role\Role;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Rbac
+ * @covers \Lmc\Rbac\Rbac
  * @group  Coverage
  */
 class RbacTest extends TestCase
 {
     /**
-     * @covers \LmcRbac\Rbac::isGranted
+     * @covers \Lmc\Rbac\Rbac::isGranted
      */
     public function testCanConvertSingleRole(): void
     {
@@ -45,7 +45,7 @@ class RbacTest extends TestCase
     }
 
     /**
-     * @covers \LmcRbac\Rbac::isGranted
+     * @covers \Lmc\Rbac\Rbac::isGranted
      */
     public function testCanUseEmptyArray(): void
     {
@@ -54,7 +54,7 @@ class RbacTest extends TestCase
     }
 
     /**
-     * @covers \LmcRbac\Rbac::isGranted
+     * @covers \Lmc\Rbac\Rbac::isGranted
      */
     public function testCanCheckMultipleRolesWithMatchingPermission(): void
     {
@@ -70,7 +70,7 @@ class RbacTest extends TestCase
     }
 
     /**
-     * @covers \LmcRbac\Rbac::isGranted
+     * @covers \Lmc\Rbac\Rbac::isGranted
      */
     public function testReturnFalseIfNoRoleHasPermission(): void
     {
@@ -78,13 +78,13 @@ class RbacTest extends TestCase
         $role2 = new Role('Bar');
 
         $roles = [$role1, $role2];
-        $rbac = new \LmcRbac\Rbac();
+        $rbac = new \Lmc\Rbac\Rbac();
 
         $this->assertFalse($rbac->isGranted($roles, 'permission'));
     }
 
     /**
-     * @covers \LmcRbac\Rbac::isGranted
+     * @covers \Lmc\Rbac\Rbac::isGranted
      */
     public function testCanCheckHierarchicalRole(): void
     {
@@ -94,13 +94,13 @@ class RbacTest extends TestCase
         $parentRole = new Role('Foo');
         $parentRole->addChild($childRole);
 
-        $rbac = new \LmcRbac\Rbac();
+        $rbac = new \Lmc\Rbac\Rbac();
 
         $this->assertTrue($rbac->isGranted($parentRole, 'permission'));
     }
 
     /**
-     * @covers \LmcRbac\Rbac::isGranted
+     * @covers \Lmc\Rbac\Rbac::isGranted
      */
     public function testReturnFalseIfNoHierarchicalRoleHasPermission(): void
     {
@@ -115,7 +115,7 @@ class RbacTest extends TestCase
     }
 
     /**
-     * @covers \LmcRbac\Rbac::isGranted
+     * @covers \Lmc\Rbac\Rbac::isGranted
      */
     public function testCanCheckTraversableAsRolesList(): void
     {

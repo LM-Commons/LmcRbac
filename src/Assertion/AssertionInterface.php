@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Assertion;
+namespace Lmc\Rbac\Assertion;
 
-use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Permission\PermissionInterface;
+use Lmc\Rbac\Identity\IdentityInterface;
+use Lmc\Rbac\Permission\PermissionInterface;
 
 /**
  * Interface that you can implement for dynamic assertions

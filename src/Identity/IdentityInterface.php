@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Identity;
+namespace Lmc\Rbac\Identity;
 
-use LmcRbac\Role\RoleInterface;
+use Lmc\Rbac\Role\RoleInterface;
 
 /**
  * Interface for an identity

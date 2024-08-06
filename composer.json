@@ -56,7 +56,7 @@
   },
   "autoload": {
     "psr-4": {
-      "LmcRbac\\": "src/"
+      "Lmc\\Rbac\\": "src/"
     }
   },
   "autoload-dev": {

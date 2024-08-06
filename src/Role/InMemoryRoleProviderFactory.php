@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Role;
+namespace Lmc\Rbac\Role;
 
-use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Role\InMemoryRoleProvider;
+use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Role\InMemoryRoleProvider;
 use Psr\Container\ContainerInterface;
 
 /**

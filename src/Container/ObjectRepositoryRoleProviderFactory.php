@@ -19,11 +19,11 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Container;
+namespace Lmc\Rbac\Container;
 
-use LmcRbac\Exception;
-use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Role\ObjectRepositoryRoleProvider;
+use Lmc\Rbac\Exception;
+use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Role\ObjectRepositoryRoleProvider;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -31,8 +31,8 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
- * @deprecated Replaced by LmcRbac\Role\ObjectRepositoryRoleProviderFactory
+ * @deprecated Replaced by Lmc\Rbac\Role\ObjectRepositoryRoleProviderFactory
  */
-final class ObjectRepositoryRoleProviderFactory extends \LmcRbac\Role\ObjectRepositoryRoleProviderFactory
+final class ObjectRepositoryRoleProviderFactory extends \Lmc\Rbac\Role\ObjectRepositoryRoleProviderFactory
 {
 }

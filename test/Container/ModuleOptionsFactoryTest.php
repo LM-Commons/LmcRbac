@@ -22,12 +22,12 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Options\ModuleOptionsFactory;
-use LmcRbac\Options\ModuleOptions;
+use Lmc\Rbac\Options\ModuleOptionsFactory;
+use Lmc\Rbac\Options\ModuleOptions;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Options\ModuleOptionsFactory
+ * @covers \Lmc\Rbac\Options\ModuleOptionsFactory
  */
 class ModuleOptionsFactoryTest extends TestCase
 {

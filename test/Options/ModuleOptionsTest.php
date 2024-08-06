@@ -21,23 +21,23 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Options;
 
-use LmcRbac\Options\ModuleOptions;
+use Lmc\Rbac\Options\ModuleOptions;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Options\ModuleOptions
+ * @covers \Lmc\Rbac\Options\ModuleOptions
  */
 class ModuleOptionsTest extends TestCase
 {
     public function testAssertModuleDefaultOptions(): void
     {
-        $moduleOptions = new \LmcRbac\Options\ModuleOptions();
+        $moduleOptions = new \Lmc\Rbac\Options\ModuleOptions();
 
         $this->assertEquals('guest', $moduleOptions->getGuestRole());
         $this->assertIsArray($moduleOptions->getRoleProvider());
         $this->assertIsArray($moduleOptions->getAssertionMap());
-        $this->assertEquals('LmcRbac\Role\InMemoryRoleProvider', key($moduleOptions->getRoleProvider()));
-        $this->assertEquals('LmcRbac\Identity\AuthenticationIdentityProvider', $moduleOptions->getIdentityProvider());
+        $this->assertEquals('Lmc\Rbac\Role\InMemoryRoleProvider', key($moduleOptions->getRoleProvider()));
+        $this->assertEquals('Lmc\Rbac\Identity\AuthenticationIdentityProvider', $moduleOptions->getIdentityProvider());
     }
 
     public function testSettersAndGetters(): void

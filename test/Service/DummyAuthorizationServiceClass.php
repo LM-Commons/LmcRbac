@@ -22,8 +22,8 @@ namespace LmcRbacTest\Service;
  * @author Eric Richer <eric.richer@vistoconsulting.com>
  */
 
-use LmcRbac\Service\AuthorizationServiceAwareInterface;
-use LmcRbac\Service\AuthorizationServiceAwareTrait;
+use Lmc\Rbac\Service\AuthorizationServiceAwareInterface;
+use Lmc\Rbac\Service\AuthorizationServiceAwareTrait;
 
 class DummyAuthorizationServiceClass implements AuthorizationServiceAwareInterface
 {

@@ -24,13 +24,13 @@ namespace LmcRbacTest\Assertion;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use LmcRbac\Assertion\AssertionInterface;
-use LmcRbac\Assertion\AssertionPluginManager;
+use Lmc\Rbac\Assertion\AssertionInterface;
+use Lmc\Rbac\Assertion\AssertionPluginManager;
 use LmcRbacTest\Asset\SimpleAssertion;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Assertion\AssertionPluginManager
+ * @covers \Lmc\Rbac\Assertion\AssertionPluginManager
  */
 class AssertionPluginManagerTest extends TestCase
 {

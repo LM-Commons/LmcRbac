@@ -19,14 +19,14 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Service;
+namespace Lmc\Rbac\Service;
 
-use LmcRbac\Assertion\AssertionContainerInterface;
-use LmcRbac\Assertion\AssertionPluginManagerInterface;
-use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Rbac;
-use LmcRbac\Service\AuthorizationService;
-use LmcRbac\Service\RoleServiceInterface;
+use Lmc\Rbac\Assertion\AssertionContainerInterface;
+use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
+use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Rbac;
+use Lmc\Rbac\Service\AuthorizationService;
+use Lmc\Rbac\Service\RoleServiceInterface;
 use Psr\Container\ContainerInterface;
 
 /**

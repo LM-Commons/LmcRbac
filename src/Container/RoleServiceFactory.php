@@ -19,11 +19,11 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Container;
+namespace Lmc\Rbac\Container;
 
 use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
-use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Service\RoleService;
+use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Service\RoleService;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -31,8 +31,8 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
- * @deprecated Replaced by LmcRbac\Service\RoleServiceFactory
+ * @deprecated Replaced by Lmc\Rbac\Service\RoleServiceFactory
  */
-final class RoleServiceFactory extends \LmcRbac\Service\RoleServiceFactory
+final class RoleServiceFactory extends \Lmc\Rbac\Service\RoleServiceFactory
 {
 }

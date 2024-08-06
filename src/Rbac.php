@@ -19,11 +19,11 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac;
+namespace Lmc\Rbac;
 
 use Generator;
-use LmcRbac\Permission\PermissionInterface;
-use LmcRbac\Role\RoleInterface;
+use Lmc\Rbac\Permission\PermissionInterface;
+use Lmc\Rbac\Role\RoleInterface;
 use Traversable;
 
 /**

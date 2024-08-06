@@ -21,12 +21,12 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Role;
 
-use LmcRbac\Role\Role;
-use LmcRbac\Role\RoleInterface;
+use Lmc\Rbac\Role\Role;
+use Lmc\Rbac\Role\RoleInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Role\Role
+ * @covers \Lmc\Rbac\Role\Role
  * @group Coverage
  */
 class RoleTest extends TestCase
@@ -38,7 +38,7 @@ class RoleTest extends TestCase
     }
 
     /**
-     * @covers \LmcRbac\Role\Role::addPermission
+     * @covers \Lmc\Rbac\Role\Role::addPermission
      */
     public function testRoleCanAddPermission(): void
     {
@@ -53,7 +53,7 @@ class RoleTest extends TestCase
     }
 
     /**
-     * @covers \LmcRbac\Role\Role::getPermissions
+     * @covers \Lmc\Rbac\Role\Role::getPermissions
      */
     public function testRoleCanGetPermissions(): void
     {
@@ -70,7 +70,7 @@ class RoleTest extends TestCase
     }
 
     /**
-     * @covers \LmcRbac\Role\Role::hasPermission
+     * @covers \Lmc\Rbac\Role\Role::hasPermission
      */
     public function testHasPermission(): void
     {
@@ -88,7 +88,7 @@ class RoleTest extends TestCase
     }
 
     /**
-     * @covers \LmcRbac\Role\Role::addChild
+     * @covers \Lmc\Rbac\Role\Role::addChild
      */
     public function testCanAddChild(): void
     {
@@ -101,7 +101,7 @@ class RoleTest extends TestCase
     }
 
     /**
-     * @covers \LmcRbac\Role\Role::hasChildren
+     * @covers \Lmc\Rbac\Role\Role::hasChildren
      */
     public function testHasChildren(): void
     {
@@ -115,7 +115,7 @@ class RoleTest extends TestCase
     }
 
     /**
-     * @covers \LmcRbac\Role\Role::getChildren
+     * @covers \Lmc\Rbac\Role\Role::getChildren
      */
     public function testCanGetChildren(): void
     {

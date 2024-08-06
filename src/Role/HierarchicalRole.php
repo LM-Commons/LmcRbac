@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Role;
+namespace Lmc\Rbac\Role;
 
 /**
  * Simple implementation for a hierarchical role

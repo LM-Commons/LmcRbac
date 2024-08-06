@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Options;
+namespace Lmc\Rbac\Options;
 
 use Laminas\Stdlib\AbstractOptions;
 
@@ -34,7 +34,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * Key of the identity provider used to retrieve the identity
      */
-    protected string $identityProvider = 'LmcRbac\Identity\AuthenticationIdentityProvider';
+    protected string $identityProvider = 'Lmc\Rbac\Identity\AuthenticationIdentityProvider';
 
     /**
      * Guest role (used when no identity is found)
@@ -57,7 +57,7 @@ class ModuleOptions extends AbstractOptions
      * @var array
      */
     protected array $roleProvider = [
-        'LmcRbac\Role\InMemoryRoleProvider' => [],
+        'Lmc\Rbac\Role\InMemoryRoleProvider' => [],
     ];
 
     /**

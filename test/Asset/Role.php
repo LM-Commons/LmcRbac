@@ -23,8 +23,8 @@ namespace LmcRbacTest\Asset;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use LmcRbac\Permission\PermissionInterface;
-use LmcRbac\Role\RoleInterface;
+use Lmc\Rbac\Permission\PermissionInterface;
+use Lmc\Rbac\Role\RoleInterface;
 
 /**
  * @ORM\Entity

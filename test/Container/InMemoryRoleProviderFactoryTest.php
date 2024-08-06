@@ -22,13 +22,13 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Role\InMemoryRoleProviderFactory;
-use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Role\InMemoryRoleProvider;
+use Lmc\Rbac\Role\InMemoryRoleProviderFactory;
+use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Role\InMemoryRoleProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Role\InMemoryRoleProviderFactory
+ * @covers \Lmc\Rbac\Role\InMemoryRoleProviderFactory
  */
 class InMemoryRoleProviderFactoryTest extends TestCase
 {

@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Role;
+namespace Lmc\Rbac\Role;
 
 /**
  * A role provider is an object that collect roles from string and convert them to RoleInterface instances

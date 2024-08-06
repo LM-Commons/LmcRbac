@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Exception;
+namespace Lmc\Rbac\Exception;
 
 /**
  * Base exception interface for LmcRbac

@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Container;
+namespace Lmc\Rbac\Container;
 
-use LmcRbac\Assertion\AssertionContainer;
+use Lmc\Rbac\Assertion\AssertionContainer;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -29,8 +29,8 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Aeneas Rekkas
  * @licence MIT
- * @deprecated Replaced by LmcRbac\Assertion\AssertionContainerFactory
+ * @deprecated Replaced by Lmc\Rbac\Assertion\AssertionContainerFactory
  */
-final class AssertionContainerFactory extends \LmcRbac\Assertion\AssertionContainerFactory
+final class AssertionContainerFactory extends \Lmc\Rbac\Assertion\AssertionContainerFactory
 {
 }
