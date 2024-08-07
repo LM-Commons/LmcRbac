@@ -16,7 +16,7 @@
  * and is licensed under the MIT license.
  */
 
-namespace LmcRbacTest\Service;
+namespace LmcRbacTest\Asset;
 
 /**
  * @author Eric Richer <eric.richer@vistoconsulting.com>

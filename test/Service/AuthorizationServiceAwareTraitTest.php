@@ -23,8 +23,11 @@ namespace LmcRbacTest\Service;
  */
 
 use Lmc\Rbac\Service\AuthorizationServiceInterface;
+use LmcRbacTest\Asset\DummyAuthorizationServiceClass;
+use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\TestCase;
 
+#[CoversTrait('Lmc\Rbac\Service\AuthorizationServiceAwareTrait')]
 class AuthorizationServiceAwareTraitTest extends TestCase
 {
     public function testAuthorizationServiceAwareTrait()

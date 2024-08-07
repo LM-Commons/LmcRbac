@@ -38,11 +38,11 @@ use Lmc\Rbac\Service\RoleService;
 use Lmc\Rbac\Service\RoleServiceInterface;
 use LmcRbacTest\Asset\Identity;
 use LmcRbacTest\Asset\SimpleAssertion;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Lmc\Rbac\Service\AuthorizationService
- */
+#[CoversClass('Lmc\Rbac\Service\AuthorizationService')]
 class AuthorizationServiceTest extends TestCase
 {
     public static function grantedProvider(): array
@@ -157,9 +157,7 @@ class AuthorizationServiceTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider grantedProvider
-     */
+    #[DataProvider('grantedProvider')]
     public function testGranted($role, $permission, $context, bool $isGranted, array $assertions = []): void
     {
         $roleConfig = [

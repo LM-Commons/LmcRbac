@@ -19,18 +19,17 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Container;
+namespace LmcRbacTest\Service;
 
 use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
 use Lmc\Rbac\Service\RoleService;
 use Lmc\Rbac\Service\RoleServiceFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Lmc\Rbac\Service\RoleServiceFactory
- */
+#[CoversClass('\Lmc\Rbac\Service\RoleServiceFactory')]
 class RoleServiceFactoryTest extends TestCase
 {
     public function testCanCreateRoleService(): void

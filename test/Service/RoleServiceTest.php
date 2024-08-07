@@ -28,13 +28,12 @@ use Lmc\Rbac\Role\RoleInterface;
 use Lmc\Rbac\Role\RoleProviderInterface;
 use Lmc\Rbac\Service\RoleService;
 use LmcRbacTest\Asset\Identity;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-/**
- * @covers \Lmc\Rbac\Service\RoleService
- */
+#[CoversClass('\Lmc\Rbac\Service\RoleService')]
 class RoleServiceTest extends TestCase
 {
     use ProphecyTrait;

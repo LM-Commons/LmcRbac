@@ -23,12 +23,10 @@ namespace LmcRbacTest\Role;
 
 use Lmc\Rbac\Role\Role;
 use Lmc\Rbac\Role\RoleInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Lmc\Rbac\Role\Role
- * @group Coverage
- */
+#[CoversClass('\Lmc\Rbac\Role\Role')]
 class RoleTest extends TestCase
 {
     public function testSetNameByConstructor(): void
@@ -37,9 +35,6 @@ class RoleTest extends TestCase
         $this->assertEquals('phpIsHell', $role->getName());
     }
 
-    /**
-     * @covers \Lmc\Rbac\Role\Role::addPermission
-     */
     public function testRoleCanAddPermission(): void
     {
         $role = new Role('php');
@@ -52,9 +47,6 @@ class RoleTest extends TestCase
         $this->assertTrue($role->hasPermission('delete'));
     }
 
-    /**
-     * @covers \Lmc\Rbac\Role\Role::getPermissions
-     */
     public function testRoleCanGetPermissions(): void
     {
         $role = new Role('php');
@@ -69,9 +61,6 @@ class RoleTest extends TestCase
         $this->assertEquals($expectedPermissions, $role->getPermissions());
     }
 
-    /**
-     * @covers \Lmc\Rbac\Role\Role::hasPermission
-     */
     public function testHasPermission(): void
     {
         $role = new Role('php');
@@ -87,9 +76,6 @@ class RoleTest extends TestCase
 
     }
 
-    /**
-     * @covers \Lmc\Rbac\Role\Role::addChild
-     */
     public function testCanAddChild(): void
     {
         $role = new Role('role');
@@ -100,9 +86,6 @@ class RoleTest extends TestCase
         $this->assertCount(1, $role->getChildren());
     }
 
-    /**
-     * @covers \Lmc\Rbac\Role\Role::hasChildren
-     */
     public function testHasChildren(): void
     {
         $role = new Role('role');
@@ -114,9 +97,6 @@ class RoleTest extends TestCase
         $this->assertTrue($role->hasChildren());
     }
 
-    /**
-     * @covers \Lmc\Rbac\Role\Role::getChildren
-     */
     public function testCanGetChildren(): void
     {
         $role = new Role('role');
