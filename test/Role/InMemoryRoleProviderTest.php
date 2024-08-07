@@ -21,12 +21,12 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Role;
 
-use LmcRbac\Role\InMemoryRoleProvider;
-use LmcRbac\Role\RoleInterface;
+use Lmc\Rbac\Role\InMemoryRoleProvider;
+use Lmc\Rbac\Role\RoleInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Role\InMemoryRoleProvider
+ * @covers \Lmc\Rbac\Role\InMemoryRoleProvider
  */
 class InMemoryRoleProviderTest extends TestCase
 {

@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Options;
+namespace Lmc\Rbac\Options;
 
-use LmcRbac\Options\ModuleOptions;
+use Lmc\Rbac\Options\ModuleOptions;
 use Psr\Container\ContainerInterface;
 
 /**

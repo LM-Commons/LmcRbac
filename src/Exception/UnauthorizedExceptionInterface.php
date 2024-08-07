@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Exception;
+namespace Lmc\Rbac\Exception;
 
 /**
  * Interface for an unauthorized exception

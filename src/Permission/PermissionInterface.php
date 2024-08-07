@@ -1,6 +1,6 @@
 <?php
 
-namespace LmcRbac\Permission;
+namespace Lmc\Rbac\Permission;
 
 /**
  * Interface that permissions must implement to be used with services using permissions

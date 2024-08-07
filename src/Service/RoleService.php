@@ -19,11 +19,11 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Service;
+namespace Lmc\Rbac\Service;
 
-use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Role\RoleInterface;
-use LmcRbac\Role\RoleProviderInterface;
+use Lmc\Rbac\Identity\IdentityInterface;
+use Lmc\Rbac\Role\RoleInterface;
+use Lmc\Rbac\Role\RoleProviderInterface;
 use Traversable;
 
 /**
@@ -44,6 +44,27 @@ class RoleService implements RoleServiceInterface
     ) {
         $this->roleProvider = $roleProvider;
         $this->guestRole = $guestRole;
+    }
+
+    /**
+     * Set the guest role
+     *
+     * @param string $guestRole
+     * @return void
+     */
+    public function setGuestRole(string $guestRole): void
+    {
+        $this->guestRole = $guestRole;
+    }
+
+    /**
+     * Get the guest role
+     *
+     * @return string
+     */
+    public function getGuestRole(): string
+    {
+        return $this->guestRole;
     }
 
     /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace LmcRbac;
+namespace Lmc\Rbac;
 
-use LmcRbac\Permission\PermissionInterface;
-use LmcRbac\Role\RoleInterface;
+use Lmc\Rbac\Permission\PermissionInterface;
+use Lmc\Rbac\Role\RoleInterface;
 use Traversable;
 
 interface RbacInterface

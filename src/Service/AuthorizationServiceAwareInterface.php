@@ -16,7 +16,7 @@
  * and is licensed under the MIT license.
  */
 
-namespace LmcRbac\Service;
+namespace Lmc\Rbac\Service;
 
 /**
  * @author Eric Richer <eric.richer@vistoconsulting.com>

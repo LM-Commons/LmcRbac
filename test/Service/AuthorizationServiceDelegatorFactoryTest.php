@@ -24,8 +24,8 @@ namespace LmcRbacTest\Service;
 
 use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Service\AuthorizationServiceDelegatorFactory;
-use LmcRbac\Service\AuthorizationServiceInterface;
+use Lmc\Rbac\Service\AuthorizationServiceDelegatorFactory;
+use Lmc\Rbac\Service\AuthorizationServiceInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;

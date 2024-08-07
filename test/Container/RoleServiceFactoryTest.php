@@ -22,14 +22,14 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Role\InMemoryRoleProvider;
-use LmcRbac\Service\RoleService;
-use LmcRbac\Service\RoleServiceFactory;
+use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Role\InMemoryRoleProvider;
+use Lmc\Rbac\Service\RoleService;
+use Lmc\Rbac\Service\RoleServiceFactory;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Service\RoleServiceFactory
+ * @covers \Lmc\Rbac\Service\RoleServiceFactory
  */
 class RoleServiceFactoryTest extends TestCase
 {
@@ -38,7 +38,7 @@ class RoleServiceFactoryTest extends TestCase
         $options = new ModuleOptions([
             'guest_role' => 'guest',
             'role_provider' => [
-                \LmcRbac\Role\InMemoryRoleProvider::class => [
+                \Lmc\Rbac\Role\InMemoryRoleProvider::class => [
                     'foo',
                 ],
             ],
@@ -54,7 +54,7 @@ class RoleServiceFactoryTest extends TestCase
         $factory = new RoleServiceFactory();
         $roleService = $factory($container, RoleService::class);
 
-        $this->assertInstanceOf(\LmcRbac\Service\RoleService::class, $roleService);
+        $this->assertInstanceOf(\Lmc\Rbac\Service\RoleService::class, $roleService);
     }
 
     public function testThrowExceptionIfNoRoleProvider(): void

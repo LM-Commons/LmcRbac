@@ -19,13 +19,13 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Service;
+namespace Lmc\Rbac\Service;
 
-use LmcRbac\Assertion\AssertionPluginManagerInterface;
-use LmcRbac\Assertion\AssertionSet;
-use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Permission\PermissionInterface;
-use LmcRbac\RbacInterface;
+use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
+use Lmc\Rbac\Assertion\AssertionSet;
+use Lmc\Rbac\Identity\IdentityInterface;
+use Lmc\Rbac\Permission\PermissionInterface;
+use Lmc\Rbac\RbacInterface;
 
 /**
  * Authorization service is a simple service that internally uses Rbac to check if identity is

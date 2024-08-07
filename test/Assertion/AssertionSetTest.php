@@ -20,18 +20,18 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Assertion;
 
-use LmcRbac\Assertion\AssertionContainerInterface;
-use LmcRbac\Assertion\AssertionInterface;
-use LmcRbac\Assertion\AssertionPluginManager;
-use LmcRbac\Assertion\AssertionPluginManagerInterface;
-use LmcRbac\Assertion\AssertionSet;
-use LmcRbac\Exception\InvalidArgumentException;
-use LmcRbac\Identity\IdentityInterface;
+use Lmc\Rbac\Assertion\AssertionContainerInterface;
+use Lmc\Rbac\Assertion\AssertionInterface;
+use Lmc\Rbac\Assertion\AssertionPluginManager;
+use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
+use Lmc\Rbac\Assertion\AssertionSet;
+use Lmc\Rbac\Exception\InvalidArgumentException;
+use Lmc\Rbac\Identity\IdentityInterface;
 use LmcRbacTest\Asset\SimpleAssertion;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Assertion\AssertionSet
+ * @covers \Lmc\Rbac\Assertion\AssertionSet
  */
 class AssertionSetTest extends TestCase
 {

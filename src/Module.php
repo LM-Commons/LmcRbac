@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac;
+namespace Lmc\Rbac;
 
 final class Module
 {

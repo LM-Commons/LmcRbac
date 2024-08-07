@@ -1,6 +1,6 @@
 <?php
 
-namespace LmcRbac\Assertion;
+namespace Lmc\Rbac\Assertion;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;

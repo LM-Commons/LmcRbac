@@ -21,7 +21,7 @@ declare(strict_types=1);
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use LmcRbac\Role\RoleInterface;
+use Lmc\Rbac\Role\RoleInterface;
 
 /**
  * @ORM\Entity
@@ -120,7 +120,7 @@ class HierarchicalRole implements RoleInterface
      * @param string|Permission $permission
      * @return void
      */
-    public function addPermission(string|Permission|\LmcRbac\Permission\PermissionInterface $permission): void
+    public function addPermission(string|Permission|\Lmc\Rbac\Permission\PermissionInterface $permission): void
     {
         if (is_string($permission)) {
             $permission = new Permission($permission);
@@ -133,7 +133,7 @@ class HierarchicalRole implements RoleInterface
      * @param $permission
      * @return bool
      */
-    public function hasPermission(string|\LmcRbac\Permission\PermissionInterface $permission): bool
+    public function hasPermission(string|\Lmc\Rbac\Permission\PermissionInterface $permission): bool
     {
         // This can be a performance problem if your role has a lot of permissions. Please refer
         // to the cookbook to an elegant way to solve this issue

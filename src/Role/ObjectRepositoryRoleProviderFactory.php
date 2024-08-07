@@ -19,11 +19,11 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Role;
+namespace Lmc\Rbac\Role;
 
-use LmcRbac\Exception;
-use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Role\ObjectRepositoryRoleProvider;
+use Lmc\Rbac\Exception;
+use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Role\ObjectRepositoryRoleProvider;
 use Psr\Container\ContainerInterface;
 
 /**

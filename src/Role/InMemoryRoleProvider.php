@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Role;
+namespace Lmc\Rbac\Role;
 
 /**
  * Simple role providers that store them in memory (ideal for small websites)
@@ -44,7 +44,7 @@ final class InMemoryRoleProvider implements RoleProviderInterface
     /**
      * @var array
      */
-    private $rolesConfig = [];
+    private array $rolesConfig = [];
 
     /**
      * @param array $rolesConfig

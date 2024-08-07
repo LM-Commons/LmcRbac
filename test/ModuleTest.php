@@ -21,12 +21,12 @@ declare(strict_types=1);
 
 namespace LmcRbacTest;
 
-use LmcRbac\ConfigProvider;
-use LmcRbac\Module;
+use Lmc\Rbac\ConfigProvider;
+use Lmc\Rbac\Module;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers  \LmcRbac\Module
+ * @covers  \Lmc\Rbac\Module
  */
 class ModuleTest extends TestCase
 {

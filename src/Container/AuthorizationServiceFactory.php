@@ -19,13 +19,13 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Container;
+namespace Lmc\Rbac\Container;
 
-use LmcRbac\Assertion\AssertionContainerInterface;
-use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Rbac;
-use LmcRbac\Service\AuthorizationService;
-use LmcRbac\Service\RoleServiceInterface;
+use Lmc\Rbac\Assertion\AssertionContainerInterface;
+use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Rbac;
+use Lmc\Rbac\Service\AuthorizationService;
+use Lmc\Rbac\Service\RoleServiceInterface;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -33,8 +33,8 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Michaël Gallego <mic.gallego@gmail.com>
  * @licence MIT
- * @deprecated Replaced by LmcRbac\Service\AuthorizationServiceFactory
+ * @deprecated Replaced by Lmc\Rbac\Service\AuthorizationServiceFactory
  */
-final class AuthorizationServiceFactory extends \LmcRbac\Service\AuthorizationServiceFactory
+final class AuthorizationServiceFactory extends \Lmc\Rbac\Service\AuthorizationServiceFactory
 {
 }

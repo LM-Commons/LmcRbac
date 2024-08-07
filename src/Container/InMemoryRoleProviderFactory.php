@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Container;
+namespace Lmc\Rbac\Container;
 
-use LmcRbac\Options\ModuleOptions;
-use LmcRbac\Role\InMemoryRoleProvider;
+use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Role\InMemoryRoleProvider;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -30,8 +30,8 @@ use Psr\Container\ContainerInterface;
  *
  * @author  Vytautas Stankus
  * @licence MIT
- * @deprecated Replaced by LmcRbac\Role\InMemoryRoleProviderFactory
+ * @deprecated Replaced by Lmc\Rbac\Role\InMemoryRoleProviderFactory
  */
-final class InMemoryRoleProviderFactory extends \LmcRbac\Role\InMemoryRoleProviderFactory
+final class InMemoryRoleProviderFactory extends \Lmc\Rbac\Role\InMemoryRoleProviderFactory
 {
 }

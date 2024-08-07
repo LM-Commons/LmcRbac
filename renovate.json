@@ -2,5 +2,12 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "baseBranches": ["master", "2.x"],
+  "packageRules": [
+    {
+      "matchPackageNames": ["phpunit/phpunit"],
+      "allowedVersions": "<11.0"
+    }
   ]
 }

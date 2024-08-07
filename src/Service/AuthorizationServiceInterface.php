@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Service;
+namespace Lmc\Rbac\Service;
 
-use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Permission\PermissionInterface;
+use Lmc\Rbac\Identity\IdentityInterface;
+use Lmc\Rbac\Permission\PermissionInterface;
 
 /**
  * Minimal interface for an authorization service

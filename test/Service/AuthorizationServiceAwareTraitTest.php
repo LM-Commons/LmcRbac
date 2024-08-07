@@ -22,7 +22,7 @@ namespace LmcRbacTest\Service;
  * @author Eric Richer <eric.richer@vistoconsulting.com>
  */
 
-use LmcRbac\Service\AuthorizationServiceInterface;
+use Lmc\Rbac\Service\AuthorizationServiceInterface;
 use PHPUnit\Framework\TestCase;
 
 class AuthorizationServiceAwareTraitTest extends TestCase

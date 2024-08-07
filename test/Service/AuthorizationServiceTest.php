@@ -22,26 +22,26 @@ declare(strict_types=1);
 namespace LmcRbacTest\Service;
 
 use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Assertion\AssertionPluginManager;
-use LmcRbac\Assertion\AssertionPluginManagerInterface;
-use LmcRbac\Assertion\AssertionSet;
-use LmcRbac\Exception\InvalidArgumentException;
-use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Identity\IdentityProviderInterface;
-use LmcRbac\Rbac;
-use LmcRbac\RbacInterface;
-use LmcRbac\Role\InMemoryRoleProvider;
-use LmcRbac\Role\Role;
-use LmcRbac\Role\RoleInterface;
-use LmcRbac\Service\AuthorizationService;
-use LmcRbac\Service\RoleService;
-use LmcRbac\Service\RoleServiceInterface;
+use Lmc\Rbac\Assertion\AssertionPluginManager;
+use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
+use Lmc\Rbac\Assertion\AssertionSet;
+use Lmc\Rbac\Exception\InvalidArgumentException;
+use Lmc\Rbac\Identity\IdentityInterface;
+use Lmc\Rbac\Identity\IdentityProviderInterface;
+use Lmc\Rbac\Rbac;
+use Lmc\Rbac\RbacInterface;
+use Lmc\Rbac\Role\InMemoryRoleProvider;
+use Lmc\Rbac\Role\Role;
+use Lmc\Rbac\Role\RoleInterface;
+use Lmc\Rbac\Service\AuthorizationService;
+use Lmc\Rbac\Service\RoleService;
+use Lmc\Rbac\Service\RoleServiceInterface;
 use LmcRbacTest\Asset\Identity;
 use LmcRbacTest\Asset\SimpleAssertion;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Service\AuthorizationService
+ * @covers \Lmc\Rbac\Service\AuthorizationService
  */
 class AuthorizationServiceTest extends TestCase
 {

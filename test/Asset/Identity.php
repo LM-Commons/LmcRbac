@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace LmcRbacTest\Asset;
 
-use LmcRbac\Identity\IdentityInterface;
+use Lmc\Rbac\Identity\IdentityInterface;
 
 class Identity implements IdentityInterface
 {

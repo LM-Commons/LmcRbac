@@ -21,7 +21,7 @@ declare(strict_types=1);
 namespace LmcRbacTest\Asset;
 
 use Doctrine\ORM\Mapping as ORM;
-use LmcRbac\Permission\PermissionInterface;
+use Lmc\Rbac\Permission\PermissionInterface;
 
 /**
  * @ORM\Entity

@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Service;
+namespace Lmc\Rbac\Service;
 
 use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
-use LmcRbac\Options\ModuleOptions;
+use Lmc\Rbac\Options\ModuleOptions;
 use Psr\Container\ContainerInterface;
 
 /**

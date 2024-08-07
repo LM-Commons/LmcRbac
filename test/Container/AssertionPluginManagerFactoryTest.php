@@ -22,14 +22,14 @@ declare(strict_types=1);
 namespace LmcRbacTest\Container;
 
 use Laminas\ServiceManager\ServiceManager;
-use LmcRbac\Assertion\AssertionContainer;
-use LmcRbac\Assertion\AssertionContainerFactory;
-use LmcRbac\Assertion\AssertionPluginManager;
-use LmcRbac\Assertion\AssertionPluginManagerFactory;
+use Lmc\Rbac\Assertion\AssertionContainer;
+use Lmc\Rbac\Assertion\AssertionContainerFactory;
+use Lmc\Rbac\Assertion\AssertionPluginManager;
+use Lmc\Rbac\Assertion\AssertionPluginManagerFactory;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Assertion\AssertionPluginManagerFactory
+ * @covers \Lmc\Rbac\Assertion\AssertionPluginManagerFactory
  */
 class AssertionPluginManagerFactoryTest extends TestCase
 {

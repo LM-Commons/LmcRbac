@@ -27,13 +27,13 @@ use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
-use LmcRbac\Role\ObjectRepositoryRoleProvider;
-use LmcRbac\Role\Role;
-use LmcRbac\Role\RoleInterface;
+use Lmc\Rbac\Role\ObjectRepositoryRoleProvider;
+use Lmc\Rbac\Role\Role;
+use Lmc\Rbac\Role\RoleInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LmcRbac\Role\ObjectRepositoryRoleProvider
+ * @covers \Lmc\Rbac\Role\ObjectRepositoryRoleProvider
  */
 class ObjectRepositoryRoleProviderTest extends TestCase
 {
@@ -107,7 +107,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
 
         $objectRepository->expects($this->once())->method('findBy')->willReturn($result);
 
-        $this->expectException('LmcRbac\Exception\RoleNotFoundException');
+        $this->expectException('Lmc\Rbac\Exception\RoleNotFoundException');
         $this->expectExceptionMessage('Some roles were asked but could not be loaded from database: guest, admin');
 
         $provider->getRoles(['guest', 'admin', 'member']);
@@ -172,7 +172,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $this->assertCount(1, $roles);
         $this->assertIsArray($roles);
 
-        $this->assertInstanceOf('LmcRbac\Role\RoleInterface', $roles[0]);
+        $this->assertInstanceOf('Lmc\Rbac\Role\RoleInterface', $roles[0]);
         $this->assertEquals('admin', $roles[0]->getName());
         $this->assertTrue($roles[0]->hasPermission('manage'));
         $this->assertTrue($roles[0]->hasPermission('read'));
@@ -208,13 +208,13 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $this->assertCount(1, $roles);
         $this->assertIsArray($roles);
 
-        $this->assertInstanceOf('LmcRbac\Role\RoleInterface', $roles[0]);
+        $this->assertInstanceOf('Lmc\Rbac\Role\RoleInterface', $roles[0]);
         $this->assertEquals('admin', $roles[0]->getName());
 
         $childRolesString = '';
 
         foreach ($this->flattenRoles($roles[0]->getChildren()) as $childRole) {
-            $this->assertInstanceOf('LmcRbac\Role\RoleInterface', $childRole);
+            $this->assertInstanceOf('Lmc\Rbac\Role\RoleInterface', $childRole);
             $childRolesString .= $childRole->getName();
         }
 

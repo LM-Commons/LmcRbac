@@ -19,9 +19,9 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac\Role;
+namespace Lmc\Rbac\Role;
 
-use LmcRbac\Permission\PermissionInterface;
+use Lmc\Rbac\Permission\PermissionInterface;
 
 /**
  * Simple implementation for a role without hierarchy

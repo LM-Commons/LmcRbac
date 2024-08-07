@@ -19,11 +19,11 @@ declare(strict_types=1);
  * and is licensed under the MIT license.
  */
 
-namespace LmcRbac\Assertion;
+namespace Lmc\Rbac\Assertion;
 
-use LmcRbac\Exception;
-use LmcRbac\Identity\IdentityInterface;
-use LmcRbac\Permission\PermissionInterface;
+use Lmc\Rbac\Exception;
+use Lmc\Rbac\Identity\IdentityInterface;
+use Lmc\Rbac\Permission\PermissionInterface;
 
 class AssertionSet implements AssertionInterface
 {
@@ -89,7 +89,7 @@ class AssertionSet implements AssertionInterface
                     break;
                 default:
                     throw new Exception\InvalidArgumentException(sprintf(
-                        'Assertion must be callable, string, array or implement LmcRbac\Assertion\AssertionInterface, "%s" given',
+                        'Assertion must be callable, string, array or implement Lmc\Rbac\Assertion\AssertionInterface, "%s" given',
                         is_object($assertion) ? get_class($assertion) : gettype($assertion)
                     ));
             }

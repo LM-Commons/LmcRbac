@@ -19,10 +19,10 @@
 
 declare(strict_types=1);
 
-namespace LmcRbac;
+namespace Lmc\Rbac;
 
-use LmcRbac\Assertion\AssertionPluginManager;
-use LmcRbac\Identity\AuthenticationIdentityProvider;
+use Lmc\Rbac\Assertion\AssertionPluginManager;
+use Lmc\Rbac\Identity\AuthenticationIdentityProvider;
 
 /**
  * The configuration provider for the LmcRbac module
@@ -43,13 +43,13 @@ final class ConfigProvider
     {
         return [
             'factories' => [
-                \LmcRbac\Assertion\AssertionPluginManager::class => \LmcRbac\Assertion\AssertionPluginManagerFactory::class,
-                \LmcRbac\Options\ModuleOptions::class => \LmcRbac\Options\ModuleOptionsFactory::class,
-                \LmcRbac\Role\InMemoryRoleProvider::class => \LmcRbac\Role\InMemoryRoleProviderFactory::class,
-                \LmcRbac\Role\ObjectRepositoryRoleProvider::class => \LmcRbac\Role\ObjectRepositoryRoleProviderFactory::class,
-                \LmcRbac\Service\AuthorizationServiceInterface::class => \LmcRbac\Service\AuthorizationServiceFactory::class,
-                \LmcRbac\Service\RoleServiceInterface::class => \LmcRbac\Service\RoleServiceFactory::class,
-                \LmcRbac\Rbac::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
+                \Lmc\Rbac\Assertion\AssertionPluginManager::class => \Lmc\Rbac\Assertion\AssertionPluginManagerFactory::class,
+                \Lmc\Rbac\Options\ModuleOptions::class => \Lmc\Rbac\Options\ModuleOptionsFactory::class,
+                \Lmc\Rbac\Role\InMemoryRoleProvider::class => \Lmc\Rbac\Role\InMemoryRoleProviderFactory::class,
+                \Lmc\Rbac\Role\ObjectRepositoryRoleProvider::class => \Lmc\Rbac\Role\ObjectRepositoryRoleProviderFactory::class,
+                \Lmc\Rbac\Service\AuthorizationServiceInterface::class => \Lmc\Rbac\Service\AuthorizationServiceFactory::class,
+                \Lmc\Rbac\Service\RoleServiceInterface::class => \Lmc\Rbac\Service\RoleServiceFactory::class,
+                \Lmc\Rbac\Rbac::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
             ],
         ];
     }
