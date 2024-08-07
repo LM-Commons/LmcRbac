@@ -30,11 +30,11 @@ use Doctrine\Persistence\ObjectRepository;
 use Lmc\Rbac\Role\ObjectRepositoryRoleProvider;
 use Lmc\Rbac\Role\Role;
 use Lmc\Rbac\Role\RoleInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Lmc\Rbac\Role\ObjectRepositoryRoleProvider
- */
+#[CoversClass('\Lmc\Rbac\Role\ObjectRepositoryRoleProvider')]
 class ObjectRepositoryRoleProviderTest extends TestCase
 {
 
@@ -113,9 +113,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $provider->getRoles(['guest', 'admin', 'member']);
     }
 
-    /**
-     * @dataProvider roleProvider
-     */
+    #[DataProvider('roleProvider')]
     public function testObjectRepositoryProviderForFlatRole(array $rolesConfig, array $rolesToCheck)
     {
         $objectManager = $this->getObjectManager();

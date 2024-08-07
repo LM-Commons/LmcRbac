@@ -46,7 +46,7 @@
   },
   "require-dev": {
     "malukenho/docheader": "^1.0.0",
-    "phpunit/phpunit": "^10.0",
+    "phpunit/phpunit": "^10.0 || ^11.0",
     "phpspec/prophecy": "^1.10",
     "phpspec/prophecy-phpunit": "^2.0",
     "friendsofphp/php-cs-fixer": "^3.43",

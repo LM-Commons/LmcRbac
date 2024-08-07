@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Container;
+namespace LmcRbacTest\Service;
 
 use Lmc\Rbac\Assertion\AssertionContainerInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManager;
@@ -29,13 +29,12 @@ use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Rbac;
 use Lmc\Rbac\Service\AuthorizationService;
 use Lmc\Rbac\Service\RoleServiceInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
-/**
- * @covers \Lmc\Rbac\Service\AuthorizationServiceFactory
- */
+#[CoversClass('\Lmc\Rbac\Service\AuthorizationServiceFactory')]
 class AuthorizationServiceFactoryTest extends TestCase
 {
     use ProphecyTrait;

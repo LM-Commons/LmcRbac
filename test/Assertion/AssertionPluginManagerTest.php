@@ -27,11 +27,10 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 use Lmc\Rbac\Assertion\AssertionInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManager;
 use LmcRbacTest\Asset\SimpleAssertion;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Lmc\Rbac\Assertion\AssertionPluginManager
- */
+#[CoversClass('\Lmc\Rbac\Assertion\AssertionPluginManager')]
 class AssertionPluginManagerTest extends TestCase
 {
     public function testValidationOfPluginSucceedsIfAssertionInterfaceIsImplemented()

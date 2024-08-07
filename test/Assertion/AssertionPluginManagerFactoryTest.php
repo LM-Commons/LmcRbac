@@ -19,28 +19,31 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Container;
+namespace LmcRbacTest\Assertion;
 
 use Laminas\ServiceManager\ServiceManager;
-use Lmc\Rbac\Options\ModuleOptionsFactory;
-use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Assertion\AssertionContainer;
+use Lmc\Rbac\Assertion\AssertionContainerFactory;
+use Lmc\Rbac\Assertion\AssertionPluginManager;
+use Lmc\Rbac\Assertion\AssertionPluginManagerFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Lmc\Rbac\Options\ModuleOptionsFactory
- */
-class ModuleOptionsFactoryTest extends TestCase
+#[CoversClass('\Lmc\Rbac\Assertion\AssertionPluginManagerFactory')]
+class AssertionPluginManagerFactoryTest extends TestCase
 {
     public function testFactory(): void
     {
-        $config = ['lmc_rbac' => []];
-
         $serviceManager = new ServiceManager();
-        $serviceManager->setService('config', $config);
+        $serviceManager->setService('config', [
+            'lmc_rbac' => [
+                'assertion_manager' => [],
+            ],
+        ]);
 
-        $factory = new ModuleOptionsFactory();
-        $options = $factory($serviceManager);
+        $factory = new AssertionPluginManagerFactory();
+        $pluginManager = $factory($serviceManager, AssertionPluginManager::class);
 
-        $this->assertInstanceOf(ModuleOptions::class, $options);
+        $this->assertInstanceOf(AssertionPluginManager::class, $pluginManager);
     }
 }

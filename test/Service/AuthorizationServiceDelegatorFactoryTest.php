@@ -23,13 +23,15 @@ namespace LmcRbacTest\Service;
  */
 
 use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
-use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Service\AuthorizationServiceDelegatorFactory;
 use Lmc\Rbac\Service\AuthorizationServiceInterface;
+use LmcRbacTest\Asset\DummyAuthorizationServiceClass;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
+#[CoversClass('\Lmc\Rbac\Service\AuthorizationServiceDelegatorFactory')]
 class AuthorizationServiceDelegatorFactoryTest extends TestCase
 {
     use ProphecyTrait;

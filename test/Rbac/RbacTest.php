@@ -23,17 +23,12 @@ namespace LmcRbacTest\Rbac;
 
 use Lmc\Rbac\Rbac;
 use Lmc\Rbac\Role\Role;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Lmc\Rbac\Rbac
- * @group  Coverage
- */
+#[CoversClass('\Lmc\Rbac\Rbac')]
 class RbacTest extends TestCase
 {
-    /**
-     * @covers \Lmc\Rbac\Rbac::isGranted
-     */
     public function testCanConvertSingleRole(): void
     {
         $role = new Role('Foo');
@@ -44,18 +39,12 @@ class RbacTest extends TestCase
         $this->assertTrue($rbac->isGranted($role, 'permission'));
     }
 
-    /**
-     * @covers \Lmc\Rbac\Rbac::isGranted
-     */
     public function testCanUseEmptyArray(): void
     {
         $rbac = new Rbac();
         $this->assertFalse($rbac->isGranted([], 'permission'));
     }
 
-    /**
-     * @covers \Lmc\Rbac\Rbac::isGranted
-     */
     public function testCanCheckMultipleRolesWithMatchingPermission(): void
     {
         $role1 = new Role('Foo');
@@ -69,9 +58,6 @@ class RbacTest extends TestCase
         $this->assertTrue($rbac->isGranted($roles, 'permission'));
     }
 
-    /**
-     * @covers \Lmc\Rbac\Rbac::isGranted
-     */
     public function testReturnFalseIfNoRoleHasPermission(): void
     {
         $role1 = new Role('Foo');
@@ -83,9 +69,6 @@ class RbacTest extends TestCase
         $this->assertFalse($rbac->isGranted($roles, 'permission'));
     }
 
-    /**
-     * @covers \Lmc\Rbac\Rbac::isGranted
-     */
     public function testCanCheckHierarchicalRole(): void
     {
         $childRole = new Role('Bar');
@@ -99,9 +82,6 @@ class RbacTest extends TestCase
         $this->assertTrue($rbac->isGranted($parentRole, 'permission'));
     }
 
-    /**
-     * @covers \Lmc\Rbac\Rbac::isGranted
-     */
     public function testReturnFalseIfNoHierarchicalRoleHasPermission(): void
     {
         $childRole = new Role('Bar');
@@ -114,9 +94,6 @@ class RbacTest extends TestCase
         $this->assertFalse($rbac->isGranted($parentRole, 'permission'));
     }
 
-    /**
-     * @covers \Lmc\Rbac\Rbac::isGranted
-     */
     public function testCanCheckTraversableAsRolesList(): void
     {
         $role1 = new Role('Foo');

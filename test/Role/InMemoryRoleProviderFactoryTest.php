@@ -19,17 +19,16 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Container;
+namespace LmcRbacTest\Role;
 
 use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Role\InMemoryRoleProviderFactory;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Lmc\Rbac\Role\InMemoryRoleProviderFactory
- */
+#[CoversClass('\Lmc\Rbac\Role\InMemoryRoleProviderFactory')]
 class InMemoryRoleProviderFactoryTest extends TestCase
 {
     public function testFactoryUsingObjectRepository(): void

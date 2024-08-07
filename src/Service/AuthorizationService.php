@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Service;
 
+use Lmc\Rbac\Assertion\AssertionInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Assertion\AssertionSet;
 use Lmc\Rbac\Identity\IdentityInterface;
@@ -57,6 +58,59 @@ class AuthorizationService implements AuthorizationServiceInterface
         $this->roleService = $roleService;
         $this->assertionPluginManager = $assertionPluginManager;
         $this->assertions = $assertions;
+    }
+
+    /**
+     * Set assertions, either merging or replacing (default)
+     * @param array $assertions
+     * @param bool $merge
+     * @return void
+     */
+    public function setAssertions(array $assertions, bool $merge = false): void
+    {
+        $this->assertions = $merge ?
+            array_merge($this->assertions, $assertions) :
+            $assertions;
+    }
+
+    /**
+     * Set assertion for a given permission
+     * @param PermissionInterface|string $permission
+     * @param AssertionInterface|callable|string $assertion
+     * @return void
+     */
+    public function setAssertion(PermissionInterface|string $permission, AssertionInterface|callable|string $assertion): void
+    {
+        $this->assertions[(string) $permission] = $assertion;
+    }
+
+    /**
+     * Check if there are assertions for the permission
+     * @param PermissionInterface|string $permission
+     * @return bool
+     */
+    public function hasAssertion(PermissionInterface|string $permission): bool
+    {
+        return isset($this->assertions[(string) $permission]);
+    }
+
+    /**
+     * Get the assertions
+     * @return array
+     */
+    public function getAssertions(): array
+    {
+        return $this->assertions;
+    }
+
+    /**
+     * Get the assertions for the given permission
+     * @param PermissionInterface|string $permission
+     * @return AssertionInterface|callable|string|null
+     */
+    public function getAssertion(PermissionInterface|string $permission): AssertionInterface|callable|string|null
+    {
+        return $this->hasAssertion(($permission)) ? $this->assertions[(string) $permission] : null;
     }
 
     public function isGranted(IdentityInterface|null $identity, string|PermissionInterface $permission, mixed $context = null): bool
