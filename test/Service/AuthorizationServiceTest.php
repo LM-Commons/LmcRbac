@@ -398,4 +398,58 @@ class AuthorizationServiceTest extends TestCase
         $roleService->expects($this->once())->method('getIdentityRoles')->with($identity, $context)->willReturn([]);
         $authorizationService->isGranted($identity, 'foo', $context);
     }
+
+    public function testGetAssertions(): void
+    {
+        $assertions = [
+            'foo' => 'foo',
+        ];
+        $authorizationService = $this->createAuthorizationService($assertions);
+        $this->assertEquals($assertions, $authorizationService->getAssertions());
+        $this->assertEquals('foo', $authorizationService->getAssertion('foo'));
+        $this->assertNull($authorizationService->getAssertion('bar'));
+    }
+
+    public function testHasAssertion(): void
+    {
+        $assertions = [
+            'foo' => 'foo',
+        ];
+        $authorizationService = $this->createAuthorizationService($assertions);
+        $this->assertTrue($authorizationService->hasAssertion('foo'));
+        $this->assertFalse($authorizationService->hasAssertion('bar'));
+    }
+
+    public function testSetAssertions(): void
+    {
+        $assertions = [
+            'foo' => 'foo',
+        ];
+        $newAssertions = [
+            'bar' => 'bar',
+        ];
+        $authorizationService = $this->createAuthorizationService($assertions);
+        $authorizationService->setAssertions($newAssertions, false);
+        $this->assertEquals($newAssertions, $authorizationService->getAssertions());
+        $authorizationService->setAssertions($assertions, true);
+        $this->assertEquals(array_merge($assertions, $newAssertions), $authorizationService->getAssertions());
+
+        // Reset assertions
+        $authorizationService->setAssertions($assertions, false);
+        $authorizationService->setAssertion('bar', 'bar');
+        $this->assertEquals(array_merge($assertions, $newAssertions), $authorizationService->getAssertions());
+
+        $authorizationService->setAssertion('bar', 'foo');
+        $this->assertEquals('foo', $authorizationService->getAssertion('bar'));
+    }
+
+    private function createAuthorizationService(array $assertions): AuthorizationService
+    {
+        return new AuthorizationService(
+            $this->createMock(Rbac::class),
+            $this->createMock(RoleServiceInterface::class),
+            $this->createMock(AssertionPluginManagerInterface::class),
+            $assertions
+        );
+    }
 }
