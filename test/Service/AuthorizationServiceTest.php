@@ -36,11 +36,11 @@ use LmcRbac\Service\RoleServiceInterface;
 use LmcRbacTest\Asset\FlatRole;
 use LmcRbacTest\Asset\Identity;
 use LmcRbacTest\Asset\SimpleAssertion;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Service\AuthorizationService
- */
+#[CoversClass('\LmcRbac\Service\AuthorizationService')]
 class AuthorizationServiceTest extends TestCase
 {
     public static function grantedProvider(): array
@@ -155,9 +155,7 @@ class AuthorizationServiceTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider grantedProvider
-     */
+    #[DataProvider('grantedProvider')]
     public function testGranted($role, $permission, $context, bool $isGranted, array $assertions = []): void
     {
         $roleConfig = [
@@ -195,7 +193,7 @@ class AuthorizationServiceTest extends TestCase
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
-        $roleService->expects($this->once())->method('getIdentityRoles')->will($this->returnValue([$role]));
+        $roleService->expects($this->once())->method('getIdentityRoles')->willReturn([$role]);
 
         $assertionContainer = $this->getMockBuilder(AssertionContainerInterface::class)->getMock();
         $assertionContainer->expects($this->never())->method('get');
@@ -213,7 +211,7 @@ class AuthorizationServiceTest extends TestCase
         $rbac->expects($this->never())->method('isGranted');
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
-        $roleService->expects($this->once())->method('getIdentityRoles')->will($this->returnValue($identity->getRoles()));
+        $roleService->expects($this->once())->method('getIdentityRoles')->willReturn($identity->getRoles());
 
         $assertionContainer = $this->getMockBuilder(AssertionContainerInterface::class)->getMock();
         $assertionContainer->expects($this->never())->method('get');
@@ -229,7 +227,7 @@ class AuthorizationServiceTest extends TestCase
         $identity = new Identity([$role]);
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
-        $roleService->expects($this->once())->method('getIdentityRoles')->will($this->returnValue($identity->getRoles()));
+        $roleService->expects($this->once())->method('getIdentityRoles')->willReturn($identity->getRoles());
 
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
         $rbac->expects($this->once())->method('isGranted')->willReturn(true);
@@ -249,7 +247,7 @@ class AuthorizationServiceTest extends TestCase
         $assertion = new SimpleAssertion();
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
-        $roleService->expects($this->once())->method('getIdentityRoles')->will($this->returnValue($identity->getRoles()));
+        $roleService->expects($this->once())->method('getIdentityRoles')->willReturn($identity->getRoles());
 
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
         $rbac->expects($this->once())->method('isGranted')->willReturn(true);
@@ -271,7 +269,7 @@ class AuthorizationServiceTest extends TestCase
         $assertion = new SimpleAssertion();
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
-        $roleService->expects($this->once())->method('getIdentityRoles')->will($this->returnValue($identity->getRoles()));
+        $roleService->expects($this->once())->method('getIdentityRoles')->willReturn($identity->getRoles());
 
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
         $rbac->expects($this->once())->method('isGranted')->willReturn(true);
@@ -292,7 +290,7 @@ class AuthorizationServiceTest extends TestCase
         $identity = new Identity([$role]);
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
-        $roleService->expects($this->once())->method('getIdentityRoles')->will($this->returnValue($identity->getRoles()));
+        $roleService->expects($this->once())->method('getIdentityRoles')->willReturn($identity->getRoles());
 
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
         $rbac->expects($this->once())->method('isGranted')->willReturn(true);
@@ -326,7 +324,7 @@ class AuthorizationServiceTest extends TestCase
         $identity = new Identity([$role]);
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
-        $roleService->expects($this->once())->method('getIdentityRoles')->will($this->returnValue($identity->getRoles()));
+        $roleService->expects($this->once())->method('getIdentityRoles')->willReturn($identity->getRoles());
 
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
         $rbac->expects($this->once())->method('isGranted')->willReturn(true);
@@ -363,10 +361,10 @@ class AuthorizationServiceTest extends TestCase
         $role = $this->getMockBuilder(RoleInterface::class)->getMock();
         $rbac = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
 
-        $rbac->expects($this->once())->method('isGranted')->will($this->returnValue(true));
+        $rbac->expects($this->once())->method('isGranted')->willReturn(true);
 
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
-        $roleService->expects($this->once())->method('getIdentityRoles')->will($this->returnValue([$role]));
+        $roleService->expects($this->once())->method('getIdentityRoles')->willReturn([$role]);
 
         $assertionContainer = $this->getMockBuilder(AssertionContainerInterface::class)->disableOriginalConstructor()->getMock();
         $authorizationService = new AuthorizationService($rbac, $roleService, $assertionContainer, ['foo' => new \stdClass()]);

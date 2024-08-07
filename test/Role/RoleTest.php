@@ -22,12 +22,10 @@ declare(strict_types=1);
 namespace LmcRbacTest\Role;
 
 use LmcRbac\Role\Role;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Role\Role
- * @group Coverage
- */
+#[CoversClass('\LmcRbac\Role\Role')]
 class RoleTest extends TestCase
 {
     public function testSetNameByConstructor(): void
@@ -36,9 +34,6 @@ class RoleTest extends TestCase
         $this->assertEquals('phpIsHell', $role->getName());
     }
 
-    /**
-     * @covers \LmcRbac\Role\Role::addPermission
-     */
     public function testRoleCanAddPermission(): void
     {
         $role = new Role('php');
@@ -51,9 +46,6 @@ class RoleTest extends TestCase
         $this->assertTrue($role->hasPermission('delete'));
     }
 
-    /**
-     * @covers \LmcRbac\Role\Role::getPermissions
-     */
     public function testRoleCanGetPermissions(): void
     {
         $role = new Role('php');

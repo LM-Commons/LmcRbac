@@ -24,11 +24,10 @@ namespace LmcRbacTest\Role;
 use LmcRbac\Role\HierarchicalRoleInterface;
 use LmcRbac\Role\InMemoryRoleProvider;
 use LmcRbac\Role\RoleInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Role\InMemoryRoleProvider
- */
+#[CoversClass('\LmcRbac\Role\InMemoryRoleProvider')]
 class InMemoryRoleProviderTest extends TestCase
 {
     public function testInMemoryProvider(): void

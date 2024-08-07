@@ -23,11 +23,10 @@ namespace LmcRbacTest;
 
 use LmcRbac\ConfigProvider;
 use LmcRbac\Module;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers  \LmcRbac\Module
- */
+#[CoversClass('\LmcRbac\Module')]
 class ModuleTest extends TestCase
 {
     public function testProvidesExpectedConfiguration()

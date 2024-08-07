@@ -3,11 +3,8 @@
   "extends": [
     "config:recommended"
   ],
-  "baseBranches": ["master", "2.x"],
-  "packageRules": [
-    {
-      "matchPackageNames": ["phpunit/phpunit"],
-      "allowedVersions": "<11.0"
-    }
-  ]
+  "major": {
+    "dependencyDashboardApproval": true
+  },
+  "baseBranches": ["master", "2.x"]
 }

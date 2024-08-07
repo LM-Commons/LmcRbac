@@ -26,11 +26,11 @@ use LmcRbac\Assertion\AssertionSet;
 use LmcRbac\Exception\InvalidArgumentException;
 use LmcRbac\Identity\IdentityInterface;
 use LmcRbacTest\Asset\SimpleAssertion;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Assertion\AssertionSet
- */
+#[CoversClass('\LmcRbac\Assertion\AssertionSet')]
 class AssertionSetTest extends TestCase
 {
     public function testImplementsAssertionInterface()
@@ -220,9 +220,7 @@ class AssertionSetTest extends TestCase
         $this->assertTrue($assertionSet->assert('permission'));
     }
 
-    /**
-     * @dataProvider dpMatrix
-     */
+    #[DataProvider('dpMatrix')]
     public function testMatrix(array $assertions, bool $expectedResult, array $assertionCalledCount)
     {
         $assertionContainer = $this->getMockBuilder(AssertionContainerInterface::class)->getMock();

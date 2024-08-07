@@ -23,17 +23,12 @@ namespace LmcRbacTest\Role;
 
 use LmcRbac\Role\HierarchicalRole;
 use LmcRbac\Role\HierarchicalRoleInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Role\HierarchicalRole
- * @group  Coverage
- */
+#[CoversClass('\LmcRbac\Role\HierarchicalRole')]
 class HierarchicalRoleTest extends TestCase
 {
-    /**
-     * @covers \LmcRbac\Role\HierarchicalRole::addChild
-     */
     public function testCanAddChild(): void
     {
         $role = new HierarchicalRole('role');
@@ -44,9 +39,6 @@ class HierarchicalRoleTest extends TestCase
         $this->assertCount(1, $role->getChildren());
     }
 
-    /**
-     * @covers \LmcRbac\Role\HierarchicalRole::hasChildren
-     */
     public function testHasChildren(): void
     {
         $role = new HierarchicalRole('role');
@@ -58,9 +50,6 @@ class HierarchicalRoleTest extends TestCase
         $this->assertTrue($role->hasChildren());
     }
 
-    /**
-     * @covers \LmcRbac\Role\HierarchicalRole::getChildren
-     */
     public function testCanGetChildren(): void
     {
         $role = new HierarchicalRole('role');
@@ -76,9 +65,6 @@ class HierarchicalRoleTest extends TestCase
         $this->assertContainsOnlyInstancesOf(HierarchicalRoleInterface::class, $children);
     }
 
-    /**
-     * @covers \LmcRbac\Role\HierarchicalRole::addPermission
-     */
     public function testRoleCanAddPermission(): void
     {
         $role = new HierarchicalRole('php');
@@ -88,9 +74,6 @@ class HierarchicalRoleTest extends TestCase
         $this->assertTrue($role->hasPermission('delete'));
     }
 
-    /**
-     * @covers \LmcRbac\Role\HierarchicalRole::getPermissions
-     */
     public function testRoleCanGetPermissions(): void
     {
         $role = new HierarchicalRole('php');

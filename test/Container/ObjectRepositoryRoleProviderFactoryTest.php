@@ -28,11 +28,10 @@ use LmcRbac\Container\ObjectRepositoryRoleProviderFactory;
 use LmcRbac\Exception\RuntimeException;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\ObjectRepositoryRoleProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Container\ObjectRepositoryRoleProviderFactory
- */
+#[CoversClass('\LmcRbac\Container\ObjectRepositoryRoleProviderFactory')]
 class ObjectRepositoryRoleProviderFactoryTest extends TestCase
 {
     public function testFactoryUsingObjectRepository(): void
@@ -68,7 +67,7 @@ class ObjectRepositoryRoleProviderFactoryTest extends TestCase
         $objectManager->expects($this->once())
             ->method('getRepository')
             ->with('Role')
-            ->will($this->returnValue($this->getMockBuilder(ObjectRepository::class)->getMock()));
+            ->willReturn($this->getMockBuilder(ObjectRepository::class)->getMock());
 
         $container->setService('ObjectManager', $objectManager);
 

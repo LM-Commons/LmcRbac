@@ -22,11 +22,10 @@ declare(strict_types=1);
 namespace LmcRbacTest\Options;
 
 use LmcRbac\Options\ModuleOptions;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Options\ModuleOptions
- */
+#[CoversClass('\LmcRbac\Options\ModuleOptions')]
 class ModuleOptionsTest extends TestCase
 {
     public function testAssertModuleDefaultOptions(): void

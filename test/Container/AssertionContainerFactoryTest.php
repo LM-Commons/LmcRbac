@@ -24,11 +24,10 @@ namespace LmcRbacTest\Container;
 use Laminas\ServiceManager\ServiceManager;
 use LmcRbac\Assertion\AssertionContainer;
 use LmcRbac\Container\AssertionContainerFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Container\AssertionContainerFactory
- */
+#[CoversClass('\LmcRbac\Container\AssertionContainerFactory')]
 class AssertionContainerFactoryTest extends TestCase
 {
     public function testFactory(): void

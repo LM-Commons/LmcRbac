@@ -24,11 +24,10 @@ namespace LmcRbacTest\Container;
 use Laminas\ServiceManager\ServiceManager;
 use LmcRbac\Container\ModuleOptionsFactory;
 use LmcRbac\Options\ModuleOptions;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Container\ModuleOptionsFactory
- */
+#[CoversClass('\LmcRbac\Container\ModuleOptionsFactory')]
 class ModuleOptionsFactoryTest extends TestCase
 {
     public function testFactory(): void

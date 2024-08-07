@@ -27,13 +27,12 @@ use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Rbac;
 use LmcRbac\Service\AuthorizationService;
 use LmcRbac\Service\RoleServiceInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
-/**
- * @covers \LmcRbac\Container\AuthorizationServiceFactory
- */
+#[CoversClass('\LmcRbac\Container\AuthorizationServiceFactory')]
 class AuthorizationServiceFactoryTest extends TestCase
 {
     use ProphecyTrait;
