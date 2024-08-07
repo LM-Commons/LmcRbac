@@ -24,11 +24,10 @@ namespace LmcRbacTest\Role;
 use Doctrine\Persistence\ObjectRepository;
 use LmcRbac\Role\ObjectRepositoryRoleProvider;
 use LmcRbacTest\Asset\FlatRole;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Role\ObjectRepositoryRoleProvider
- */
+#[CoversClass('\LmcRbac\Role\ObjectRepositoryRoleProvider')]
 class ObjectRepositoryRoleProviderTest extends TestCase
 {
     public function testObjectRepositoryProviderGetRoles(): void
@@ -38,7 +37,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $provider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
         $result = [$memberRole];
 
-        $objectRepository->expects($this->once())->method('findBy')->will($this->returnValue($result));
+        $objectRepository->expects($this->once())->method('findBy')->willReturn($result);
 
         $this->assertEquals($result, $provider->getRoles(['member']));
     }
@@ -51,7 +50,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $result = [$memberRole];
 
         // note exactly once, consecutive call come from cache
-        $objectRepository->expects($this->exactly(1))->method('findBy')->will($this->returnValue($result));
+        $objectRepository->expects($this->exactly(1))->method('findBy')->willReturn($result);
 
         $provider->getRoles(['member']);
         $provider->getRoles(['member']);
@@ -65,7 +64,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $result = [$memberRole];
 
         // note exactly twice, as cache is cleared
-        $objectRepository->expects($this->exactly(2))->method('findBy')->will($this->returnValue($result));
+        $objectRepository->expects($this->exactly(2))->method('findBy')->willReturn($result);
 
         $provider->getRoles(['member']);
         $provider->clearRoleCache();
@@ -79,7 +78,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $provider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
         $result = [$memberRole];
 
-        $objectRepository->expects($this->once())->method('findBy')->will($this->returnValue($result));
+        $objectRepository->expects($this->once())->method('findBy')->willReturn($result);
 
         $this->expectException('LmcRbac\Exception\RoleNotFoundException');
         $this->expectExceptionMessage('Some roles were asked but could not be loaded from database: guest, admin');

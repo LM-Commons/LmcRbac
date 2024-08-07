@@ -25,11 +25,10 @@ use Laminas\ServiceManager\ServiceManager;
 use LmcRbac\Container\InMemoryRoleProviderFactory;
 use LmcRbac\Options\ModuleOptions;
 use LmcRbac\Role\InMemoryRoleProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LmcRbac\Container\InMemoryRoleProviderFactory
- */
+#[CoversClass('\LmcRbac\Container\InMemoryRoleProviderFactory')]
 class InMemoryRoleProviderFactoryTest extends TestCase
 {
     public function testFactoryUsingObjectRepository(): void

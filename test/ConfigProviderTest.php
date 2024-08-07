@@ -22,11 +22,10 @@ declare(strict_types=1);
 namespace LmcRbacTest;
 
 use LmcRbac\ConfigProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers  \LmcRbac\ConfigProvider
- */
+#[CoversClass('\LmcRbac\ConfigProvider')]
 class ConfigProviderTest extends TestCase
 {
     public function testProvidesExpectedConfiguration()

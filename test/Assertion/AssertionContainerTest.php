@@ -26,12 +26,11 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 use LmcRbac\Assertion\AssertionContainer;
 use LmcRbac\Assertion\AssertionInterface;
 use LmcRbacTest\Asset\SimpleAssertion;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 
-/**
- * @covers \LmcRbac\Assertion\AssertionContainer
- */
+#[CoversClass('\LmcRbac\Assertion\AssertionContainer')]
 class AssertionContainerTest extends TestCase
 {
     public function testValidationOfPluginSucceedsIfAssertionInterfaceIsImplemented()
