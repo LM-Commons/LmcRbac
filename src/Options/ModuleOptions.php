@@ -32,11 +32,6 @@ use Laminas\Stdlib\AbstractOptions;
 class ModuleOptions extends AbstractOptions
 {
     /**
-     * Key of the identity provider used to retrieve the identity
-     */
-    protected string $identityProvider = 'Lmc\Rbac\Identity\AuthenticationIdentityProvider';
-
-    /**
      * Guest role (used when no identity is found)
      *
      * @var string
@@ -70,27 +65,6 @@ class ModuleOptions extends AbstractOptions
         $this->__strictMode__ = false;
 
         parent::__construct($options);
-    }
-
-    /**
-     * Set the key of the identity provider used to retrieve the identity
-     *
-     * @param string $identityProvider
-     * @return void
-     */
-    public function setIdentityProvider(string $identityProvider): void
-    {
-        $this->identityProvider = $identityProvider;
-    }
-
-    /**
-     * Get the key of the identity provider used to retrieve the identity
-     *
-     * @return string
-     */
-    public function getIdentityProvider(): string
-    {
-        return $this->identityProvider;
     }
 
     /**
