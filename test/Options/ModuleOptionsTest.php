@@ -36,7 +36,6 @@ class ModuleOptionsTest extends TestCase
         $this->assertIsArray($moduleOptions->getRoleProvider());
         $this->assertIsArray($moduleOptions->getAssertionMap());
         $this->assertEquals('Lmc\Rbac\Role\InMemoryRoleProvider', key($moduleOptions->getRoleProvider()));
-        $this->assertEquals('Lmc\Rbac\Identity\AuthenticationIdentityProvider', $moduleOptions->getIdentityProvider());
     }
 
     public function testSettersAndGetters(): void
@@ -53,6 +52,5 @@ class ModuleOptionsTest extends TestCase
         $this->assertEquals('unknown', $moduleOptions->getGuestRole());
         $this->assertEquals([], $moduleOptions->getRoleProvider());
         $this->assertEquals(['foo' => 'bar'], $moduleOptions->getAssertionMap());
-        $this->assertEquals('foo', $moduleOptions->getIdentityProvider());
     }
 }

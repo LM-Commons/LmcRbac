@@ -32,6 +32,9 @@ class ConfigProviderTest extends TestCase
     {
         $provider = new ConfigProvider();
         $expected = [
+            'aliases' => [
+                \Lmc\Rbac\Assertion\AssertionPluginManagerInterface::class => \Lmc\Rbac\Assertion\AssertionPluginManager::class,
+            ],
             'factories' => [
                 \Lmc\Rbac\Assertion\AssertionPluginManager::class => \Lmc\Rbac\Assertion\AssertionPluginManagerFactory::class,
                 \Lmc\Rbac\Options\ModuleOptions::class => \Lmc\Rbac\Options\ModuleOptionsFactory::class,

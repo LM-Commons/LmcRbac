@@ -21,9 +21,6 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac;
 
-use Lmc\Rbac\Assertion\AssertionPluginManager;
-use Lmc\Rbac\Identity\AuthenticationIdentityProvider;
-
 /**
  * The configuration provider for the LmcRbac module
  *
@@ -42,6 +39,9 @@ final class ConfigProvider
     public function getDependencyConfig(): array
     {
         return [
+            'aliases' => [
+                \Lmc\Rbac\Assertion\AssertionPluginManagerInterface::class => \Lmc\Rbac\Assertion\AssertionPluginManager::class,
+            ],
             'factories' => [
                 \Lmc\Rbac\Assertion\AssertionPluginManager::class => \Lmc\Rbac\Assertion\AssertionPluginManagerFactory::class,
                 \Lmc\Rbac\Options\ModuleOptions::class => \Lmc\Rbac\Options\ModuleOptionsFactory::class,
