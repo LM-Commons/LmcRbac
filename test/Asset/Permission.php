@@ -18,7 +18,7 @@ declare(strict_types=1);
  * and is licensed under the MIT license.
  */
 
-namespace LmcRbacTest\Asset;
+namespace LmcTest\Rbac\Asset;
 
 use Doctrine\ORM\Mapping as ORM;
 use Lmc\Rbac\Permission\PermissionInterface;

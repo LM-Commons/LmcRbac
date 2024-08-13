@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Rbac;
+namespace LmcTest\Rbac\Rbac;
 
 use Lmc\Rbac\Rbac;
 use Lmc\Rbac\Role\Role;

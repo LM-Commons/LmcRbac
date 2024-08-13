@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Options;
+namespace LmcTest\Rbac\Options;
 
 use Lmc\Rbac\Options\ModuleOptions;
 use PHPUnit\Framework\Attributes\CoversClass;

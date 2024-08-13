@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Service;
+namespace LmcTest\Rbac\Service;
 
 use Lmc\Rbac\Assertion\AssertionContainerInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManager;

@@ -16,14 +16,14 @@
  * and is licensed under the MIT license.
  */
 
-namespace LmcRbacTest\Service;
+namespace LmcTest\Rbac\Service;
 
 /**
  * @author Eric Richer <eric.richer@vistoconsulting.com>
  */
 
 use Lmc\Rbac\Service\AuthorizationServiceInterface;
-use LmcRbacTest\Asset\DummyAuthorizationServiceClass;
+use LmcTest\Rbac\Asset\DummyAuthorizationServiceClass;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 

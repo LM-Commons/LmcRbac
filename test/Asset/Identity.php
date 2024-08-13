@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Asset;
+namespace LmcTest\Rbac\Asset;
 
 use Lmc\Rbac\Identity\IdentityInterface;
 

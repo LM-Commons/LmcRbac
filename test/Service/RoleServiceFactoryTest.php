@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Service;
+namespace LmcTest\Rbac\Service;
 
 use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Options\ModuleOptions;

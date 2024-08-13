@@ -18,7 +18,7 @@ declare(strict_types=1);
  * and is licensed under the MIT license.
  */
 
-namespace LmcRbacTest\Assertion;
+namespace LmcTest\Rbac\Assertion;
 
 use Lmc\Rbac\Assertion\AssertionContainerInterface;
 use Lmc\Rbac\Assertion\AssertionInterface;
@@ -27,7 +27,7 @@ use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Assertion\AssertionSet;
 use Lmc\Rbac\Exception\InvalidArgumentException;
 use Lmc\Rbac\Identity\IdentityInterface;
-use LmcRbacTest\Asset\SimpleAssertion;
+use LmcTest\Rbac\Asset\SimpleAssertion;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

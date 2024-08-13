@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Assertion;
+namespace LmcTest\Rbac\Assertion;
 
 use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Assertion\AssertionContainer;

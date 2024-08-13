@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Role;
+namespace LmcTest\Rbac\Role;
 
 use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Role\InMemoryRoleProviderFactory;

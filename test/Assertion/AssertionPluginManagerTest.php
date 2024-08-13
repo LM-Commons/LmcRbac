@@ -19,14 +19,14 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Assertion;
+namespace LmcTest\Rbac\Assertion;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Lmc\Rbac\Assertion\AssertionInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManager;
-use LmcRbacTest\Asset\SimpleAssertion;
+use LmcTest\Rbac\Asset\SimpleAssertion;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
