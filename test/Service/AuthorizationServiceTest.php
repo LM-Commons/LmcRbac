@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Service;
+namespace LmcTest\Rbac\Service;
 
 use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Assertion\AssertionPluginManager;
@@ -27,7 +27,6 @@ use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Assertion\AssertionSet;
 use Lmc\Rbac\Exception\InvalidArgumentException;
 use Lmc\Rbac\Identity\IdentityInterface;
-use Lmc\Rbac\Identity\IdentityProviderInterface;
 use Lmc\Rbac\Rbac;
 use Lmc\Rbac\RbacInterface;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
@@ -36,8 +35,8 @@ use Lmc\Rbac\Role\RoleInterface;
 use Lmc\Rbac\Service\AuthorizationService;
 use Lmc\Rbac\Service\RoleService;
 use Lmc\Rbac\Service\RoleServiceInterface;
-use LmcRbacTest\Asset\Identity;
-use LmcRbacTest\Asset\SimpleAssertion;
+use LmcTest\Rbac\Asset\Identity;
+use LmcTest\Rbac\Asset\SimpleAssertion;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -182,13 +181,6 @@ class AuthorizationServiceTest extends TestCase
         ];
 
         $identity = new Identity((array) $role);
-        /*
-        $identityProvider = $this->createMock(IdentityProviderInterface::class);
-
-        $identityProvider->expects($this->any())
-            ->method('getIdentity')
-            ->willReturn($identity);
-        */
         $roleService = new RoleService(new InMemoryRoleProvider($roleConfig), 'guest');
         $assertionPluginManager = new AssertionPluginManager(new ServiceManager(), $assertionPluginConfig);
         $authorizationService = new AuthorizationService(new Rbac(), $roleService, $assertionPluginManager, $assertions);

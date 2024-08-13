@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Role;
+namespace LmcTest\Rbac\Role;
 
 use Lmc\Rbac\Role\InMemoryRoleProvider;
 use Lmc\Rbac\Role\RoleInterface;

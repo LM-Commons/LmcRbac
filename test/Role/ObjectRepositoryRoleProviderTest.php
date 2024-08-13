@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Role;
+namespace LmcTest\Rbac\Role;
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
@@ -119,20 +119,20 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $objectManager = $this->getObjectManager();
         foreach ($rolesConfig as $name => $roleConfig) {
             if (is_array($roleConfig)) {
-                $role = new \LmcRbacTest\Asset\Role($name);
+                $role = new \LmcTest\Rbac\Asset\Role($name);
                 if (isset($roleConfig['permissions'])) {
                     foreach ($roleConfig['permissions'] as $permission) {
                         $role->addPermission($permission);
                     }
                 }
             } else {
-                $role = new \LmcRbacTest\Asset\Role($roleConfig);
+                $role = new \LmcTest\Rbac\Asset\Role($roleConfig);
             }
             $objectManager->persist($role);
         }
         $objectManager->flush();
 
-        $objectRepository = $objectManager->getRepository('LmcRbacTest\Asset\Role');
+        $objectRepository = $objectManager->getRepository('LmcTest\Rbac\Asset\Role');
         $objectRepositoryRoleProvider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
 
         $roles = $objectRepositoryRoleProvider->getRoles($rolesToCheck);
@@ -153,14 +153,14 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $objectManager = $this->getObjectManager();
 
         // Let's create a role
-        $adminRole = new \LmcRbacTest\Asset\Role('admin');
+        $adminRole = new \LmcTest\Rbac\Asset\Role('admin');
         $adminRole->addPermission('manage');
         $adminRole->addPermission('write');
         $adminRole->addPermission('read');
         $objectManager->persist($adminRole);
         $objectManager->flush();
 
-        $objectRepository = $objectManager->getRepository('LmcRbacTest\Asset\Role');
+        $objectRepository = $objectManager->getRepository('LmcTest\Rbac\Asset\Role');
 
         $objectRepositoryRoleProvider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
 
@@ -183,20 +183,20 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $objectManager = $this->getObjectManager();
 
         // Let's add some roles
-        $guestRole = new \LmcRbacTest\Asset\Role('guest');
+        $guestRole = new \LmcTest\Rbac\Asset\Role('guest');
         $objectManager->persist($guestRole);
 
-        $memberRole = new \LmcRbacTest\Asset\Role('member');
+        $memberRole = new \LmcTest\Rbac\Asset\Role('member');
         $memberRole->addChild($guestRole);
         $objectManager->persist($memberRole);
 
-        $adminRole = new \LmcRbacTest\Asset\Role('admin');
+        $adminRole = new \LmcTest\Rbac\Asset\Role('admin');
         $adminRole->addChild($memberRole);
         $objectManager->persist($adminRole);
 
         $objectManager->flush();
 
-        $objectRepository = $objectManager->getRepository('LmcRbacTest\Asset\Role');
+        $objectRepository = $objectManager->getRepository('LmcTest\Rbac\Asset\Role');
 
         $objectRepositoryRoleProvider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
 

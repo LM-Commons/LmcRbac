@@ -61,7 +61,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "LmcRbacTest\\": "test/"
+      "LmcTest\\Rbac\\": "test/"
     }
   },
   "extra": {

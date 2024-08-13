@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest\Service;
+namespace LmcTest\Rbac\Service;
 
 use Lmc\Rbac\Identity\IdentityInterface;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
@@ -27,7 +27,7 @@ use Lmc\Rbac\Role\Role;
 use Lmc\Rbac\Role\RoleInterface;
 use Lmc\Rbac\Role\RoleProviderInterface;
 use Lmc\Rbac\Service\RoleService;
-use LmcRbacTest\Asset\Identity;
+use LmcTest\Rbac\Asset\Identity;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
