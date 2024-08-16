@@ -23,6 +23,7 @@ namespace Lmc\Rbac\Service;
 
 use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Role\RoleProviderInterface;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -44,9 +45,13 @@ class RoleServiceFactory
         }
 
         $roleProviderName = key($roleProvider);
+        $roleProvider = $container->get($roleProviderName);
+        if (! $roleProvider instanceof RoleProviderInterface) {
+            throw new ServiceNotCreatedException(sprintf('Class %s does not implement LmcRbac\Role\RoleProviderInterface', $roleProviderName));
+        }
 
         return new RoleService(
-            $container->get($roleProviderName),
+            $roleProvider,
             $moduleOptions->getGuestRole()
         );
     }
