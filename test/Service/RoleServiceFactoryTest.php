@@ -72,4 +72,26 @@ class RoleServiceFactoryTest extends TestCase
         $factory = new RoleServiceFactory();
         $factory($container);
     }
+
+    public function testThrowExceptionIfInvalidRoleProvider(): void
+    {
+        $this->expectException(\Laminas\ServiceManager\Exception\ServiceNotCreatedException::class);
+
+        $options = new ModuleOptions([
+            'guest_role' => 'guest',
+            'role_provider' => [
+                'InvalidRoleProvider' => [],
+            ],
+        ]);
+
+        $container = new ServiceManager(['services' => [
+            ModuleOptions::class => $options,
+            'InvalidRoleProvider' => function () {
+                return new \stdClass();
+            }
+        ]]);
+
+        $factory = new RoleServiceFactory();
+        $factory($container);
+    }
 }

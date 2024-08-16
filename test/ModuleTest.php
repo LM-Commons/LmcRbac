@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace LmcRbacTest;
+namespace LmcTest;
 
 use Lmc\Rbac\ConfigProvider;
 use Lmc\Rbac\Module;
