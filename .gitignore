@@ -1,7 +1,6 @@
 vendor
-composer.lock
 .idea
-.php_cs.cache
+.phpcs*
 build
 .phpunit.result.cache
 /.phpunit.cache
