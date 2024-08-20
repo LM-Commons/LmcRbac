@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Options;
 
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Options\ModuleOptionsFactory;
@@ -41,5 +42,22 @@ class ModuleOptionsFactoryTest extends TestCase
         $options = $factory($serviceManager);
 
         $this->assertInstanceOf(ModuleOptions::class, $options);
+    }
+    public function testNoConfig(): void
+    {
+        $factory = new ModuleOptionsFactory();
+        $serviceManager = new ServiceManager();
+
+        $config = [];
+        $serviceManager->setService('config', $config);
+
+        $this->expectException(ServiceNotCreatedException::class);
+        $factory($serviceManager);
+
+        $config['lmc_rbac'] = 'foo';
+        $serviceManager->setService('config', $config);
+
+        $this->expectException(ServiceNotCreatedException::class);
+        $factory($serviceManager);
     }
 }

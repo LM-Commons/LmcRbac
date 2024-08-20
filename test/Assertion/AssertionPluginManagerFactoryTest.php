@@ -24,21 +24,23 @@ namespace LmcTest\Rbac\Assertion;
 use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Assertion\AssertionPluginManager;
 use Lmc\Rbac\Assertion\AssertionPluginManagerFactory;
+use Lmc\Rbac\Options\ModuleOptions;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 #[CoversClass(AssertionPluginManagerFactory::class)]
 class AssertionPluginManagerFactoryTest extends TestCase
 {
     public function testFactory(): void
     {
-        $serviceManager = new ServiceManager();
-        $serviceManager->setService('config', [
-            'lmc_rbac' => [
+        $moduleOptions = new ModuleOptions(
+            [
                 'assertion_manager' => [],
-            ],
-        ]);
-
+            ]
+        );
+        $serviceManager = new ServiceManager();
+        $serviceManager->setService(ModuleOptions::class, $moduleOptions);
         $factory       = new AssertionPluginManagerFactory();
         $pluginManager = $factory($serviceManager, AssertionPluginManager::class);
 

@@ -39,6 +39,7 @@ class ModuleOptionsTest extends TestCase
         $this->assertIsArray($moduleOptions->getRoleProvider());
         $this->assertIsArray($moduleOptions->getAssertionMap());
         $this->assertEquals(InMemoryRoleProvider::class, key($moduleOptions->getRoleProvider()));
+        $this->assertIsArray($moduleOptions->getAssertionManager());
     }
 
     public function testSettersAndGetters(): void
@@ -50,10 +51,14 @@ class ModuleOptionsTest extends TestCase
                 'foo' => 'bar',
             ],
             'identity_provider' => 'foo',
+            'assertion_manager' => [
+                'factories' => [],
+            ],
         ]);
 
         $this->assertEquals('unknown', $moduleOptions->getGuestRole());
         $this->assertEquals([], $moduleOptions->getRoleProvider());
         $this->assertEquals(['foo' => 'bar'], $moduleOptions->getAssertionMap());
+        $this->assertEquals(['factories' => []], $moduleOptions->getAssertionManager());
     }
 }

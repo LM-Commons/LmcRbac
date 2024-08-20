@@ -3,6 +3,7 @@
 namespace Lmc\Rbac\Assertion;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Lmc\Rbac\Options\ModuleOptions;
 use Psr\Container\ContainerInterface;
 
 class AssertionPluginManagerFactory implements FactoryInterface
@@ -13,8 +14,9 @@ class AssertionPluginManagerFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): AssertionPluginManager
     {
-        $config = $container->get('config')['lmc_rbac']['assertion_manager'];
+        /** @var ModuleOptions $config */
+        $config = $container->get(ModuleOptions::class);
 
-        return new AssertionPluginManager($container, $config);
+        return new AssertionPluginManager($container, $config->getAssertionManager());
     }
 }
