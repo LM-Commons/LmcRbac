@@ -69,7 +69,7 @@ return [
          *     'AssertOwnerCanEditArticle' => \My\Namespace\AssertOwnerCanEditArticleFactory::class
          *   ],
          */
-        'assertion_map' => [
-        ],
+        // 'assertion_map' => [],
+        // 'assertion_manager' => [],
     ],
 ];
