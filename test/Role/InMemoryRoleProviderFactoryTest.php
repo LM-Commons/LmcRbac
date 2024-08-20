@@ -22,13 +22,13 @@ declare(strict_types=1);
 namespace LmcTest\Rbac\Role;
 
 use Laminas\ServiceManager\ServiceManager;
-use Lmc\Rbac\Role\InMemoryRoleProviderFactory;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
+use Lmc\Rbac\Role\InMemoryRoleProviderFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass('\Lmc\Rbac\Role\InMemoryRoleProviderFactory')]
+#[CoversClass(InMemoryRoleProviderFactory::class)]
 class InMemoryRoleProviderFactoryTest extends TestCase
 {
     public function testFactoryUsingObjectRepository(): void
@@ -37,12 +37,12 @@ class InMemoryRoleProviderFactoryTest extends TestCase
         $container->setService(ModuleOptions::class, new ModuleOptions([
             'role_provider' => [
                 InMemoryRoleProvider::class => [
-                    'admin' => [
-                        'children' => ['member'],
+                    'admin'  => [
+                        'children'    => ['member'],
                         'permissions' => ['delete'],
                     ],
                     'member' => [
-                        'children' => ['guest'],
+                        'children'    => ['guest'],
                         'permissions' => ['write'],
                     ],
                     'guest',

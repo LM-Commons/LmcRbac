@@ -26,6 +26,8 @@ use Lmc\Rbac\Permission\PermissionInterface;
 use Lmc\Rbac\Role\RoleInterface;
 use Traversable;
 
+use function iterator_to_array;
+
 /**
  * Rbac object. It is used to check a permission against roles
  */
@@ -33,10 +35,6 @@ class Rbac implements RbacInterface
 {
     /**
      * Determines if access is granted by checking the roles for permission.
-     *
-     * @param RoleInterface|iterable $roles
-     * @param string|PermissionInterface $permission
-     * @return bool
      */
     public function isGranted(RoleInterface|iterable $roles, string|PermissionInterface $permission): bool
     {
@@ -49,7 +47,7 @@ class Rbac implements RbacInterface
         }
 
         foreach ($this->flattenRoles($roles) as $role) {
-            /* @var RoleInterface $role */
+            /** @var RoleInterface $role */
             if ($role->hasPermission($permission)) {
                 return true;
             }

@@ -21,12 +21,15 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Role;
 
+use Doctrine\DBAL\Driver\PDO\SQLite\Driver;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
+use Generator;
+use Lmc\Rbac\Exception\RoleNotFoundException;
 use Lmc\Rbac\Role\ObjectRepositoryRoleProvider;
 use Lmc\Rbac\Role\Role;
 use Lmc\Rbac\Role\RoleInterface;
@@ -34,21 +37,23 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass('\Lmc\Rbac\Role\ObjectRepositoryRoleProvider')]
+use function count;
+use function is_array;
+
+#[CoversClass(ObjectRepositoryRoleProvider::class)]
 class ObjectRepositoryRoleProviderTest extends TestCase
 {
-
     public static function roleProvider(): array
     {
         return [
             'one-role-flat' => [
-                'rolesConfig' => [
+                'rolesConfig'  => [
                     'admin',
                 ],
                 'rolesToCheck' => ['admin'],
             ],
-            '2-roles-flat' => [
-                'rolesConfig' => [
+            '2-roles-flat'  => [
+                'rolesConfig'  => [
                     'admin',
                     'member',
                 ],
@@ -60,9 +65,9 @@ class ObjectRepositoryRoleProviderTest extends TestCase
     public function testObjectRepositoryProviderGetRoles(): void
     {
         $objectRepository = $this->createMock(ObjectRepository::class);
-        $memberRole = new Role('member');
-        $provider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
-        $result = [$memberRole];
+        $memberRole       = new Role('member');
+        $provider         = new ObjectRepositoryRoleProvider($objectRepository, 'name');
+        $result           = [$memberRole];
 
         $objectRepository->expects($this->once())->method('findBy')->willReturn($result);
 
@@ -72,9 +77,9 @@ class ObjectRepositoryRoleProviderTest extends TestCase
     public function testRoleCacheOnConsecutiveCalls(): void
     {
         $objectRepository = $this->createMock(ObjectRepository::class);
-        $memberRole = new Role('member');
-        $provider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
-        $result = [$memberRole];
+        $memberRole       = new Role('member');
+        $provider         = new ObjectRepositoryRoleProvider($objectRepository, 'name');
+        $result           = [$memberRole];
 
         // note exactly once, consecutive call come from cache
         $objectRepository->expects($this->exactly(1))->method('findBy')->willReturn($result);
@@ -86,9 +91,9 @@ class ObjectRepositoryRoleProviderTest extends TestCase
     public function testClearRoleCache(): void
     {
         $objectRepository = $this->createMock(ObjectRepository::class);
-        $memberRole = new Role('member');
-        $provider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
-        $result = [$memberRole];
+        $memberRole       = new Role('member');
+        $provider         = new ObjectRepositoryRoleProvider($objectRepository, 'name');
+        $result           = [$memberRole];
 
         // note exactly twice, as cache is cleared
         $objectRepository->expects($this->exactly(2))->method('findBy')->willReturn($result);
@@ -101,13 +106,13 @@ class ObjectRepositoryRoleProviderTest extends TestCase
     public function testThrowExceptionIfAskedRoleIsNotFound(): void
     {
         $objectRepository = $this->createMock(ObjectRepository::class);
-        $memberRole = new Role('member');
-        $provider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
-        $result = [$memberRole];
+        $memberRole       = new Role('member');
+        $provider         = new ObjectRepositoryRoleProvider($objectRepository, 'name');
+        $result           = [$memberRole];
 
         $objectRepository->expects($this->once())->method('findBy')->willReturn($result);
 
-        $this->expectException('Lmc\Rbac\Exception\RoleNotFoundException');
+        $this->expectException(RoleNotFoundException::class);
         $this->expectExceptionMessage('Some roles were asked but could not be loaded from database: guest, admin');
 
         $provider->getRoles(['guest', 'admin', 'member']);
@@ -132,7 +137,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         }
         $objectManager->flush();
 
-        $objectRepository = $objectManager->getRepository('LmcTest\Rbac\Asset\Role');
+        $objectRepository             = $objectManager->getRepository(\LmcTest\Rbac\Asset\Role::class);
         $objectRepositoryRoleProvider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
 
         $roles = $objectRepositoryRoleProvider->getRoles($rolesToCheck);
@@ -160,7 +165,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $objectManager->persist($adminRole);
         $objectManager->flush();
 
-        $objectRepository = $objectManager->getRepository('LmcTest\Rbac\Asset\Role');
+        $objectRepository = $objectManager->getRepository(\LmcTest\Rbac\Asset\Role::class);
 
         $objectRepositoryRoleProvider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
 
@@ -170,7 +175,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $this->assertCount(1, $roles);
         $this->assertIsArray($roles);
 
-        $this->assertInstanceOf('Lmc\Rbac\Role\RoleInterface', $roles[0]);
+        $this->assertInstanceOf(RoleInterface::class, $roles[0]);
         $this->assertEquals('admin', $roles[0]->getName());
         $this->assertTrue($roles[0]->hasPermission('manage'));
         $this->assertTrue($roles[0]->hasPermission('read'));
@@ -196,7 +201,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
 
         $objectManager->flush();
 
-        $objectRepository = $objectManager->getRepository('LmcTest\Rbac\Asset\Role');
+        $objectRepository = $objectManager->getRepository(\LmcTest\Rbac\Asset\Role::class);
 
         $objectRepositoryRoleProvider = new ObjectRepositoryRoleProvider($objectRepository, 'name');
 
@@ -206,13 +211,13 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $this->assertCount(1, $roles);
         $this->assertIsArray($roles);
 
-        $this->assertInstanceOf('Lmc\Rbac\Role\RoleInterface', $roles[0]);
+        $this->assertInstanceOf(RoleInterface::class, $roles[0]);
         $this->assertEquals('admin', $roles[0]->getName());
 
         $childRolesString = '';
 
         foreach ($this->flattenRoles($roles[0]->getChildren()) as $childRole) {
-            $this->assertInstanceOf('Lmc\Rbac\Role\RoleInterface', $childRole);
+            $this->assertInstanceOf(RoleInterface::class, $childRole);
             $childRolesString .= $childRole->getName();
         }
 
@@ -221,15 +226,15 @@ class ObjectRepositoryRoleProviderTest extends TestCase
 
     private function getObjectManager(): ObjectManager|EntityManager
     {
-        $config = ORMSetup::createAttributeMetadataConfiguration(
+        $config        = ORMSetup::createAttributeMetadataConfiguration(
             paths: [__DIR__ . '/../Asset'],
             isDevMode: true
         );
-        $connection = DriverManager::getConnection([
-            'driverClass' => 'Doctrine\DBAL\Driver\PDO\SQLite\Driver',
-            'path' => null,
-            'memory' => true,
-            'dbname' => 'test',
+        $connection    = DriverManager::getConnection([
+            'driverClass' => Driver::class,
+            'path'        => null,
+            'memory'      => true,
+            'dbname'      => 'test',
         ], $config);
         $entityManager = new EntityManager($connection, $config);
 
@@ -240,7 +245,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         return $objectManager;
     }
 
-    private function flattenRoles(iterable $roles): \Generator
+    private function flattenRoles(iterable $roles): Generator
     {
         foreach ($roles as $role) {
             yield $role;

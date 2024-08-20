@@ -18,18 +18,10 @@
 
 namespace Lmc\Rbac\Service;
 
-/**
- * @author Eric Richer <eric.richer@vistoconsulting.com>
- *
- */
-
 interface AuthorizationServiceAwareInterface
 {
     /**
      * Set the AuthorizationService
-     *
-     * @param   AuthorizationServiceInterface $authorizationService
-     * @return  void
      */
     public function setAuthorizationService(AuthorizationServiceInterface $authorizationService): void;
 }

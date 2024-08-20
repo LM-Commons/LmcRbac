@@ -28,16 +28,13 @@ use Psr\Container\ContainerInterface;
 
 /**
  * Factory used to create an object repository role provider
- *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 class ObjectRepositoryRoleProviderFactory
 {
     public function __invoke(ContainerInterface $container): ObjectRepositoryRoleProvider
     {
         $moduleOptions = $container->get(ModuleOptions::class);
-        $options = $moduleOptions->getRoleProvider()[ObjectRepositoryRoleProvider::class] ?? [];
+        $options       = $moduleOptions->getRoleProvider()[ObjectRepositoryRoleProvider::class] ?? [];
 
         if (! isset($options['role_name_property'])) {
             throw new Exception\RuntimeException('The "role_name_property" option is missing');
@@ -50,7 +47,7 @@ class ObjectRepositoryRoleProviderFactory
         }
 
         if (isset($options['object_manager'], $options['class_name'])) {
-            $objectManager = $container->get($options['object_manager']);
+            $objectManager    = $container->get($options['object_manager']);
             $objectRepository = $objectManager->getRepository($options['class_name']);
 
             return new ObjectRepositoryRoleProvider($objectRepository, $options['role_name_property']);

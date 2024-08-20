@@ -27,16 +27,13 @@ use Lmc\Rbac\Permission\PermissionInterface;
 /**
  * Interface that you can implement for dynamic assertions
  *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @author  Aeneas Rekkas
- * @author  Daniel Gimenes  <daniel@danielgimenes.com.br>
  * @licence MIT
  */
 interface AssertionInterface
 {
     public function assert(
         PermissionInterface|string $permission,
-        IdentityInterface $identity = null,
+        ?IdentityInterface $identity = null,
         mixed $context = null
     ): bool;
 }

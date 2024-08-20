@@ -22,14 +22,12 @@ declare(strict_types=1);
 namespace LmcTest\Rbac\Assertion;
 
 use Laminas\ServiceManager\ServiceManager;
-use Lmc\Rbac\Assertion\AssertionContainer;
-use Lmc\Rbac\Assertion\AssertionContainerFactory;
 use Lmc\Rbac\Assertion\AssertionPluginManager;
 use Lmc\Rbac\Assertion\AssertionPluginManagerFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass('\Lmc\Rbac\Assertion\AssertionPluginManagerFactory')]
+#[CoversClass(AssertionPluginManagerFactory::class)]
 class AssertionPluginManagerFactoryTest extends TestCase
 {
     public function testFactory(): void
@@ -41,7 +39,7 @@ class AssertionPluginManagerFactoryTest extends TestCase
             ],
         ]);
 
-        $factory = new AssertionPluginManagerFactory();
+        $factory       = new AssertionPluginManagerFactory();
         $pluginManager = $factory($serviceManager, AssertionPluginManager::class);
 
         $this->assertInstanceOf(AssertionPluginManager::class, $pluginManager);

@@ -21,6 +21,22 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac;
 
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use Lmc\Rbac\Assertion\AssertionPluginManager;
+use Lmc\Rbac\Assertion\AssertionPluginManagerFactory;
+use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
+use Lmc\Rbac\Options\ModuleOptions;
+use Lmc\Rbac\Options\ModuleOptionsFactory;
+use Lmc\Rbac\Rbac;
+use Lmc\Rbac\Role\InMemoryRoleProvider;
+use Lmc\Rbac\Role\InMemoryRoleProviderFactory;
+use Lmc\Rbac\Role\ObjectRepositoryRoleProvider;
+use Lmc\Rbac\Role\ObjectRepositoryRoleProviderFactory;
+use Lmc\Rbac\Service\AuthorizationServiceFactory;
+use Lmc\Rbac\Service\AuthorizationServiceInterface;
+use Lmc\Rbac\Service\RoleServiceFactory;
+use Lmc\Rbac\Service\RoleServiceInterface;
+
 /**
  * The configuration provider for the LmcRbac module
  *
@@ -32,24 +48,24 @@ final class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencyConfig(),
-            'lmc_rbac' => $this->getModuleConfig(),
+            'lmc_rbac'     => $this->getModuleConfig(),
         ];
     }
 
     public function getDependencyConfig(): array
     {
         return [
-            'aliases' => [
-                \Lmc\Rbac\Assertion\AssertionPluginManagerInterface::class => \Lmc\Rbac\Assertion\AssertionPluginManager::class,
+            'aliases'   => [
+                AssertionPluginManagerInterface::class => AssertionPluginManager::class,
             ],
             'factories' => [
-                \Lmc\Rbac\Assertion\AssertionPluginManager::class => \Lmc\Rbac\Assertion\AssertionPluginManagerFactory::class,
-                \Lmc\Rbac\Options\ModuleOptions::class => \Lmc\Rbac\Options\ModuleOptionsFactory::class,
-                \Lmc\Rbac\Role\InMemoryRoleProvider::class => \Lmc\Rbac\Role\InMemoryRoleProviderFactory::class,
-                \Lmc\Rbac\Role\ObjectRepositoryRoleProvider::class => \Lmc\Rbac\Role\ObjectRepositoryRoleProviderFactory::class,
-                \Lmc\Rbac\Service\AuthorizationServiceInterface::class => \Lmc\Rbac\Service\AuthorizationServiceFactory::class,
-                \Lmc\Rbac\Service\RoleServiceInterface::class => \Lmc\Rbac\Service\RoleServiceFactory::class,
-                \Lmc\Rbac\Rbac::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
+                AssertionPluginManager::class        => AssertionPluginManagerFactory::class,
+                ModuleOptions::class                 => ModuleOptionsFactory::class,
+                InMemoryRoleProvider::class          => InMemoryRoleProviderFactory::class,
+                ObjectRepositoryRoleProvider::class  => ObjectRepositoryRoleProviderFactory::class,
+                AuthorizationServiceInterface::class => AuthorizationServiceFactory::class,
+                RoleServiceInterface::class          => RoleServiceFactory::class,
+                Rbac::class                          => InvokableFactory::class,
             ],
         ];
     }

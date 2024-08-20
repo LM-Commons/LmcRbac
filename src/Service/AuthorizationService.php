@@ -28,12 +28,12 @@ use Lmc\Rbac\Identity\IdentityInterface;
 use Lmc\Rbac\Permission\PermissionInterface;
 use Lmc\Rbac\RbacInterface;
 
+use function array_merge;
+use function is_array;
+
 /**
  * Authorization service is a simple service that internally uses Rbac to check if identity is
  * granted a permission
- *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 class AuthorizationService implements AuthorizationServiceInterface
 {
@@ -43,9 +43,7 @@ class AuthorizationService implements AuthorizationServiceInterface
 
     private AssertionPluginManagerInterface $assertionPluginManager;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private array $assertions;
 
     public function __construct(
@@ -54,17 +52,16 @@ class AuthorizationService implements AuthorizationServiceInterface
         AssertionPluginManagerInterface $assertionPluginManager,
         array $assertions = []
     ) {
-        $this->rbac = $rbac;
-        $this->roleService = $roleService;
+        $this->rbac                   = $rbac;
+        $this->roleService            = $roleService;
         $this->assertionPluginManager = $assertionPluginManager;
-        $this->assertions = $assertions;
+        $this->assertions             = $assertions;
     }
 
     /**
      * Set assertions, either merging or replacing (default)
+     *
      * @param array $assertions
-     * @param bool $merge
-     * @return void
      */
     public function setAssertions(array $assertions, bool $merge = false): void
     {
@@ -75,19 +72,16 @@ class AuthorizationService implements AuthorizationServiceInterface
 
     /**
      * Set assertion for a given permission
-     * @param PermissionInterface|string $permission
-     * @param AssertionInterface|callable|string $assertion
-     * @return void
      */
-    public function setAssertion(PermissionInterface|string $permission, AssertionInterface|callable|string $assertion): void
-    {
+    public function setAssertion(
+        PermissionInterface|string $permission,
+        AssertionInterface|callable|string $assertion
+    ): void {
         $this->assertions[(string) $permission] = $assertion;
     }
 
     /**
      * Check if there are assertions for the permission
-     * @param PermissionInterface|string $permission
-     * @return bool
      */
     public function hasAssertion(PermissionInterface|string $permission): bool
     {
@@ -96,6 +90,7 @@ class AuthorizationService implements AuthorizationServiceInterface
 
     /**
      * Get the assertions
+     *
      * @return array
      */
     public function getAssertions(): array
@@ -105,16 +100,17 @@ class AuthorizationService implements AuthorizationServiceInterface
 
     /**
      * Get the assertions for the given permission
-     * @param PermissionInterface|string $permission
-     * @return AssertionInterface|callable|string|null
      */
     public function getAssertion(PermissionInterface|string $permission): AssertionInterface|callable|string|null
     {
-        return $this->hasAssertion(($permission)) ? $this->assertions[(string) $permission] : null;
+        return $this->hasAssertion($permission) ? $this->assertions[(string) $permission] : null;
     }
 
-    public function isGranted(IdentityInterface|null $identity, string|PermissionInterface $permission, mixed $context = null): bool
-    {
+    public function isGranted(
+        IdentityInterface|null $identity,
+        string|PermissionInterface $permission,
+        mixed $context = null
+    ): bool {
         $roles = $this->roleService->getIdentityRoles($identity, $context);
 
         if (empty($roles)) {
@@ -129,7 +125,7 @@ class AuthorizationService implements AuthorizationServiceInterface
             return true;
         }
 
-        if (\is_array($this->assertions[(string) $permission])) {
+        if (is_array($this->assertions[(string) $permission])) {
             $permissionAssertions = $this->assertions[(string) $permission];
         } else {
             $permissionAssertions = [$this->assertions[(string) $permission]];

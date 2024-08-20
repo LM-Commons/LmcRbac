@@ -29,19 +29,12 @@ use Lmc\Rbac\Permission\PermissionInterface;
  */
 class Role implements RoleInterface
 {
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private array $permissions = [];
 
-    /**
-     * @var array|RoleInterface[]
-     */
+    /** @var array|RoleInterface[] */
     private array $children = [];
 
     public function __construct(string $name)

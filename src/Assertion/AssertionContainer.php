@@ -26,9 +26,9 @@ use Laminas\ServiceManager\AbstractPluginManager;
 /**
  * Plugin manager to create assertions
  *
- * @author  Aeneas Rekkas
- * @licence MIT
  * @deprecated Use AssertionPluginManager
+ *
+ * @licence MIT
  * @codeCoverageIgnore
  */
 final class AssertionContainer extends AbstractPluginManager implements AssertionContainerInterface
@@ -36,9 +36,9 @@ final class AssertionContainer extends AbstractPluginManager implements Assertio
     protected $instanceOf = AssertionInterface::class;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function get($name, array $options = null): AssertionInterface
+    public function get($name, ?array $options = null): AssertionInterface
     {
         return parent::get($name);
     }

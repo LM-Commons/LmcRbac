@@ -21,14 +21,10 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Options;
 
-use Lmc\Rbac\Options\ModuleOptions;
 use Psr\Container\ContainerInterface;
 
 /**
  * Factory for the module options
- *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 class ModuleOptionsFactory
 {

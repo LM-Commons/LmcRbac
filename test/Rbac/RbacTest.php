@@ -21,12 +21,13 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Rbac;
 
+use ArrayIterator;
 use Lmc\Rbac\Rbac;
 use Lmc\Rbac\Role\Role;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass('\Lmc\Rbac\Rbac')]
+#[CoversClass(Rbac::class)]
 class RbacTest extends TestCase
 {
     public function testCanConvertSingleRole(): void
@@ -53,7 +54,7 @@ class RbacTest extends TestCase
         $role2->addPermission('permission');
 
         $roles = [$role1, $role2];
-        $rbac = new Rbac();
+        $rbac  = new Rbac();
 
         $this->assertTrue($rbac->isGranted($roles, 'permission'));
     }
@@ -64,7 +65,7 @@ class RbacTest extends TestCase
         $role2 = new Role('Bar');
 
         $roles = [$role1, $role2];
-        $rbac = new \Lmc\Rbac\Rbac();
+        $rbac  = new Rbac();
 
         $this->assertFalse($rbac->isGranted($roles, 'permission'));
     }
@@ -77,7 +78,7 @@ class RbacTest extends TestCase
         $parentRole = new Role('Foo');
         $parentRole->addChild($childRole);
 
-        $rbac = new \Lmc\Rbac\Rbac();
+        $rbac = new Rbac();
 
         $this->assertTrue($rbac->isGranted($parentRole, 'permission'));
     }
@@ -101,8 +102,8 @@ class RbacTest extends TestCase
         $role2 = new Role('Bar');
         $role2->addPermission('permission');
 
-        $roles = new \ArrayIterator([$role1, $role2]);
-        $rbac = new Rbac();
+        $roles = new ArrayIterator([$role1, $role2]);
+        $rbac  = new Rbac();
 
         $this->assertTrue($rbac->isGranted($roles, 'permission'));
     }

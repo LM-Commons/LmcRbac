@@ -27,8 +27,6 @@ namespace Lmc\Rbac\Role;
  * Data can come from anywhere. LmcRbac is bundled with two providers that allow to load roles from database
  * or from memory
  *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 interface RoleProviderInterface
 {

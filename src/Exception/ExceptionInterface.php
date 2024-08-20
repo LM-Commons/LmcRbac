@@ -24,8 +24,6 @@ namespace Lmc\Rbac\Exception;
 /**
  * Base exception interface for LmcRbac
  *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 interface ExceptionInterface
 {

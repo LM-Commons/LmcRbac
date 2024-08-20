@@ -1,5 +1,4 @@
 <?php
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,8 +28,6 @@ use Psr\Container\ContainerInterface;
 /**
  * Factory to create the role service
  *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 class RoleServiceFactory
 {
