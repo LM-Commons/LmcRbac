@@ -26,9 +26,9 @@ use Psr\Container\ContainerInterface;
 /**
  * Factory to create a assertion plugin manager
  *
- * @author  Aeneas Rekkas
- * @licence MIT
  * @deprecated Use AssertionPluginManagerFactory
+ *
+ * @licence MIT
  * @codeCoverageIgnore
  */
 class AssertionContainerFactory

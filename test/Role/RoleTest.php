@@ -26,7 +26,7 @@ use Lmc\Rbac\Role\RoleInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass('\Lmc\Rbac\Role\Role')]
+#[CoversClass(Role::class)]
 class RoleTest extends TestCase
 {
     public function testSetNameByConstructor(): void
@@ -73,12 +73,11 @@ class RoleTest extends TestCase
         $role->addChild($childRole);
         $this->assertTrue($role->hasPermission('bar'));
         $this->assertFalse($role->hasPermission('baz'));
-
     }
 
     public function testCanAddChild(): void
     {
-        $role = new Role('role');
+        $role  = new Role('role');
         $child = new Role('child');
 
         $role->addChild($child);
@@ -99,7 +98,7 @@ class RoleTest extends TestCase
 
     public function testCanGetChildren(): void
     {
-        $role = new Role('role');
+        $role   = new Role('role');
         $child1 = new Role('child 1');
         $child2 = new Role('child 2');
 

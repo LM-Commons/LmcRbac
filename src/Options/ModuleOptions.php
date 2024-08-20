@@ -22,19 +22,16 @@ declare(strict_types=1);
 namespace Lmc\Rbac\Options;
 
 use Laminas\Stdlib\AbstractOptions;
+use Lmc\Rbac\Role\InMemoryRoleProvider;
 
 /**
  * Options for LmcRbac module
  *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 class ModuleOptions extends AbstractOptions
 {
     /**
      * Guest role (used when no identity is found)
-     *
-     * @var string
      */
     protected string $guestRole = 'guest';
 
@@ -52,7 +49,7 @@ class ModuleOptions extends AbstractOptions
      * @var array
      */
     protected array $roleProvider = [
-        'Lmc\Rbac\Role\InMemoryRoleProvider' => [],
+        InMemoryRoleProvider::class => [],
     ];
 
     /**
@@ -71,7 +68,6 @@ class ModuleOptions extends AbstractOptions
      * Set the assertions options
      *
      * @param array $assertionMap
-     * @return void
      */
     public function setAssertionMap(array $assertionMap): void
     {
@@ -90,9 +86,6 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * Set the guest role (used when no identity is found)
-     *
-     * @param string $guestRole
-     * @return void
      */
     public function setGuestRole(string $guestRole): void
     {
@@ -101,8 +94,6 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * Get the guest role (used when no identity is found)
-     *
-     * @return string
      */
     public function getGuestRole(): string
     {

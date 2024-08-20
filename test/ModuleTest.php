@@ -19,23 +19,23 @@
 
 declare(strict_types=1);
 
-namespace LmcTest;
+namespace LmcTest\Rbac;
 
 use Lmc\Rbac\ConfigProvider;
 use Lmc\Rbac\Module;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass('\Lmc\Rbac\Module')]
+#[CoversClass(Module::class)]
 class ModuleTest extends TestCase
 {
     public function testProvidesExpectedConfiguration()
     {
         $provider = new ConfigProvider();
-        $module = new Module();
+        $module   = new Module();
         $expected = [
             'service_manager' => $provider->getDependencyConfig(),
-            'lmc_rbac' => $provider->getModuleConfig(),
+            'lmc_rbac'        => $provider->getModuleConfig(),
         ];
         $this->assertEquals($expected, $module->getConfig());
     }

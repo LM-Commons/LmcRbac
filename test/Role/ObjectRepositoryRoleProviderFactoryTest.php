@@ -24,14 +24,14 @@ namespace LmcTest\Rbac\Role;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 use Laminas\ServiceManager\ServiceManager;
-use Lmc\Rbac\Role\ObjectRepositoryRoleProviderFactory;
 use Lmc\Rbac\Exception\RuntimeException;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Role\ObjectRepositoryRoleProvider;
+use Lmc\Rbac\Role\ObjectRepositoryRoleProviderFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass('\Lmc\Rbac\Role\ObjectRepositoryRoleProviderFactory')]
+#[CoversClass(ObjectRepositoryRoleProviderFactory::class)]
 class ObjectRepositoryRoleProviderFactoryTest extends TestCase
 {
     public function testFactoryUsingObjectRepository(): void
@@ -41,7 +41,7 @@ class ObjectRepositoryRoleProviderFactoryTest extends TestCase
             'role_provider' => [
                 ObjectRepositoryRoleProvider::class => [
                     'role_name_property' => 'name',
-                    'object_repository' => 'RoleObjectRepository',
+                    'object_repository'  => 'RoleObjectRepository',
                 ],
             ],
         ]));
@@ -58,8 +58,8 @@ class ObjectRepositoryRoleProviderFactoryTest extends TestCase
             'role_provider' => [
                 ObjectRepositoryRoleProvider::class => [
                     'role_name_property' => 'name',
-                    'object_manager' => 'ObjectManager',
-                    'class_name' => 'Role',
+                    'object_manager'     => 'ObjectManager',
+                    'class_name'         => 'Role',
                 ],
             ],
         ]));

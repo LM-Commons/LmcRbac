@@ -26,8 +26,6 @@ use Lmc\Rbac\Role\RoleInterface;
 /**
  * Interface for an identity
  *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 interface IdentityInterface
 {

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -21,19 +20,13 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Service;
 
-use Lmc\Rbac\Assertion\AssertionContainerInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Rbac;
-use Lmc\Rbac\Service\AuthorizationService;
-use Lmc\Rbac\Service\RoleServiceInterface;
 use Psr\Container\ContainerInterface;
 
 /**
  * Factory to create the authorization service
- *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 class AuthorizationServiceFactory
 {

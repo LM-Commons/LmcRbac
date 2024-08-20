@@ -24,27 +24,23 @@ namespace Lmc\Rbac\Role;
 use Doctrine\Persistence\ObjectRepository;
 use Lmc\Rbac\Exception\RoleNotFoundException;
 
+use function array_diff;
+use function count;
+use function implode;
+use function sprintf;
+
 /**
  * Role provider that uses Doctrine object repository to fetch roles
- *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 final class ObjectRepositoryRoleProvider implements RoleProviderInterface
 {
-    /**
-     * @var ObjectRepository
-     */
+    /** @var ObjectRepository */
     private $objectRepository;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $roleNameProperty;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $roleCache = [];
 
     public function __construct(ObjectRepository $objectRepository, string $roleNameProperty)

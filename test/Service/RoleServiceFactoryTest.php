@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Service;
 
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
@@ -28,16 +29,17 @@ use Lmc\Rbac\Service\RoleService;
 use Lmc\Rbac\Service\RoleServiceFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
-#[CoversClass('\Lmc\Rbac\Service\RoleServiceFactory')]
+#[CoversClass(RoleServiceFactory::class)]
 class RoleServiceFactoryTest extends TestCase
 {
     public function testCanCreateRoleService(): void
     {
         $options = new ModuleOptions([
-            'guest_role' => 'guest',
+            'guest_role'    => 'guest',
             'role_provider' => [
-                \Lmc\Rbac\Role\InMemoryRoleProvider::class => [
+                InMemoryRoleProvider::class => [
                     'foo',
                 ],
             ],
@@ -45,29 +47,31 @@ class RoleServiceFactoryTest extends TestCase
 
         $container = new ServiceManager([
             'services' => [
-                ModuleOptions::class => $options,
+                ModuleOptions::class        => $options,
                 InMemoryRoleProvider::class => new InMemoryRoleProvider([]),
             ],
         ]);
 
-        $factory = new RoleServiceFactory();
+        $factory     = new RoleServiceFactory();
         $roleService = $factory($container, RoleService::class);
 
-        $this->assertInstanceOf(\Lmc\Rbac\Service\RoleService::class, $roleService);
+        $this->assertInstanceOf(RoleService::class, $roleService);
     }
 
     public function testThrowExceptionIfNoRoleProvider(): void
     {
-        $this->expectException(\Laminas\ServiceManager\Exception\ServiceNotCreatedException::class);
+        $this->expectException(ServiceNotCreatedException::class);
 
         $options = new ModuleOptions([
-            'guest_role' => 'guest',
+            'guest_role'    => 'guest',
             'role_provider' => [],
         ]);
 
-        $container = new ServiceManager(['services' => [
-            ModuleOptions::class => $options,
-        ]]);
+        $container = new ServiceManager([
+            'services' => [
+                ModuleOptions::class => $options,
+            ],
+        ]);
 
         $factory = new RoleServiceFactory();
         $factory($container);
@@ -75,21 +79,23 @@ class RoleServiceFactoryTest extends TestCase
 
     public function testThrowExceptionIfInvalidRoleProvider(): void
     {
-        $this->expectException(\Laminas\ServiceManager\Exception\ServiceNotCreatedException::class);
+        $this->expectException(ServiceNotCreatedException::class);
 
         $options = new ModuleOptions([
-            'guest_role' => 'guest',
+            'guest_role'    => 'guest',
             'role_provider' => [
                 'InvalidRoleProvider' => [],
             ],
         ]);
 
-        $container = new ServiceManager(['services' => [
-            ModuleOptions::class => $options,
-            'InvalidRoleProvider' => function () {
-                return new \stdClass();
-            }
-        ]]);
+        $container = new ServiceManager([
+            'services' => [
+                ModuleOptions::class  => $options,
+                'InvalidRoleProvider' => function () {
+                    return new stdClass();
+                },
+            ],
+        ]);
 
         $factory = new RoleServiceFactory();
         $factory($container);

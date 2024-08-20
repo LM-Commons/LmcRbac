@@ -25,23 +25,28 @@ use Lmc\Rbac\Exception;
 use Lmc\Rbac\Identity\IdentityInterface;
 use Lmc\Rbac\Permission\PermissionInterface;
 
+use function count;
+use function gettype;
+use function is_array;
+use function is_callable;
+use function is_object;
+use function is_string;
+use function sprintf;
+
 class AssertionSet implements AssertionInterface
 {
     /**
      * Condition constants
      */
-    public const CONDITION_OR = 'condition_or';
+    public const CONDITION_OR  = 'condition_or';
     public const CONDITION_AND = 'condition_and';
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private array $assertions;
 
-    private $condition = self::CONDITION_AND;
+    private string $condition = self::CONDITION_AND;
 
     /**
-     * @param AssertionPluginManagerInterface $assertionPluginManager
      * @param array $assertions
      */
     public function __construct(
@@ -49,8 +54,10 @@ class AssertionSet implements AssertionInterface
         array $assertions
     ) {
         if (isset($assertions['condition'])) {
-            if ($assertions['condition'] !== AssertionSet::CONDITION_AND
-                && $assertions['condition'] !== AssertionSet::CONDITION_OR) {
+            if (
+                $assertions['condition'] !== self::CONDITION_AND
+                && $assertions['condition'] !== self::CONDITION_OR
+            ) {
                 throw new Exception\InvalidArgumentException('Invalid assertion condition given.');
             }
 
@@ -62,8 +69,11 @@ class AssertionSet implements AssertionInterface
         $this->assertions = $assertions;
     }
 
-    public function assert(PermissionInterface|string $permission, IdentityInterface $identity = null, $context = null): bool
-    {
+    public function assert(
+        PermissionInterface|string $permission,
+        ?IdentityInterface $identity = null,
+        mixed $context = null
+    ): bool {
         if (empty($this->assertions)) {
             return false;
         }
@@ -85,23 +95,23 @@ class AssertionSet implements AssertionInterface
                     break;
                 case is_array($assertion):
                     $this->assertions[$index] = $assertion = new AssertionSet($this->assertionPluginManager, $assertion);
-                    $asserted = $assertion->assert($permission, $identity, $context);
+                    $asserted                 = $assertion->assert($permission, $identity, $context);
                     break;
                 default:
                     throw new Exception\InvalidArgumentException(sprintf(
                         'Assertion must be callable, string, array or implement Lmc\Rbac\Assertion\AssertionInterface, "%s" given',
-                        is_object($assertion) ? get_class($assertion) : gettype($assertion)
+                        is_object($assertion) ? $assertion::class : gettype($assertion)
                     ));
             }
 
             switch ($this->condition) {
-                case AssertionSet::CONDITION_AND:
+                case self::CONDITION_AND:
                     if (false === $asserted) {
                         return false;
                     }
 
                     break;
-                case AssertionSet::CONDITION_OR:
+                case self::CONDITION_OR:
                     if (true === $asserted) {
                         return true;
                     }
@@ -111,7 +121,7 @@ class AssertionSet implements AssertionInterface
             $assertedCount++;
         }
 
-        if (AssertionSet::CONDITION_AND === $this->condition && count($this->assertions) === $assertedCount) {
+        if (self::CONDITION_AND === $this->condition && count($this->assertions) === $assertedCount) {
             return true;
         }
 

@@ -26,19 +26,13 @@ use Lmc\Rbac\Role\RoleInterface;
 
 /**
  * Role service
- *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 interface RoleServiceInterface
 {
     /**
      * Get the identity roles from the current identity, applying some more logic
      *
-     * @param null|IdentityInterface $identity
-     * @param mixed|null $context
      * @return RoleInterface[]
      */
-    public function getIdentityRoles(IdentityInterface $identity = null, mixed $context = null): iterable;
-
+    public function getIdentityRoles(?IdentityInterface $identity = null, mixed $context = null): iterable;
 }

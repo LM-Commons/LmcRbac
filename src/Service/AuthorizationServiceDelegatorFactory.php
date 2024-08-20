@@ -1,4 +1,5 @@
 <?php
+
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -16,27 +17,28 @@
  * and is licensed under the MIT license.
  */
 
-namespace Lmc\Rbac\Service;
+declare(strict_types=1);
 
-/**
- * @author Eric Richer <eric.richer@vistoconsulting.com>
- *
- */
+namespace Lmc\Rbac\Service;
 
 use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 use Psr\Container\ContainerInterface;
 
+use function call_user_func;
+
 class AuthorizationServiceDelegatorFactory implements DelegatorFactoryInterface
 {
-
     /**
      * @inheritDoc
      */
-    public function __invoke(ContainerInterface $container, $name, callable $callback, ?array $options = null): AuthorizationServiceAwareInterface
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        $name,
+        callable $callback,
+        ?array $options = null
+    ): AuthorizationServiceAwareInterface {
         $instance = call_user_func($callback);
-
         if (! $instance instanceof AuthorizationServiceAwareInterface) {
             throw new ServiceNotCreatedException("The service $name must implement Laminas\Authorization\Service\AuthorizationServiceAwareInterface");
         }

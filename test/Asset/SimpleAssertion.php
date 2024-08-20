@@ -27,22 +27,18 @@ use Lmc\Rbac\Permission\PermissionInterface;
 
 class SimpleAssertion implements AssertionInterface
 {
-    /**
-     * @var int
-     */
-    protected $called = 0;
+    /** @var int */
+    protected int $called = 0;
 
-    /**
-     * @var bool
-     */
-    protected $willAssert;
+    /** @var bool */
+    protected bool $willAssert;
 
     public function __construct(bool $willAssert = true)
     {
         $this->willAssert = $willAssert;
     }
 
-    public function assert(string|PermissionInterface $permission, IdentityInterface $identity = null, $context = null): bool
+    public function assert(string|PermissionInterface $permission, ?IdentityInterface $identity = null, $context = null): bool
     {
         $this->called++;
 

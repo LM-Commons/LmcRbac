@@ -26,21 +26,21 @@ use Lmc\Rbac\Role\RoleInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass('\Lmc\Rbac\Role\InMemoryRoleProvider')]
+#[CoversClass(InMemoryRoleProvider::class)]
 class InMemoryRoleProviderTest extends TestCase
 {
     public function testInMemoryProvider(): void
     {
         $inMemoryProvider = new InMemoryRoleProvider([
-            'admin' => [
-                'children' => ['member'],
+            'admin'  => [
+                'children'    => ['member'],
                 'permissions' => ['delete'],
             ],
             'member' => [
-                'children' => ['guest'],
+                'children'    => ['guest'],
                 'permissions' => ['write'],
             ],
-            'mrx' => [
+            'mrx'    => [
                 'permissions' => ['write', 'delete'],
             ],
             'guest',
@@ -66,7 +66,6 @@ class InMemoryRoleProviderTest extends TestCase
         // Test guest role
         $guestRole = $roles[2];
         $this->assertInstanceOf(RoleInterface::class, $guestRole);
-//        $this->assertNotInstanceOf(HierarchicalRoleInterface::class, $guestRole);
         $this->assertEquals('guest', $guestRole->getName());
         $this->assertFalse($guestRole->hasPermission('write'));
         $this->assertFalse($guestRole->hasPermission('delete'));
@@ -74,7 +73,6 @@ class InMemoryRoleProviderTest extends TestCase
         // Test mrx role
         $guestRole = $roles[3];
         $this->assertInstanceOf(RoleInterface::class, $guestRole);
-//        $this->assertNotInstanceOf(HierarchicalRoleInterface::class, $guestRole);
         $this->assertEquals('mrx', $guestRole->getName());
         $this->assertTrue($guestRole->hasPermission('write'));
         $this->assertTrue($guestRole->hasPermission('delete'));

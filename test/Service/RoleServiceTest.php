@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Service;
 
+use ArrayIterator;
 use Lmc\Rbac\Identity\IdentityInterface;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
 use Lmc\Rbac\Role\Role;
@@ -33,7 +34,7 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-#[CoversClass('\Lmc\Rbac\Service\RoleService')]
+#[CoversClass(RoleService::class)]
 class RoleServiceTest extends TestCase
 {
     use ProphecyTrait;
@@ -63,8 +64,8 @@ class RoleServiceTest extends TestCase
     public function testReturnTraversableRolesFromIdentityGiven(): void
     {
         $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
-        $identity = $this->prophesize(IdentityInterface::class);
-        $identity->getRoles()->willReturn($roles = new \ArrayIterator(['first', 'second', 'third']));
+        $identity    = $this->prophesize(IdentityInterface::class);
+        $identity->getRoles()->willReturn($roles = new ArrayIterator(['first', 'second', 'third']));
 
         $result = $roleService->getIdentityRoles($identity->reveal());
 
@@ -81,8 +82,8 @@ class RoleServiceTest extends TestCase
         $roleProvider->getRoles(Argument::any())->shouldNotBeCalled();
 
         $roleService = new RoleService($roleProvider->reveal(), 'guest');
-        $roles = [new Role('first'), new Role('second'), new Role('third')];
-        $identity = new Identity($roles);
+        $roles       = [new Role('first'), new Role('second'), new Role('third')];
+        $identity    = new Identity($roles);
 
         $result = $roleService->getIdentityRoles($identity);
 
@@ -94,11 +95,11 @@ class RoleServiceTest extends TestCase
     public function testWillCollectRolesOnlyIfRequired(): void
     {
         $roleProvider = $this->prophesize(RoleProviderInterface::class);
-        $roles = [new Role('first'), new Role('second'), 'third'];
+        $roles        = [new Role('first'), new Role('second'), 'third'];
         $roleProvider->getRoles(['third'])->shouldBeCalled()->willReturn([new Role('third')]);
 
         $roleService = new RoleService($roleProvider->reveal(), 'guest');
-        $identity = new Identity($roles);
+        $identity    = new Identity($roles);
 
         $result = $roleService->getIdentityRoles($identity);
 

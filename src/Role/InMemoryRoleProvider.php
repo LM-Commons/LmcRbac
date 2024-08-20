@@ -35,15 +35,10 @@ namespace Lmc\Rbac\Role;
  *
  * For maximum performance, this provider DOES NOT do a lot of type check, so you must closely
  * follow the format :)
- *
- * @author  Michaël Gallego <mic.gallego@gmail.com>
- * @licence MIT
  */
 final class InMemoryRoleProvider implements RoleProviderInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private array $rolesConfig = [];
 
     /**
@@ -55,7 +50,7 @@ final class InMemoryRoleProvider implements RoleProviderInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function getRoles(iterable $roleNames): iterable
     {
@@ -71,7 +66,7 @@ final class InMemoryRoleProvider implements RoleProviderInterface
             $roleConfig = $this->rolesConfig[$roleName];
 
             if (isset($roleConfig['children'])) {
-                $role = new Role($roleName);
+                $role       = new Role($roleName);
                 $childRoles = (array) $roleConfig['children'];
 
                 foreach ($this->getRoles($childRoles) as $childRole) {
