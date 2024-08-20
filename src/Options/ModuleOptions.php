@@ -53,6 +53,13 @@ class ModuleOptions extends AbstractOptions
     ];
 
     /**
+     * Assertion plugin manager configuration
+     *
+     * @var array
+     */
+    protected array $assertionManager = [];
+
+    /**
      * Constructor
      *
      * {@inheritdoc}
@@ -113,5 +120,23 @@ class ModuleOptions extends AbstractOptions
     public function getRoleProvider(): array
     {
         return $this->roleProvider;
+    }
+
+    /**
+     * Set the configuration for the assertion plugin manager
+     *
+     * @param array $assertionManager
+     */
+    public function setAssertionManager(array $assertionManager): void
+    {
+        $this->assertionManager = $assertionManager;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAssertionManager(): array
+    {
+        return $this->assertionManager;
     }
 }
