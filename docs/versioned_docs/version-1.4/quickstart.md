@@ -29,7 +29,7 @@ In the `config/autoload/lmcrbac.global.php`, add the following:
 return [
     'lmc_rbac' => [
         'role_provider' => [
-            Lmc\Rbac\Role\InMemoryRoleProvider::class => [
+            'LmcRbac\Role\InMemoryRoleProvider' => [
                 'guest',
                 'user' => [
                     'permissions' => ['create', 'edit'],
@@ -60,9 +60,9 @@ is granted to an identity:
 <?php
 
     /** @var \Psr\Container\ContainerInterface $container */
-    $authorizationService = $container->get('\Lmc\Rbac\Service\AuthorizationServiceInterface');
+    $authorizationService = $container->get('\LmcRbac\Service\AuthorizationServiceInterface');
     
-    /** @var \Lmc\Rbac\Identity\IdentityInterface $identity */
+    /** @var \LmcRbac\Identity\IdentityInterface $identity */
     if ($authorizationService->isGranted($identity, 'create')) {
         /** do something */
     }
@@ -78,7 +78,7 @@ can be configured in the `lmcrbac.config.php` file.  More on this in the [Config
 
 :::warning
 `LmcRbac` does not provide any logic to instantiate an identity entity. It is assumed that
-the application will instantiate an entity that implements `\Lmc\Rbac\Identity\IdentityInterface` which defines the `getRoles()`
+the application will instantiate an entity that implements `\LmcRbac\Identity\IdentityInterface` which defines the `getRoles()`
 method. 
 :::
 
@@ -88,7 +88,7 @@ Even if an identity has the `user` role granting it the `edit` permission, it sh
 
 This can be achieved using dynamic assertion.
 
-An assertion is a function that implements the `\Lmc\Rbac\Assertion\AssertionInterface` and is configured in the configuration 
+An assertion is a function that implements the `\LmcRbac\Assertion\AssertionInterface` and is configured in the configuration 
 file.
 
 Let's modify the `lmcrbac.config.php` file as follows:
@@ -118,9 +118,9 @@ Then use the authorization service passing the resource (called a 'context') in 
 <?php
 
     /** @var \Psr\Container\ContainerInterface $container */
-    $authorizationService = $container->get('\Lmc\Rbac\Service\AuthorizationServiceInterface');
+    $authorizationService = $container->get('\LmcRbac\Service\AuthorizationServiceInterface');
     
-    /** @var \Lmc\Rbac\Identity\IdentityInterface $identity */
+    /** @var \LmcRbac\Identity\IdentityInterface $identity */
     if ($authorizationService->isGranted($identity, 'edit', $resource)) {
         /** do something */
     }

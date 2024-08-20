@@ -5,7 +5,11 @@ title: Get started
 ---
 ## Requirements
 
-- PHP 8.1 or higher
+- PHP 7.3 or higher
+
+:::warning
+The code is continuously tested against PHP 8.1 and higher only. There is no warranty that it will work for PHP 8.0 and lower.
+:::
 
 ## Installation
 

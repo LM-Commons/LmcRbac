@@ -1,67 +1,60 @@
 ---
-sidebar_label: Roles, permissions and Role providers
-title: Roles, Permissions and Role providers
+sidebar_label: Roles and Role providers
+title: Roles and Role providers
 sidebar_position: 4
 ---
 
-## Roles
+## Role types
 
 A role is an object that returns a list of permissions that the role has.
 
-Roles are defined using by the `\Lmc\Rbac\Role\Role` class or by a class
-implementing `Lmc\Rbac\Role\RoleInterface`.
+`LmcRbac` support two types of roles: hierarchical roles and flat roles.
 
-Roles can have child roles and therefore provides a hierarchy of roles where a role inherit the permissions of all its 
-child roles.
+### Flat roles
 
-For example, a 'user' role may have the 'read' and 'write' permissions, and a 'admin' role
+A flat role is the simplest role object. It contains the list of permissions that
+the role has.
+
+Flat roles are defined using by the `LmcRbac\Role\Role` class or by classes
+implementing the `LmcRbac\Role\RoleInterface`.
+
+### Hierarchical roles
+
+A hierarchical role is a role that has child roles and therefore provides
+a hierarchy of roles where a role inherit the permissions of all its child roles.
+
+For example, a 'user' role may have the 'read' and 'write' permissions, and a 'admin' role 
 may inherit the permissions of the 'user' role plus an additional 'delete' role. In this structure,
 the 'admin' role will have 'user' as its child role.
 
+Hierarchical roles may have flat roles or hierarchical roles as children.
 
-:::info
-#### Flat roles
-
-Previous version of LmcRbac used to make a distinction between flat roles and hierarchical roles.
-A flat role is just a simplification of a hierarchical role, i.e. a hierarchical role without children. Therefore 
-`Lmc\Rbac\Role\Role` is now hierarchical by default and `Lmc\Rbac\Role\HierarchicalRole` has been deprecated.
-
-:::
-
-## Permissions
-
-A permission in LmcRbac is simply a string that represents the permission such as 'read', 'write' or 'delete'.
-But it can also be more precise like 'article.read' or 'article.write'.
-
-Permissions can also be objects as long as they implement the `Lmc\Rbac\Permission\PermissionInterface`. This could be the
-case, for example, when permissions are stored in a database where they could also have a identified and a description.
+Hierarchical roles are defined using by the `LmcRbac\Role\HierarchicalRole` class or by classes
+implementing the `LmcRbac\Role\HierarchicalRoleInterface`.
 
 ## Role Providers
 A role provider is an object that returns a list of roles. A role provider must implement the
-`Lmc\Rbac\Role\RoleProviderInterface` interface. The only required method is `getRoles`, and must return an array
-of `Lmc\Rbac\Role\RoleInterface` objects.
+`LmcRbac\Role\RoleProviderInterface` interface. The only required method is `getRoles`, and must return an array
+of `LmcRbac\Role\RoleInterface` objects.
 
 Roles can come from one of many sources: in memory, from a file, from a database, etc. However, you can specify only one role provider per application.
 
 ### Built-in role providers
 
-LmcRbac comes with two built-in role providers: `Lmc\Rbac\Role\InMemoryRoleProvider` and 
-`Lmc\Rbac\Role\ObjectRepositoryRoleProvider`. A role provider must be added to the `role_provider` subkey in the 
-configuration file. For example:
+LmcRbac comes with two built-in role providers: `LmcRbac\Role\InMemoryRoleProvider` and `LmcRbac\Role\ObjectRepositoryRoleProvider`. A role
+provider must be added to the `role_provider` subkey in the configuration file:
 
 ```php
 return [
     'lmc_rbac' => [
         'role_provider' => [
-            Lmc\Rbac\Role\InMemoryRoleProvider::class => [
-                // configuration
-            ],
+            // Role provider config here!
         ]
     ]
 ];
 ```
 
-### `Lmc\Rbac\Role\InMemoryRoleProvider`
+### `LmcRbac\Role\InMemoryRoleProvider`
 
 This provider is ideal for small/medium sites with few roles/permissions. All the data is specified in a simple associative array in a
 PHP file.
@@ -72,7 +65,7 @@ Here is an example of the format you need to use:
 return [
     'lmc_rbac' => [
         'role_provider' => [
-            Lmc\Rbac\Role\InMemoryRoleProvider::class => [
+            'LmcRbac\Role\InMemoryRoleProvider' => [
                 'admin' => [
                     'children'    => ['member'],
                     'permissions' => ['article.delete']
@@ -90,8 +83,9 @@ return [
 ];
 ```
 
-The `children` and `permissions` subkeys are entirely optional. Internally, the `Lmc\Rbac\Role\InMemoryRoleProvider` creates
-`Lmc\Rbac\Role\Role` objects with children, if any.
+The `children` and `permissions` subkeys are entirely optional. Internally, the `LmcRbac\Role\InMemoryRoleProvider` creates
+either a `LmcRbac\Role\Role` object if the role does not have any children, or a `LmcRbac\Role\HierarchicalRole` if
+the role has at least one child.
 
 If you are more confident with flat RBAC, the previous config can be re-written to remove any inheritence between roles:
 
@@ -99,7 +93,7 @@ If you are more confident with flat RBAC, the previous config can be re-written 
 return [
     'lmc_rbac' => [
         'role_provider' => [
-            Lmc\Rbac\Role\InMemoryRoleProvider::class => [
+            'LmcRbac\Role\InMemoryRoleProvider' => [
                 'admin' => [
                     'permissions' => [
                         'article.delete',
@@ -124,7 +118,7 @@ return [
 ];
 ```
 
-### `Lmc\Rbac\Role\ObjectRepositoryRoleProvider`
+### `LmcRbac\Role\ObjectRepositoryRoleProvider`
 
 This provider fetches roles from a database using `Doctrine\Common\Persistence\ObjectRepository` interface.
 
@@ -135,7 +129,7 @@ using the `object_repository` key:
 return [
     'lmc_rbac' => [
         'role_provider' => [
-            Lmc\Rbac\Role\ObjectRepositoryRoleProvider::class => [
+            'LmcRbac\Role\ObjectRepositoryRoleProvider' => [
                 'object_repository'  => 'App\Repository\RoleRepository',
                 'role_name_property' => 'name'
             ],
@@ -150,7 +144,7 @@ Or you can specify the `object_manager` and `class_name` options:
 return [
     'lmc_rbac' => [
         'role_provider' => [
-            Lmc\Rbac\Role\ObjectRepositoryRoleProvider::class => [
+            'LmcRbac\Role\ObjectRepositoryRoleProvider' => [
                 'object_manager'     => 'doctrine.entitymanager.orm_default',
                 'class_name'         => 'App\Entity\Role',
                 'role_name_property' => 'name'
@@ -164,14 +158,14 @@ In both cases, you need to specify the `role_name_property` value, which is the 
 that holds the actual role name. This is used internally to only load the identity roles, instead of loading
 the whole table every time.
 
-Please note that your entity fetched from the table MUST implement the `Lmc\Rbac\Role\RoleInterface` interface.
+Please note that your entity fetched from the table MUST implement the `LmcRbac\Role\RoleInterface` interface.
 
 Sample ORM entity models are provided in the `/data` folder for flat role, hierarchical role and permission.
 
 ## Creating custom role providers
 
 To create a custom role provider, you first need to create a class that implements the 
-`Lmc\Rbac\Role\RoleProviderInterface` interface.
+`LmcRbac\Role\RoleProviderInterface` interface.
 
 Then, you need to add it to the role provider manager:
 
@@ -179,7 +173,7 @@ Then, you need to add it to the role provider manager:
 return [
     'lmc_rbac' => [
         'role_provider' => [
-            MyCustomRoleProvider::class => [
+            'Application\Role\CustomRoleProvider' => [
                 // Options
             ],
         ],
@@ -191,7 +185,7 @@ And the role provider is created using the service manager:
 return [
     'service_manager' => [
         'factories' => [
-            MyCustomRoleProvider::class => MyCustomRoleProviderFactory::class,
+            'Application\Role\CustomRoleProvider' => 'Application\Factory\CustomRoleProviderFactory'
         ],
     ],
 ];

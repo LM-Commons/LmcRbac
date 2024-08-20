@@ -14,13 +14,13 @@ You can define dynamic assertion functions and assigned them to permission via c
 
 ## Defining a dynamic assertion function
 
-A dynamic assertion must implement the `Lmc\Rbac\Assertion\AssertionInterace` which defines only one method:
+A dynamic assertion must implement the `LmcRbac\Assertion\AssertionInterace` which defines only one method:
 
 ```php
 public function assert(
-        PermissionInterface|string $permission,
-        ?IdentityInterface $identity = null,
-        mixed $context = null
+        string $permission,
+        IdentityInterface $identity = null,
+        $context = null
     ): bool
 ```
 The assertion returns `true` when the access is granted, `false` otherwise.
@@ -31,9 +31,9 @@ represented by `$permission` owns the resource represented by `$context`.
 ```php
 <?php
 
-class MyAssertion implements \Lmc\Rbac\Assertion\AssertionInterface
+class MyAssertion implements \LmcRbac\Assertion\AssertionInterface
 {
-    public function assert(PermissionInterface|string $permission, ?IdentityInterface $identity = null, $context = null): bool
+    public function assert(string $permission, IdentityInterface $identity = null, $context = null): bool
     {
         // for 'edit' permission
         if ('edit' === $permission) {
@@ -57,7 +57,6 @@ plugin manager and its configuration should be a service manager configuration a
 
 ```php
 <?php
-use Laminas\ServiceManager\Factory\InvokableFactory
 
 return [
     'lmc_rbac' => [
@@ -67,7 +66,7 @@ return [
         ],
         'assertion_manager' => [
             'factories' => [
-                \My\Namespace\MyAssertion::class => InvokableFactory::class
+                \My\Namespace\MyAssertion::class => \Laminas\ServiceManager\Factory\InvokableFactory::class
             ],
         ],
     ],
@@ -78,13 +77,11 @@ It is also possible to configure an assertion using a callable instead of a clas
 ```php
 <?php
 
-use Lmc\Rbac\Permission\PermissionInterface;
-
 return [
     'lmc_rbac' => [
         /* the rest of the file */
         'assertion_map' => [
-            'edit'  => function assert(PermissionInterface|string $permission, ?IdentityInterface $identity = null, $context = null): bool
+            'edit'  => function assert(string $permission, IdentityInterface $identity = null, $context = null): bool
                         {
                             // for 'edit' permission
                             if ('edit' === $permission) {
@@ -116,15 +113,15 @@ return [
                 \My\Namespace\AssertionB::class,
             ],
             'read' => [
-                'condition' => \Lmc\Rbac\Assertion\AssertionSet::CONDITION_OR,
+                'condition' => \LmcRbac\Assertion\AssertionSet::CONDITION_OR,
                 \My\Namespace\AssertionC::class,
                 \My\Namespace\AssertionD::class,
             ],
             'delete' => [
-                'condition' => \Lmc\Rbac\Assertion\AssertionSet::CONDITION_OR,
+                'condition' => \LmcRbac\Assertion\AssertionSet::CONDITION_OR,
                 \My\Namespace\AssertionE::class,
                 [
-                    'condition' => \Lmc\Rbac\Assertion\AssertionSet::CONDITION_AND,
+                    'condition' => \LmcRbac\Assertion\AssertionSet::CONDITION_AND,
                     \My\Namespace\AssertionF::class,
                     \My\Namespace\AssertionC::class,                
                 ],

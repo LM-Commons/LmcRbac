@@ -71,6 +71,7 @@ themeConfig:
             logo: {
                 alt: 'LM-Commons Logo',
                 src: 'img/LMC-logo.png',
+//                href: 'https://lm-commons.github.io'
             },
             items: [
             {
@@ -79,6 +80,10 @@ themeConfig:
                 position: 'left',
                 label: 'Documentation',
             },
+                {
+                    type: "docsVersionDropdown",
+                    position: "right",
+                },
             {to: '/blog', label: 'Blog', position: 'left'},
                 {
                     href: 'https://lm-commons.github.io',
@@ -87,8 +92,9 @@ themeConfig:
             },
             {
                 href: 'https://github.com/lm-commons/lmcrbac',
-                label: 'GitHub',
+//                label: 'GitHub',
                 position: 'right',
+                className: 'header-github-link',
             },
             ],
         },

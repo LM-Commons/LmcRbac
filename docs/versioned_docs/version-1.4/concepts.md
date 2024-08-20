@@ -35,9 +35,9 @@ resource.
 
 An identity is typically provided by an authentication process within the application. 
 
-Authentication is not in the scope of `LmcRbac` and it is assumed that an identity entity that can provide the assigned 
-roles is available when using the authorization service. If no identity is available, as it would be the case when no 
-user is "logged in", then a guest role is assumed.
+Authentication is not in the scope of `LmcRbac` and it is assumed that an identity entity providing assigned roles
+is available when using the authorization service. If no identity is available, as it would be the case when no user is "logged in",
+then a guest role is assumed.
 
 
 

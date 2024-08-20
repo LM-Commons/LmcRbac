@@ -26,14 +26,6 @@ return [
     'lmc_rbac' => [
 
         /**
-         * Key that is used to fetch the identity provider
-         *
-         * Please note that when an identity is found, it MUST implement the LmcRbac\Identity\IdentityProviderInterface
-         * interface, otherwise it will throw an exception.
-         */
-        // 'identity_provider' => 'LmcRbac\Identity\AuthenticationIdentityProvider',
-
-        /**
          * Set the guest role
          *
          * This role is used by the authorization service when the authentication service returns no identity
@@ -50,7 +42,7 @@ return [
          *
          * The provider config for InMemoryRoleProvider must follow the following format:
          *
-         *       'LmcRbac\Role\InMemoryRoleProvider' => [
+         *       Lmc\Rbac\Role\InMemoryRoleProvider::class => [
          *           'role1' => [
          *               'children'    => ['children1', 'children2'], // OPTIONAL
          *               'permissions' => ['edit', 'read'] // OPTIONAL
