@@ -34,5 +34,5 @@ interface RoleServiceInterface
      *
      * @return RoleInterface[]
      */
-    public function getIdentityRoles(?IdentityInterface $identity = null, mixed $context = null): iterable;
+    public function getIdentityRoles(?IdentityInterface $identity = null): iterable;
 }

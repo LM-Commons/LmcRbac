@@ -110,7 +110,7 @@ class AuthorizationService implements AuthorizationServiceInterface
         string $permission,
         mixed $context = null
     ): bool {
-        $roles = $this->roleService->getIdentityRoles($identity, $context);
+        $roles = $this->roleService->getIdentityRoles($identity);
 
         if (empty($roles)) {
             return false;

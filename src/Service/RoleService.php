@@ -34,7 +34,9 @@ use function array_merge;
 class RoleService implements RoleServiceInterface
 {
     protected RoleProviderInterface $roleProvider;
+
     protected string $guestRole = '';
+
     public function __construct(RoleProviderInterface $roleProvider, string $guestRole)
     {
         $this->roleProvider = $roleProvider;
@@ -43,6 +45,8 @@ class RoleService implements RoleServiceInterface
 
     /**
      * Set the guest role
+     *
+     * @deprecated The Guest role should be defined using the constructor
      */
     public function setGuestRole(string $guestRole): void
     {
@@ -62,7 +66,7 @@ class RoleService implements RoleServiceInterface
      *
      * @return RoleInterface[]
      */
-    public function getIdentityRoles(?IdentityInterface $identity = null, mixed $context = null): iterable
+    public function getIdentityRoles(?IdentityInterface $identity = null): iterable
     {
         // If no identity is provided, get the guest role
         if (null === $identity) {
