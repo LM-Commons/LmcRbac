@@ -120,7 +120,7 @@ class HierarchicalRole implements RoleInterface
      * @param string|Permission $permission
      * @return void
      */
-    public function addPermission(string|Permission|\Lmc\Rbac\Permission\PermissionInterface $permission): void
+    public function addPermission(string|Permission $permission): void
     {
         if (is_string($permission)) {
             $permission = new Permission($permission);
@@ -130,15 +130,15 @@ class HierarchicalRole implements RoleInterface
     }
 
     /**
-     * @param $permission
+     * @param string $permission
      * @return bool
      */
-    public function hasPermission(string|\Lmc\Rbac\Permission\PermissionInterface $permission): bool
+    public function hasPermission(string $permission): bool
     {
         // This can be a performance problem if your role has a lot of permissions. Please refer
         // to the cookbook to an elegant way to solve this issue
 
-        return isset($this->permissions[(string) $permission]);
+        return isset($this->permissions[$permission]);
     }
 
     /**

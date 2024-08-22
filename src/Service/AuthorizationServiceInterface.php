@@ -23,7 +23,6 @@ namespace Lmc\Rbac\Service;
 
 use Lmc\Rbac\Assertion\AssertionInterface;
 use Lmc\Rbac\Identity\IdentityInterface;
-use Lmc\Rbac\Permission\PermissionInterface;
 
 /**
  * Minimal interface for an authorization service
@@ -35,7 +34,7 @@ interface AuthorizationServiceInterface
      */
     public function isGranted(
         ?IdentityInterface $identity,
-        PermissionInterface|string $permission,
+        string $permission,
         mixed $context = null
     ): bool;
 
@@ -48,14 +47,14 @@ interface AuthorizationServiceInterface
      * Set assertion for a given permission
      */
     public function setAssertion(
-        PermissionInterface|string $permission,
+        string $permission,
         AssertionInterface|callable|string $assertion
     ): void;
 
     /**
      * Check if there are assertions for the permission
      */
-    public function hasAssertion(PermissionInterface|string $permission): bool;
+    public function hasAssertion(string $permission): bool;
 
     /**
      * Get the assertions
@@ -67,5 +66,5 @@ interface AuthorizationServiceInterface
     /**
      * Get the assertions for the given permission
      */
-    public function getAssertion(PermissionInterface|string $permission): AssertionInterface|callable|string|null;
+    public function getAssertion(string $permission): AssertionInterface|callable|string|null;
 }

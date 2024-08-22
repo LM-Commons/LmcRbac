@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace LmcTest\Rbac\Asset;
 
 use Doctrine\ORM\Mapping as ORM;
-use Lmc\Rbac\Permission\PermissionInterface;
 
 /**
  * @ORM\Entity
@@ -30,11 +29,9 @@ use Lmc\Rbac\Permission\PermissionInterface;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'permissions')]
-class Permission implements PermissionInterface
+class Permission
 {
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -44,17 +41,12 @@ class Permission implements PermissionInterface
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected ?int $id;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string", length=128, unique=true)
-     */
+    /** @ORM\Column(type="string", length=128, unique=true) */
     #[ORM\Column(type: 'string', length: 128, unique: true)]
     protected ?string $name;
 
     /**
      * Constructor
-     * @param string $name
      */
     public function __construct(string $name)
     {
@@ -63,8 +55,6 @@ class Permission implements PermissionInterface
 
     /**
      * Get the permission identifier
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {

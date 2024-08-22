@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Role;
 
-use Lmc\Rbac\Permission\PermissionInterface;
-
 /**
  * Interface for a role
  *
@@ -32,11 +30,11 @@ interface RoleInterface
 {
     public function getName(): string;
 
-    public function hasPermission(PermissionInterface|string $permission): bool;
+    public function hasPermission(string $permission): bool;
 
     public function addChild(RoleInterface $role): void;
 
-    public function addPermission(PermissionInterface $permission): void;
+    public function addPermission(string $permission): void;
 
     public function hasChildren(): bool;
 

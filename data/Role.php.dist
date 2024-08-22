@@ -97,10 +97,10 @@ class Role implements RoleInterface
     /**
      * Add a permission
      *
-     * @param string|PermissionInterface $name
+     * @param string $name
      * @return void
      */
-    public function addPermission(string|PermissionInterface $permission): void
+    public function addPermission(string $permission): void
     {
         $permission = new \Permission($permission);
 
@@ -112,14 +112,14 @@ class Role implements RoleInterface
         return $this->name;
     }
 
-    public function hasPermission(string|PermissionInterface $permission): bool
+    public function hasPermission(string $permission): bool
     {
-        return isset($this->permissions[(string) $permission]);
+        return isset($this->permissions[$permission]);
     }
 
-    public function addChild(RoleInterface $child): void
+    public function addChild(RoleInterface $role): void
     {
-        $this->children[] = $child;
+        $this->children[] = $role;
     }
 
     public function getChildren(): iterable

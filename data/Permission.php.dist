@@ -19,7 +19,6 @@ declare(strict_types=1);
  */
 
 use Doctrine\ORM\Mapping as ORM;
-use Lmc\Rbac\Permission\PermissionInterface;
 
 /**
  * @ORM\Entity
@@ -27,7 +26,7 @@ use Lmc\Rbac\Permission\PermissionInterface;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'permissions')]
-class Permission implements PermissionInterface
+class Permission
 {
     /**
      * @var int|null

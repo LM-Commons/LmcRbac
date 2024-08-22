@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace Lmc\Rbac;
 
 use Generator;
-use Lmc\Rbac\Permission\PermissionInterface;
 use Lmc\Rbac\Role\RoleInterface;
 use Traversable;
 
@@ -36,7 +35,7 @@ class Rbac implements RbacInterface
     /**
      * Determines if access is granted by checking the roles for permission.
      */
-    public function isGranted(RoleInterface|iterable $roles, string|PermissionInterface $permission): bool
+    public function isGranted(RoleInterface|iterable $roles, string $permission): bool
     {
         if ($roles instanceof Traversable) {
             $roles = iterator_to_array($roles);

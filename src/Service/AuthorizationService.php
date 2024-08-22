@@ -25,7 +25,6 @@ use Lmc\Rbac\Assertion\AssertionInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Assertion\AssertionSet;
 use Lmc\Rbac\Identity\IdentityInterface;
-use Lmc\Rbac\Permission\PermissionInterface;
 use Lmc\Rbac\RbacInterface;
 
 use function array_merge;
@@ -74,18 +73,18 @@ class AuthorizationService implements AuthorizationServiceInterface
      * Set assertion for a given permission
      */
     public function setAssertion(
-        PermissionInterface|string $permission,
+        string $permission,
         AssertionInterface|callable|string $assertion
     ): void {
-        $this->assertions[(string) $permission] = $assertion;
+        $this->assertions[$permission] = $assertion;
     }
 
     /**
      * Check if there are assertions for the permission
      */
-    public function hasAssertion(PermissionInterface|string $permission): bool
+    public function hasAssertion(string $permission): bool
     {
-        return isset($this->assertions[(string) $permission]);
+        return isset($this->assertions[$permission]);
     }
 
     /**
@@ -101,14 +100,14 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * Get the assertions for the given permission
      */
-    public function getAssertion(PermissionInterface|string $permission): AssertionInterface|callable|string|null
+    public function getAssertion(string $permission): AssertionInterface|callable|string|null
     {
-        return $this->hasAssertion($permission) ? $this->assertions[(string) $permission] : null;
+        return $this->hasAssertion($permission) ? $this->assertions[$permission] : null;
     }
 
     public function isGranted(
         IdentityInterface|null $identity,
-        string|PermissionInterface $permission,
+        string $permission,
         mixed $context = null
     ): bool {
         $roles = $this->roleService->getIdentityRoles($identity, $context);
@@ -121,14 +120,14 @@ class AuthorizationService implements AuthorizationServiceInterface
             return false;
         }
 
-        if (empty($this->assertions[(string) $permission])) {
+        if (empty($this->assertions[$permission])) {
             return true;
         }
 
-        if (is_array($this->assertions[(string) $permission])) {
-            $permissionAssertions = $this->assertions[(string) $permission];
+        if (is_array($this->assertions[$permission])) {
+            $permissionAssertions = $this->assertions[$permission];
         } else {
-            $permissionAssertions = [$this->assertions[(string) $permission]];
+            $permissionAssertions = [$this->assertions[$permission]];
         }
 
         $assertionSet = new AssertionSet($this->assertionPluginManager, $permissionAssertions);
