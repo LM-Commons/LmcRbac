@@ -84,7 +84,8 @@ themeConfig:
                     type: "docsVersionDropdown",
                     position: "right",
                 },
-            {to: '/blog', label: 'Blog', position: 'left'},
+
+//            {to: '/blog', label: 'Blog', position: 'right'},
                 {
                     href: 'https://lm-commons.github.io',
                     label: 'LM-Commons',
