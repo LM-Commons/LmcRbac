@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Service;
 
+use Laminas\Permissions\Rbac\RoleInterface;
 use Lmc\Rbac\Identity\IdentityInterface;
-use Lmc\Rbac\Role\RoleInterface;
 use Lmc\Rbac\Role\RoleProviderInterface;
 use Traversable;
 
@@ -62,7 +62,7 @@ class RoleService implements RoleServiceInterface
     }
 
     /**
-     * Get the identity roles from the current identity, applying some more logic
+     * Get the roles from the current identity, applying some more logic
      *
      * @return RoleInterface[]
      */
@@ -79,22 +79,22 @@ class RoleService implements RoleServiceInterface
     /**
      * Convert the roles (potentially strings) to concrete RoleInterface objects using role provider
      *
-     * @param  array|Traversable $roles
+     * @param  string[]|RoleInterface[] $roles
      * @return RoleInterface[]
      */
-    protected function convertRoles(iterable $roles): iterable
+    protected function convertRoles(array $roles): iterable
     {
         $collectedRoles = [];
         $toCollect      = [];
         foreach ($roles as $role) {
-        // If it's already a RoleInterface, nothing to do as a RoleInterface contains everything already
+            // If it's already a RoleInterface, nothing to do as a RoleInterface contains everything already
             if ($role instanceof RoleInterface) {
                 $collectedRoles[] = $role;
                 continue;
             }
 
             // Otherwise, it's a string and hence we need to collect it
-            $toCollect[] = (string) $role;
+            $toCollect[] = $role;
         }
 
         // Nothing to collect, we don't even need to hit the (potentially) costly role provider

@@ -21,7 +21,7 @@ declare(strict_types=1);
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Lmc\Rbac\Role\RoleInterface;
+use Laminas\Permissions\Rbac\RoleInterface;
 
 /**
  * @ORM\Entity
@@ -44,12 +44,12 @@ class HierarchicalRole implements RoleInterface
     protected ?int $id = null;
 
     /**
-     * @var string|null
+     * @var string
      *
      * @ORM\Column(type="string", length=48, unique=true)
      */
     #[ORM\Column(name: 'name', type: 'string', length: 255, unique: true)]
-    protected ?string $name;
+    protected string $name = '';
 
     /**
      * @var RoleInterface[]|Collection
@@ -111,34 +111,34 @@ class HierarchicalRole implements RoleInterface
      * @param RoleInterface $child
      * @return void
      */
-    public function addChild(RoleInterface $role): void
+    public function addChild(RoleInterface $child): void
     {
-        $this->children[] = $role;
+        $this->children[] = $child;
     }
 
     /**
-     * @param string|Permission $permission
+     * @param string|Permission $name
      * @return void
      */
-    public function addPermission(string|Permission $permission): void
+    public function addPermission(string|Permission $name): void
     {
-        if (is_string($permission)) {
-            $permission = new Permission($permission);
+        if (is_string($name)) {
+            $permission = new Permission($name);
         }
 
-        $this->permissions[(string) $permission] = $permission;
+        $this->permissions[(string) $name] = $permission;
     }
 
     /**
-     * @param string $permission
+     * @param string $name
      * @return bool
      */
-    public function hasPermission(string $permission): bool
+    public function hasPermission(string $name): bool
     {
         // This can be a performance problem if your role has a lot of permissions. Please refer
         // to the cookbook to an elegant way to solve this issue
 
-        return isset($this->permissions[$permission]);
+        return isset($this->permissions[$name]);
     }
 
     /**
@@ -149,11 +149,18 @@ class HierarchicalRole implements RoleInterface
         return $this->children;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function hasChildren(): bool
     {
         return ! $this->children->isEmpty();
+    }
+
+    public function addParent(RoleInterface $parent): void
+    {
+        // Do nothing
+    }
+
+    public function getParents(): iterable
+    {
+        return [];
     }
 }

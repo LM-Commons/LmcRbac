@@ -21,17 +21,16 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Service;
 
+use Laminas\Permissions\Rbac\Rbac;
+use Laminas\Permissions\Rbac\Role;
+use Laminas\Permissions\Rbac\RoleInterface;
 use Laminas\ServiceManager\ServiceManager;
 use Lmc\Rbac\Assertion\AssertionPluginManager;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Assertion\AssertionSet;
 use Lmc\Rbac\Exception\InvalidArgumentException;
 use Lmc\Rbac\Identity\IdentityInterface;
-use Lmc\Rbac\Rbac;
-use Lmc\Rbac\RbacInterface;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
-use Lmc\Rbac\Role\Role;
-use Lmc\Rbac\Role\RoleInterface;
 use Lmc\Rbac\Service\AuthorizationService;
 use Lmc\Rbac\Service\RoleService;
 use Lmc\Rbac\Service\RoleServiceInterface;
@@ -383,12 +382,12 @@ class AuthorizationServiceTest extends TestCase
         $identity = new Identity([]);
         $context  = 'context';
 
-        $rbac                   = $this->getMockBuilder(RbacInterface::class)->disableOriginalConstructor()->getMock();
-        $roleService            = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
+        $rbac                   = $this->getMockBuilder(Rbac::class)->disableOriginalConstructor()->getMock();
+        $roleService            = $this->createMock(RoleServiceInterface::class);
         $assertionPluginManager = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
         $authorizationService   = new AuthorizationService($rbac, $roleService, $assertionPluginManager);
 
-        $roleService->expects($this->once())->method('getIdentityRoles')->with($identity, $context)->willReturn([]);
+        $roleService->expects($this->once())->method('getIdentityRoles')->with($identity)->willReturn([]);
         $authorizationService->isGranted($identity, 'foo', $context);
     }
 

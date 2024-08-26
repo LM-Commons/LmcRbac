@@ -41,12 +41,12 @@ class Permission
     protected ?int $id;
 
     /**
-     * @var string|null
+     * @var string
      *
      * @ORM\Column(type="string", length=128, unique=true)
      */
     #[ORM\Column(type: 'string', length: 128, unique: true)]
-    protected ?string $name;
+    protected string $name = '';
 
     /**
      * Constructor

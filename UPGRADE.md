@@ -2,20 +2,26 @@
 
 ## From LmcRbac v1 to LmcRbac v2
 
-LmcRbac v2 is a major version upgrade with many breaking changes that prevent
+LmcRbac v2 is a major version upgrade with many major breaking changes that prevent
 straightforward upgrading.
+
+### Major changes
+
+- LmcRbac v2 is now based on Role and Rbac classes from `laminas-permissions-rbac`. All services have
+been updated to use these classes and interfaces.
+
 
 ### Namespace change
 
 The namespace has been changed from LmcRbac to Lmc\Rbac. Please review your code to replace `LmcRbac` namespace
 by `Lmc\Rbac` namespace.
 
-### Deprecations
+### Deprecations and removals
 
-- `Lmc\Rbac\HierarchicalRole` has been deprecated since `Lmc\Rbac\Role` now supports hierarchical roles. Flat roles 
-are just a simplified version of a hierarchical roles. Use `Lmc\Rbac\Role` instead.
+- `LmcRbac\HierarchicalRole`, `LmcRbac\Role` and `LmcRbac\RoleInterface` has been deleted.
+Use the equivalent classes from `laminas-permissions-rbac` instead.
 - The factories for services have been refactored from the `src/Container` folder
-  to be colocated with the service that a factory is creating. All factories in the `src/Container` has been deprecated.
+  to be colocated with the service that a factory is creating. All factories in the `src/Container` has been deleted.
 - The `AssertionContainer` class, interface and factory have been deprecated and replaced by `AssertionPluginManager` class, interface and factory.
 
 ## From ZfcRbac v3 to LmcRbac v1

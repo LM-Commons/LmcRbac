@@ -1,4 +1,5 @@
 <?php
+
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,14 +26,17 @@ use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Role\RoleProviderInterface;
 use Psr\Container\ContainerInterface;
 
+use function key;
+use function sprintf;
+
 /**
  * Factory to create the role service
- *
  */
 class RoleServiceFactory
 {
     public function __invoke(ContainerInterface $container): RoleService
     {
+        /** @var ModuleOptions $moduleOptions */
         $moduleOptions = $container->get(ModuleOptions::class);
 
         // Get the role provider from the options
@@ -42,14 +46,14 @@ class RoleServiceFactory
         }
 
         $roleProviderName = key($roleProvider);
+        /** @var RoleProviderInterface $roleProvider */
         $roleProvider = $container->get($roleProviderName);
         if (! $roleProvider instanceof RoleProviderInterface) {
-            throw new ServiceNotCreatedException(sprintf('Class %s does not implement LmcRbac\Role\RoleProviderInterface', $roleProviderName));
+            throw new ServiceNotCreatedException(
+                sprintf('Class %s does not implement LmcRbac\Role\RoleProviderInterface', $roleProviderName)
+            );
         }
 
-        return new RoleService(
-            $roleProvider,
-            $moduleOptions->getGuestRole()
-        );
+        return new RoleService($roleProvider, $moduleOptions->getGuestRole());
     }
 }

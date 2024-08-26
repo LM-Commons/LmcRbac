@@ -40,6 +40,8 @@ interface AuthorizationServiceInterface
 
     /**
      * Set assertions, either merging or replacing (default)
+     *
+     * @param array<string|callable|AssertionInterface> $assertions
      */
     public function setAssertions(array $assertions, bool $merge = false): void;
 
@@ -59,7 +61,7 @@ interface AuthorizationServiceInterface
     /**
      * Get the assertions
      *
-     * @return array
+     * @return array<string|callable|AssertionInterface>
      */
     public function getAssertions(): array;
 
