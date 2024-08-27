@@ -9,7 +9,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
     title: 'LmcRbac',
-    tagline: 'Role-based access control components for your Laminas or Mezzio application',
+    tagline: 'Role-based access control components for your Laminas MVC and Mezzio application',
     favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -102,6 +102,7 @@ themeConfig:
         footer: {
             style: 'dark',
             links: [
+/*
             {
                 title: 'Docs',
                 items: [
@@ -111,6 +112,8 @@ themeConfig:
                 },
                 ],
             },
+
+ */
             {
                 title: 'Community',
                 items: [
@@ -123,10 +126,13 @@ themeConfig:
             {
                 title: 'More',
                 items: [
+/*
                 {
                     label: 'Blog',
                     to: '/blog',
                 },
+
+ */
                 {
                     label: 'GitHub',
                     href: 'https://github.com/lm-commons/lmcrbac',

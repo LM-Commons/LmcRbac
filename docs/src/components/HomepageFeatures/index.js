@@ -57,15 +57,9 @@ export default function HomepageFeatures() {
         <div className={clsx("row")}>
             <div className={clsx("col col--8")}>
                 <Heading as="h1">Introduction</Heading>
-                <p>Components and services to provide role-based access control (RBAC) to your application.</p>
+                <p>LmcRbac offers components and services to implement role-based access control (RBAC) in your
+                    application. LmcRbac extends the components provided by <Link href="https://docs.laminas.dev/laminas-permissions-rbac">laminas-permissions-rbac</Link>.</p>
                 <p>LmcRbac can be used in Laminas MVC and in Mezzio applications.</p>
-                <p>Based on the original work of <a
-                    href="https://github.com/ZF-Commons/zfc-rbac">ZF-Commons/zfc-rbac</a> v3.x.</p>
-                <p>If you are looking for the Laminas version of zfc-rbac v2, please use <a
-                    href="https://github.com/LM-Commons/LmcRbacMvc">LM-Commons/LmcRbacMvc</a>.</p>
-                <div className={styles.buttons}>
-                    <Link className="button buttton--primary" to="/docs/gettingstarted">Get started</Link>
-                </div>
                 <Heading as="h2">Support</Heading>
                 <ul>
                     <li>File issues at <a

@@ -1,8 +1,54 @@
 ---
-sidebar_label: Getting Started
-sidebar_position: 2
-title: Getting started
+title: Quick Start
+sidebar_position: 1
 ---
+
+LmcRbac offers components and services to implement role-based access control (RBAC) in your application.
+LmcRbac extends the components provided by [laminas-permissions-rbac](https://github.com/laminas/laminas-permissions-rbac).
+
+LmcRbac can be used in Laminas MVC and in Mezzio applications.
+
+:::tip
+If you are upgrading from LmcRbac v1 or from zfc-rbac v3, please read the [Upgrading section](Upgrading/to-v2.md)
+:::
+
+## Concepts
+
+[Role-Based Access Control (RBAC)](https://en.wikipedia.org/wiki/Role-based_access_control)
+is an approach to restricting system access to authorized users by putting emphasis
+on roles and their permissions.
+
+In the RBAC model:
+
+- an **identity** has one of more roles.
+- a **role** has one of more permissions.
+- a **permission** is typically an action like "read", "write", "delete".
+- a **role** can have **child roles** thus providing a hierarchy of roles where a role will inherit the permissions of all its child roles.
+
+### Authorization
+
+An identity will be authorized to perform an action, such as accessing a resource, if it is granted
+the permission that controls the execution of the action.
+
+For example, deleting an item could be restricted to identities that have at least one role that has the
+`item.delete` permission.  This could be implemented by defining a `member` role that has the `item.delete` and assigning
+this role of an authenticated user.
+
+### Dynamic Assertions
+
+In some cases, just checking if the identity has the `item.delete` permission is not enough.
+It would also be necessary to check, for example, that the `item` belongs to the identity. Dynamic assertion allow
+to specify some extra checks before granting access to perform an action such as, in this case, being the owner of the
+resource.
+
+### Identities
+
+An identity is typically provided by an authentication process within the application.
+
+Authentication is not in the scope of `LmcRbac` and it is assumed that an identity entity that can provide the assigned
+roles is available when using the authorization service. If no identity is available, as it would be the case when no
+user is "logged in", then a guest role is assumed.
+
 ## Requirements
 
 - PHP 8.1 or higher
@@ -22,7 +68,7 @@ You will be prompted by the `laminas-component-installer` plugin to inject LM-Co
 :::note
 **Manual installation:**
 
-Enable the module by adding `LmcRbac` key to your `application.config.php` or `modules.config.php` file for Laminas MVC 
+Enable the module by adding `LmcRbac` key to your `application.config.php` or `modules.config.php` file for Laminas MVC
 applications, or to the `config/config.php` file for Mezzio applications.
 :::
 
