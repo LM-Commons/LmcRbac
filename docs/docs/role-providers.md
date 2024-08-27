@@ -8,8 +8,10 @@ sidebar_position: 4
 
 A role is an object that returns a list of permissions that the role has.
 
-Roles are defined using by the `\Lmc\Rbac\Role\Role` class or by a class
-implementing `Lmc\Rbac\Role\RoleInterface`.
+LmcRbac uses the Role class defined by [laminas-permissions-rbac](https://github.com/laminas/laminas-permissions-rbac).
+
+Roles are defined using by the `\Laminas\Permissions\Rbac\Role` class or by a class
+implementing `\Laminas\Permissions\Rbac\RoleInterface`.
 
 Roles can have child roles and therefore provides a hierarchy of roles where a role inherit the permissions of all its 
 child roles.
@@ -19,27 +21,29 @@ may inherit the permissions of the 'user' role plus an additional 'delete' role.
 the 'admin' role will have 'user' as its child role.
 
 
-:::info
-#### Flat roles
-
+:::tip[Flat roles]
 Previous version of LmcRbac used to make a distinction between flat roles and hierarchical roles.
-A flat role is just a simplification of a hierarchical role, i.e. a hierarchical role without children. Therefore 
-`Lmc\Rbac\Role\Role` is now hierarchical by default and `Lmc\Rbac\Role\HierarchicalRole` has been deprecated.
+A flat role is just a simplification of a hierarchical role, i.e. a hierarchical role without children.
 
+In `laminas-permissions-rbac`, roles are hierarchical.
 :::
 
 ## Permissions
 
-A permission in LmcRbac is simply a string that represents the permission such as 'read', 'write' or 'delete'.
+A permission in `laminas-permissions-rbac` is simply a string that represents the permission such as 'read', 'write' or 'delete'.
 But it can also be more precise like 'article.read' or 'article.write'.
 
-Permissions can also be objects as long as they implement the `Lmc\Rbac\Permission\PermissionInterface`. This could be the
+A permission can also be an object as long as it can be casted to a string. This could be the
 case, for example, when permissions are stored in a database where they could also have a identified and a description.
+
+:::tip
+An object can be casted to a string by implementing the `__toString()` method.
+:::
 
 ## Role Providers
 A role provider is an object that returns a list of roles. A role provider must implement the
 `Lmc\Rbac\Role\RoleProviderInterface` interface. The only required method is `getRoles`, and must return an array
-of `Lmc\Rbac\Role\RoleInterface` objects.
+of `Laminas\Permissions\Rbac\RoleInterface` objects.
 
 Roles can come from one of many sources: in memory, from a file, from a database, etc. However, you can specify only one role provider per application.
 
@@ -196,4 +200,20 @@ return [
     ],
 ];
 ```
+
+## Role Service
+
+LmcRbac provides a role service that will use the Role Providers to provide the roles
+associated with a given identity.
+
+It can be retrieved from the container be requesting the `Lmc\Rbac\Service\RoleServiceIntgeface`.
+
+`Lmc\Rbac\Service\RoleServiceInterface` defines the following method:
+
+- `getIdentityRoles(?IdentityInterface $identity = null): iterable`
+
+  | Parameter                                                           | Description                                                                                                                                                                        |
+  |----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | `$identity` | The identity whose roles to retrieve. <br/>If `$identity` is null, then the `guest` is used. <br/>The `guest` role is definable via configuration and defaults to `'guest'`. |
+
 

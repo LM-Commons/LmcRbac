@@ -18,7 +18,7 @@ A dynamic assertion must implement the `Lmc\Rbac\Assertion\AssertionInterace` wh
 
 ```php
 public function assert(
-        PermissionInterface|string $permission,
+        string $permission,
         ?IdentityInterface $identity = null,
         mixed $context = null
     ): bool
@@ -33,7 +33,7 @@ represented by `$permission` owns the resource represented by `$context`.
 
 class MyAssertion implements \Lmc\Rbac\Assertion\AssertionInterface
 {
-    public function assert(PermissionInterface|string $permission, ?IdentityInterface $identity = null, $context = null): bool
+    public function assert(string $permission, ?IdentityInterface $identity = null, $context = null): bool
     {
         // for 'edit' permission
         if ('edit' === $permission) {
@@ -84,7 +84,7 @@ return [
     'lmc_rbac' => [
         /* the rest of the file */
         'assertion_map' => [
-            'edit'  => function assert(PermissionInterface|string $permission, ?IdentityInterface $identity = null, $context = null): bool
+            'edit'  => function assert(string $permission, ?IdentityInterface $identity = null, $context = null): bool
                         {
                             // for 'edit' permission
                             if ('edit' === $permission) {
@@ -145,3 +145,9 @@ associated with the `'delete'` permission above.
 The default logic is to combine assertions using 'and' logic but this can be explicitly set as shown above for `'delete'`
 permission.
 
+## Defining dynamic assertions at run-time
+
+Although dynamic assertions are typically defined in the application's configuration, it is possible to set
+dynamic assertions at run-time by using the Authorization Service utility methods for adding/getting assertions.
+
+These methods are described in the Authorization Service [reference](authorization-service.md#reference).

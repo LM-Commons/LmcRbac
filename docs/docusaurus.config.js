@@ -78,7 +78,7 @@ themeConfig:
                 type: 'docSidebar',
                 sidebarId: 'documentationSidebar',
                 position: 'left',
-                label: 'Documentation',
+                label: 'Docs',
             },
                 {
                     type: "docsVersionDropdown",
