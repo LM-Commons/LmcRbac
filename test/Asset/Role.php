@@ -1,4 +1,5 @@
 <?php
+
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -23,8 +24,7 @@ namespace LmcTest\Rbac\Asset;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Lmc\Rbac\Permission\PermissionInterface;
-use Lmc\Rbac\Role\RoleInterface;
+use Laminas\Permissions\Rbac\RoleInterface;
 
 /**
  * @ORM\Entity
@@ -35,8 +35,6 @@ use Lmc\Rbac\Role\RoleInterface;
 class Role implements RoleInterface
 {
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -46,17 +44,11 @@ class Role implements RoleInterface
     #[ORM\GeneratedValue]
     private ?int $id;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string", length=32, unique=true)
-     */
+    /** @ORM\Column(type="string", length=32, unique=true) */
     #[ORM\Column(type: 'string', length: 32, unique: true)]
     private ?string $name;
 
     /**
-     * @var Collection
-     *
      * @ORM\JoinTable(name="role_children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      * @ORM\InverseJoinColumn(name="child_id", referencedColumnName="id")
@@ -65,14 +57,10 @@ class Role implements RoleInterface
     #[ORM\JoinTable(name: 'role_children')]
     #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'child_id', referencedColumnName: 'id')]
-    #[ORM\ManyToMany(targetEntity: Role::class, cascade: ['persist'])]
+    #[ORM\ManyToMany(targetEntity: self::class, cascade: ['persist'])]
     private Collection $children;
 
-    /**
-     * @var Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Permission", indexBy="name", fetch="EAGER", cascade={"persist"})
-     */
+    /** @ORM\ManyToMany(targetEntity="Permission", indexBy="name", fetch="EAGER", cascade={"persist"}) */
     #[ORM\ManyToMany(targetEntity: 'Permission', cascade: ['persist'], fetch: 'EAGER', indexBy: 'name')]
     private Collection $permissions;
 
@@ -81,15 +69,13 @@ class Role implements RoleInterface
      */
     public function __construct(string $name)
     {
-        $this->name = $name;
-        $this->children = new ArrayCollection();
+        $this->name        = $name;
+        $this->children    = new ArrayCollection();
         $this->permissions = new ArrayCollection();
     }
 
     /**
      * Get the role identifier
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -98,13 +84,10 @@ class Role implements RoleInterface
 
     /**
      * Add a permission
-     *
-     * @param  string $name
-     * @return void
      */
-    public function addPermission(string|PermissionInterface $permission): void
+    public function addPermission(string $name): void
     {
-        $permission = new Permission($permission);
+        $permission = new Permission($name);
 
         $this->permissions[(string) $permission] = $permission;
     }
@@ -114,14 +97,14 @@ class Role implements RoleInterface
         return $this->name;
     }
 
-    public function hasPermission(PermissionInterface|string $permission): bool
+    public function hasPermission(string $name): bool
     {
-        return isset($this->permissions[(string) $permission]);
+        return isset($this->permissions[$name]);
     }
 
-    public function addChild(RoleInterface $role): void
+    public function addChild(RoleInterface $child): void
     {
-        $this->children[] = $role;
+        $this->children[] = $child;
     }
 
     public function getChildren(): iterable
@@ -132,5 +115,15 @@ class Role implements RoleInterface
     public function hasChildren(): bool
     {
         return ! $this->children->isEmpty();
+    }
+
+    public function addParent(RoleInterface $parent): void
+    {
+        // TODO: Implement addParent() method.
+    }
+
+    public function getParents(): iterable
+    {
+        return [];
     }
 }

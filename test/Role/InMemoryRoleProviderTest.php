@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Role;
 
+use Laminas\Permissions\Rbac\RoleInterface;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
-use Lmc\Rbac\Role\RoleInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 

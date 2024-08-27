@@ -21,12 +21,13 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Role;
 
+use Laminas\Permissions\Rbac\RoleInterface;
+
 /**
  * A role provider is an object that collect roles from string and convert them to RoleInterface instances
  *
  * Data can come from anywhere. LmcRbac is bundled with two providers that allow to load roles from database
  * or from memory
- *
  */
 interface RoleProviderInterface
 {

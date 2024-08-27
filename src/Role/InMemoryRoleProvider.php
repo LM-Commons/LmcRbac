@@ -21,6 +21,8 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Role;
 
+use Laminas\Permissions\Rbac\Role;
+
 /**
  * Simple role providers that store them in memory (ideal for small websites)
  *

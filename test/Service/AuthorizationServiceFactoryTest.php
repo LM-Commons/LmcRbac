@@ -21,10 +21,10 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Service;
 
+use Laminas\Permissions\Rbac\Rbac;
 use Lmc\Rbac\Assertion\AssertionPluginManager;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Options\ModuleOptions;
-use Lmc\Rbac\Rbac;
 use Lmc\Rbac\Service\AuthorizationService;
 use Lmc\Rbac\Service\AuthorizationServiceFactory;
 use Lmc\Rbac\Service\RoleServiceInterface;

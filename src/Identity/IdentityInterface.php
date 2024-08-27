@@ -21,11 +21,10 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Identity;
 
-use Lmc\Rbac\Role\RoleInterface;
+use Laminas\Permissions\Rbac\RoleInterface;
 
 /**
- * Interface for an identity
- *
+ * Interface for an identity to provides roles
  */
 interface IdentityInterface
 {

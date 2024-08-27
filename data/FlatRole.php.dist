@@ -21,8 +21,7 @@ declare(strict_types=1);
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Lmc\Rbac\Permission\PermissionInterface;
-use Lmc\Rbac\Role\RoleInterface;
+use Laminas\Permissions\Rbac\RoleInterface;
 
 /**
  * @ORM\Entity
@@ -45,12 +44,12 @@ class FlatRole implements RoleInterface
     protected ?int $id;
 
     /**
-     * @var string|null
+     * @var string
      *
      * @ORM\Column(type="string", length=255, unique=true)
      */
     #[ORM\Column(name: 'name', type: 'string', length: 255, unique: true)]
-    protected ?string $name;
+    protected string $name = '';
 
     /**
      * @var Permission[]|Collection
@@ -101,27 +100,20 @@ class FlatRole implements RoleInterface
     /**
      * @inheritDoc
      */
-    public function addPermission(PermissionInterface|string $permission): void
+    public function addPermission(string $name): void
     {
-        if (is_string($permission)) {
-            $permission = new Permission($permission);
-        }
+        $permission = new Permission($name);
 
-        $this->permissions[(string) $permission] = $permission;
+        $this->permissions[$name] = $permission;
     }
 
     /**
      * @inheritDoc
      */
-    public function hasPermission(PermissionInterface|string $permission): bool
+    public function hasPermission(string $name): bool
     {
-        // This can be a performance problem if your role has a lot of permissions. Please refer
-        // to the cookbook to an elegant way to solve this issue
-
-        return isset($this->permissions[(string) $permission]);
+        return isset($this->permissions[$name]);
     }
-
-
 
     public function getChildren(): iterable
     {
@@ -133,8 +125,18 @@ class FlatRole implements RoleInterface
         return false;
     }
 
-    public function addChild(RoleInterface $role): void
+    public function addChild(RoleInterface $child): void
     {
         // Do nothing
+    }
+
+    public function addParent(RoleInterface $parent): void
+    {
+        // Do nothing
+    }
+
+    public function getParents(): iterable
+    {
+        return [];
     }
 }

@@ -21,11 +21,11 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Service;
 
+use Laminas\Permissions\Rbac\Rbac;
 use Lmc\Rbac\Assertion\AssertionInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Assertion\AssertionSet;
 use Lmc\Rbac\Identity\IdentityInterface;
-use Lmc\Rbac\Permission\PermissionInterface;
 use Lmc\Rbac\RbacInterface;
 
 use function array_merge;
@@ -37,17 +37,20 @@ use function is_array;
  */
 class AuthorizationService implements AuthorizationServiceInterface
 {
-    protected RbacInterface $rbac;
+    protected Rbac $rbac;
 
     protected RoleServiceInterface $roleService;
 
     private AssertionPluginManagerInterface $assertionPluginManager;
 
-    /** @var array */
+    /** @var array<string|callable|AssertionInterface> */
     private array $assertions;
 
+    /**
+     * @param array<string|callable|AssertionInterface> $assertions
+     */
     public function __construct(
-        RbacInterface $rbac,
+        Rbac $rbac,
         RoleServiceInterface $roleService,
         AssertionPluginManagerInterface $assertionPluginManager,
         array $assertions = []
@@ -61,7 +64,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * Set assertions, either merging or replacing (default)
      *
-     * @param array $assertions
+     * @param array<string|callable|AssertionInterface> $assertions
      */
     public function setAssertions(array $assertions, bool $merge = false): void
     {
@@ -74,24 +77,24 @@ class AuthorizationService implements AuthorizationServiceInterface
      * Set assertion for a given permission
      */
     public function setAssertion(
-        PermissionInterface|string $permission,
+        string $permission,
         AssertionInterface|callable|string $assertion
     ): void {
-        $this->assertions[(string) $permission] = $assertion;
+        $this->assertions[$permission] = $assertion;
     }
 
     /**
      * Check if there are assertions for the permission
      */
-    public function hasAssertion(PermissionInterface|string $permission): bool
+    public function hasAssertion(string $permission): bool
     {
-        return isset($this->assertions[(string) $permission]);
+        return isset($this->assertions[$permission]);
     }
 
     /**
      * Get the assertions
      *
-     * @return array
+     * @return array<string|callable|AssertionInterface>
      */
     public function getAssertions(): array
     {
@@ -101,38 +104,47 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * Get the assertions for the given permission
      */
-    public function getAssertion(PermissionInterface|string $permission): AssertionInterface|callable|string|null
+    public function getAssertion(string $permission): AssertionInterface|callable|string|null
     {
-        return $this->hasAssertion($permission) ? $this->assertions[(string) $permission] : null;
+        return $this->hasAssertion($permission) ? $this->assertions[$permission] : null;
     }
 
-    public function isGranted(
-        IdentityInterface|null $identity,
-        string|PermissionInterface $permission,
-        mixed $context = null
-    ): bool {
-        $roles = $this->roleService->getIdentityRoles($identity, $context);
+    public function isGranted(IdentityInterface|null $identity, string $permission, mixed $context = null): bool
+    {
+        $roles = $this->roleService->getIdentityRoles($identity);
 
         if (empty($roles)) {
             return false;
         }
 
-        if (! $this->rbac->isGranted($roles, $permission)) {
-            return false;
+        $this->injectRoles($this->rbac, $roles);
+
+        foreach ($roles as $role) {
+            if ($this->rbac->isGranted($role, $permission)) {
+                // Found one role with the permission
+                // Check for assertions
+                if (! isset($this->assertions[$permission])) {
+                    return true;
+                }
+
+                if (is_array($this->assertions[$permission])) {
+                    $permissionAssertions = $this->assertions[$permission];
+                } else {
+                    $permissionAssertions = [$this->assertions[$permission]];
+                }
+
+                $assertionSet = new AssertionSet($this->assertionPluginManager, $permissionAssertions);
+
+                return $assertionSet->assert($permission, $identity, $context);
+            }
         }
+        return false;
+    }
 
-        if (empty($this->assertions[(string) $permission])) {
-            return true;
+    protected function injectRoles(Rbac $rbac, array $roles): void
+    {
+        foreach ($roles as $role) {
+            $rbac->addRole($role);
         }
-
-        if (is_array($this->assertions[(string) $permission])) {
-            $permissionAssertions = $this->assertions[(string) $permission];
-        } else {
-            $permissionAssertions = [$this->assertions[(string) $permission]];
-        }
-
-        $assertionSet = new AssertionSet($this->assertionPluginManager, $permissionAssertions);
-
-        return $assertionSet->assert($permission, $identity, $context);
     }
 }
