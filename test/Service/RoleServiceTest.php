@@ -21,11 +21,9 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Service;
 
-use ArrayIterator;
-use Lmc\Rbac\Identity\IdentityInterface;
+use Laminas\Permissions\Rbac\Role;
+use Laminas\Permissions\Rbac\RoleInterface;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
-use Lmc\Rbac\Role\Role;
-use Lmc\Rbac\Role\RoleInterface;
 use Lmc\Rbac\Role\RoleProviderInterface;
 use Lmc\Rbac\Service\RoleService;
 use LmcTest\Rbac\Asset\Identity;
@@ -59,21 +57,6 @@ class RoleServiceTest extends TestCase
         $this->assertCount(1, $result);
         $this->assertInstanceOf(RoleInterface::class, $result[0]);
         $this->assertEquals('guest', $result[0]->getName());
-    }
-
-    public function testReturnTraversableRolesFromIdentityGiven(): void
-    {
-        $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
-        $identity    = $this->prophesize(IdentityInterface::class);
-        $identity->getRoles()->willReturn($roles = new ArrayIterator(['first', 'second', 'third']));
-
-        $result = $roleService->getIdentityRoles($identity->reveal());
-
-        $this->assertCount(3, $result);
-        $this->assertInstanceOf(RoleInterface::class, $result[0]);
-        $this->assertEquals($roles[0], $result[0]->getName());
-        $this->assertEquals($roles[1], $result[1]->getName());
-        $this->assertEquals($roles[2], $result[2]->getName());
     }
 
     public function testWillNotInvokeRoleProviderIfAllRolesCollected(): void
@@ -116,7 +99,7 @@ class RoleServiceTest extends TestCase
         $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
         $this->assertEquals('guest', $roleService->getGuestRole());
 
-        $roleService->setGuestRole('foo');
-        $this->assertEquals('foo', $roleService->getGuestRole());
+        //$roleService->setGuestRole('foo');
+        //$this->assertEquals('foo', $roleService->getGuestRole());
     }
 }

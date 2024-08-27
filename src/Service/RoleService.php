@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Service;
 
+use Laminas\Permissions\Rbac\RoleInterface;
 use Lmc\Rbac\Identity\IdentityInterface;
-use Lmc\Rbac\Role\RoleInterface;
 use Lmc\Rbac\Role\RoleProviderInterface;
 use Traversable;
 
@@ -34,7 +34,9 @@ use function array_merge;
 class RoleService implements RoleServiceInterface
 {
     protected RoleProviderInterface $roleProvider;
+
     protected string $guestRole = '';
+
     public function __construct(RoleProviderInterface $roleProvider, string $guestRole)
     {
         $this->roleProvider = $roleProvider;
@@ -43,6 +45,8 @@ class RoleService implements RoleServiceInterface
 
     /**
      * Set the guest role
+     *
+     * @deprecated The Guest role should be defined using the constructor
      */
     public function setGuestRole(string $guestRole): void
     {
@@ -58,11 +62,11 @@ class RoleService implements RoleServiceInterface
     }
 
     /**
-     * Get the identity roles from the current identity, applying some more logic
+     * Get the roles from the current identity, applying some more logic
      *
      * @return RoleInterface[]
      */
-    public function getIdentityRoles(?IdentityInterface $identity = null, mixed $context = null): iterable
+    public function getIdentityRoles(?IdentityInterface $identity = null): iterable
     {
         // If no identity is provided, get the guest role
         if (null === $identity) {
@@ -75,22 +79,22 @@ class RoleService implements RoleServiceInterface
     /**
      * Convert the roles (potentially strings) to concrete RoleInterface objects using role provider
      *
-     * @param  array|Traversable $roles
+     * @param  string[]|RoleInterface[] $roles
      * @return RoleInterface[]
      */
-    protected function convertRoles(iterable $roles): iterable
+    protected function convertRoles(array $roles): iterable
     {
         $collectedRoles = [];
         $toCollect      = [];
         foreach ($roles as $role) {
-        // If it's already a RoleInterface, nothing to do as a RoleInterface contains everything already
+            // If it's already a RoleInterface, nothing to do as a RoleInterface contains everything already
             if ($role instanceof RoleInterface) {
                 $collectedRoles[] = $role;
                 continue;
             }
 
             // Otherwise, it's a string and hence we need to collect it
-            $toCollect[] = (string) $role;
+            $toCollect[] = $role;
         }
 
         // Nothing to collect, we don't even need to hit the (potentially) costly role provider

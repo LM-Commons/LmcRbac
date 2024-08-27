@@ -9,7 +9,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
     title: 'LmcRbac',
-    tagline: 'Role-based access control components for your Laminas or Mezzio application',
+    tagline: 'Role-based access control components for your Laminas MVC and Mezzio application',
     favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -71,15 +71,21 @@ themeConfig:
             logo: {
                 alt: 'LM-Commons Logo',
                 src: 'img/LMC-logo.png',
+//                href: 'https://lm-commons.github.io'
             },
             items: [
             {
                 type: 'docSidebar',
                 sidebarId: 'documentationSidebar',
                 position: 'left',
-                label: 'Documentation',
+                label: 'Docs',
             },
-            {to: '/blog', label: 'Blog', position: 'left'},
+                {
+                    type: "docsVersionDropdown",
+                    position: "right",
+                },
+
+//            {to: '/blog', label: 'Blog', position: 'right'},
                 {
                     href: 'https://lm-commons.github.io',
                     label: 'LM-Commons',
@@ -87,14 +93,16 @@ themeConfig:
             },
             {
                 href: 'https://github.com/lm-commons/lmcrbac',
-                label: 'GitHub',
+//                label: 'GitHub',
                 position: 'right',
+                className: 'header-github-link',
             },
             ],
         },
         footer: {
             style: 'dark',
             links: [
+/*
             {
                 title: 'Docs',
                 items: [
@@ -104,6 +112,8 @@ themeConfig:
                 },
                 ],
             },
+
+ */
             {
                 title: 'Community',
                 items: [
@@ -116,10 +126,13 @@ themeConfig:
             {
                 title: 'More',
                 items: [
+/*
                 {
                     label: 'Blog',
                     to: '/blog',
                 },
+
+ */
                 {
                     label: 'GitHub',
                     href: 'https://github.com/lm-commons/lmcrbac',

@@ -23,7 +23,6 @@ namespace Lmc\Rbac\Assertion;
 
 use Lmc\Rbac\Exception;
 use Lmc\Rbac\Identity\IdentityInterface;
-use Lmc\Rbac\Permission\PermissionInterface;
 
 use function count;
 use function gettype;
@@ -47,6 +46,7 @@ class AssertionSet implements AssertionInterface
     private string $condition = self::CONDITION_AND;
 
     /**
+     * @param AssertionPluginManagerInterface $assertionPluginManager
      * @param array $assertions
      */
     public function __construct(
@@ -70,7 +70,7 @@ class AssertionSet implements AssertionInterface
     }
 
     public function assert(
-        PermissionInterface|string $permission,
+        $permission,
         ?IdentityInterface $identity = null,
         mixed $context = null
     ): bool {

@@ -14,6 +14,5 @@ a `config/autoload/lmcrbac.global.php` file. A sample configuration file is prov
 | Key | Description                                                                                                                                    |
 |--|------------------------------------------------------------------------------------------------------------------------------------------------|
 | `guest_role` | Defines the name of the `guest` role when no identity exists. <br/>Defaults to `'guest'`.                                                      |
-| `role_provider` | Defines the role provider.<br/>Defaults to `[]`<br/>See the [Role Providers](role-providers) section.                                          |
 | `assertion_map` | Defines the dynamic assertions that are associated to permissions.<br/>Defaults to `[]`.<br/>See the [Dynamic Assertions](assertions) section. |
-| `assertion_manager` | Provides a configuration for the Assertion Plugin Manager.<br/> Defaults to `[]`.<br/>See the [Dynamic Assertion](assertions.md) section.     |
+| `role_provider` | Defines the role provider.<br/>Defaults to `[]`<br/>See the [Role Providers](role-providers) section.                                          |

@@ -21,13 +21,14 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac;
 
+use Laminas\Permissions\Rbac\Rbac;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Lmc\Rbac\Assertion\AssertionPluginManager;
 use Lmc\Rbac\Assertion\AssertionPluginManagerFactory;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Options\ModuleOptionsFactory;
-use Lmc\Rbac\Rbac;
+//use Lmc\Rbac\Rbac;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
 use Lmc\Rbac\Role\InMemoryRoleProviderFactory;
 use Lmc\Rbac\Role\ObjectRepositoryRoleProvider;

@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace Lmc\Rbac\Assertion;
 
 use Lmc\Rbac\Identity\IdentityInterface;
-use Lmc\Rbac\Permission\PermissionInterface;
 
 /**
  * Interface that you can implement for dynamic assertions
@@ -32,7 +31,7 @@ use Lmc\Rbac\Permission\PermissionInterface;
 interface AssertionInterface
 {
     public function assert(
-        PermissionInterface|string $permission,
+        string $permission,
         ?IdentityInterface $identity = null,
         mixed $context = null
     ): bool;
