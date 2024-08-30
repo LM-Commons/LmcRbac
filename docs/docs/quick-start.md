@@ -68,7 +68,7 @@ You will be prompted by the `laminas-component-installer` plugin to inject LM-Co
 :::note
 **Manual installation:**
 
-Enable the module by adding `LmcRbac` key to your `application.config.php` or `modules.config.php` file for Laminas MVC
+Enable the module by adding `Lmc\Rbac` key to your `application.config.php` or `modules.config.php` file for Laminas MVC
 applications, or to the `config/config.php` file for Mezzio applications.
 :::
 
