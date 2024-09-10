@@ -47,13 +47,14 @@ const config = {
                 editUrl:
                 'https://github.com/lm-commons/lmcrbac/tree/master/docs/',
                 includeCurrentVersion: false,
-                lastVersion: '2.0',
+                /*
                 versions: {
-                    "2.0": {
-                        label: '2.0',
-                        path: '2.0',
+                    "1.4": {
+                        banner: 'none',
                     }
                 }
+
+                 */
             },
             blog: {
                 showReadingTime: true,
