@@ -41,12 +41,12 @@
   "require": {
     "php": "^8.1 || ^8.2 || ^8.3",
     "laminas/laminas-permissions-rbac": "^3.0",
-    "laminas/laminas-servicemanager": "^3.3",
+    "laminas/laminas-servicemanager": "^3.3 || ^4.0",
     "laminas/laminas-stdlib": "^3.1",
     "doctrine/persistence": "^2.0 || ^3.0"
   },
   "require-dev": {
-    "laminas/laminas-coding-standard": "^2.5.0",
+    "laminas/laminas-coding-standard": "^3.0.0",
     "phpunit/phpunit": "^10.0 || ^11.0",
     "phpspec/prophecy": "^1.10",
     "phpspec/prophecy-phpunit": "^2.0",
