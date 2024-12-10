@@ -23,7 +23,6 @@ namespace Lmc\Rbac\Exception;
 
 /**
  * Base exception interface for LmcRbac
- *
  */
 interface ExceptionInterface
 {

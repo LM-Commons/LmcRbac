@@ -98,8 +98,9 @@ class ObjectRepositoryRoleProviderFactoryTest extends TestCase
     public function testThrowExceptionIfNoObjectManagerNorObjectRepositoryIsSet(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('No object repository was found while creating the LmcRbac object repository role provider. Are
-             you sure you specified either the "object_repository" option or "object_manager"/"class_name" options?');
+        $this->expectExceptionMessage('No object repository was found while creating the LmcRbac object repository 
+            role provider. Are you sure you specified either the "object_repository" option or 
+            "object_manager"/"class_name" options?');
 
         $container = new ServiceManager();
         $container->setService(ModuleOptions::class, new ModuleOptions([

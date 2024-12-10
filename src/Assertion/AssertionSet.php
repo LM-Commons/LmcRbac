@@ -40,15 +40,10 @@ class AssertionSet implements AssertionInterface
     public const CONDITION_OR  = 'condition_or';
     public const CONDITION_AND = 'condition_and';
 
-    /** @var array */
     private array $assertions;
 
     private string $condition = self::CONDITION_AND;
 
-    /**
-     * @param AssertionPluginManagerInterface $assertionPluginManager
-     * @param array $assertions
-     */
     public function __construct(
         private readonly AssertionPluginManagerInterface $assertionPluginManager,
         array $assertions
@@ -69,11 +64,8 @@ class AssertionSet implements AssertionInterface
         $this->assertions = $assertions;
     }
 
-    public function assert(
-        $permission,
-        ?IdentityInterface $identity = null,
-        mixed $context = null
-    ): bool {
+    public function assert(string $permission, ?IdentityInterface $identity = null, mixed $context = null): bool
+    {
         if (empty($this->assertions)) {
             return false;
         }
@@ -94,12 +86,16 @@ class AssertionSet implements AssertionInterface
                     $asserted = $assertion->assert($permission, $identity, $context);
                     break;
                 case is_array($assertion):
-                    $this->assertions[$index] = $assertion = new AssertionSet($this->assertionPluginManager, $assertion);
+                    $this->assertions[$index] = $assertion = new AssertionSet(
+                        $this->assertionPluginManager,
+                        $assertion
+                    );
                     $asserted                 = $assertion->assert($permission, $identity, $context);
                     break;
                 default:
                     throw new Exception\InvalidArgumentException(sprintf(
-                        'Assertion must be callable, string, array or implement Lmc\Rbac\Assertion\AssertionInterface, "%s" given',
+                        'Assertion must be callable, string, 
+                        array or implement Lmc\Rbac\Assertion\AssertionInterface, "%s" given',
                         is_object($assertion) ? $assertion::class : gettype($assertion)
                     ));
             }

@@ -26,7 +26,6 @@ use Lmc\Rbac\Role\InMemoryRoleProvider;
 
 /**
  * Options for LmcRbac module
- *
  */
 class ModuleOptions extends AbstractOptions
 {
@@ -37,16 +36,12 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * Assertion map
-     *
-     * @var array
      */
     protected array $assertionMap = [];
 
     /**
      * A configuration for role provider
      * Defaults to InMemoryRoleProvider
-     *
-     * @var array
      */
     protected array $roleProvider = [
         InMemoryRoleProvider::class => [],
@@ -54,8 +49,6 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * Assertion plugin manager configuration
-     *
-     * @var array
      */
     protected array $assertionManager = [];
 
@@ -73,8 +66,6 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * Set the assertions options
-     *
-     * @param array $assertionMap
      */
     public function setAssertionMap(array $assertionMap): void
     {
@@ -83,8 +74,6 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * Get the assertions options
-     *
-     * @return array
      */
     public function getAssertionMap(): array
     {
@@ -109,8 +98,6 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * Set the configuration for the role provider
-     *
-     * @param array $roleProvider
      */
     public function setRoleProvider(array $roleProvider): void
     {
@@ -124,17 +111,12 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * Set the configuration for the assertion plugin manager
-     *
-     * @param array $assertionManager
      */
     public function setAssertionManager(array $assertionManager): void
     {
         $this->assertionManager = $assertionManager;
     }
 
-    /**
-     * @return array
-     */
     public function getAssertionManager(): array
     {
         return $this->assertionManager;

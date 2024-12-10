@@ -107,7 +107,10 @@ class AssertionSetTest extends TestCase
         $barAssertion = new SimpleAssertion(true);
 
         $assertionContainer = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
-        $assertionSet       = new AssertionSet($assertionContainer, ['fooFactory', 'barFactory', 'condition' => AssertionSet::CONDITION_AND]);
+        $assertionSet       = new AssertionSet(
+            $assertionContainer,
+            ['fooFactory', 'barFactory', 'condition' => AssertionSet::CONDITION_AND]
+        );
 
         $assertionContainer->expects($this->once())->method('get')->with('fooFactory')->willReturn($fooAssertion);
 
@@ -123,7 +126,10 @@ class AssertionSetTest extends TestCase
         $barAssertion = new SimpleAssertion(false);
 
         $assertionContainer = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
-        $assertionSet       = new AssertionSet($assertionContainer, ['fooFactory', 'barFactory', 'condition' => AssertionSet::CONDITION_OR]);
+        $assertionSet       = new AssertionSet(
+            $assertionContainer,
+            ['fooFactory', 'barFactory', 'condition' => AssertionSet::CONDITION_OR]
+        );
 
         $assertionContainer->expects($this->once())->method('get')->with('fooFactory')->willReturn($fooAssertion);
 
@@ -239,10 +245,10 @@ class AssertionSetTest extends TestCase
     {
         unset($assertions['condition']);
         foreach ($assertions as $key => $assertion) {
+            /** @var array|SimpleAssertion $assertion */
             if (is_array($assertion)) {
                 $this->assertionsCalled($assertion, $assertionCalledCount[$key]);
             } else {
-                /** @var SimpleAssertion $assertion */
                 $this->assertSame($assertionCalledCount[$key], $assertion->calledTimes());
             }
         }
@@ -263,13 +269,39 @@ class AssertionSetTest extends TestCase
             [['condition' => AssertionSet::CONDITION_OR, new SimpleAssertion(true)], true, [1]],
 
             // break early for AND condition with failure
-            [['condition' => AssertionSet::CONDITION_AND, new SimpleAssertion(false), new SimpleAssertion(false)], false, [1, 0]],
+            [
+                [
+                    'condition' => AssertionSet::CONDITION_AND,
+                    new SimpleAssertion(false),
+                    new SimpleAssertion(false),
+                ],
+                false,
+                [1, 0],
+            ],
 
             // break early for OR condition with success
-            [['condition' => AssertionSet::CONDITION_OR, new SimpleAssertion(true), new SimpleAssertion(false)], true, [1, 0]],
+            [
+                [
+                    'condition' => AssertionSet::CONDITION_OR,
+                    new SimpleAssertion(true),
+                    new SimpleAssertion(false),
+                ],
+                true,
+                [1, 0],
+            ],
 
             // nested assertions
-            [['condition' => AssertionSet::CONDITION_OR, new SimpleAssertion(false), [new SimpleAssertion(true)]], true, [1, [1]]],
+            [
+                [
+                    'condition' => AssertionSet::CONDITION_OR,
+                    new SimpleAssertion(false),
+                    [
+                        new SimpleAssertion(true),
+                    ],
+                ],
+                true,
+                [1, [1]],
+            ],
         ];
     }
 }

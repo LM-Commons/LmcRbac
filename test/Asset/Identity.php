@@ -25,7 +25,6 @@ use Lmc\Rbac\Identity\IdentityInterface;
 
 class Identity implements IdentityInterface
 {
-    /** @var array */
     private array $roles;
 
     public function __construct(array $roles = [])

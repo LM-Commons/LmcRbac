@@ -27,7 +27,6 @@ use Psr\Container\ContainerInterface;
 
 /**
  * Factory used to create an in memory role provider
- *
  */
 class InMemoryRoleProviderFactory
 {

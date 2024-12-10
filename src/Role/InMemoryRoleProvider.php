@@ -40,12 +40,8 @@ use Laminas\Permissions\Rbac\Role;
  */
 final class InMemoryRoleProvider implements RoleProviderInterface
 {
-    /** @var array */
     private array $rolesConfig = [];
 
-    /**
-     * @param array $rolesConfig
-     */
     public function __construct(array $rolesConfig)
     {
         $this->rolesConfig = $rolesConfig;

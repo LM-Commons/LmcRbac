@@ -25,5 +25,5 @@ use Psr\Container\ContainerInterface;
 
 interface AssertionPluginManagerInterface extends ContainerInterface
 {
-    public function get($name): AssertionInterface;
+    public function get(string $id): AssertionInterface;
 }

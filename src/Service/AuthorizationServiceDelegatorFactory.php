@@ -40,7 +40,8 @@ class AuthorizationServiceDelegatorFactory implements DelegatorFactoryInterface
     ): AuthorizationServiceAwareInterface {
         $instance = call_user_func($callback);
         if (! $instance instanceof AuthorizationServiceAwareInterface) {
-            throw new ServiceNotCreatedException("The service $name must implement Laminas\Authorization\Service\AuthorizationServiceAwareInterface");
+            throw new ServiceNotCreatedException("The service $name must implement 
+            Laminas\Authorization\Service\AuthorizationServiceAwareInterface");
         }
 
         $authorizationService = $container->get(AuthorizationServiceInterface::class);
