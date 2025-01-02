@@ -38,6 +38,7 @@ use LmcTest\Rbac\Asset\Identity;
 use LmcTest\Rbac\Asset\SimpleAssertion;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -392,7 +393,10 @@ class AuthorizationServiceTest extends TestCase
 
         $assertionPluginManager = $this->getMockBuilder(AssertionPluginManagerInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $authorizationService   = new AuthorizationService(
+        /**
+         * @psalm-suppress InvalidArgument
+         */
+        $authorizationService = new AuthorizationService(
             $rbac,
             $roleService,
             $assertionPluginManager,
@@ -404,6 +408,9 @@ class AuthorizationServiceTest extends TestCase
         $authorizationService->isGranted(new Identity(), 'foo', 'foo');
     }
 
+    /**
+     * @throws Exception
+     */
     public function testContextIsPassedToRoleService(): void
     {
         $identity = new Identity([]);
@@ -418,6 +425,9 @@ class AuthorizationServiceTest extends TestCase
         $authorizationService->isGranted($identity, 'foo', $context);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testGetAssertions(): void
     {
         $assertions           = [
@@ -429,6 +439,9 @@ class AuthorizationServiceTest extends TestCase
         $this->assertNull($authorizationService->getAssertion('bar'));
     }
 
+    /**
+     * @throws Exception
+     */
     public function testHasAssertion(): void
     {
         $assertions           = [
@@ -439,6 +452,9 @@ class AuthorizationServiceTest extends TestCase
         $this->assertFalse($authorizationService->hasAssertion('bar'));
     }
 
+    /**
+     * @throws Exception
+     */
     public function testSetAssertions(): void
     {
         $assertions           = [
@@ -462,8 +478,14 @@ class AuthorizationServiceTest extends TestCase
         $this->assertEquals('foo', $authorizationService->getAssertion('bar'));
     }
 
+    /**
+     * @throws Exception
+     */
     private function createAuthorizationService(array $assertions): AuthorizationService
     {
+        /**
+         * @psalm-suppress MixedArgumentTypeCoercion
+         */
         return new AuthorizationService(
             $this->createMock(Rbac::class),
             $this->createMock(RoleServiceInterface::class),

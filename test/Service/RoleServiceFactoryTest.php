@@ -53,7 +53,7 @@ class RoleServiceFactoryTest extends TestCase
         ]);
 
         $factory     = new RoleServiceFactory();
-        $roleService = $factory($container, RoleService::class);
+        $roleService = $factory($container);
 
         $this->assertInstanceOf(RoleService::class, $roleService);
     }
