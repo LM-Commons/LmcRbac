@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41ef3e5bbb4a18f8987c2598e5e78b03",
+    "content-hash": "478346e57fd6c14bf0e0285a0177bcbb",
     "packages": [
         {
             "name": "doctrine/event-manager",
@@ -5393,7 +5393,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
     },
     "platform-dev": {},
     "platform-overrides": {
