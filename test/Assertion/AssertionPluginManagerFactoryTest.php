@@ -27,14 +27,13 @@ use Lmc\Rbac\Assertion\AssertionPluginManagerFactory;
 use Lmc\Rbac\Options\ModuleOptions;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
 
 #[CoversClass(AssertionPluginManagerFactory::class)]
 class AssertionPluginManagerFactoryTest extends TestCase
 {
     public function testFactory(): void
     {
-        $moduleOptions = new ModuleOptions(
+        $moduleOptions  = new ModuleOptions(
             [
                 'assertion_manager' => [],
             ]

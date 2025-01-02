@@ -24,6 +24,8 @@ namespace Lmc\Rbac\Options;
 use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use Psr\Container\ContainerInterface;
 
+use function is_array;
+
 /**
  * Factory for the module options
  */
@@ -33,7 +35,7 @@ class ModuleOptionsFactory
     {
         $config = $container->get('config');
 
-        if (!isset($config['lmc_rbac']) || !is_array($config['lmc_rbac'])) {
+        if (! isset($config['lmc_rbac']) || ! is_array($config['lmc_rbac'])) {
             throw new ServiceNotCreatedException('No lmc_rbac config found.');
         }
 

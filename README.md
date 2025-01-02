@@ -9,7 +9,6 @@
 
 ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2Flm-commons%2Flmcrbac%2Fproperties%2Fvalues&query=%24%5B%3A1%5D.value&label=Maintenance%20Status)
 
-
 Role-based access control module to provide additional features on top of Laminas\Permissions\Rbac
 
 ## Requirements

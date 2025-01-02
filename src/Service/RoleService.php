@@ -24,7 +24,6 @@ namespace Lmc\Rbac\Service;
 use Laminas\Permissions\Rbac\RoleInterface;
 use Lmc\Rbac\Identity\IdentityInterface;
 use Lmc\Rbac\Role\RoleProviderInterface;
-use Traversable;
 
 use function array_merge;
 

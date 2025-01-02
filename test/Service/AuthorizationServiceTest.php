@@ -38,6 +38,7 @@ use LmcTest\Rbac\Asset\Identity;
 use LmcTest\Rbac\Asset\SimpleAssertion;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -159,8 +160,13 @@ class AuthorizationServiceTest extends TestCase
     }
 
     #[DataProvider('grantedProvider')]
-    public function testGranted($role, $permission, $context, bool $isGranted, array $assertions = []): void
-    {
+    public function testGranted(
+        string|array $role,
+        string $permission,
+        bool|null $context,
+        bool $isGranted,
+        array $assertions = []
+    ): void {
         $roleConfig = [
             'admin'  => [
                 'children'    => ['member'],
@@ -185,7 +191,12 @@ class AuthorizationServiceTest extends TestCase
         $identity               = new Identity((array) $role);
         $roleService            = new RoleService(new InMemoryRoleProvider($roleConfig), 'guest');
         $assertionPluginManager = new AssertionPluginManager(new ServiceManager(), $assertionPluginConfig);
-        $authorizationService   = new AuthorizationService(new Rbac(), $roleService, $assertionPluginManager, $assertions);
+        $authorizationService   = new AuthorizationService(
+            new Rbac(),
+            $roleService,
+            $assertionPluginManager,
+            $assertions
+        );
 
         $this->assertEquals($isGranted, $authorizationService->isGranted($identity, $permission, $context));
     }
@@ -258,7 +269,12 @@ class AuthorizationServiceTest extends TestCase
         $assertionPluginManager = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
         $assertionPluginManager->expects($this->never())->method('get');
 
-        $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager, ['foo' => $assertion]);
+        $authorizationService = new AuthorizationService(
+            $rbac,
+            $roleService,
+            $assertionPluginManager,
+            ['foo' => $assertion]
+        );
 
         $authorizationService->isGranted($identity, 'foo', 'foo');
 
@@ -278,9 +294,15 @@ class AuthorizationServiceTest extends TestCase
         $rbac->expects($this->once())->method('isGranted')->willReturn(true);
 
         $assertionPluginManager = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
-        $assertionPluginManager->expects($this->once())->method('get')->with('fooFactory')->willReturn($assertion);
+        $assertionPluginManager->expects($this->once())
+            ->method('get')->with('fooFactory')->willReturn($assertion);
 
-        $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager, ['foo' => 'fooFactory']);
+        $authorizationService = new AuthorizationService(
+            $rbac,
+            $roleService,
+            $assertionPluginManager,
+            ['foo' => 'fooFactory']
+        );
 
         $authorizationService->isGranted($identity, 'foo', 'foo');
 
@@ -369,14 +391,26 @@ class AuthorizationServiceTest extends TestCase
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
         $roleService->expects($this->once())->method('getIdentityRoles')->willreturn([$role]);
 
-        $assertionPluginManager = $this->getMockBuilder(AssertionPluginManagerInterface::class)->disableOriginalConstructor()->getMock();
-        $authorizationService   = new AuthorizationService($rbac, $roleService, $assertionPluginManager, ['foo' => new stdClass()]);
+        $assertionPluginManager = $this->getMockBuilder(AssertionPluginManagerInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        /**
+         * @psalm-suppress InvalidArgument
+         */
+        $authorizationService = new AuthorizationService(
+            $rbac,
+            $roleService,
+            $assertionPluginManager,
+            ['foo' => new stdClass()]
+        );
 
         $this->expectException(InvalidArgumentException::class);
 
         $authorizationService->isGranted(new Identity(), 'foo', 'foo');
     }
 
+    /**
+     * @throws Exception
+     */
     public function testContextIsPassedToRoleService(): void
     {
         $identity = new Identity([]);
@@ -391,6 +425,9 @@ class AuthorizationServiceTest extends TestCase
         $authorizationService->isGranted($identity, 'foo', $context);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testGetAssertions(): void
     {
         $assertions           = [
@@ -402,6 +439,9 @@ class AuthorizationServiceTest extends TestCase
         $this->assertNull($authorizationService->getAssertion('bar'));
     }
 
+    /**
+     * @throws Exception
+     */
     public function testHasAssertion(): void
     {
         $assertions           = [
@@ -412,6 +452,9 @@ class AuthorizationServiceTest extends TestCase
         $this->assertFalse($authorizationService->hasAssertion('bar'));
     }
 
+    /**
+     * @throws Exception
+     */
     public function testSetAssertions(): void
     {
         $assertions           = [
@@ -435,8 +478,14 @@ class AuthorizationServiceTest extends TestCase
         $this->assertEquals('foo', $authorizationService->getAssertion('bar'));
     }
 
+    /**
+     * @throws Exception
+     */
     private function createAuthorizationService(array $assertions): AuthorizationService
     {
+        /**
+         * @psalm-suppress MixedArgumentTypeCoercion
+         */
         return new AuthorizationService(
             $this->createMock(Rbac::class),
             $this->createMock(RoleServiceInterface::class),

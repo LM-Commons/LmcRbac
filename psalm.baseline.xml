@@ -1,3 +1,312 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.25.0@01a8eb06b9e9cc6cfb6a320bf9fb14331919d505">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+  <file src="src/Assertion/AssertionPluginManager.php">
+    <MissingTemplateParam>
+      <code><![CDATA[AssertionPluginManager]]></code>
+    </MissingTemplateParam>
+    <MixedInferredReturnType>
+      <code><![CDATA[AssertionInterface]]></code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[parent::get($name, $options)]]></code>
+    </MixedReturnStatement>
+    <ParamNameMismatch>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$name]]></code>
+    </ParamNameMismatch>
+  </file>
+  <file src="src/Assertion/AssertionPluginManagerFactory.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$config->getAssertionManager()]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Assertion/AssertionSet.php">
+    <MixedAssignment>
+      <code><![CDATA[$asserted]]></code>
+      <code><![CDATA[$assertion]]></code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Options/ModuleOptions.php">
+    <MissingParamType>
+      <code><![CDATA[$options]]></code>
+    </MissingParamType>
+    <MissingTemplateParam>
+      <code><![CDATA[ModuleOptions]]></code>
+    </MissingTemplateParam>
+    <MixedArgument>
+      <code><![CDATA[$options]]></code>
+    </MixedArgument>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[setAssertionManager]]></code>
+      <code><![CDATA[setAssertionMap]]></code>
+      <code><![CDATA[setGuestRole]]></code>
+      <code><![CDATA[setRoleProvider]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Role/InMemoryRoleProvider.php">
+    <MixedArgument>
+      <code><![CDATA[$permission]]></code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$childRoles]]></code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess>
+      <code><![CDATA[$roleConfig['children']]]></code>
+      <code><![CDATA[$roleConfig['permissions']]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code><![CDATA[$permission]]></code>
+      <code><![CDATA[$permissions]]></code>
+      <code><![CDATA[$roleConfig]]></code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Role/InMemoryRoleProviderFactory.php">
+    <MixedArgument>
+      <code><![CDATA[$moduleOptions->getRoleProvider()[InMemoryRoleProvider::class] ?? []]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$moduleOptions]]></code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code><![CDATA[getRoleProvider]]></code>
+    </MixedMethodCall>
+  </file>
+  <file src="src/Role/ObjectRepositoryRoleProvider.php">
+    <InvalidReturnStatement>
+      <code><![CDATA[$roles]]></code>
+    </InvalidReturnStatement>
+    <MixedAssignment>
+      <code><![CDATA[$role]]></code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code><![CDATA[iterable]]></code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->roleCache[$key]]]></code>
+    </MixedReturnStatement>
+    <UndefinedDocblockClass>
+      <code><![CDATA[$role]]></code>
+      <code><![CDATA[$roles]]></code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="src/Role/ObjectRepositoryRoleProviderFactory.php">
+    <MixedArgument>
+      <code><![CDATA[$objectRepository]]></code>
+      <code><![CDATA[$objectRepository]]></code>
+      <code><![CDATA[$options['object_manager']]]></code>
+      <code><![CDATA[$options['object_repository']]]></code>
+      <code><![CDATA[$options['role_name_property']]]></code>
+      <code><![CDATA[$options['role_name_property']]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$moduleOptions]]></code>
+      <code><![CDATA[$objectManager]]></code>
+      <code><![CDATA[$objectRepository]]></code>
+      <code><![CDATA[$objectRepository]]></code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code><![CDATA[getRepository]]></code>
+      <code><![CDATA[getRoleProvider]]></code>
+    </MixedMethodCall>
+  </file>
+  <file src="src/Service/AuthorizationService.php">
+    <MixedArgument>
+      <code><![CDATA[$role]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$role]]></code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Service/AuthorizationServiceDelegatorFactory.php">
+    <MixedArgument>
+      <code><![CDATA[$authorizationService]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$authorizationService]]></code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Service/AuthorizationServiceFactory.php">
+    <MixedArgument>
+      <code><![CDATA[$container->get(AssertionPluginManagerInterface::class)]]></code>
+      <code><![CDATA[$container->get(Rbac::class)]]></code>
+      <code><![CDATA[$container->get(RoleServiceInterface::class)]]></code>
+      <code><![CDATA[$moduleOptions->getAssertionMap()]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$moduleOptions]]></code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code><![CDATA[getAssertionMap]]></code>
+    </MixedMethodCall>
+  </file>
+  <file src="src/Service/RoleService.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[setGuestRole]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Service/RoleServiceFactory.php">
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$roleProviderName]]></code>
+    </MixedArgumentTypeCoercion>
+  </file>
+  <file src="test/Assertion/AssertionPluginManagerTest.php">
+    <MissingReturnType>
+      <code><![CDATA[testValidationOfPluginFailsIfAssertionInterfaceIsNotImplemented]]></code>
+      <code><![CDATA[testValidationOfPluginSucceedsIfAssertionInterfaceIsImplemented]]></code>
+    </MissingReturnType>
+    <UnusedVariable>
+      <code><![CDATA[$instance]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Assertion/AssertionSetTest.php">
+    <MissingClosureParamType>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$permission]]></code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType>
+      <code><![CDATA[function ($permission, ?IdentityInterface $identity = null, $context = null) use (&$called) {]]></code>
+    </MissingClosureReturnType>
+    <MissingReturnType>
+      <code><![CDATA[assertionsCalled]]></code>
+      <code><![CDATA[testAcceptsAnAndCondition]]></code>
+      <code><![CDATA[testAcceptsAnOrCondition]]></code>
+      <code><![CDATA[testAndConditionWillBreakEarlyWithFailure]]></code>
+      <code><![CDATA[testAssertionsAsStringsAreCached]]></code>
+      <code><![CDATA[testImplementsAssertionInterface]]></code>
+      <code><![CDATA[testMatrix]]></code>
+      <code><![CDATA[testOrConditionWillBreakEarlyWithSuccess]]></code>
+      <code><![CDATA[testThrowExceptionForInvalidAssertion]]></code>
+      <code><![CDATA[testThrowsExceptionForAnUnknownCondition]]></code>
+      <code><![CDATA[testUsesAssertionsAsArrays]]></code>
+      <code><![CDATA[testUsesAssertionsAsCallables]]></code>
+      <code><![CDATA[testUsesAssertionsAsInstances]]></code>
+      <code><![CDATA[testUsesAssertionsAsStrings]]></code>
+      <code><![CDATA[testWhenNoAssertionsArePresentTheAssertionWillFail]]></code>
+      <code><![CDATA[testWhenNoConditionIsGivenAndIsUsed]]></code>
+    </MissingReturnType>
+    <MixedArgument>
+      <code><![CDATA[$assertionCalledCount[$key]]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$assertion]]></code>
+    </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[dpMatrix]]></code>
+    </PossiblyUnusedMethod>
+    <UnusedClosureParam>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$identity]]></code>
+      <code><![CDATA[$permission]]></code>
+    </UnusedClosureParam>
+  </file>
+  <file src="test/ConfigProviderTest.php">
+    <MissingReturnType>
+      <code><![CDATA[testInvocationProvidesDependencyConfiguration]]></code>
+      <code><![CDATA[testProvidesExpectedConfiguration]]></code>
+      <code><![CDATA[testProvidesExpectedModuleConfiguration]]></code>
+    </MissingReturnType>
+  </file>
+  <file src="test/ModuleTest.php">
+    <MissingReturnType>
+      <code><![CDATA[testProvidesExpectedConfiguration]]></code>
+    </MissingReturnType>
+  </file>
+  <file src="test/Role/ObjectRepositoryRoleProviderTest.php">
+    <InvalidArgument>
+      <code><![CDATA[[
+            'driverClass' => Driver::class,
+            'path'        => null,
+            'memory'      => true,
+            'dbname'      => 'test',
+        ]]]></code>
+    </InvalidArgument>
+    <MissingReturnType>
+      <code><![CDATA[testObjectRepositoryProviderForFlatRole]]></code>
+      <code><![CDATA[testObjectRepositoryProviderForFlatRoleWithPermissions]]></code>
+      <code><![CDATA[testObjectRepositoryProviderForHierarchicalRole]]></code>
+    </MissingReturnType>
+    <MixedArgument>
+      <code><![CDATA[$permission]]></code>
+      <code><![CDATA[$role->getChildren()]]></code>
+      <code><![CDATA[$roleConfig]]></code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$rolesToCheck]]></code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment>
+      <code><![CDATA[$permission]]></code>
+      <code><![CDATA[$role]]></code>
+      <code><![CDATA[$roleConfig]]></code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code><![CDATA[getChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
+    </MixedMethodCall>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[roleProvider]]></code>
+    </PossiblyUnusedMethod>
+    <RedundantConditionGivenDocblockType>
+      <code><![CDATA[assertIsArray]]></code>
+      <code><![CDATA[assertIsArray]]></code>
+      <code><![CDATA[assertIsArray]]></code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="test/Service/AuthorizationServiceAwareTraitTest.php">
+    <MissingReturnType>
+      <code><![CDATA[testAuthorizationServiceAwareTrait]]></code>
+    </MissingReturnType>
+  </file>
+  <file src="test/Service/AuthorizationServiceDelegatorFactoryTest.php">
+    <MissingClosureReturnType>
+      <code><![CDATA[function () {]]></code>
+      <code><![CDATA[function () {]]></code>
+    </MissingClosureReturnType>
+    <UnusedVariable>
+      <code><![CDATA[$instance]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Service/AuthorizationServiceTest.php">
+    <InvalidArgument>
+      <code><![CDATA[[
+            'foo' => [
+                function ($permission, ?IdentityInterface $identity = null, $context = null) use (&$called1) {
+                    $called1 = true;
+
+                    return true;
+                },
+                function ($permission, ?IdentityInterface $identity = null, $context = null) use (&$called2) {
+                    $called2 = true;
+
+                    return false;
+                },
+            ],
+        ]]]></code>
+    </InvalidArgument>
+    <MissingClosureParamType>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$permission]]></code>
+      <code><![CDATA[$permission]]></code>
+      <code><![CDATA[$permission]]></code>
+    </MissingClosureParamType>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$assertions]]></code>
+    </MixedArgumentTypeCoercion>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[grantedProvider]]></code>
+    </PossiblyUnusedMethod>
+    <UnusedClosureParam>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$identity]]></code>
+      <code><![CDATA[$identity]]></code>
+      <code><![CDATA[$identity]]></code>
+      <code><![CDATA[$permission]]></code>
+      <code><![CDATA[$permission]]></code>
+      <code><![CDATA[$permission]]></code>
+    </UnusedClosureParam>
+  </file>
 </files>

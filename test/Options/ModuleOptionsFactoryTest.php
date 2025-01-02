@@ -43,9 +43,10 @@ class ModuleOptionsFactoryTest extends TestCase
 
         $this->assertInstanceOf(ModuleOptions::class, $options);
     }
+
     public function testNoConfig(): void
     {
-        $factory = new ModuleOptionsFactory();
+        $factory        = new ModuleOptionsFactory();
         $serviceManager = new ServiceManager();
 
         $config = [];

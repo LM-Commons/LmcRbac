@@ -26,7 +26,6 @@ use Lmc\Rbac\Assertion\AssertionInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Assertion\AssertionSet;
 use Lmc\Rbac\Identity\IdentityInterface;
-use Lmc\Rbac\RbacInterface;
 
 use function array_merge;
 use function is_array;

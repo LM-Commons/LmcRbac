@@ -35,7 +35,7 @@ class SimpleAssertion implements AssertionInterface
         $this->willAssert = $willAssert;
     }
 
-    public function assert(string $permission, ?IdentityInterface $identity = null, $context = null): bool
+    public function assert(string $permission, ?IdentityInterface $identity = null, mixed $context = null): bool
     {
         $this->called++;
 

@@ -43,7 +43,8 @@ class AuthorizationServiceFactoryTest extends TestCase
         $container = $this->prophesize(ContainerInterface::class);
         $container->get(ModuleOptions::class)->willReturn(new ModuleOptions([]));
         $container->get(RoleServiceInterface::class)->willReturn($this->createMock(RoleServiceInterface::class));
-        $container->get(AssertionPluginManagerInterface::class)->willReturn($this->createMock(AssertionPluginManager::class));
+        $container->get(AssertionPluginManagerInterface::class)
+            ->willReturn($this->createMock(AssertionPluginManager::class));
         $container->get(Rbac::class)->willReturn(new Rbac());
 
         $factory              = new AuthorizationServiceFactory();
