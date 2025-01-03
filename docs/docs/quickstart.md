@@ -102,11 +102,12 @@ return [
         ],
         'assertion_map' => [
             'edit' => function ($permission, IdentityInterface $identity = null, $resource = null) {
-                        if ($resource->getOwnerId() === $identity->getId() {
-                            return true;
-                        } else {
-                            return false;
-                      }
+                if ($resource->getOwnerId() === $identity->getId()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
         ],
     ],
 ];
