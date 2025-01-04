@@ -166,7 +166,7 @@ Let's modify the `lmcrbac.config.php` file as follows:
 return [
     'lmc_rbac' => [
         'role_provider' => [
-            /* roles and permissions
+            /* roles and permissions */
         ],
         'assertion_map' => [
             'edit' => function ($permission, IdentityInterface $identity = null, $resource = null) {
