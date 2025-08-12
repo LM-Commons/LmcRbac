@@ -22,10 +22,13 @@ declare(strict_types=1);
 namespace Lmc\Rbac\Service;
 
 use Laminas\Permissions\Rbac\RoleInterface;
+use Lmc\Rbac\Exception\RuntimeException;
 use Lmc\Rbac\Identity\IdentityInterface;
 use Lmc\Rbac\Role\RoleProviderInterface;
 
 use function array_merge;
+use function is_array;
+use function method_exists;
 
 /**
  * Role service
@@ -65,14 +68,20 @@ class RoleService implements RoleServiceInterface
      *
      * @return RoleInterface[]
      */
-    public function getIdentityRoles(?IdentityInterface $identity = null): iterable
+    public function getIdentityRoles($identity = null): iterable
     {
         // If no identity is provided, get the guest role
         if (null === $identity) {
             return $this->convertRoles([$this->guestRole]);
         }
 
-        return $this->convertRoles($identity->getRoles());
+        if ($identity instanceof IdentityInterface || method_exists($identity, 'getRoles')) {
+            $roles = $identity->getRoles();
+            if (is_array($roles)) {
+                return $this->convertRoles($roles);
+            }
+        }
+        throw new RuntimeException('$identity does not implement getRoles() method');
     }
 
     /**

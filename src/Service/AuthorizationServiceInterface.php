@@ -33,7 +33,7 @@ interface AuthorizationServiceInterface
      * Check if the permission is granted to the current identity
      */
     public function isGranted(
-        ?IdentityInterface $identity,
+        $identity,
         string $permission,
         mixed $context = null
     ): bool;

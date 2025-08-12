@@ -31,8 +31,7 @@ interface RoleServiceInterface
 {
     /**
      * Get the identity roles from the current identity, applying some more logic
-     *
      * @return RoleInterface[]
      */
-    public function getIdentityRoles(?IdentityInterface $identity = null): iterable;
+    public function getIdentityRoles($identity = null): iterable;
 }

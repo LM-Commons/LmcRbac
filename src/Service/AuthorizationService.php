@@ -108,7 +108,7 @@ class AuthorizationService implements AuthorizationServiceInterface
         return $this->hasAssertion($permission) ? $this->assertions[$permission] : null;
     }
 
-    public function isGranted(IdentityInterface|null $identity, string $permission, mixed $context = null): bool
+    public function isGranted($identity, string $permission, mixed $context = null): bool
     {
         $roles = $this->roleService->getIdentityRoles($identity);
 
