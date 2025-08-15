@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace Lmc\Rbac\Service;
 
 use Laminas\Permissions\Rbac\RoleInterface;
-use Lmc\Rbac\Identity\IdentityInterface;
 
 /**
  * Role service
@@ -31,7 +30,8 @@ interface RoleServiceInterface
 {
     /**
      * Get the identity roles from the current identity, applying some more logic
+     *
      * @return RoleInterface[]
      */
-    public function getIdentityRoles($identity = null): iterable;
+    public function getIdentityRoles(object|null $identity = null): iterable;
 }

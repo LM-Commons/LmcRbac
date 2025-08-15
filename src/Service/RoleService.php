@@ -68,7 +68,7 @@ class RoleService implements RoleServiceInterface
      *
      * @return RoleInterface[]
      */
-    public function getIdentityRoles($identity = null): iterable
+    public function getIdentityRoles(object|null $identity = null): iterable
     {
         // If no identity is provided, get the guest role
         if (null === $identity) {
@@ -76,8 +76,10 @@ class RoleService implements RoleServiceInterface
         }
 
         if ($identity instanceof IdentityInterface || method_exists($identity, 'getRoles')) {
+            /** @psalm-suppress MixedAssignment */
             $roles = $identity->getRoles();
             if (is_array($roles)) {
+                /** @psalm-suppress MixedArgumentTypeCoercion */
                 return $this->convertRoles($roles);
             }
         }

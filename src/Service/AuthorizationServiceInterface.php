@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace Lmc\Rbac\Service;
 
 use Lmc\Rbac\Assertion\AssertionInterface;
-use Lmc\Rbac\Identity\IdentityInterface;
 
 /**
  * Minimal interface for an authorization service
@@ -33,7 +32,7 @@ interface AuthorizationServiceInterface
      * Check if the permission is granted to the current identity
      */
     public function isGranted(
-        $identity,
+        object|null $identity,
         string $permission,
         mixed $context = null
     ): bool;
