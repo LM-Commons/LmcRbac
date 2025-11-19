@@ -22,7 +22,6 @@
   </file>
   <file src="src/Assertion/AssertionSet.php">
     <MixedAssignment>
-      <code><![CDATA[$asserted]]></code>
       <code><![CDATA[$assertion]]></code>
     </MixedAssignment>
   </file>

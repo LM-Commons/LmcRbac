@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace Lmc\Rbac\Assertion;
 
 use Lmc\Rbac\Exception;
-use Lmc\Rbac\Identity\IdentityInterface;
 
 use function count;
 use function gettype;
@@ -64,7 +63,7 @@ class AssertionSet implements AssertionInterface
         $this->assertions = $assertions;
     }
 
-    public function assert(string $permission, ?IdentityInterface $identity = null, mixed $context = null): bool
+    public function assert(string $permission, object|null $identity = null, mixed $context = null): bool
     {
         if (empty($this->assertions)) {
             return false;
@@ -75,6 +74,7 @@ class AssertionSet implements AssertionInterface
         foreach ($this->assertions as $index => $assertion) {
             switch (true) {
                 case is_callable($assertion):
+                    /** @var bool $asserted */
                     $asserted = $assertion($permission, $identity, $context);
                     break;
                 case $assertion instanceof AssertionInterface:
