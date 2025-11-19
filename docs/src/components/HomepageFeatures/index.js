@@ -66,8 +66,8 @@ export default function HomepageFeatures() {
                         href="https://github.com/LM-Commons/LmcRbac/issues">github.com/LM-Commons/LmcRbac/issues</a>.
                     </li>
                     <li>Ask questions in the <a
-                        href="https://join.slack.com/t/lm-commons/shared_invite/zt-2gankt2wj-FTS45hp1W~JEj1tWvDsUHQ">LM-Commons
-                        Slack</a> chat.
+                        href="https://discord.gg/MSQZQJcS4S">LM-Commons
+                        Discord</a> chat.
                     </li>
                 </ul>
 
