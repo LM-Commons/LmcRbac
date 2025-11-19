@@ -51,7 +51,7 @@ user is "logged in", then a guest role is assumed.
 
 ## Requirements
 
-- PHP 8.1 or higher
+- PHP 8.2 or higher
 
 ## Installation
 
@@ -60,24 +60,21 @@ LmcRbac only officially supports installation through Composer.
 Install the module:
 
 ```sh
-$ composer require lm-commons/lmc-rbac "~1.0"
+$ composer require lm-commons/lmc-rbac
 ```
 
-You will be prompted by the `laminas-component-installer` plugin to inject LM-Commons\LmcRbac.
+You will be prompted by the Laminas Component Installer plugin to inject LM-Commons\LmcRbac.
 
 :::note
 **Manual installation:**
 
-Enable the module by adding `Lmc\Rbac` key to your `application.config.php` or `modules.config.php` file for Laminas MVC
-applications, or to the `config/config.php` file for Mezzio applications.
+- In Mezzio applications, enable the component by adding 'Lmc\Rbac\ConfigProvider' to the `config/config.php` file
+- In MVC applications, enable the module by adding `Lmc\Rbac` key to your
+`application.config.php` or `modules.config.php`,
 :::
 
 Customize the module by copy-pasting
 the `lmcrbac.global.php` file to your `config/autoload` folder.
-
-:::note
-On older versions of `LmcRbac`, the configuration file is named `config/config.global.php`.
-:::
 
 ## Defining roles
 
@@ -130,7 +127,7 @@ is granted to an identity:
     /** @var \Psr\Container\ContainerInterface $container */
     $authorizationService = $container->get('\Lmc\Rbac\Service\AuthorizationServiceInterface');
     
-    /** @var \Lmc\Rbac\Identity\IdentityInterface $identity */
+    /** @var \Lmc\Rbac\Identity\IdentityInterface|object $identity */
     if ($authorizationService->isGranted($identity, 'create')) {
         /** do something */
     }
@@ -145,9 +142,10 @@ can be configured in the `lmcrbac.config.php` file.  More on this in the [Config
 :::
 
 :::warning
-`LmcRbac` does not provide any logic to instantiate an identity entity. It is assumed that
-the application will instantiate an entity that implements `\Lmc\Rbac\Identity\IdentityInterface` which defines the `getRoles()`
-method.
+`LmcRbac` does not provide any logic to instantiate an identity entity.
+It is assumed that the application will instantiate an entity that either 
+implements `\Lmc\Rbac\Identity\IdentityInterface` which defines the `getRoles()`
+method, or implements a `getRoles()` method.
 :::
 
 ## Using assertions
@@ -169,7 +167,7 @@ return [
             /* roles and permissions */
         ],
         'assertion_map' => [
-            'edit' => function ($permission, IdentityInterface $identity = null, $resource = null) {
+            'edit' => function ($permission, $identity = null, $resource = null) {
                 if ($resource->getOwnerId() === $identity->getId()) {
                     return true;
                 } else {

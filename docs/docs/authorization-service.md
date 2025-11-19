@@ -19,7 +19,7 @@ The Authorization service can be retrieved from the service manager using the na
 
 `Lmc\Rbac\Service\AuthorizationServiceInterface` defines the following methods:
 
-#### `isGranted(?IdentityInterface $identity, string $permission, $context = null): bool`
+#### `isGranted(object|null $identity, string $permission, $context = null): bool`
 
 Checks that the identity has is granted the permission for the (optional) context.
 

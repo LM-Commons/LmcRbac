@@ -19,7 +19,7 @@ A dynamic assertion must implement the `Lmc\Rbac\Assertion\AssertionInterace` wh
 ```php
 public function assert(
         string $permission,
-        ?IdentityInterface $identity = null,
+        object|null $identity = null,
         mixed $context = null
     ): bool
 ```
@@ -33,7 +33,7 @@ represented by `$permission` owns the resource represented by `$context`.
 
 class MyAssertion implements \Lmc\Rbac\Assertion\AssertionInterface
 {
-    public function assert(string $permission, ?IdentityInterface $identity = null, $context = null): bool
+    public function assert(string $permission, object|null $identity = null, $context = null): bool
     {
         // for 'edit' permission
         if ('edit' === $permission) {
@@ -84,7 +84,7 @@ return [
     'lmc_rbac' => [
         /* the rest of the file */
         'assertion_map' => [
-            'edit'  => function assert(string $permission, ?IdentityInterface $identity = null, $context = null): bool
+            'edit'  => function assert(string $permission, object|null $identity = null, $context = null): bool
                         {
                             // for 'edit' permission
                             if ('edit' === $permission) {
