@@ -25,7 +25,7 @@ const config = {
     trailingSlash: false,
 
     onBrokenLinks: 'throw',
-    onBrokenMarkdownLinks: 'warn',
+    //onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -35,6 +35,12 @@ const config = {
         locales: ['en'],
     },
 
+    "markdown": {
+        hooks:
+            {
+                onBrokenMarkdownLinks: 'warn',
+            },
+    },
     presets: [
     [
       'classic',
@@ -46,15 +52,16 @@ const config = {
               // Remove this to remove the "edit this page" links.
                 editUrl:
                 'https://github.com/lm-commons/lmcrbac/tree/master/docs/',
-                includeCurrentVersion: false,
-                /*
+                includeCurrentVersion: true,
+                lastVersion: 'current',
                 versions: {
+                    current: {
+                        label: '2.x',
+                    },
                     "1.4": {
                         banner: 'none',
                     }
                 }
-
-                 */
             },
             blog: {
                 showReadingTime: true,
@@ -92,6 +99,11 @@ themeConfig:
                 {
                     type: "docsVersionDropdown",
                     position: "right",
+                    versions: {
+                        current: {label: '2.x'},
+                        '2.0': {label: '2.0'},
+                        '1.4': {label: '1.x'},
+                    },
                 },
 
 //            {to: '/blog', label: 'Blog', position: 'right'},
@@ -111,24 +123,12 @@ themeConfig:
         footer: {
             style: 'dark',
             links: [
-/*
-            {
-                title: 'Docs',
-                items: [
-                {
-                    label: 'Documentation',
-                    to: '/docs/gettingstarted',
-                },
-                ],
-            },
-
- */
             {
                 title: 'Community',
                 items: [
                 {
-                    label: 'Slack',
-                    href: 'https://join.slack.com/t/lm-commons/shared_invite/zt-2gankt2wj-FTS45hp1W~JEj1tWvDsUHQ',
+                    label: 'Discord',
+                    href: 'https://discord.gg/MSQZQJcS4S',
                 },
                 ],
             },
