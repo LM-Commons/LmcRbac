@@ -21,7 +21,6 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Assertion;
 
-use Lmc\Rbac\Assertion\AssertionInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Assertion\AssertionSet;
 use Lmc\Rbac\Exception\InvalidArgumentException;
@@ -37,15 +36,7 @@ use function is_array;
 #[CoversClass(AssertionSet::class)]
 class AssertionSetTest extends TestCase
 {
-    public function testImplementsAssertionInterface()
-    {
-        $assertionContainer = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
-        $assertionSet       = new AssertionSet($assertionContainer, []);
-
-        $this->assertInstanceOf(AssertionInterface::class, $assertionSet);
-    }
-
-    public function testWhenNoAssertionsArePresentTheAssertionWillFail()
+    public function testWhenNoAssertionsArePresentTheAssertionWillFail(): void
     {
         $assertionContainer = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
         $assertionSet       = new AssertionSet($assertionContainer, []);
@@ -53,7 +44,7 @@ class AssertionSetTest extends TestCase
         $this->assertFalse($assertionSet->assert('foo'));
     }
 
-    public function testAcceptsAnAndCondition()
+    public function testAcceptsAnAndCondition(): void
     {
         $assertionContainer = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
         $assertionSet       = new AssertionSet($assertionContainer, ['condition' => AssertionSet::CONDITION_AND]);
@@ -61,7 +52,7 @@ class AssertionSetTest extends TestCase
         $this->assertFalse($assertionSet->assert('foo'));
     }
 
-    public function testAcceptsAnOrCondition()
+    public function testAcceptsAnOrCondition(): void
     {
         $assertionContainer = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
         $assertionSet       = new AssertionSet($assertionContainer, ['condition' => AssertionSet::CONDITION_OR]);
@@ -69,7 +60,7 @@ class AssertionSetTest extends TestCase
         $this->assertFalse($assertionSet->assert('foo'));
     }
 
-    public function testThrowsExceptionForAnUnknownCondition()
+    public function testThrowsExceptionForAnUnknownCondition(): void
     {
         $assertionContainer = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
 
@@ -77,7 +68,7 @@ class AssertionSetTest extends TestCase
         new AssertionSet($assertionContainer, ['condition' => 'unknown']);
     }
 
-    public function testWhenNoConditionIsGivenAndIsUsed()
+    public function testWhenNoConditionIsGivenAndIsUsed(): void
     {
         $fooAssertion = new SimpleAssertion(true);
         $barAssertion = new SimpleAssertion(false);
@@ -101,7 +92,7 @@ class AssertionSetTest extends TestCase
         $this->assertTrue($barAssertion->gotCalled());
     }
 
-    public function testAndConditionWillBreakEarlyWithFailure()
+    public function testAndConditionWillBreakEarlyWithFailure(): void
     {
         $fooAssertion = new SimpleAssertion(false);
         $barAssertion = new SimpleAssertion(true);
@@ -120,7 +111,7 @@ class AssertionSetTest extends TestCase
         $this->assertFalse($barAssertion->gotCalled());
     }
 
-    public function testOrConditionWillBreakEarlyWithSuccess()
+    public function testOrConditionWillBreakEarlyWithSuccess(): void
     {
         $fooAssertion = new SimpleAssertion(true);
         $barAssertion = new SimpleAssertion(false);
@@ -139,7 +130,7 @@ class AssertionSetTest extends TestCase
         $this->assertFalse($barAssertion->gotCalled());
     }
 
-    public function testAssertionsAsStringsAreCached()
+    public function testAssertionsAsStringsAreCached(): void
     {
         $fooAssertion = new SimpleAssertion(true);
 
@@ -155,7 +146,7 @@ class AssertionSetTest extends TestCase
         $this->assertSame(2, $fooAssertion->calledTimes());
     }
 
-    public function testUsesAssertionsAsStrings()
+    public function testUsesAssertionsAsStrings(): void
     {
         $fooAssertion = new SimpleAssertion(true);
 
@@ -169,7 +160,7 @@ class AssertionSetTest extends TestCase
         $this->assertTrue($fooAssertion->gotCalled());
     }
 
-    public function testUsesAssertionsAsInstances()
+    public function testUsesAssertionsAsInstances(): void
     {
         $fooAssertion = new SimpleAssertion(true);
 
@@ -181,7 +172,7 @@ class AssertionSetTest extends TestCase
         $this->assertTrue($fooAssertion->gotCalled());
     }
 
-    public function testUsesAssertionsAsCallables()
+    public function testUsesAssertionsAsCallables(): void
     {
         $called       = false;
         $fooAssertion = function ($permission, ?IdentityInterface $identity = null, $context = null) use (&$called) {
@@ -198,7 +189,7 @@ class AssertionSetTest extends TestCase
         $this->assertTrue($called);
     }
 
-    public function testUsesAssertionsAsArrays()
+    public function testUsesAssertionsAsArrays(): void
     {
         $fooAssertion = new SimpleAssertion(true);
         $barAssertion = new SimpleAssertion(true);
@@ -219,7 +210,7 @@ class AssertionSetTest extends TestCase
         $this->assertTrue($barAssertion->gotCalled());
     }
 
-    public function testThrowExceptionForInvalidAssertion()
+    public function testThrowExceptionForInvalidAssertion(): void
     {
         $fooAssertion = new stdClass();
 
@@ -231,7 +222,7 @@ class AssertionSetTest extends TestCase
     }
 
     #[DataProvider('dpMatrix')]
-    public function testMatrix(array $assertions, bool $expectedResult, array $assertionCalledCount)
+    public function testMatrix(array $assertions, bool $expectedResult, int|array $assertionCalledCount): void
     {
         $assertionContainer = $this->getMockBuilder(AssertionPluginManagerInterface::class)->getMock();
         $assertionSet       = new AssertionSet($assertionContainer, $assertions);
@@ -241,11 +232,11 @@ class AssertionSetTest extends TestCase
         $this->assertionsCalled($assertions, $assertionCalledCount);
     }
 
-    private function assertionsCalled(array $assertions, array $assertionCalledCount)
+    private function assertionsCalled(array $assertions, int|array $assertionCalledCount): void
     {
         unset($assertions['condition']);
+        /** @var array|SimpleAssertion $assertion */
         foreach ($assertions as $key => $assertion) {
-            /** @var array|SimpleAssertion $assertion */
             if (is_array($assertion)) {
                 $this->assertionsCalled($assertion, $assertionCalledCount[$key]);
             } else {
@@ -258,49 +249,69 @@ class AssertionSetTest extends TestCase
     {
         return [
             // no assertions will fail
-            [[], false, []],
+            [
+                'assertions'           => [],
+                'expectedResult'       => false,
+                'assertionCalledCount' => [],
+            ],
 
             // one failure, one success
-            [['condition' => AssertionSet::CONDITION_AND, new SimpleAssertion(false)], false, [1]],
-            [['condition' => AssertionSet::CONDITION_AND, new SimpleAssertion(true)], true, [1]],
+            [
+                'assertions'           => ['condition' => AssertionSet::CONDITION_AND, new SimpleAssertion(false)],
+                'expectedResult'       => false,
+                'assertionCalledCount' => [1],
+            ],
+            [
+                'assertions'           => ['condition' => AssertionSet::CONDITION_AND, new SimpleAssertion(true)],
+                'expectedResult'       => true,
+                'assertionCalledCount' => [1],
+            ],
 
             // one failure, one success
-            [['condition' => AssertionSet::CONDITION_OR, new SimpleAssertion(false)], false, [1]],
-            [['condition' => AssertionSet::CONDITION_OR, new SimpleAssertion(true)], true, [1]],
+            [
+                'assertions'           => ['condition' => AssertionSet::CONDITION_OR, new SimpleAssertion(false)],
+                'expectedResult'       => false,
+                'assertionCalledCount' => [1],
+            ],
+            [
+                'assertions'           => ['condition' => AssertionSet::CONDITION_OR, new SimpleAssertion(true)],
+                'expectedResult'       => true,
+                'assertionCalledCount' => [1],
+            ],
 
             // break early for AND condition with failure
             [
-                [
+                'assertions'           => [
                     'condition' => AssertionSet::CONDITION_AND,
                     new SimpleAssertion(false),
                     new SimpleAssertion(false),
                 ],
-                false,
-                [1, 0],
+                'expectedResult'       => false,
+                'assertionCalledCount' => [1, 0],
             ],
 
             // break early for OR condition with success
             [
-                [
+                'assertions'           => [
                     'condition' => AssertionSet::CONDITION_OR,
                     new SimpleAssertion(true),
                     new SimpleAssertion(false),
                 ],
-                true,
-                [1, 0],
+                'expectedResult'       => true,
+                'assertionCalledCount' => [1, 0],
             ],
 
             // nested assertions
             [
-                [
+                'assertions'           => [
                     'condition' => AssertionSet::CONDITION_OR,
                     new SimpleAssertion(false),
                     [
                         new SimpleAssertion(true),
                     ],
                 ],
-                true,
-                [1, [1]],
+                'expectedResult'       => true,
+                'assertionCalledCount' => [1, [1]],
             ],
         ];
     }

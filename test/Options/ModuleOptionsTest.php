@@ -26,8 +26,6 @@ use Lmc\Rbac\Role\InMemoryRoleProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-use function key;
-
 #[CoversClass(ModuleOptions::class)]
 class ModuleOptionsTest extends TestCase
 {
@@ -36,10 +34,9 @@ class ModuleOptionsTest extends TestCase
         $moduleOptions = new ModuleOptions();
 
         $this->assertEquals('guest', $moduleOptions->getGuestRole());
-        $this->assertIsArray($moduleOptions->getRoleProvider());
-        $this->assertIsArray($moduleOptions->getAssertionMap());
-        $this->assertEquals(InMemoryRoleProvider::class, key($moduleOptions->getRoleProvider()));
-        $this->assertIsArray($moduleOptions->getAssertionManager());
+        $this->assertArrayHasKey(InMemoryRoleProvider::class, $moduleOptions->getRoleProvider());
+        $this->assertEquals([], $moduleOptions->getAssertionMap());
+        $this->assertEquals([], $moduleOptions->getAssertionManager());
     }
 
     public function testSettersAndGetters(): void

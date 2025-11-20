@@ -26,6 +26,6 @@ use InvalidArgumentException as BaseInvalidArgumentException;
 /**
  * InvalidArgumentException
  */
-class InvalidArgumentException extends BaseInvalidArgumentException implements ExceptionInterface
+final class InvalidArgumentException extends BaseInvalidArgumentException implements ExceptionInterface
 {
 }

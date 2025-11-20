@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="6.13.1@1e3b7f0a8ab32b23197b91107adc0a7ed8a05b51">
   <file src="src/Assertion/AssertionPluginManager.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[AssertionPluginManager]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
-      <code><![CDATA[public function get($name, ?array $options = null): AssertionInterface]]></code>
       <code><![CDATA[public function validate(mixed $instance): void]]></code>
     </MissingOverrideAttribute>
     <MissingTemplateParam>
@@ -19,58 +15,10 @@
       <code><![CDATA[$name]]></code>
     </ParamNameMismatch>
   </file>
-  <file src="src/Assertion/AssertionPluginManagerFactory.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[AssertionPluginManagerFactory]]></code>
-    </ClassMustBeFinal>
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function __invoke(]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="src/Assertion/AssertionPluginManagerInterface.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function get(string $id): AssertionInterface;]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="src/Assertion/AssertionSet.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[AssertionSet]]></code>
-    </ClassMustBeFinal>
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function assert(string $permission, object|null $identity = null, mixed $context = null): bool]]></code>
-    </MissingOverrideAttribute>
-    <MixedAssignment>
-      <code><![CDATA[$assertion]]></code>
-    </MixedAssignment>
-  </file>
-  <file src="src/Exception/InvalidArgumentException.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[InvalidArgumentException]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Exception/RoleNotFoundException.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[RoleNotFoundException]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Exception/RuntimeException.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[RuntimeException]]></code>
-    </ClassMustBeFinal>
-  </file>
   <file src="src/Options/ModuleOptions.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[ModuleOptions]]></code>
-    </ClassMustBeFinal>
-    <MissingParamType>
+    <PossiblyInvalidArgument>
       <code><![CDATA[$options]]></code>
-    </MissingParamType>
-    <MissingTemplateParam>
-      <code><![CDATA[ModuleOptions]]></code>
-    </MissingTemplateParam>
-    <MixedArgument>
-      <code><![CDATA[$options]]></code>
-    </MixedArgument>
+    </PossiblyInvalidArgument>
     <PossiblyUnusedMethod>
       <code><![CDATA[setAssertionManager]]></code>
       <code><![CDATA[setAssertionMap]]></code>
@@ -255,33 +203,16 @@
     <MissingClosureReturnType>
       <code><![CDATA[function ($permission, ?IdentityInterface $identity = null, $context = null) use (&$called) {]]></code>
     </MissingClosureReturnType>
-    <MissingReturnType>
-      <code><![CDATA[assertionsCalled]]></code>
-      <code><![CDATA[testAcceptsAnAndCondition]]></code>
-      <code><![CDATA[testAcceptsAnOrCondition]]></code>
-      <code><![CDATA[testAndConditionWillBreakEarlyWithFailure]]></code>
-      <code><![CDATA[testAssertionsAsStringsAreCached]]></code>
-      <code><![CDATA[testImplementsAssertionInterface]]></code>
-      <code><![CDATA[testMatrix]]></code>
-      <code><![CDATA[testOrConditionWillBreakEarlyWithSuccess]]></code>
-      <code><![CDATA[testThrowExceptionForInvalidAssertion]]></code>
-      <code><![CDATA[testThrowsExceptionForAnUnknownCondition]]></code>
-      <code><![CDATA[testUsesAssertionsAsArrays]]></code>
-      <code><![CDATA[testUsesAssertionsAsCallables]]></code>
-      <code><![CDATA[testUsesAssertionsAsInstances]]></code>
-      <code><![CDATA[testUsesAssertionsAsStrings]]></code>
-      <code><![CDATA[testWhenNoAssertionsArePresentTheAssertionWillFail]]></code>
-      <code><![CDATA[testWhenNoConditionIsGivenAndIsUsed]]></code>
-    </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$assertionCalledCount[$key]]]></code>
     </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$assertion]]></code>
-    </MixedAssignment>
     <MixedReturnStatement>
       <code><![CDATA[array]]></code>
     </MixedReturnStatement>
+    <PossiblyInvalidArrayAccess>
+      <code><![CDATA[$assertionCalledCount[$key]]]></code>
+      <code><![CDATA[$assertionCalledCount[$key]]]></code>
+    </PossiblyInvalidArrayAccess>
     <UnusedClosureParam>
       <code><![CDATA[$context]]></code>
       <code><![CDATA[$identity]]></code>

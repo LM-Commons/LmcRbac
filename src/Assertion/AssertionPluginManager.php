@@ -6,12 +6,13 @@ namespace Lmc\Rbac\Assertion;
 
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
+use Override;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
 use function sprintf;
 
-class AssertionPluginManager extends AbstractPluginManager implements AssertionPluginManagerInterface
+final class AssertionPluginManager extends AbstractPluginManager implements AssertionPluginManagerInterface
 {
     public function validate(mixed $instance): void
     {
@@ -30,6 +31,7 @@ class AssertionPluginManager extends AbstractPluginManager implements AssertionP
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
+    #[Override]
     public function get($name, ?array $options = null): AssertionInterface
     {
         return parent::get($name, $options);
