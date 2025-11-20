@@ -26,6 +26,6 @@ use RuntimeException as BaseRuntimeException;
 /**
  * RuntimeException
  */
-class RuntimeException extends BaseRuntimeException implements ExceptionInterface
+final class RuntimeException extends BaseRuntimeException implements ExceptionInterface
 {
 }

@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Service;
 
-use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
+use Lmc\Rbac\Exception\ServiceNotCreatedException;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Role\RoleProviderInterface;
 use Psr\Container\ContainerInterface;

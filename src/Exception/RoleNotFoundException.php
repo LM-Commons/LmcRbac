@@ -26,7 +26,7 @@ use RuntimeException as BaseRuntimeException;
 /**
  * Exception that is thrown when a role cannot be found (for instance from a provider)
  */
-class RoleNotFoundException extends BaseRuntimeException implements ExceptionInterface
+final class RoleNotFoundException extends BaseRuntimeException implements ExceptionInterface
 {
     /** @var string */
     protected $message = 'No role could be found';

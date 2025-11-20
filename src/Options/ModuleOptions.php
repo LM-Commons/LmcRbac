@@ -26,8 +26,11 @@ use Lmc\Rbac\Role\InMemoryRoleProvider;
 
 /**
  * Options for LmcRbac module
+ *
+ * @template TValue
+ * @extends AbstractOptions<TValue>
  */
-class ModuleOptions extends AbstractOptions
+final class ModuleOptions extends AbstractOptions
 {
     /**
      * Guest role (used when no identity is found)
@@ -52,12 +55,7 @@ class ModuleOptions extends AbstractOptions
      */
     protected array $assertionManager = [];
 
-    /**
-     * Constructor
-     *
-     * {@inheritdoc}
-     */
-    public function __construct($options = null)
+    public function __construct(array $options = [])
     {
         $this->__strictMode__ = false;
 

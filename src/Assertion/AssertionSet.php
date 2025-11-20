@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace Lmc\Rbac\Assertion;
 
 use Lmc\Rbac\Exception;
+use Override;
 
 use function count;
 use function gettype;
@@ -31,7 +32,7 @@ use function is_object;
 use function is_string;
 use function sprintf;
 
-class AssertionSet implements AssertionInterface
+final class AssertionSet implements AssertionInterface
 {
     /**
      * Condition constants
@@ -63,6 +64,7 @@ class AssertionSet implements AssertionInterface
         $this->assertions = $assertions;
     }
 
+    #[Override]
     public function assert(string $permission, object|null $identity = null, mixed $context = null): bool
     {
         if (empty($this->assertions)) {
@@ -71,6 +73,10 @@ class AssertionSet implements AssertionInterface
 
         $assertedCount = 0;
 
+        /**
+         * @var string $index
+         * @var mixed $assertion
+         */
         foreach ($this->assertions as $index => $assertion) {
             switch (true) {
                 case is_callable($assertion):

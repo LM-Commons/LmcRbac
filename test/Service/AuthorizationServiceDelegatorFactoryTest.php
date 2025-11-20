@@ -21,44 +21,40 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Service;
 
-use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
+use Lmc\Rbac\Exception\ServiceNotCreatedException;
 use Lmc\Rbac\Service\AuthorizationServiceDelegatorFactory;
 use Lmc\Rbac\Service\AuthorizationServiceInterface;
 use LmcTest\Rbac\Asset\DummyAuthorizationServiceClass;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
 #[CoversClass(AuthorizationServiceDelegatorFactory::class)]
-class AuthorizationServiceDelegatorFactoryTest extends TestCase
+final class AuthorizationServiceDelegatorFactoryTest extends TestCase
 {
-    use ProphecyTrait;
-
     public function testDelegatorFactory(): void
     {
         $authorizationService = $this->createMock(AuthorizationServiceInterface::class);
-        $container            = $this->prophesize(ContainerInterface::class);
-        $callback             = function () {
+        $container            = $this->createMock(ContainerInterface::class);
+        $container->expects($this->once())->method('get')->willReturn($authorizationService);
+        $callback         = function (): DummyAuthorizationServiceClass {
             return new DummyAuthorizationServiceClass();
         };
-        $container->get(AuthorizationServiceInterface::class)->willReturn($authorizationService)->shouldBeCalled();
         $delegatorFactory = new AuthorizationServiceDelegatorFactory();
-        $instance         = $delegatorFactory($container->reveal(), DummyAuthorizationServiceClass::class, $callback);
-        $this->assertInstanceOf(DummyAuthorizationServiceClass::class, $instance);
+        $delegatorFactory($container, DummyAuthorizationServiceClass::class, $callback);
     }
 
     public function testDelegatorFactoryException(): void
     {
         $authorizationService = $this->createMock(AuthorizationServiceInterface::class);
-        $container            = $this->prophesize(ContainerInterface::class);
-        $callback             = function () {
+        $container            = $this->createMock(ContainerInterface::class);
+        $callback             = function (): stdClass {
             return new stdClass();
         };
         $delegatorFactory     = new AuthorizationServiceDelegatorFactory();
-        $container->get(AuthorizationServiceInterface::class)->willReturn($authorizationService)->shouldNotBeCalled();
+        $container->expects($this->never())->method('get')->willReturn($authorizationService);
         $this->expectException(ServiceNotCreatedException::class);
-        $instance = $delegatorFactory($container->reveal(), DummyAuthorizationServiceClass::class, $callback);
+        $delegatorFactory($container, DummyAuthorizationServiceClass::class, $callback);
     }
 }

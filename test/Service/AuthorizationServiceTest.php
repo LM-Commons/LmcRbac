@@ -52,73 +52,78 @@ class AuthorizationServiceTest extends TestCase
         return [
             // Simple is granted
             [
-                'guest',
-                'read',
-                null,
-                true,
+                'role'       => 'guest',
+                'permission' => 'read',
+                'context'    => null,
+                'isGranted'  => true,
+                'assertions' => [],
             ],
 
             // Simple is allowed from parent
             [
-                'member',
-                'read',
-                null,
-                true,
+                'role'       => 'member',
+                'permission' => 'read',
+                'context'    => null,
+                'isGranted'  => true,
+                'assertions' => [],
             ],
 
             // Simple is refused
             [
-                'guest',
-                'write',
-                null,
-                false,
+                'role'       => 'guest',
+                'permission' => 'write',
+                'context'    => null,
+                'isGranted'  => false,
+                'assertions' => [],
             ],
 
             // Simple is refused from parent
             [
-                'guest',
-                'delete',
-                null,
-                false,
+                'role'       => 'guest',
+                'permission' => 'delete',
+                'context'    => null,
+                'isGranted'  => false,
+                'assertions' => [],
             ],
 
             // Simple is refused from assertion map
             [
-                'admin',
-                'delete',
-                false,
-                false,
-                [
+                'role'       => 'admin',
+                'permission' => 'delete',
+                'context'    => false,
+                'isGranted'  => false,
+                'assertions' => [
                     'delete' => 'false_assertion',
                 ],
             ],
 
             // Simple is accepted from assertion map
             [
-                'admin',
-                'delete',
-                true,
-                true,
-                [
+                'role'       => 'admin',
+                'permission' => 'delete',
+                'context'    => true,
+                'isGranted'  => true,
+                'assertions' => [
                     'delete' => 'true_assertion',
                 ],
             ],
 
             // Simple is refused from no role
             [
-                [],
-                'read',
-                null,
-                false,
+                'role'       => [],
+                'permission' => 'read',
+                'context'    => null,
+                'isGranted'  => false,
+                'assertions' => [],
             ],
 
             // Nested is accepted from assertion map
             [
-                'admin',
-                'delete',
-                true,
-                true,
-                [
+                'role'       => 'admin',
+                'permission' => 'delete',
+                'context'    => true,
+                'isGranted'  => true,
+                'assertions' => [
                     'delete' => [
                         [
                             'false_assertion',
@@ -132,13 +137,13 @@ class AuthorizationServiceTest extends TestCase
                 ],
             ],
 
-            // If possible will not required will not execute all assertions from assertion map
+            // If possible will not require will not execute all assertions from assertion map
             [
-                'admin',
-                'delete',
-                true,
-                true,
-                [
+                'role'       => 'admin',
+                'permission' => 'delete',
+                'context'    => true,
+                'isGranted'  => true,
+                'assertions' => [
                     'delete' => [
                         'false_assertion',
                         [
@@ -209,7 +214,7 @@ class AuthorizationServiceTest extends TestCase
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
         $roleService->expects($this->once())->method('getIdentityRoles')->willReturn([$role]);
 
-        $assertionPluginManager = $this->createMock(AssertionPluginManager::class);
+        $assertionPluginManager = $this->createMock(AssertionPluginManagerInterface::class);
         $assertionPluginManager->expects($this->never())->method('get');
 
         $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager);
@@ -227,7 +232,7 @@ class AuthorizationServiceTest extends TestCase
         $roleService = $this->getMockBuilder(RoleServiceInterface::class)->getMock();
         $roleService->expects($this->once())->method('getIdentityRoles')->willReturn($identity->getRoles());
 
-        $assertionPluginManager = $this->createMock(AssertionPluginManager::class);
+        $assertionPluginManager = $this->createMock(AssertionPluginManagerInterface::class);
         $assertionPluginManager->expects($this->never())->method('get');
 
         $authorizationService = new AuthorizationService($rbac, $roleService, $assertionPluginManager);

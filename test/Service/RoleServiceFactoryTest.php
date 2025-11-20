@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Service;
 
-use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use Laminas\ServiceManager\ServiceManager;
+use Lmc\Rbac\Exception\ServiceNotCreatedException;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Role\InMemoryRoleProvider;
 use Lmc\Rbac\Service\RoleService;

@@ -24,15 +24,22 @@ namespace Lmc\Rbac\Service;
 use Laminas\Permissions\Rbac\Rbac;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Options\ModuleOptions;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 /**
  * Factory to create the authorization service
  */
 class AuthorizationServiceFactory
 {
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     */
     public function __invoke(ContainerInterface $container): AuthorizationService
     {
+        /** @var ModuleOptions $moduleOptions */
         $moduleOptions = $container->get(ModuleOptions::class);
 
         return new AuthorizationService(

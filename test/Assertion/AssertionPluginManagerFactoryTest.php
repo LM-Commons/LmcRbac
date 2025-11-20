@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace LmcTest\Rbac\Assertion;
 
 use Laminas\ServiceManager\ServiceManager;
-use Lmc\Rbac\Assertion\AssertionPluginManager;
 use Lmc\Rbac\Assertion\AssertionPluginManagerFactory;
 use Lmc\Rbac\Options\ModuleOptions;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -41,8 +40,7 @@ class AssertionPluginManagerFactoryTest extends TestCase
         $serviceManager = new ServiceManager();
         $serviceManager->setService(ModuleOptions::class, $moduleOptions);
         $factory       = new AssertionPluginManagerFactory();
-        $pluginManager = $factory($serviceManager, AssertionPluginManager::class);
-
-        $this->assertInstanceOf(AssertionPluginManager::class, $pluginManager);
+        $pluginManager = $factory($serviceManager);
+        $this->assertFalse($pluginManager->has('foo'));
     }
 }
