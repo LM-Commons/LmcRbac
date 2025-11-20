@@ -1,22 +1,5 @@
 <?php
 
-/*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license.
- */
-
 declare(strict_types=1);
 
 namespace LmcTest\Rbac\Service;
@@ -29,14 +12,10 @@ use Lmc\Rbac\Service\RoleService;
 use LmcTest\Rbac\Asset\Identity;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 
 #[CoversClass(RoleService::class)]
 class RoleServiceTest extends TestCase
 {
-    use ProphecyTrait;
-
     public function testReturnGuestRoleIfNoIdentityIsGiven(): void
     {
         $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
@@ -61,10 +40,10 @@ class RoleServiceTest extends TestCase
 
     public function testWillNotInvokeRoleProviderIfAllRolesCollected(): void
     {
-        $roleProvider = $this->prophesize(RoleProviderInterface::class);
-        $roleProvider->getRoles(Argument::any())->shouldNotBeCalled();
+        $roleProvider = $this->createMock(RoleProviderInterface::class);
+        $roleProvider->expects($this->never())->method('getRoles');
 
-        $roleService = new RoleService($roleProvider->reveal(), 'guest');
+        $roleService = new RoleService($roleProvider, 'guest');
         $roles       = [new Role('first'), new Role('second'), new Role('third')];
         $identity    = new Identity($roles);
 
@@ -77,11 +56,13 @@ class RoleServiceTest extends TestCase
 
     public function testWillCollectRolesOnlyIfRequired(): void
     {
-        $roleProvider = $this->prophesize(RoleProviderInterface::class);
-        $roles        = [new Role('first'), new Role('second'), 'third'];
-        $roleProvider->getRoles(['third'])->shouldBeCalled()->willReturn([new Role('third')]);
+        $roleProvider = $this->createMock(RoleProviderInterface::class);
+        $roleProvider->expects($this->once())->method('getRoles')
+            ->with(['third'])
+            ->willReturn([new Role('third')]);
+        $roles = [new Role('first'), new Role('second'), 'third'];
 
-        $roleService = new RoleService($roleProvider->reveal(), 'guest');
+        $roleService = new RoleService($roleProvider, 'guest');
         $identity    = new Identity($roles);
 
         $result = $roleService->getIdentityRoles($identity);
@@ -98,8 +79,5 @@ class RoleServiceTest extends TestCase
     {
         $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
         $this->assertEquals('guest', $roleService->getGuestRole());
-
-        //$roleService->setGuestRole('foo');
-        //$this->assertEquals('foo', $roleService->getGuestRole());
     }
 }

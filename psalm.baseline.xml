@@ -129,15 +129,9 @@
     <ClassMustBeFinal>
       <code><![CDATA[AuthorizationServiceDelegatorFactory]]></code>
     </ClassMustBeFinal>
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function __invoke(]]></code>
-    </MissingOverrideAttribute>
-    <MixedArgument>
-      <code><![CDATA[$authorizationService]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$authorizationService]]></code>
-    </MixedAssignment>
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[AuthorizationServiceAwareInterface]]></code>
+    </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Service/AuthorizationServiceFactory.php">
     <ClassMustBeFinal>
@@ -147,14 +141,13 @@
       <code><![CDATA[$container->get(AssertionPluginManagerInterface::class)]]></code>
       <code><![CDATA[$container->get(Rbac::class)]]></code>
       <code><![CDATA[$container->get(RoleServiceInterface::class)]]></code>
-      <code><![CDATA[$moduleOptions->getAssertionMap()]]></code>
     </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$moduleOptions]]></code>
-    </MixedAssignment>
-    <MixedMethodCall>
-      <code><![CDATA[getAssertionMap]]></code>
-    </MixedMethodCall>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$moduleOptions->getAssertionMap()]]></code>
+    </MixedArgumentTypeCoercion>
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[AuthorizationService]]></code>
+    </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Service/RoleService.php">
     <ClassMustBeFinal>
@@ -313,18 +306,6 @@
     <MissingReturnType>
       <code><![CDATA[testAuthorizationServiceAwareTrait]]></code>
     </MissingReturnType>
-  </file>
-  <file src="test/Service/AuthorizationServiceDelegatorFactoryTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[AuthorizationServiceDelegatorFactoryTest]]></code>
-    </ClassMustBeFinal>
-    <MissingClosureReturnType>
-      <code><![CDATA[function () {]]></code>
-      <code><![CDATA[function () {]]></code>
-    </MissingClosureReturnType>
-    <UnusedVariable>
-      <code><![CDATA[$instance]]></code>
-    </UnusedVariable>
   </file>
   <file src="test/Service/AuthorizationServiceFactoryTest.php">
     <ClassMustBeFinal>
