@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lmc\Rbac\Options;
 
-use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
+use Lmc\Rbac\Exception\ServiceNotCreatedException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;

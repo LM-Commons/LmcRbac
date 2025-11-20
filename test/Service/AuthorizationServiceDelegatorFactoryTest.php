@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Service;
 
-use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
+use Lmc\Rbac\Exception\ServiceNotCreatedException;
 use Lmc\Rbac\Service\AuthorizationServiceDelegatorFactory;
 use Lmc\Rbac\Service\AuthorizationServiceInterface;
 use LmcTest\Rbac\Asset\DummyAuthorizationServiceClass;

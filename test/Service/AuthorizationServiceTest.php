@@ -61,69 +61,69 @@ class AuthorizationServiceTest extends TestCase
 
             // Simple is allowed from parent
             [
-                'role'        => 'member',
+                'role'       => 'member',
                 'permission' => 'read',
-                'context'     => null,
-                'isGranted'   => true,
-                'assertions'  => [],
+                'context'    => null,
+                'isGranted'  => true,
+                'assertions' => [],
             ],
 
             // Simple is refused
             [
-                'role'        => 'guest',
+                'role'       => 'guest',
                 'permission' => 'write',
-                'context'     => null,
-                'isGranted'   => false,
-                'assertions'  => [],
+                'context'    => null,
+                'isGranted'  => false,
+                'assertions' => [],
             ],
 
             // Simple is refused from parent
             [
-                'role'        => 'guest',
+                'role'       => 'guest',
                 'permission' => 'delete',
-                'context'     => null,
-                'isGranted'   => false,
-                'assertions'  => [],
+                'context'    => null,
+                'isGranted'  => false,
+                'assertions' => [],
             ],
 
             // Simple is refused from assertion map
             [
-                'role'        => 'admin',
+                'role'       => 'admin',
                 'permission' => 'delete',
-                'context'     => false,
-                'isGranted'   => false,
-                'assertions'  => [
+                'context'    => false,
+                'isGranted'  => false,
+                'assertions' => [
                     'delete' => 'false_assertion',
                 ],
             ],
 
             // Simple is accepted from assertion map
             [
-                'role'        => 'admin',
+                'role'       => 'admin',
                 'permission' => 'delete',
-                'context'     => true,
-                'isGranted'   => true,
-                'assertions'  => [
+                'context'    => true,
+                'isGranted'  => true,
+                'assertions' => [
                     'delete' => 'true_assertion',
                 ],
             ],
 
             // Simple is refused from no role
             [
-                'role'        => [],
+                'role'       => [],
                 'permission' => 'read',
-                'context'     => null,
-                'isGranted'   => false,
-                'assertions'  => [],
+                'context'    => null,
+                'isGranted'  => false,
+                'assertions' => [],
             ],
 
             // Nested is accepted from assertion map
             [
-                'role'        => 'admin',
+                'role'       => 'admin',
                 'permission' => 'delete',
-                'context'     => true,
-                'isGranted'   => true,
-                'assertions'  => [
+                'context'    => true,
+                'isGranted'  => true,
+                'assertions' => [
                     'delete' => [
                         [
                             'false_assertion',
@@ -139,11 +139,11 @@ class AuthorizationServiceTest extends TestCase
 
             // If possible will not require will not execute all assertions from assertion map
             [
-                'role'        => 'admin',
+                'role'       => 'admin',
                 'permission' => 'delete',
-                'context'     => true,
-                'isGranted'   => true,
-                'assertions'  => [
+                'context'    => true,
+                'isGranted'  => true,
+                'assertions' => [
                     'delete' => [
                         'false_assertion',
                         [

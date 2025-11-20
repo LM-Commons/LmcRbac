@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace LmcTest\Rbac\Options;
 
-use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use Laminas\ServiceManager\ServiceManager;
+use Lmc\Rbac\Exception\ServiceNotCreatedException;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Options\ModuleOptionsFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
