@@ -27,10 +27,11 @@ use Lmc\Rbac\Role\InMemoryRoleProvider;
 /**
  * Options for LmcRbac module
  *
+ * @final
  * @template TValue
  * @extends AbstractOptions<TValue>
  */
-final class ModuleOptions extends AbstractOptions
+class ModuleOptions extends AbstractOptions
 {
     /**
      * Guest role (used when no identity is found)
