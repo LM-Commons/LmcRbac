@@ -1,5 +1,8 @@
 {
   "extensions": [
     "sqlite3"
-  ]
+  ],
+  "ignore_php_platform_requirements": {
+    "8.5": true
+  }
 }
