@@ -128,7 +128,7 @@ themeConfig:
                 items: [
                 {
                     label: 'Discord',
-                    href: 'https://discord.gg/MSQZQJcS4S',
+                    href: 'https://discord.gg/nAAu7AhR',
                 },
                 ],
             },
