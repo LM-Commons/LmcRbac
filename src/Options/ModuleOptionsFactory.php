@@ -9,8 +9,8 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
+use function assert;
 use function is_array;
-use function PHPUnit\Framework\assertIsArray;
 
 /**
  * Factory for the module options
@@ -29,7 +29,7 @@ class ModuleOptionsFactory
             throw new ServiceNotCreatedException('No lmc_rbac config found.');
         }
 
-        assertIsArray($config['lmc_rbac']);
+        assert(is_array($config['lmc_rbac']));
         return new ModuleOptions($config['lmc_rbac']);
     }
 }
