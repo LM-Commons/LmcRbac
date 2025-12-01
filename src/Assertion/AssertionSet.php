@@ -88,7 +88,7 @@ final class AssertionSet implements AssertionInterface
                     break;
                 case is_string($assertion):
                     /** @var AssertionInterface $assertion */
-                    $assertion = $this->assertionPluginManager->get($assertion);
+                    $assertion                = $this->assertionPluginManager->get($assertion);
                     $this->assertions[$index] = $assertion;
 
                     $asserted = $assertion->assert($permission, $identity, $context);
