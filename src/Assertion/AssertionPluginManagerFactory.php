@@ -14,6 +14,7 @@ final class AssertionPluginManagerFactory
         /** @var ModuleOptions $config */
         $config = $container->get(ModuleOptions::class);
 
+        /** @psalm-suppress MixedArgumentTypeCoercion */
         return new AssertionPluginManager($container, $config->getAssertionManager());
     }
 }

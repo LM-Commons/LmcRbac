@@ -6,9 +6,6 @@ namespace Lmc\Rbac\Assertion;
 
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
-use Override;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
 
 use function sprintf;
 
@@ -23,17 +20,5 @@ final class AssertionPluginManager extends AbstractPluginManager implements Asse
             'Assertions must implement "Lmc\Rbac\Assertion\AssertionInterface", but "%s" was given',
             $instance::class
         ));
-    }
-
-    /**
-     * @param string $name
-     * @param array|null $options
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
-     */
-    #[Override]
-    public function get($name, ?array $options = null): AssertionInterface
-    {
-        return parent::get($name, $options);
     }
 }
