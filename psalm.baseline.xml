@@ -7,13 +7,6 @@
     <MissingTemplateParam>
       <code><![CDATA[AssertionPluginManager]]></code>
     </MissingTemplateParam>
-    <MixedReturnStatement>
-      <code><![CDATA[parent::get($name, $options)]]></code>
-    </MixedReturnStatement>
-    <ParamNameMismatch>
-      <code><![CDATA[$name]]></code>
-      <code><![CDATA[$name]]></code>
-    </ParamNameMismatch>
   </file>
   <file src="src/Options/ModuleOptions.php">
     <PossiblyInvalidArgument>
