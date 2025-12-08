@@ -1,11 +1,9 @@
 # LmcRbac
 
-[![Build](https://github.com/lm-commons/LmcRbac/actions/workflows/build_test.yml/badge.svg)](https://github.com/lm-commons/LmcRbac/actions/workflows/build_test.yml)
+[![Build](https://github.com/lm-commons/LmcRbac/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/lm-commons/LmcRbac/actions/workflows/continuous-integration.yml)
 [![Version](https://poser.pugx.org/lm-commons/lmc-rbac/v)](https://packagist.org/packages/lm-commons/lmc-rbac)
 [![Total Downloads](https://poser.pugx.org/lm-commons/lmc-rbac/downloads)](//packagist.org/packages/lm-commons/lmc-rbac)
 [![License](https://poser.pugx.org/lm-commons/lmc-rbac/license)](https://packagist.org/packages/lm-commons/lmc-rbac)
-[![Coverage Status](https://coveralls.io/repos/github/LM-Commons/LmcRbac/badge.svg?branch=master)](https://coveralls.io/github/LM-Commons/LmcRbac?branch=master)
-[![Static Badge](https://img.shields.io/badge/Chat_on-Slack-blue)](https://join.slack.com/t/lm-commons/shared_invite/zt-2gankt2wj-FTS45hp1W~JEj1tWvDsUHQ)
 
 ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2Flm-commons%2Flmcrbac%2Fproperties%2Fvalues&query=%24%5B%3A1%5D.value&label=Maintenance%20Status)
 
@@ -14,7 +12,7 @@ Laminas\Permissions\Rbac
 
 ## Requirements
 
-- PHP 8.1 or higher
+- PHP 8.2 or higher
 
 ## Optional
 
@@ -34,7 +32,7 @@ documentation, please refer to [getcomposer.org](http://getcomposer.org/).
 Install the module:
 
 ```sh
-$ php composer.phar require lm-commons/lmc-rbac
+$ composer require lm-commons/lmc-rbac
 ```
 
 Enable the module by adding `LmcRbac` key to your `application.config.php` file.
