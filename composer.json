@@ -1,6 +1,6 @@
 {
   "name": "lm-commons/lmc-rbac",
-  "description": "Laminas Module that provides a layer of features of Laminas\\Permissions\\Rbac",
+  "description": "Authorization services to implement Role-based Access Control based on Laminas\\Permissions\\Rbac",
   "type": "library",
   "license": "BSD-3-Clause",
   "keywords": [
