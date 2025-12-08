@@ -2,7 +2,7 @@
   "name": "lm-commons/lmc-rbac",
   "description": "Laminas Module that provides a layer of features of Laminas\\Permissions\\Rbac",
   "type": "library",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "keywords": [
     "module",
     "laminas",
@@ -11,28 +11,6 @@
   ],
   "homepage": "http://www.github.com/LM-Commons/lmc-rbac",
   "authors": [
-    {
-      "name": "Kyle Spraggs",
-      "email": "theman@spiffyjr.me",
-      "homepage": "http://www.spiffyjr.me/"
-    },
-    {
-      "name": "Michaël Gallego",
-      "email": "mic.gallego@gmail.com",
-      "homepage": "http://www.michaelgallego.fr"
-    },
-    {
-      "name": "Jean-Marie Leroux",
-      "email": "jmleroux.pro@gmail.com"
-    },
-    {
-      "name": "Florent Blaison",
-      "email": "florent.blaison@gmail.com"
-    },
-    {
-      "name": "Bas Kamer",
-      "email": "baskamer@gmail.com"
-    },
     {
       "name": "Eric Richer",
       "email": "eric.richer@vistoconsulting.com"
