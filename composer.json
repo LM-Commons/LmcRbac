@@ -21,13 +21,13 @@
     "laminas/laminas-permissions-rbac": "^3.4",
     "laminas/laminas-servicemanager": "^3.18 || ^4.0",
     "laminas/laminas-stdlib": "^3.1",
-    "doctrine/persistence": "^2.0 || ^3.0"
+    "doctrine/persistence": "^3.0 || ^4.0"
   },
   "require-dev": {
     "laminas/laminas-coding-standard": "^3.1",
     "phpunit/phpunit": "^11.5",
     "doctrine/orm": "^3.5",
-    "symfony/cache": "^6.4",
+    "symfony/cache": "^6.4 || ^7.0 || ^8.0",
     "psalm/plugin-phpunit": "^0.19.0",
     "vimeo/psalm": "^6.13"
   },
