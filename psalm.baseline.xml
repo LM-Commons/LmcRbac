@@ -8,6 +8,11 @@
       <code><![CDATA[AssertionPluginManager]]></code>
     </MissingTemplateParam>
   </file>
+  <file src="src/Exception/UnauthorizedException.php">
+    <UnusedClass>
+      <code><![CDATA[UnauthorizedException]]></code>
+    </UnusedClass>
+  </file>
   <file src="src/Options/ModuleOptions.php">
     <PossiblyInvalidArgument>
       <code><![CDATA[$options]]></code>
@@ -98,6 +103,11 @@
       <code><![CDATA[getRepository]]></code>
       <code><![CDATA[getRoleProvider]]></code>
     </MixedMethodCall>
+  </file>
+  <file src="src/Role/RoleFactoryInterface.php">
+    <UnusedClass>
+      <code><![CDATA[RoleFactoryInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Service/AuthorizationService.php">
     <ClassMustBeFinal>
