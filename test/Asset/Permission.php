@@ -24,24 +24,17 @@ namespace LmcTest\Rbac\Asset;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="permissions")
+ * @deprecated
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'permissions')]
 class Permission
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected ?int $id;
 
-    /** @ORM\Column(type="string", length=128, unique=true) */
     #[ORM\Column(type: 'string', length: 128, unique: true)]
     protected ?string $name;
 

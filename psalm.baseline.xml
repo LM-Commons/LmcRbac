@@ -8,6 +8,12 @@
       <code><![CDATA[AssertionPluginManager]]></code>
     </MissingTemplateParam>
   </file>
+  <file src="src/ConfigProvider.php">
+    <DeprecatedClass>
+      <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
+      <code><![CDATA[ObjectRepositoryRoleProviderFactory::class]]></code>
+    </DeprecatedClass>
+  </file>
   <file src="src/Exception/UnauthorizedException.php">
     <UnusedClass>
       <code><![CDATA[UnauthorizedException]]></code>
@@ -64,27 +70,20 @@
     </MixedMethodCall>
   </file>
   <file src="src/Role/ObjectRepositoryRoleProvider.php">
-    <InvalidReturnStatement>
-      <code><![CDATA[$roles]]></code>
-    </InvalidReturnStatement>
     <MissingOverrideAttribute>
       <code><![CDATA[public function getRoles(iterable $roleNames): iterable]]></code>
     </MissingOverrideAttribute>
-    <MixedAssignment>
-      <code><![CDATA[$role]]></code>
-    </MixedAssignment>
-    <MixedReturnStatement>
-      <code><![CDATA[$this->roleCache[$key]]]></code>
-    </MixedReturnStatement>
-    <UndefinedDocblockClass>
-      <code><![CDATA[$role]]></code>
-      <code><![CDATA[$roles]]></code>
-    </UndefinedDocblockClass>
   </file>
   <file src="src/Role/ObjectRepositoryRoleProviderFactory.php">
     <ClassMustBeFinal>
       <code><![CDATA[ObjectRepositoryRoleProviderFactory]]></code>
     </ClassMustBeFinal>
+    <DeprecatedClass>
+      <code><![CDATA[ObjectRepositoryRoleProvider]]></code>
+      <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProvider($objectRepository, $options['role_name_property'])]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProvider($objectRepository, $options['role_name_property'])]]></code>
+    </DeprecatedClass>
     <MixedArgument>
       <code><![CDATA[$objectRepository]]></code>
       <code><![CDATA[$objectRepository]]></code>
@@ -219,6 +218,10 @@
     <ClassMustBeFinal>
       <code><![CDATA[ConfigProviderTest]]></code>
     </ClassMustBeFinal>
+    <DeprecatedClass>
+      <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
+      <code><![CDATA[ObjectRepositoryRoleProviderFactory::class]]></code>
+    </DeprecatedClass>
     <MissingReturnType>
       <code><![CDATA[testInvocationProvidesDependencyConfiguration]]></code>
       <code><![CDATA[testProvidesExpectedConfiguration]]></code>
@@ -257,11 +260,46 @@
     <ClassMustBeFinal>
       <code><![CDATA[ObjectRepositoryRoleProviderFactoryTest]]></code>
     </ClassMustBeFinal>
+    <DeprecatedClass>
+      <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
+      <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
+      <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
+      <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
+      <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
+      <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
+      <code><![CDATA[ObjectRepositoryRoleProviderFactory::class]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProviderFactory()]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProviderFactory()]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProviderFactory()]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProviderFactory()]]></code>
+    </DeprecatedClass>
   </file>
   <file src="test/Role/ObjectRepositoryRoleProviderTest.php">
     <ClassMustBeFinal>
       <code><![CDATA[ObjectRepositoryRoleProviderTest]]></code>
     </ClassMustBeFinal>
+    <DeprecatedClass>
+      <code><![CDATA[$objectManager->getRepository(\LmcTest\Rbac\Asset\Role::class)]]></code>
+      <code><![CDATA[$objectManager->getRepository(\LmcTest\Rbac\Asset\Role::class)]]></code>
+      <code><![CDATA[$objectManager->getRepository(\LmcTest\Rbac\Asset\Role::class)]]></code>
+      <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
+      <code><![CDATA[\LmcTest\Rbac\Asset\Role::class]]></code>
+      <code><![CDATA[\LmcTest\Rbac\Asset\Role::class]]></code>
+      <code><![CDATA[\LmcTest\Rbac\Asset\Role::class]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProvider($objectRepository, 'name')]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProvider($objectRepository, 'name')]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProvider($objectRepository, 'name')]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProvider($objectRepository, 'name')]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProvider($objectRepository, 'name')]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProvider($objectRepository, 'name')]]></code>
+      <code><![CDATA[new ObjectRepositoryRoleProvider($objectRepository, 'name')]]></code>
+      <code><![CDATA[new \LmcTest\Rbac\Asset\Role($name)]]></code>
+      <code><![CDATA[new \LmcTest\Rbac\Asset\Role($roleConfig)]]></code>
+      <code><![CDATA[new \LmcTest\Rbac\Asset\Role('admin')]]></code>
+      <code><![CDATA[new \LmcTest\Rbac\Asset\Role('admin')]]></code>
+      <code><![CDATA[new \LmcTest\Rbac\Asset\Role('guest')]]></code>
+      <code><![CDATA[new \LmcTest\Rbac\Asset\Role('member')]]></code>
+    </DeprecatedClass>
     <InvalidArgument>
       <code><![CDATA[[
             'driverClass' => Driver::class,

@@ -28,6 +28,8 @@ use Psr\Container\ContainerInterface;
 
 /**
  * Factory used to create an object repository role provider
+ *
+ * @deprecated
  */
 class ObjectRepositoryRoleProviderFactory
 {
