@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace Lmc\Rbac\Role;
 
 use Doctrine\Persistence\ObjectRepository;
+use Laminas\Permissions\Rbac\RoleInterface;
 use Lmc\Rbac\Exception\RoleNotFoundException;
 
 use function array_diff;
@@ -31,17 +32,17 @@ use function sprintf;
 
 /**
  * Role provider that uses Doctrine object repository to fetch roles
+ *
+ * @deprecated  Use Lmc\Rbac\Role\Doctrine\ObjectRepositoryRoleProvider instead
  */
 final class ObjectRepositoryRoleProvider implements RoleProviderInterface
 {
-    /** @var ObjectRepository */
-    private $objectRepository;
+    private ObjectRepository $objectRepository;
 
-    /** @var string */
-    private $roleNameProperty;
+    private string $roleNameProperty;
 
-    /** @var array */
-    private $roleCache = [];
+    /** @var array<array-key, RoleInterface[]> */
+    private array $roleCache = [];
 
     public function __construct(ObjectRepository $objectRepository, string $roleNameProperty)
     {

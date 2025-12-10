@@ -43,6 +43,9 @@ use function sys_get_temp_dir;
 
 use const PHP_VERSION_ID;
 
+/**
+ * @deprecated
+ */
 #[CoversClass(ObjectRepositoryRoleProvider::class)]
 class ObjectRepositoryRoleProviderTest extends TestCase
 {
