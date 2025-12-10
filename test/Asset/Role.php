@@ -27,40 +27,26 @@ use Doctrine\ORM\Mapping as ORM;
 use Laminas\Permissions\Rbac\RoleInterface;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="roles")
+ * @deprecated
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'roles')]
 class Role implements RoleInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
     private ?int $id;
 
-    /** @ORM\Column(type="string", length=32, unique=true) */
     #[ORM\Column(type: 'string', length: 32, unique: true)]
     private ?string $name;
 
-    /**
-     * @ORM\JoinTable(name="role_children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-     * @ORM\InverseJoinColumn(name="child_id", referencedColumnName="id")
-     * @ORM\ManyToMany(targetEntity="role", cascade={"persist"})
-     */
     #[ORM\JoinTable(name: 'role_children')]
     #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'child_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: self::class, cascade: ['persist'])]
     private Collection $children;
 
-    /** @ORM\ManyToMany(targetEntity="Permission", indexBy="name", fetch="EAGER", cascade={"persist"}) */
     #[ORM\ManyToMany(targetEntity: 'Permission', cascade: ['persist'], fetch: 'EAGER', indexBy: 'name')]
     private Collection $permissions;
 

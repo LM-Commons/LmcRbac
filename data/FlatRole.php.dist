@@ -23,38 +23,21 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Laminas\Permissions\Rbac\RoleInterface;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="roles")
- */
 #[ORM\Entity]
 #[ORM\Table(name: 'roles')]
+/**
+ * @deprecated
+ */
 class FlatRole implements RoleInterface
 {
-    /**
-     * @var int|null
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
     #[ORM\Id]
     #[ORM\Column(name: 'id', type: 'integer')]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected ?int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
     #[ORM\Column(name: 'name', type: 'string', length: 255, unique: true)]
     protected string $name = '';
 
-    /**
-     * @var Permission[]|Collection
-     * @ORM\ManyToMany(targetEntity="Permission", indexBy="name", fetch="EAGER", cascade={"persist"})
-     */
     #[ORM\ManyToMany(targetEntity: "Persmission", cascade: ["persist"], fetch: "EAGER", indexBy: "name")]
     protected array|Collection|ArrayCollection $permissions;
 

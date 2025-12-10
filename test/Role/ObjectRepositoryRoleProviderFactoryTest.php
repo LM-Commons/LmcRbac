@@ -31,6 +31,9 @@ use Lmc\Rbac\Role\ObjectRepositoryRoleProviderFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @deprecated
+ */
 #[CoversClass(ObjectRepositoryRoleProviderFactory::class)]
 class ObjectRepositoryRoleProviderFactoryTest extends TestCase
 {
