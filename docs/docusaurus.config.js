@@ -24,7 +24,7 @@ const config = {
     projectName: 'LmcRbac',
     trailingSlash: false,
 
-    onBrokenLinks: 'throw',
+    onBrokenLinks: 'warn',
     //onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
@@ -56,7 +56,13 @@ const config = {
                 lastVersion: 'current',
                 versions: {
                     current: {
-                        label: '2.2 (Latest)',
+                        label: '2.3 (Latest)',
+                    },
+                    "2.2": {
+                        banner: 'none',
+                    },
+                    "2.0": {
+                        banner: 'none',
                     },
                     "1.4": {
                         banner: 'none',
@@ -103,7 +109,8 @@ themeConfig:
                     type: "docsVersionDropdown",
                     position: "right",
                     versions: {
-                        current: {label: '2.2 (Latest)'},
+                        current: {label: '2.3 (Latest)'},
+                        '2.2': {label: '2.2'},
                         '2.0': {label: '2.0'},
                         '1.4': {label: '1.x'},
                     },
@@ -138,19 +145,29 @@ themeConfig:
             {
                 title: 'More',
                 items: [
-/*
-                {
-                    label: 'Blog',
-                    to: '/blog',
-                },
-
- */
                 {
                     label: 'GitHub',
                     href: 'https://github.com/lm-commons/lmcrbac',
                 },
                 ],
             },
+                {
+                    title: 'Other',
+                    items: [
+                        {
+                            label: 'Disclaimer',
+                            href: 'https://lm-commons.github.io/disclaimer'
+                        },
+                        {
+                            label: 'Privacy',
+                            href: 'https://lm-commons.github.io/privacy'
+                        },
+                        {
+                            label: 'Disclaimer',
+                            href: 'https://lm-commons.github.io/cookies-policy'
+                        },
+                    ],
+                },
             ],
             copyright: `Copyright © ${new Date().getFullYear()} LM-Commons Organization. Built with Docusaurus.`,
         },

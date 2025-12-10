@@ -95,7 +95,7 @@ return [
 ```
 
 The `children` and `permissions` subkeys are entirely optional. Internally, the `Lmc\Rbac\Role\InMemoryRoleProvider` creates
-`Lmc\Rbac\Role\Role` objects with children, if any.
+`Laminas\Permissions\Rbac\Role` objects with children, if any.
 
 If you are more confident with flat RBAC, the previous config can be re-written to remove any inheritence between roles:
 
@@ -168,7 +168,7 @@ In both cases, you need to specify the `role_name_property` value, which is the 
 that holds the actual role name. This is used internally to only load the identity roles, instead of loading
 the whole table every time.
 
-Please note that your entity fetched from the table MUST implement the `Lmc\Rbac\Role\RoleInterface` interface.
+Please note that your entity fetched from the table MUST implement the `Laminas\Permissions\Rbac\RoleInterface` interface.
 
 Sample ORM entity models are provided in the `/data` folder for flat role, hierarchical role and permission.
 
