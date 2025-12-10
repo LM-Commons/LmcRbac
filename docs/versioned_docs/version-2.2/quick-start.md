@@ -9,7 +9,7 @@ LmcRbac extends the components provided by [laminas-permissions-rbac](https://gi
 LmcRbac can be used in Laminas MVC and in Mezzio applications.
 
 :::tip
-If you are upgrading from LmcRbac v1 or from zfc-rbac v3, please read the [Upgrading section](upgrading/to-v2)
+If you are upgrading from LmcRbac v1 or from zfc-rbac v3, please read the [Upgrading section](Upgrading/to-v2.md)
 :::
 
 ## Concepts
@@ -63,8 +63,7 @@ Install the module:
 $ composer require lm-commons/lmc-rbac
 ```
 
-You will be prompted by the Laminas Component Installer plugin to inject the package
-into the application's configuration.
+You will be prompted by the Laminas Component Installer plugin to inject LM-Commons\LmcRbac.
 
 :::note
 **Manual installation:**
@@ -83,7 +82,7 @@ By default, no roles and no permissions are defined.
 
 Roles and permissions are defined by a Role Provider. `LmcRbac` ships with two roles providers:
 - a simple `InMemoryRoleProvider` that uses an associative array to define roles and their permission. This is the default.
-- a `ObjectRepositoyRoleProvider` that is based on Doctrine ORM. (*Deprecated since v2.3*)
+- a `ObjectRepositoyRoleProvider` that is based on Doctrine ORM.
 
 To quickly get started, let's use the `InMemoryRoleProvider` role provider.
 
@@ -119,7 +118,7 @@ a child and with its own permission. If the hierarchy is flattened:
 
 ## Basic authorization
 
-The authorization service can get retrieved from the container and used to check if a permission
+The authorization service can get retrieved from the service manager container and used to check if a permission
 is granted to an identity:
 
 ```php

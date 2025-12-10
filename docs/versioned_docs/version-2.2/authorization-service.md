@@ -6,7 +6,7 @@ title: Authorization Service
 
 ### Usage
 
-The Authorization service can be retrieved from the container using the name
+The Authorization service can be retrieved from the service manager using the name
 `Lmc\Rbac\Service\AuthorizationServiceInterface` and injected into your code:
 
 ```php
@@ -162,13 +162,5 @@ class Module
     }
 }
 ```
-
-## Authorization Exception
-
-LmcRbac provides a `Lmc\Rbac\Exception\UnauthorizedException` exception class that can be thrown by a service
-when authorization is denied.
-
-This is for convenience as LmcRbac does not provide any handler for this exception
-and it is expected that applications will implement the exception handler.
 
 
