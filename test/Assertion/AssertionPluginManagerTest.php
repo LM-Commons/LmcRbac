@@ -36,8 +36,9 @@ class AssertionPluginManagerTest extends TestCase
 {
     public function testValidationOfPluginSucceedsIfAssertionInterfaceIsImplemented()
     {
-        $containerMock = $this->createMock(ContainerInterface::class);
-        $container     = new AssertionPluginManager($containerMock, [
+//        $containerMock = $this->createMock(ContainerInterface::class);
+        $containerStub = $this->createStub(ContainerInterface::class);
+        $container     = new AssertionPluginManager($containerStub, [
             'factories' => [
                 SimpleAssertion::class => InvokableFactory::class,
             ],
@@ -48,8 +49,8 @@ class AssertionPluginManagerTest extends TestCase
 
     public function testValidationOfPluginFailsIfAssertionInterfaceIsNotImplemented()
     {
-        $containerMock = $this->createMock(ContainerInterface::class);
-        $container     = new AssertionPluginManager($containerMock, [
+        $containerStub = $this->createStub(ContainerInterface::class);
+        $container     = new AssertionPluginManager($containerStub, [
             'factories' => [
                 stdClass::class => InvokableFactory::class,
             ],

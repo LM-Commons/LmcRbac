@@ -35,7 +35,7 @@ final class AuthorizationServiceDelegatorFactoryTest extends TestCase
 {
     public function testDelegatorFactory(): void
     {
-        $authorizationService = $this->createMock(AuthorizationServiceInterface::class);
+        $authorizationService = $this->createStub(AuthorizationServiceInterface::class);
         $container            = $this->createMock(ContainerInterface::class);
         $container->expects($this->once())->method('get')->willReturn($authorizationService);
         $callback         = function (): DummyAuthorizationServiceClass {
@@ -47,7 +47,7 @@ final class AuthorizationServiceDelegatorFactoryTest extends TestCase
 
     public function testDelegatorFactoryException(): void
     {
-        $authorizationService = $this->createMock(AuthorizationServiceInterface::class);
+        $authorizationService = $this->createStub(AuthorizationServiceInterface::class);
         $container            = $this->createMock(ContainerInterface::class);
         $callback             = function (): stdClass {
             return new stdClass();
