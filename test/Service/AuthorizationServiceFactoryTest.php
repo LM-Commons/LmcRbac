@@ -24,7 +24,7 @@ class AuthorizationServiceFactoryTest extends TestCase
             ->willReturnMap(
                 [
                     [ModuleOptions::class, new ModuleOptions([])],
-                    [RoleServiceInterface::class, $this->createMock(RoleServiceInterface::class)],
+                    [RoleServiceInterface::class, $this->createStub(RoleServiceInterface::class)],
                     [AssertionPluginManagerInterface::class, new AssertionPluginManager($container)],
                     [Rbac::class, new Rbac()],
                 ]

@@ -33,7 +33,7 @@ class AuthorizationServiceAwareTraitTest extends TestCase
     public function testAuthorizationServiceAwareTrait()
     {
         $class                = new DummyAuthorizationServiceClass();
-        $authorizationService = $this->createMock(AuthorizationServiceInterface::class);
+        $authorizationService = $this->createStub(AuthorizationServiceInterface::class);
         $class->setAuthorizationService($authorizationService);
         $this->assertSame($authorizationService, $class->getAuthorizationService());
     }
