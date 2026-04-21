@@ -12,7 +12,7 @@ Laminas\Permissions\Rbac
 
 ## Requirements
 
-- PHP 8.2 or higher
+- PHP 8.3 or higher
 
 ## Optional
 
@@ -50,4 +50,4 @@ help you to more quickly take advantage of LmcRbac.
 ## Support
 
 - File issues at on [github](https://github.com/LM-Commons/LmcRbac/issues).
-- Ask questions on [the LM-Commons Discord](https://discord.gg/nAAu7AhR).
+- Ask questions on the [LM-Commons Discord](https://discord.gg/nAAu7AhR).
