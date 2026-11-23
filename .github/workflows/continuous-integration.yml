@@ -7,8 +7,6 @@ on:
   push:
     paths-ignore:
       - 'docs/**'
-    branches:
-    tags:
 
 jobs:
   ci:
