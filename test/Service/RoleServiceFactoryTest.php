@@ -100,4 +100,25 @@ class RoleServiceFactoryTest extends TestCase
         $factory = new RoleServiceFactory();
         $factory($container);
     }
+
+    public function testThrowExceptionIfInvalidRoleProviderNoKey(): void
+    {
+        $this->expectException(ServiceNotCreatedException::class);
+
+        $options = new ModuleOptions([
+            'guest_role'    => 'guest',
+            'role_provider' => [
+                0 => [],
+            ],
+        ]);
+
+        $container = new ServiceManager([
+            'services' => [
+                ModuleOptions::class => $options,
+            ],
+        ]);
+
+        $factory = new RoleServiceFactory();
+        $factory($container);
+    }
 }

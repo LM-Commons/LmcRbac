@@ -24,8 +24,11 @@ namespace Lmc\Rbac\Service;
 use Lmc\Rbac\Exception\ServiceNotCreatedException;
 use Lmc\Rbac\Options\ModuleOptions;
 use Lmc\Rbac\Role\RoleProviderInterface;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
+use function is_string;
 use function key;
 use function sprintf;
 
@@ -34,6 +37,10 @@ use function sprintf;
  */
 class RoleServiceFactory
 {
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function __invoke(ContainerInterface $container): RoleService
     {
         /** @var ModuleOptions $moduleOptions */
@@ -46,7 +53,14 @@ class RoleServiceFactory
         }
 
         $roleProviderName = key($roleProvider);
-        /** @var RoleProviderInterface $roleProvider */
+
+        if (! is_string($roleProviderName)) {
+            throw new ServiceNotCreatedException(
+                'Invalid role provider configuration provided.'
+            );
+        }
+
+        /** @var RoleProviderInterface|mixed $roleProvider */
         $roleProvider = $container->get($roleProviderName);
         if (! $roleProvider instanceof RoleProviderInterface) {
             throw new ServiceNotCreatedException(
