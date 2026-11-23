@@ -28,7 +28,7 @@ use Psr\Container\ContainerInterface;
 /**
  * Factory used to create an in memory role provider
  */
-class InMemoryRoleProviderFactory
+final class InMemoryRoleProviderFactory
 {
     public function __invoke(ContainerInterface $container): InMemoryRoleProvider
     {

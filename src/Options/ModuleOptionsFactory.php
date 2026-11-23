@@ -14,7 +14,7 @@ use function is_array;
 /**
  * Factory for the module options
  */
-class ModuleOptionsFactory
+final class ModuleOptionsFactory
 {
     /**
      * @throws ContainerExceptionInterface

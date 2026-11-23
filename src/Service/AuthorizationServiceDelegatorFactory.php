@@ -11,7 +11,7 @@ use Psr\Container\NotFoundExceptionInterface;
 
 use function call_user_func;
 
-class AuthorizationServiceDelegatorFactory
+final class AuthorizationServiceDelegatorFactory
 {
     /**
      * @throws ContainerExceptionInterface

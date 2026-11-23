@@ -31,7 +31,7 @@ use Psr\Container\ContainerInterface;
  *
  * @deprecated
  */
-class ObjectRepositoryRoleProviderFactory
+final class ObjectRepositoryRoleProviderFactory
 {
     public function __invoke(ContainerInterface $container): ObjectRepositoryRoleProvider
     {

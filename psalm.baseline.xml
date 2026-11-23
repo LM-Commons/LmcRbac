@@ -27,11 +27,6 @@
       <code><![CDATA[setRoleProvider]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Options/ModuleOptionsFactory.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[ModuleOptionsFactory]]></code>
-    </ClassMustBeFinal>
-  </file>
   <file src="src/Role/InMemoryRoleProvider.php">
     <MixedArgument>
       <code><![CDATA[$permission]]></code>
@@ -50,9 +45,6 @@
     </MixedAssignment>
   </file>
   <file src="src/Role/InMemoryRoleProviderFactory.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[InMemoryRoleProviderFactory]]></code>
-    </ClassMustBeFinal>
     <MixedArgument>
       <code><![CDATA[$moduleOptions->getRoleProvider()[InMemoryRoleProvider::class] ?? []]]></code>
     </MixedArgument>
@@ -64,9 +56,6 @@
     </MixedMethodCall>
   </file>
   <file src="src/Role/ObjectRepositoryRoleProviderFactory.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[ObjectRepositoryRoleProviderFactory]]></code>
-    </ClassMustBeFinal>
     <DeprecatedClass>
       <code><![CDATA[ObjectRepositoryRoleProvider]]></code>
       <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
@@ -109,17 +98,11 @@
     </MixedAssignment>
   </file>
   <file src="src/Service/AuthorizationServiceDelegatorFactory.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[AuthorizationServiceDelegatorFactory]]></code>
-    </ClassMustBeFinal>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[AuthorizationServiceAwareInterface]]></code>
     </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Service/AuthorizationServiceFactory.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[AuthorizationServiceFactory]]></code>
-    </ClassMustBeFinal>
     <MixedArgument>
       <code><![CDATA[$container->get(AssertionPluginManagerInterface::class)]]></code>
       <code><![CDATA[$container->get(Rbac::class)]]></code>
@@ -139,11 +122,6 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[setGuestRole]]></code>
     </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Service/RoleServiceFactory.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[RoleServiceFactory]]></code>
-    </ClassMustBeFinal>
   </file>
   <file src="test/Assertion/AssertionPluginManagerTest.php">
     <UnusedVariable>
