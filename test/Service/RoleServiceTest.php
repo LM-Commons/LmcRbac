@@ -24,7 +24,7 @@ class RoleServiceTest extends TestCase
 
         $this->assertCount(1, $result);
         $this->assertInstanceOf(RoleInterface::class, $result[0]);
-        $this->assertEquals('guest', $result[0]->getName());
+        $this->assertSame('guest', $result[0]->getName());
     }
 
     public function testReturnGuestRoleIfNullIdentityIsGiven(): void
@@ -35,7 +35,7 @@ class RoleServiceTest extends TestCase
 
         $this->assertCount(1, $result);
         $this->assertInstanceOf(RoleInterface::class, $result[0]);
-        $this->assertEquals('guest', $result[0]->getName());
+        $this->assertSame('guest', $result[0]->getName());
     }
 
     public function testWillNotInvokeRoleProviderIfAllRolesCollected(): void
@@ -70,14 +70,14 @@ class RoleServiceTest extends TestCase
         $this->assertCount(3, $result);
         $this->assertInstanceOf(RoleInterface::class, $result[0]);
 
-        $this->assertEquals($roles[0]->getName(), $result[0]->getName());
-        $this->assertEquals($roles[1]->getName(), $result[1]->getName());
-        $this->assertEquals($roles[2], $result[2]->getName());
+        $this->assertSame($roles[0]->getName(), $result[0]->getName());
+        $this->assertSame($roles[1]->getName(), $result[1]->getName());
+        $this->assertSame($roles[2], $result[2]->getName());
     }
 
     public function testGuestRoleSetterGetter(): void
     {
         $roleService = new RoleService(new InMemoryRoleProvider([]), 'guest');
-        $this->assertEquals('guest', $roleService->getGuestRole());
+        $this->assertSame('guest', $roleService->getGuestRole());
     }
 }

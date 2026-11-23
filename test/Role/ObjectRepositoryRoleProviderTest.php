@@ -182,7 +182,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $this->assertIsArray($roles);
 
         $this->assertInstanceOf(RoleInterface::class, $roles[0]);
-        $this->assertEquals('admin', $roles[0]->getName());
+        $this->assertSame('admin', $roles[0]->getName());
         $this->assertTrue($roles[0]->hasPermission('manage'));
         $this->assertTrue($roles[0]->hasPermission('read'));
         $this->assertTrue($roles[0]->hasPermission('write'));
@@ -218,7 +218,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $this->assertIsArray($roles);
 
         $this->assertInstanceOf(RoleInterface::class, $roles[0]);
-        $this->assertEquals('admin', $roles[0]->getName());
+        $this->assertSame('admin', $roles[0]->getName());
 
         $childRolesString = '';
 
@@ -227,7 +227,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
             $childRolesString .= $childRole->getName();
         }
 
-        $this->assertEquals('memberguest', $childRolesString);
+        $this->assertSame('memberguest', $childRolesString);
     }
 
     private function getObjectManager(): ObjectManager|EntityManager

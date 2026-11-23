@@ -203,7 +203,7 @@ class AuthorizationServiceTest extends TestCase
             $assertions
         );
 
-        $this->assertEquals($isGranted, $authorizationService->isGranted($identity, $permission, $context));
+        $this->assertSame($isGranted, $authorizationService->isGranted($identity, $permission, $context));
     }
 
     public function testDoNotCallAssertionIfThePermissionIsNotGranted(): void

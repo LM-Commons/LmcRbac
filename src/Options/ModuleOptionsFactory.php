@@ -9,7 +9,6 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-use function assert;
 use function is_array;
 
 /**
@@ -23,13 +22,13 @@ class ModuleOptionsFactory
      */
     public function __invoke(ContainerInterface $container): ModuleOptions
     {
+        /** @var array $config */
         $config = $container->get('config');
 
         if (! isset($config['lmc_rbac']) || ! is_array($config['lmc_rbac'])) {
             throw new ServiceNotCreatedException('No lmc_rbac config found.');
         }
 
-        assert(is_array($config['lmc_rbac']));
         return new ModuleOptions($config['lmc_rbac']);
     }
 }

@@ -33,7 +33,7 @@ class ModuleOptionsTest extends TestCase
     {
         $moduleOptions = new ModuleOptions();
 
-        $this->assertEquals('guest', $moduleOptions->getGuestRole());
+        $this->assertSame('guest', $moduleOptions->getGuestRole());
         $this->assertArrayHasKey(InMemoryRoleProvider::class, $moduleOptions->getRoleProvider());
         $this->assertEquals([], $moduleOptions->getAssertionMap());
         $this->assertEquals([], $moduleOptions->getAssertionManager());
@@ -53,7 +53,7 @@ class ModuleOptionsTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals('unknown', $moduleOptions->getGuestRole());
+        $this->assertSame('unknown', $moduleOptions->getGuestRole());
         $this->assertEquals([], $moduleOptions->getRoleProvider());
         $this->assertEquals(['foo' => 'bar'], $moduleOptions->getAssertionMap());
         $this->assertEquals(['factories' => []], $moduleOptions->getAssertionManager());
