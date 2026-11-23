@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.16.1@f1f5de594dc76faf8784e02d3dc4716c91c6f6ac">
+<files psalm-version="7.16.0@708bf98874d359acbdcedb84f8624e9ec215867d">
   <file src="src/Assertion/AssertionPluginManager.php">
     <MissingOverrideAttribute>
       <code><![CDATA[public function validate(mixed $instance): void]]></code>
@@ -166,9 +166,6 @@
     <ClassMustBeFinal>
       <code><![CDATA[RoleServiceFactory]]></code>
     </ClassMustBeFinal>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$roleProviderName]]></code>
-    </MixedArgumentTypeCoercion>
   </file>
   <file src="test/Assertion/AssertionPluginManagerFactoryTest.php">
     <ClassMustBeFinal>
@@ -201,9 +198,6 @@
     <MixedArgument>
       <code><![CDATA[$assertionCalledCount[$key]]]></code>
     </MixedArgument>
-    <MixedReturnStatement>
-      <code><![CDATA[array]]></code>
-    </MixedReturnStatement>
     <PossiblyInvalidArrayAccess>
       <code><![CDATA[$assertionCalledCount[$key]]]></code>
       <code><![CDATA[$assertionCalledCount[$key]]]></code>
@@ -279,9 +273,6 @@
       <code><![CDATA[ObjectRepositoryRoleProviderTest]]></code>
     </ClassMustBeFinal>
     <DeprecatedClass>
-      <code><![CDATA[$objectManager->getRepository(\LmcTest\Rbac\Asset\Role::class)]]></code>
-      <code><![CDATA[$objectManager->getRepository(\LmcTest\Rbac\Asset\Role::class)]]></code>
-      <code><![CDATA[$objectManager->getRepository(\LmcTest\Rbac\Asset\Role::class)]]></code>
       <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
       <code><![CDATA[\LmcTest\Rbac\Asset\Role::class]]></code>
       <code><![CDATA[\LmcTest\Rbac\Asset\Role::class]]></code>
@@ -331,9 +322,6 @@
       <code><![CDATA[getChildren]]></code>
       <code><![CDATA[hasChildren]]></code>
     </MixedMethodCall>
-    <MixedReturnStatement>
-      <code><![CDATA[array]]></code>
-    </MixedReturnStatement>
     <RedundantConditionGivenDocblockType>
       <code><![CDATA[assertIsArray]]></code>
       <code><![CDATA[assertIsArray]]></code>
@@ -384,9 +372,6 @@
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$assertions]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedReturnStatement>
-      <code><![CDATA[array]]></code>
-    </MixedReturnStatement>
     <UnusedClosureParam>
       <code><![CDATA[$context]]></code>
       <code><![CDATA[$context]]></code>
