@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace Lmc\Rbac\Role;
 
 use Laminas\Permissions\Rbac\Role;
+use Override;
 
 /**
  * Simple role providers that store them in memory (ideal for small websites)
@@ -50,6 +51,7 @@ final class InMemoryRoleProvider implements RoleProviderInterface
     /**
      * @inheritDoc
      */
+    #[Override]
     public function getRoles(iterable $roleNames): iterable
     {
         $roles = [];
