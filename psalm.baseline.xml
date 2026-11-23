@@ -146,10 +146,6 @@
     </ClassMustBeFinal>
   </file>
   <file src="test/Assertion/AssertionPluginManagerTest.php">
-    <MissingReturnType>
-      <code><![CDATA[testValidationOfPluginFailsIfAssertionInterfaceIsNotImplemented]]></code>
-      <code><![CDATA[testValidationOfPluginSucceedsIfAssertionInterfaceIsImplemented]]></code>
-    </MissingReturnType>
     <UnusedVariable>
       <code><![CDATA[$instance]]></code>
     </UnusedVariable>
@@ -180,16 +176,6 @@
       <code><![CDATA[ObjectRepositoryRoleProvider::class]]></code>
       <code><![CDATA[ObjectRepositoryRoleProviderFactory::class]]></code>
     </DeprecatedClass>
-    <MissingReturnType>
-      <code><![CDATA[testInvocationProvidesDependencyConfiguration]]></code>
-      <code><![CDATA[testProvidesExpectedConfiguration]]></code>
-      <code><![CDATA[testProvidesExpectedModuleConfiguration]]></code>
-    </MissingReturnType>
-  </file>
-  <file src="test/ModuleTest.php">
-    <MissingReturnType>
-      <code><![CDATA[testProvidesExpectedConfiguration]]></code>
-    </MissingReturnType>
   </file>
   <file src="test/Role/ObjectRepositoryRoleProviderFactoryTest.php">
     <DeprecatedClass>
@@ -234,11 +220,6 @@
             'dbname'      => 'test',
         ]]]></code>
     </InvalidArgument>
-    <MissingReturnType>
-      <code><![CDATA[testObjectRepositoryProviderForFlatRole]]></code>
-      <code><![CDATA[testObjectRepositoryProviderForFlatRoleWithPermissions]]></code>
-      <code><![CDATA[testObjectRepositoryProviderForHierarchicalRole]]></code>
-    </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$permission]]></code>
       <code><![CDATA[$role->getChildren()]]></code>
@@ -262,11 +243,6 @@
       <code><![CDATA[assertIsArray]]></code>
       <code><![CDATA[assertIsArray]]></code>
     </RedundantConditionGivenDocblockType>
-  </file>
-  <file src="test/Service/AuthorizationServiceAwareTraitTest.php">
-    <MissingReturnType>
-      <code><![CDATA[testAuthorizationServiceAwareTrait]]></code>
-    </MissingReturnType>
   </file>
   <file src="test/Service/AuthorizationServiceTest.php">
     <InvalidArgument>

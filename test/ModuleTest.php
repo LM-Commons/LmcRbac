@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Module::class)]
 final class ModuleTest extends TestCase
 {
-    public function testProvidesExpectedConfiguration()
+    public function testProvidesExpectedConfiguration(): void
     {
         $provider = new ConfigProvider();
         $module   = new Module();

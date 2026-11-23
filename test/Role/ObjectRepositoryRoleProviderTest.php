@@ -125,7 +125,7 @@ final class ObjectRepositoryRoleProviderTest extends TestCase
     }
 
     #[DataProvider('roleProvider')]
-    public function testObjectRepositoryProviderForFlatRole(array $rolesConfig, array $rolesToCheck)
+    public function testObjectRepositoryProviderForFlatRole(array $rolesConfig, array $rolesToCheck): void
     {
         $objectManager = $this->getObjectManager();
         foreach ($rolesConfig as $name => $roleConfig) {
@@ -159,7 +159,7 @@ final class ObjectRepositoryRoleProviderTest extends TestCase
         }
     }
 
-    public function testObjectRepositoryProviderForFlatRoleWithPermissions()
+    public function testObjectRepositoryProviderForFlatRoleWithPermissions(): void
     {
         $objectManager = $this->getObjectManager();
 
@@ -189,7 +189,7 @@ final class ObjectRepositoryRoleProviderTest extends TestCase
         $this->assertFalse($roles[0]->hasPermission('foo'));
     }
 
-    public function testObjectRepositoryProviderForHierarchicalRole()
+    public function testObjectRepositoryProviderForHierarchicalRole(): void
     {
         $objectManager = $this->getObjectManager();
 

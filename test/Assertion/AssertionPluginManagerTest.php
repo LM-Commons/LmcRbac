@@ -34,7 +34,7 @@ use stdClass;
 #[CoversClass(AssertionPluginManager::class)]
 final class AssertionPluginManagerTest extends TestCase
 {
-    public function testValidationOfPluginSucceedsIfAssertionInterfaceIsImplemented()
+    public function testValidationOfPluginSucceedsIfAssertionInterfaceIsImplemented(): void
     {
 //        $containerMock = $this->createMock(ContainerInterface::class);
         $containerStub = $this->createStub(ContainerInterface::class);
@@ -47,7 +47,7 @@ final class AssertionPluginManagerTest extends TestCase
         $this->assertInstanceOf(AssertionInterface::class, $container->get(SimpleAssertion::class));
     }
 
-    public function testValidationOfPluginFailsIfAssertionInterfaceIsNotImplemented()
+    public function testValidationOfPluginFailsIfAssertionInterfaceIsNotImplemented(): void
     {
         $containerStub = $this->createStub(ContainerInterface::class);
         $container     = new AssertionPluginManager($containerStub, [
