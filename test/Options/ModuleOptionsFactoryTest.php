@@ -29,7 +29,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(ModuleOptionsFactory::class)]
-class ModuleOptionsFactoryTest extends TestCase
+final class ModuleOptionsFactoryTest extends TestCase
 {
     public function testFactory(): void
     {

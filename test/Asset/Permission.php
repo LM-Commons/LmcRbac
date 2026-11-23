@@ -28,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'permissions')]
-class Permission
+final class Permission
 {
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]

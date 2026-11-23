@@ -47,7 +47,7 @@ use const PHP_VERSION_ID;
  * @deprecated
  */
 #[CoversClass(ObjectRepositoryRoleProvider::class)]
-class ObjectRepositoryRoleProviderTest extends TestCase
+final class ObjectRepositoryRoleProviderTest extends TestCase
 {
     public static function roleProvider(): array
     {

@@ -31,7 +31,7 @@ use Laminas\Permissions\Rbac\RoleInterface;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'roles')]
-class Role implements RoleInterface
+final class Role implements RoleInterface
 {
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]

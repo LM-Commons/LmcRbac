@@ -23,7 +23,7 @@ namespace LmcTest\Rbac\Asset;
 
 use Lmc\Rbac\Assertion\AssertionInterface;
 
-class SimpleAssertion implements AssertionInterface
+final class SimpleAssertion implements AssertionInterface
 {
     protected int $called = 0;
 

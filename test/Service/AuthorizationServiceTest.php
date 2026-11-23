@@ -45,7 +45,7 @@ use stdClass;
 use function array_merge;
 
 #[CoversClass(AuthorizationService::class)]
-class AuthorizationServiceTest extends TestCase
+final class AuthorizationServiceTest extends TestCase
 {
     public static function grantedProvider(): array
     {

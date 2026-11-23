@@ -24,7 +24,7 @@ namespace LmcTest\Rbac\Asset;
 use Lmc\Rbac\Service\AuthorizationServiceAwareInterface;
 use Lmc\Rbac\Service\AuthorizationServiceAwareTrait;
 
-class DummyAuthorizationServiceClass implements AuthorizationServiceAwareInterface
+final class DummyAuthorizationServiceClass implements AuthorizationServiceAwareInterface
 {
     use AuthorizationServiceAwareTrait;
 }

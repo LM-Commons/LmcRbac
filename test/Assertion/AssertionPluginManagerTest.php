@@ -32,7 +32,7 @@ use Psr\Container\ContainerInterface;
 use stdClass;
 
 #[CoversClass(AssertionPluginManager::class)]
-class AssertionPluginManagerTest extends TestCase
+final class AssertionPluginManagerTest extends TestCase
 {
     public function testValidationOfPluginSucceedsIfAssertionInterfaceIsImplemented()
     {

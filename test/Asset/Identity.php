@@ -23,7 +23,7 @@ namespace LmcTest\Rbac\Asset;
 
 use Lmc\Rbac\Identity\IdentityInterface;
 
-class Identity implements IdentityInterface
+final class Identity implements IdentityInterface
 {
     private array $roles;
 

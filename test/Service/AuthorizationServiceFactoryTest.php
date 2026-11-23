@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 #[CoversClass(AuthorizationServiceFactory::class)]
-class AuthorizationServiceFactoryTest extends TestCase
+final class AuthorizationServiceFactoryTest extends TestCase
 {
     public function testCanCreateAuthorizationService(): void
     {
