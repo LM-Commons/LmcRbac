@@ -25,6 +25,7 @@ use Laminas\Permissions\Rbac\RoleInterface;
 use Lmc\Rbac\Exception\RuntimeException;
 use Lmc\Rbac\Identity\IdentityInterface;
 use Lmc\Rbac\Role\RoleProviderInterface;
+use Override;
 
 use function array_merge;
 use function is_array;
@@ -68,6 +69,7 @@ class RoleService implements RoleServiceInterface
      *
      * @return RoleInterface[]
      */
+    #[Override]
     public function getIdentityRoles(object|null $identity = null): iterable
     {
         // If no identity is provided, get the guest role

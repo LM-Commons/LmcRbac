@@ -24,6 +24,7 @@ namespace Lmc\Rbac\Role;
 use Doctrine\Persistence\ObjectRepository;
 use Laminas\Permissions\Rbac\RoleInterface;
 use Lmc\Rbac\Exception\RoleNotFoundException;
+use Override;
 
 use function array_diff;
 use function count;
@@ -55,6 +56,7 @@ final class ObjectRepositoryRoleProvider implements RoleProviderInterface
         $this->roleCache = [];
     }
 
+    #[Override]
     public function getRoles(iterable $roleNames): iterable
     {
         $key = implode($roleNames);

@@ -29,7 +29,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(InMemoryRoleProviderFactory::class)]
-class InMemoryRoleProviderFactoryTest extends TestCase
+final class InMemoryRoleProviderFactoryTest extends TestCase
 {
     public function testFactoryUsingObjectRepository(): void
     {

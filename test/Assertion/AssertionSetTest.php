@@ -34,7 +34,7 @@ use stdClass;
 use function is_array;
 
 #[CoversClass(AssertionSet::class)]
-class AssertionSetTest extends TestCase
+final class AssertionSetTest extends TestCase
 {
     public function testWhenNoAssertionsArePresentTheAssertionWillFail(): void
     {

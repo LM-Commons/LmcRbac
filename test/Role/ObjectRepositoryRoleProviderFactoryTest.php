@@ -35,7 +35,7 @@ use PHPUnit\Framework\TestCase;
  * @deprecated
  */
 #[CoversClass(ObjectRepositoryRoleProviderFactory::class)]
-class ObjectRepositoryRoleProviderFactoryTest extends TestCase
+final class ObjectRepositoryRoleProviderFactoryTest extends TestCase
 {
     public function testFactoryUsingObjectRepository(): void
     {

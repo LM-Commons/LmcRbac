@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(RoleService::class)]
-class RoleServiceTest extends TestCase
+final class RoleServiceTest extends TestCase
 {
     public function testReturnGuestRoleIfNoIdentityIsGiven(): void
     {

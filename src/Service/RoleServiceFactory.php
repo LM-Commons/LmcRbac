@@ -35,7 +35,7 @@ use function sprintf;
 /**
  * Factory to create the role service
  */
-class RoleServiceFactory
+final class RoleServiceFactory
 {
     /**
      * @throws ContainerExceptionInterface

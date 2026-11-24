@@ -31,7 +31,7 @@ use Psr\Container\NotFoundExceptionInterface;
 /**
  * Factory to create the authorization service
  */
-class AuthorizationServiceFactory
+final class AuthorizationServiceFactory
 {
     /**
      * @throws NotFoundExceptionInterface

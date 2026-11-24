@@ -25,6 +25,7 @@ use Laminas\Permissions\Rbac\Rbac;
 use Lmc\Rbac\Assertion\AssertionInterface;
 use Lmc\Rbac\Assertion\AssertionPluginManagerInterface;
 use Lmc\Rbac\Assertion\AssertionSet;
+use Override;
 
 use function array_merge;
 use function is_array;
@@ -64,6 +65,7 @@ class AuthorizationService implements AuthorizationServiceInterface
      *
      * @param array<string|callable|AssertionInterface> $assertions
      */
+    #[Override]
     public function setAssertions(array $assertions, bool $merge = false): void
     {
         $this->assertions = $merge ?
@@ -74,6 +76,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * Set assertion for a given permission
      */
+    #[Override]
     public function setAssertion(
         string $permission,
         AssertionInterface|callable|string $assertion
@@ -84,6 +87,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * Check if there are assertions for the permission
      */
+    #[Override]
     public function hasAssertion(string $permission): bool
     {
         return isset($this->assertions[$permission]);
@@ -94,6 +98,7 @@ class AuthorizationService implements AuthorizationServiceInterface
      *
      * @return array<string|callable|AssertionInterface>
      */
+    #[Override]
     public function getAssertions(): array
     {
         return $this->assertions;
@@ -102,11 +107,13 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * Get the assertions for the given permission
      */
+    #[Override]
     public function getAssertion(string $permission): AssertionInterface|callable|string|null
     {
         return $this->hasAssertion($permission) ? $this->assertions[$permission] : null;
     }
 
+    #[Override]
     public function isGranted(object|null $identity, string $permission, mixed $context = null): bool
     {
         $roles = $this->roleService->getIdentityRoles($identity);

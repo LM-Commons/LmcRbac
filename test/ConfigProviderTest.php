@@ -41,9 +41,9 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(ConfigProvider::class)]
-class ConfigProviderTest extends TestCase
+final class ConfigProviderTest extends TestCase
 {
-    public function testProvidesExpectedConfiguration()
+    public function testProvidesExpectedConfiguration(): void
     {
         $provider = new ConfigProvider();
         $expected = [
@@ -63,7 +63,7 @@ class ConfigProviderTest extends TestCase
         $this->assertEquals($expected, $provider->getDependencyConfig());
     }
 
-    public function testProvidesExpectedModuleConfiguration()
+    public function testProvidesExpectedModuleConfiguration(): void
     {
         $provider = new ConfigProvider();
         $expected = [
@@ -72,7 +72,7 @@ class ConfigProviderTest extends TestCase
         $this->assertEquals($expected, $provider->getModuleConfig());
     }
 
-    public function testInvocationProvidesDependencyConfiguration()
+    public function testInvocationProvidesDependencyConfiguration(): void
     {
         $provider = new ConfigProvider();
         $expected = [

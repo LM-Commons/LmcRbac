@@ -28,7 +28,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(AssertionPluginManagerFactory::class)]
-class AssertionPluginManagerFactoryTest extends TestCase
+final class AssertionPluginManagerFactoryTest extends TestCase
 {
     public function testFactory(): void
     {

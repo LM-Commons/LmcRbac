@@ -47,7 +47,7 @@ use const PHP_VERSION_ID;
  * @deprecated
  */
 #[CoversClass(ObjectRepositoryRoleProvider::class)]
-class ObjectRepositoryRoleProviderTest extends TestCase
+final class ObjectRepositoryRoleProviderTest extends TestCase
 {
     public static function roleProvider(): array
     {
@@ -125,7 +125,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
     }
 
     #[DataProvider('roleProvider')]
-    public function testObjectRepositoryProviderForFlatRole(array $rolesConfig, array $rolesToCheck)
+    public function testObjectRepositoryProviderForFlatRole(array $rolesConfig, array $rolesToCheck): void
     {
         $objectManager = $this->getObjectManager();
         foreach ($rolesConfig as $name => $roleConfig) {
@@ -159,7 +159,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         }
     }
 
-    public function testObjectRepositoryProviderForFlatRoleWithPermissions()
+    public function testObjectRepositoryProviderForFlatRoleWithPermissions(): void
     {
         $objectManager = $this->getObjectManager();
 
@@ -189,7 +189,7 @@ class ObjectRepositoryRoleProviderTest extends TestCase
         $this->assertFalse($roles[0]->hasPermission('foo'));
     }
 
-    public function testObjectRepositoryProviderForHierarchicalRole()
+    public function testObjectRepositoryProviderForHierarchicalRole(): void
     {
         $objectManager = $this->getObjectManager();
 

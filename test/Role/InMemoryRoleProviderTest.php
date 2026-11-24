@@ -27,7 +27,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(InMemoryRoleProvider::class)]
-class InMemoryRoleProviderTest extends TestCase
+final class InMemoryRoleProviderTest extends TestCase
 {
     public function testInMemoryProvider(): void
     {

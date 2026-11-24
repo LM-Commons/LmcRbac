@@ -6,11 +6,13 @@ namespace Lmc\Rbac\Assertion;
 
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
+use Override;
 
 use function sprintf;
 
 final class AssertionPluginManager extends AbstractPluginManager implements AssertionPluginManagerInterface
 {
+    #[Override]
     public function validate(mixed $instance): void
     {
         if ($instance instanceof AssertionInterface) {

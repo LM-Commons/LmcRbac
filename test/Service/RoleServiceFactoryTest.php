@@ -32,7 +32,7 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 
 #[CoversClass(RoleServiceFactory::class)]
-class RoleServiceFactoryTest extends TestCase
+final class RoleServiceFactoryTest extends TestCase
 {
     public function testCanCreateRoleService(): void
     {

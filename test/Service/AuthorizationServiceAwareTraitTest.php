@@ -28,9 +28,9 @@ use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\TestCase;
 
 #[CoversTrait(AuthorizationServiceAwareTrait::class)]
-class AuthorizationServiceAwareTraitTest extends TestCase
+final class AuthorizationServiceAwareTraitTest extends TestCase
 {
-    public function testAuthorizationServiceAwareTrait()
+    public function testAuthorizationServiceAwareTrait(): void
     {
         $class                = new DummyAuthorizationServiceClass();
         $authorizationService = $this->createStub(AuthorizationServiceInterface::class);
